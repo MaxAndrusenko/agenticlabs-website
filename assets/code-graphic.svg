@@ -1,0 +1,51 @@
+<svg viewBox="0 0 560 400" width="560" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylized code editor window showing a short Apex snippet">
+  <defs>
+    <style>.mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }</style>
+  </defs>
+
+  <rect x="0" y="0" width="560" height="400" fill="#F7F9FB"/>
+
+  <!-- editor panel -->
+  <rect x="44" y="40" width="472" height="320" rx="12" fill="#FFFFFF" stroke="#E3E7ED" stroke-width="1.5"/>
+
+  <!-- title bar -->
+  <path d="M44 52 a12 12 0 0 1 12 -12 h448 a12 12 0 0 1 12 12 v34 h-472 z" fill="#032D60"/>
+  <circle cx="70" cy="63" r="6" fill="#BA0517"/>
+  <circle cx="92" cy="63" r="6" fill="#E3E7ED"/>
+  <circle cx="114" cy="63" r="6" fill="#03B4A7"/>
+  <rect x="176" y="52" width="150" height="22" rx="5" fill="#0B5CAB"/>
+  <text x="192" y="67" class="mono" font-size="11" font-weight="500" fill="#FFFFFF">OpportunityHandler.cls</text>
+
+  <!-- gutter -->
+  <line x1="86" y1="86" x2="86" y2="360" stroke="#E3E7ED" stroke-width="1"/>
+  <g class="mono" font-size="12" font-weight="500" fill="#5C6470" text-anchor="end">
+    <text x="74" y="116">1</text>
+    <text x="74" y="152">2</text>
+    <text x="74" y="188">3</text>
+    <text x="74" y="224">4</text>
+    <text x="74" y="260">5</text>
+    <text x="74" y="296">6</text>
+    <text x="74" y="332">7</text>
+  </g>
+
+  <!-- code -->
+  <g class="mono" font-size="13" font-weight="500">
+    <text x="100" y="116"><tspan fill="#5C6470">// Drafted by AI, reviewed by an architect</tspan></text>
+    <text x="100" y="152"><tspan fill="#0176D3">public with sharing class</tspan><tspan fill="#16181D"> OpportunityHandler {</tspan></text>
+    <text x="100" y="188"><tspan fill="#16181D">  </tspan><tspan fill="#0176D3">public static void</tspan><tspan fill="#16181D"> onBeforeUpdate(</tspan><tspan fill="#7526E3">List</tspan><tspan fill="#16181D">&lt;</tspan><tspan fill="#7526E3">Opportunity</tspan><tspan fill="#16181D">&gt; opps) {</tspan></text>
+    <text x="100" y="224"><tspan fill="#16181D">    </tspan><tspan fill="#0176D3">for</tspan><tspan fill="#16181D"> (</tspan><tspan fill="#7526E3">Opportunity</tspan><tspan fill="#16181D"> o : opps) {</tspan></text>
+    <text x="100" y="260"><tspan fill="#16181D">      o.StageName = </tspan><tspan fill="#03B4A7">'Qualified'</tspan><tspan fill="#16181D">;</tspan></text>
+    <text x="100" y="296"><tspan fill="#16181D">    }</tspan></text>
+    <text x="100" y="332"><tspan fill="#16181D">  }</tspan><tspan fill="#5C6470"> // 100% test coverage</tspan></text>
+  </g>
+
+  <!-- cursor -->
+  <rect x="248" y="248" width="2" height="15" fill="#0176D3"/>
+
+  <!-- status line -->
+  <rect x="44" y="336" width="472" height="24" rx="0" fill="#EEF6FD"/>
+  <rect x="44" y="348" width="472" height="12" rx="0" fill="#EEF6FD"/>
+  <path d="M44 348 h472 v0 a12 12 0 0 1 -12 12 h-448 a12 12 0 0 1 -12 -12 z" fill="#EEF6FD"/>
+  <circle cx="62" cy="348" r="4" fill="#2E844A"/>
+  <text x="74" y="352" class="mono" font-size="10" font-weight="500" fill="#5C6470">APEX · 0 ERRORS</text>
+</svg>

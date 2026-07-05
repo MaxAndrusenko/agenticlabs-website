@@ -1,0 +1,77 @@
+<svg viewBox="0 0 800 450" width="800" height="450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstract comparison of agent-based automation versus traditional deterministic flow automation">
+  <defs>
+    <style>.mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }</style>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="450" fill="#F7F9FB"/>
+
+  <!-- grid -->
+  <g stroke="#E3E7ED" stroke-width="1" opacity="0.7">
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+  </g>
+
+  <text x="64" y="72" class="mono" font-size="13" font-weight="500" fill="#7526E3" letter-spacing="1.5">AGENTFORCE VS. TRADITIONAL AUTOMATION</text>
+
+  <!-- vertical divider -->
+  <line x1="400" y1="110" x2="400" y2="360" stroke="#E3E7ED" stroke-width="1.5" stroke-dasharray="4 6"/>
+
+  <!-- LEFT: traditional deterministic flow (linear steps) -->
+  <text x="72" y="132" class="mono" font-size="11" font-weight="500" fill="#5C6470">DETERMINISTIC FLOW</text>
+  <g transform="translate(72, 160)">
+    <!-- step boxes -->
+    <rect x="0" y="30" width="66" height="40" rx="6" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+    <rect x="0" y="100" width="66" height="40" rx="6" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+    <path d="M186 50 l0 20 l-30 0" fill="none"/>
+    <!-- diamond decision -->
+    <g transform="translate(160, 50)">
+      <path d="M0 -26 L 26 0 L 0 26 L -26 0 Z" fill="#EEF6FD" stroke="#0176D3" stroke-width="1.8"/>
+    </g>
+    <rect x="260" y="30" width="66" height="40" rx="6" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+    <rect x="260" y="100" width="66" height="40" rx="6" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+    <!-- connectors -->
+    <g fill="none" stroke="#5C6470" stroke-width="1.6">
+      <path d="M66 50 H 134"/>
+      <path d="M66 120 H 100 V 76 L 138 60"/>
+      <path d="M186 42 C 220 30, 240 50, 260 50"/>
+      <path d="M186 58 C 220 90, 240 120, 260 120"/>
+    </g>
+    <g fill="#5C6470" font-size="9" class="mono">
+      <text x="10" y="55">IF</text>
+      <text x="10" y="125">SET</text>
+      <text x="268" y="55">DO</text>
+      <text x="268" y="125">END</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: agent (goal + reasoning graph) -->
+  <text x="440" y="132" class="mono" font-size="11" font-weight="500" fill="#7526E3">AUTONOMOUS AGENT</text>
+  <g transform="translate(440, 160)">
+    <!-- central agent core -->
+    <circle cx="150" cy="90" r="34" fill="#F3ECFD" stroke="#7526E3" stroke-width="2"/>
+    <path d="M150 66 l7 18 l18 7 l-18 7 l-7 18 l-7 -18 l-18 -7 l18 -7 z" fill="none" stroke="#7526E3" stroke-width="2" stroke-linejoin="round"/>
+    <!-- satellite capability nodes -->
+    <g>
+      <circle cx="40" cy="40" r="18" fill="#FFFFFF" stroke="#03B4A7" stroke-width="1.8"/>
+      <circle cx="40" cy="150" r="18" fill="#FFFFFF" stroke="#03B4A7" stroke-width="1.8"/>
+      <circle cx="270" cy="40" r="18" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+      <circle cx="270" cy="150" r="18" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+    </g>
+    <!-- reasoning links (curved, non-linear) -->
+    <g fill="none" stroke="#5C6470" stroke-width="1.6" stroke-dasharray="3 4">
+      <path d="M56 52 C 90 70, 100 78, 122 82"/>
+      <path d="M56 138 C 90 120, 100 108, 122 98"/>
+      <path d="M254 52 C 220 70, 200 78, 180 84"/>
+      <path d="M254 138 C 220 120, 200 108, 180 98"/>
+    </g>
+    <!-- small icons in satellites -->
+    <path d="M34 40 h12 M34 46 h8" stroke="#03B4A7" stroke-width="1.6" stroke-linecap="round"/>
+    <rect x="33" y="144" width="14" height="12" rx="2" fill="none" stroke="#03B4A7" stroke-width="1.6"/>
+    <path d="M264 40 l5 5 l7 -8" fill="none" stroke="#0176D3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="270" cy="150" r="5" fill="none" stroke="#0176D3" stroke-width="1.6"/>
+  </g>
+
+  <!-- footer note -->
+  <text x="64" y="400" class="mono" font-size="11" font-weight="500" fill="#5C6470">KNOW WHEN A FLOW BEATS AN AGENT</text>
+</svg>

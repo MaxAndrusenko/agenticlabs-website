@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Why ‘AI-generated’ is the wrong way to think about AI-accelerated Salesforce development — Agentic Labs</title>
+  <meta name="description" content="AI-accelerated is not AI-generated. Why senior engineers who own every line ship better Salesforce work than either juniors or unsupervised AI.">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/insights/ai-accelerated-not-ai-generated.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Why ‘AI-generated’ is the wrong way to think about AI-accelerated Salesforce development — Agentic Labs">
+  <meta property="og:description" content="AI-accelerated is not AI-generated. Why senior engineers who own every line ship better Salesforce work than either juniors or unsupervised AI.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/insights/ai-accelerated-not-ai-generated.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component copied from index.html.
+       Subfolder page: href/src prefixed with ../ . No primary-nav item is
+       active on an insight article, so no link carries .is-active here.
+       ========================================================================= -->
+  <header class="al-navbar">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="../index.html" aria-label="Agentic Labs — home">
+        <img src="../assets/logo.svg" width="180" height="36" alt="Agentic Labs">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="../index.html">Home</a>
+        <a class="al-navbar__link" href="../services.html">Services</a>
+        <a class="al-navbar__link" href="../work.html">Work</a>
+        <a class="al-navbar__link" href="../approach.html">Approach</a>
+        <a class="al-navbar__link" href="../contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="../contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="../index.html">Home</a>
+      <a class="al-navbar__link" href="../services.html">Services</a>
+      <a class="al-navbar__link" href="../work.html">Work</a>
+      <a class="al-navbar__link" href="../approach.html">Approach</a>
+      <a class="al-navbar__link" href="../contact.html">Contact</a>
+      <a class="al-navbar__link" href="../insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="../contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         ARTICLE HERO
+         DRAFT COPY — this article is a first draft for client review.
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 760px; margin-inline: auto;">
+          <div class="al-tag-row">
+            <span class="al-tag al-tag--ai">Agentic AI</span>
+          </div>
+          <h1>Why ‘AI-generated’ is the wrong way to think about AI-accelerated Salesforce development</h1>
+          <!-- PLACEHOLDER: confirm author byline and publish date with client -->
+          <p class="al-card__meta" style="margin-top: var(--al-space-4);">
+            By the Agentic Labs team · <span class="al-mono">Jun 2026</span> · 6 min read
+          </p>
+        </div>
+
+        <figure class="al-reveal" style="max-width: 960px; margin: var(--al-space-8) auto 0;">
+          <img
+            src="../assets/insight-ai-accelerated.svg"
+            width="960"
+            height="540"
+            alt="A split diagram contrasting an unsupervised AI dropping raw code straight into a Salesforce org with a senior engineer reviewing, correcting, and approving each change before it ships."
+            style="width: 100%; height: auto; border-radius: var(--al-radius-panel); border: 1px solid var(--al-border);">
+        </figure>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         ARTICLE BODY — constrained reading column (~720px)
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <article class="al-reveal" style="max-width: 720px; margin-inline: auto;">
+
+          <p class="al-body-lg" style="margin-bottom: var(--al-space-6);">
+            &ldquo;AI-generated&rdquo; and &ldquo;AI-accelerated&rdquo; sound like synonyms. In practice they describe two very different ways of building software — and on a Salesforce org, the gap between them is the difference between code you can trust in production and code you are quietly hoping nobody looks at too closely.
+          </p>
+
+          <p style="margin-bottom: var(--al-space-6);">
+            The distinction is not pedantry. It decides who is accountable for a merge, how failure modes get caught, and whether the thing you deploy holds up when real data and real edge cases hit it. This piece lays out where we draw the line, why we draw it there, and what it should mean when you are evaluating any partner who says they &ldquo;use AI.&rdquo;
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8); margin-bottom: var(--al-space-4);">The distinction that matters</h2>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            AI-generated implies the AI is the author. A prompt goes in, code comes out, and it ships more or less as written. The model is the decision-maker; the human is a courier. AI-accelerated inverts that relationship. A senior engineer owns the design, the constraints, and every decision that has consequences. The AI is a fast, tireless pair of hands that removes mechanical friction — but it never gets the final word.
+          </p>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            On the platform specifically, this matters more than it does in a greenfield codebase. Salesforce is a shared, stateful environment with governor limits, an object model you cannot casually refactor, sharing rules that encode real security policy, and automation that fires in an order that is not always obvious. A plausible-looking Apex trigger or Flow can be subtly wrong in ways that only surface under bulk load, in a specific profile context, or three releases later. Correctness here is contextual, and context is exactly what a model working from a prompt does not fully have.
+          </p>
+
+          <blockquote style="margin: var(--al-space-8) 0; padding-left: var(--al-space-6); border-left: 3px solid var(--al-blue-60); font-size: 24px; line-height: 1.4; font-weight: 600; color: var(--al-navy-90); text-wrap: balance;">
+            The AI does the typing. The judgment — architecture, tradeoffs, and every merge — stays human.
+          </blockquote>
+
+          <h2 style="margin-top: var(--al-space-8); margin-bottom: var(--al-space-4);">Where AI actually helps</h2>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            Used well, agentic tooling is a genuine force multiplier. It is fastest and safest on work that is mechanical, well-specified, and easy to verify — the parts of a build where a senior engineer already knows the right answer and just needs it typed out correctly. In our workflow that means:
+          </p>
+
+          <ul style="margin-bottom: var(--al-space-6); padding-left: var(--al-space-5); list-style: disc;">
+            <li style="margin-bottom: var(--al-space-3);"><strong>Boilerplate.</strong> Trigger handler frameworks, wrapper classes, LWC scaffolding, selector and service layers — the structural code that follows a known pattern and rewards consistency over cleverness.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Tests.</strong> First-draft Apex test classes, bulk-data setup, and assertion scaffolding. A human still decides what actually needs to be proven, but the AI drafts the coverage fast so the engineer can focus on the cases that matter.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Documentation.</strong> Inline comments, ApexDoc, README and runbook drafts, and change summaries — the artifacts that make a build maintainable and that teams under deadline pressure usually skip.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Scaffolding and refactors.</strong> Renames, mechanical migrations, repetitive edits across many files, and generating the skeleton of a component so the engineer starts from a running shell rather than a blank file.</li>
+          </ul>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            What these have in common: the correct output is knowable in advance, the cost of a mistake is low, and a reviewer can confirm the result quickly. That is the sweet spot. Acceleration here buys back hours that get reinvested in the parts of the job a model cannot own.
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8); margin-bottom: var(--al-space-4);">Where human judgment is non-negotiable</h2>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            The other half of the work is where careers are made and orgs are broken, and it is precisely where unsupervised generation is most dangerous — because the output still looks confident and correct. These decisions stay with a senior engineer, full stop:
+          </p>
+
+          <ul style="margin-bottom: var(--al-space-6); padding-left: var(--al-space-5); list-style: disc;">
+            <li style="margin-bottom: var(--al-space-3);"><strong>Architecture.</strong> Whether a requirement belongs in Flow, Apex, or an Agentforce action; how automation is sequenced; what happens when two processes touch the same record. Get this wrong and every line built on top inherits the mistake.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Data model.</strong> Objects, relationships, and how they will behave at scale. The data model is the hardest thing to change once records exist, and a model that reads fine in a prompt can quietly foreclose next year's roadmap.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Security.</strong> Sharing rules, field-level security, <span class="al-mono">with sharing</span> versus <span class="al-mono">without sharing</span>, and where sensitive data flows. These encode policy and compliance, and a confident wrong answer here is a breach waiting to happen.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Tradeoffs.</strong> Cost against flexibility, speed against maintainability, clever against boring-and-obvious. Every real build is a series of judgment calls with no single right answer — only the answer that fits this org, this team, and this budget.</li>
+          </ul>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            A model can propose options in each of these areas, and often usefully. What it cannot do is be accountable for the choice, weigh it against constraints it was never told about, or notice the second-order consequence that only shows up because someone has lived through it before. That is the human's job, and it is not delegable.
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8); margin-bottom: var(--al-space-4);">What this means for your org</h2>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            If you are evaluating a partner, the useful question is not &ldquo;do you use AI?&rdquo; Nearly everyone does now. The question is <em>where</em> they let it make decisions and <em>who</em> is on the hook for the code that ships. An honest answer sounds like: AI drafts and accelerates; a named senior engineer designs, reviews, and owns every merge; and the same source control, review, and test bar applies to AI-drafted code as to hand-written code.
+          </p>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            The failure mode to avoid is either extreme. Unsupervised generation gives you volume without judgment — a lot of plausible code and no one who can explain why it is right. A junior bench without leverage gives you judgment that is still forming, at senior prices. AI-accelerated senior delivery is the combination that actually compounds: the experience to make the right call, plus the tooling to make it faster.
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8); margin-bottom: var(--al-space-4);">The bottom line</h2>
+
+          <p style="margin-bottom: var(--al-space-5);">
+            AI-generated and AI-accelerated are not two labels for the same thing. One hands authorship to a model; the other keeps authorship with an engineer and hands the model the mechanical work. On a live Salesforce org — where the data model is load-bearing, security is policy, and mistakes surface late — that difference is the whole game.
+          </p>
+
+          <p style="margin-bottom: 0;">
+            We build the second way, deliberately. The AI does the typing so our engineers spend their time on the decisions that decide outcomes. Judgment stays human, because on your org it has to.
+          </p>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         AUTHOR BIO
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-card al-reveal" style="max-width: 720px; margin-inline: auto; flex-direction: row; gap: var(--al-space-5); align-items: flex-start;">
+          <!-- PLACEHOLDER: confirm author identity, avatar, and bio with client -->
+          <img src="../assets/avatar-1.svg" width="56" height="56" alt="" aria-hidden="true" style="width: 56px; height: 56px; border-radius: var(--al-radius-pill); flex: 0 0 auto;">
+          <div>
+            <p class="al-card__eyebrow" style="margin-bottom: var(--al-space-1);">Written by</p>
+            <h2 class="al-card__title" style="font-size: 20px; margin-bottom: var(--al-space-2);">The Agentic Labs team</h2>
+            <p class="al-card__body" style="margin-bottom: 0;">
+              <!-- PLACEHOLDER: replace with real author bio and credentials -->
+              Certified Salesforce architects and senior developers who use agentic AI as leverage, never as a replacement. We write about how we build so you know what to expect before you engage.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         RELATED POSTS
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Keep reading</span>
+          <h2>Related insights</h2>
+        </header>
+
+        <div class="al-grid--2">
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="agentforce-vs-traditional-automation.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/insight-agentforce.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--ai">Agentforce</span>
+            </div>
+            <h3 class="al-card__title">Agentforce vs. traditional automation</h3>
+            <p class="al-card__body">When an agent earns its place over a Flow — and the questions to ask before you build one.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">FEB 2026</span> · 8 min read</p>
+            <a class="al-card__link" href="agentforce-vs-traditional-automation.html">Read →</a>
+          </article>
+
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="five-questions-before-you-sign.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/insight-questions.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Buying</span>
+            </div>
+            <h3 class="al-card__title">Five questions before you sign a Salesforce partner</h3>
+            <p class="al-card__body">A short diligence checklist for technical and business buyers evaluating a development partner.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">JAN 2026</span> · 5 min read</p>
+            <a class="al-card__link" href="five-questions-before-you-sign.html">Read →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Your Salesforce org, engineered for what's next.</h2>
+            <p>Talk to a senior architect about custom development, integrations, or an Agentforce build — scoped before you commit.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="../contact.html">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="../contact.html">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component copied from index.html.
+       Subfolder page: href/src prefixed with ../ .
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="../index.html" aria-label="Agentic Labs — home">
+            <img src="../assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="../index.html">Home</a>
+          <a class="al-footer__link" href="../services.html">Services</a>
+          <a class="al-footer__link" href="../work.html">Work</a>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+          <a class="al-footer__link" href="../insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="../privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="../cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="../privacy-policy.html">Privacy Policy</a>
+          <a href="../cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

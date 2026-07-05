@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Agentic Labs — Senior Salesforce engineering, accelerated by agentic AI</title>
+  <meta name="description" content="Certified Salesforce architects and senior developers who use agentic AI as leverage, not a replacement. Custom development, integrations, and Agentforce builds.">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Agentic Labs — Senior Salesforce engineering, accelerated by agentic AI">
+  <meta property="og:description" content="Certified Salesforce architects and senior developers who use agentic AI as leverage, not a replacement. Custom development, integrations, and Agentforce builds.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component. Other root-level pages copy this verbatim,
+       changing only which .al-navbar__link carries .is-active + aria-current.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <header class="al-navbar al-navbar--on-hero">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="index.html" aria-label="Agentic Labs — home">
+        <!-- Light logo shows over the dark (banner-matched) bar; dark logo shows on hover when the bar turns white. -->
+        <img class="al-navbar__logo-img al-navbar__logo-img--light" src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+        <img class="al-navbar__logo-img al-navbar__logo-img--dark" src="assets/logo.svg" width="180" height="36" alt="" aria-hidden="true">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link is-active" href="index.html" aria-current="page">Home</a>
+        <a class="al-navbar__link" href="services.html">Services</a>
+        <a class="al-navbar__link" href="work.html">Work</a>
+        <a class="al-navbar__link" href="approach.html">Approach</a>
+        <a class="al-navbar__link" href="contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link is-active" href="index.html" aria-current="page">Home</a>
+      <a class="al-navbar__link" href="services.html">Services</a>
+      <a class="al-navbar__link" href="work.html">Work</a>
+      <a class="al-navbar__link" href="approach.html">Approach</a>
+      <a class="al-navbar__link" href="contact.html">Contact</a>
+      <a class="al-navbar__link" href="insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. HERO — immersive, full-viewport (home page only).
+         Animated particle-network background (canvas, painted by
+         initHeroCanvas() in js/main.js) over a drifting brand-gradient mesh.
+         The .al-hero--immersive modifier is applied ONLY here; the shared base
+         .al-hero* rules used by other pages are left untouched. All original
+         content is preserved — eyebrow, H1, sub, both CTAs, provenance tag, and
+         the 4-stat strip. The previous .al-hero__media SVG (hero-graphic.svg)
+         is retired in favour of the full-bleed animated field.
+         ===================================================================== -->
+    <section class="al-hero al-hero--immersive">
+      <!-- Decorative animated field: hidden from assistive tech, not focusable.
+           Renders one static frame (no rAF loop) under prefers-reduced-motion. -->
+      <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+      <!-- Contrast scrim: keeps all copy AA-legible over every animation frame. -->
+      <span class="al-hero__scrim" aria-hidden="true"></span>
+
+      <div class="al-hero__inner al-container">
+        <div class="al-hero__content al-reveal">
+          <span class="al-eyebrow">AI-Native Salesforce Development</span>
+          <h1 class="al-hero__title">Fast Delivered Salesforce Solutions Without Compromising Quality</h1>
+          <p class="al-hero__sub">Agentic Labs pairs certified architects and senior developers with AI-native tooling to ship custom development, integrations, and Agentforce builds faster, without junior benches or guesswork.</p>
+          <div class="al-hero__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="contact.html">Contact us</a>
+            <a class="al-btn al-btn--ghost" href="work.html">See our work →</a>
+          </div>
+          <p style="margin-top: var(--al-space-5);">
+          </p>
+        </div>
+      </div>
+
+      <div class="al-hero__foot al-container">
+        <div class="al-stat-strip">
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat">
+            <span class="al-stat__num">40+</span>
+            <span class="al-stat__label">Orgs shipped</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat">
+            <span class="al-stat__num">15+</span>
+            <span class="al-stat__label">Years combined Salesforce experience</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat">
+            <span class="al-stat__num">100%</span>
+            <span class="al-stat__label">Senior-staffed</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat">
+            <span class="al-stat__num">Certified</span>
+            <span class="al-stat__label">Architects</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. SERVICES
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">What we do</span>
+          <h2>Salesforce delivery, built for how AI actually works.</h2>
+        </header>
+
+        <div class="al-grid--4">
+          <!-- Architecture & Advisory -->
+          <article class="al-card al-card--service al-reveal">
+            <span class="al-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18" />
+                <path d="M5 21V8l7-5 7 5v13" />
+                <path d="M9 21v-6h6v6" />
+              </svg>
+            </span>
+            <span class="al-card__eyebrow">Advisory</span>
+            <h3 class="al-card__title">Architecture &amp; advisory</h3>
+            <p class="al-card__body">Data models, org strategy, and technical roadmaps that hold up as you scale — designed by architects who have seen the failure modes.</p>
+            <a class="al-card__link" href="services.html">Learn more →</a>
+          </article>
+
+          <!-- Custom Development -->
+          <article class="al-card al-card--service al-reveal">
+            <span class="al-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 18l-5-6 5-6" />
+                <path d="M16 6l5 6-5 6" />
+                <path d="M13 4l-2 16" />
+              </svg>
+            </span>
+            <span class="al-card__eyebrow">Build</span>
+            <h3 class="al-card__title">Custom development</h3>
+            <p class="al-card__body">Apex, LWC, and Flow engineered for correctness and maintainability. AI accelerates the typing; a senior developer owns every line that ships.</p>
+            <a class="al-card__link" href="services.html">Learn more →</a>
+          </article>
+
+          <!-- Agentforce & AI Integration -->
+          <article class="al-card al-card--service al-reveal">
+            <span class="al-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                <path d="M5 5l2.5 2.5M16.5 16.5L19 19M19 5l-2.5 2.5M7.5 16.5L5 19" />
+              </svg>
+            </span>
+            <span class="al-card__eyebrow">Agentforce</span>
+            <h3 class="al-card__title">Agentforce &amp; AI integration</h3>
+            <p class="al-card__body">Agents and AI workflows scoped to real business rules, with guardrails and human review — not demos that break in production.</p>
+            <a class="al-card__link" href="services.html">Learn more →</a>
+          </article>
+
+          <!-- Managed Support & Optimization -->
+          <article class="al-card al-card--service al-reveal">
+            <span class="al-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+                <path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+                <circle cx="12" cy="12" r="3.5" />
+              </svg>
+            </span>
+            <span class="al-card__eyebrow">Support</span>
+            <h3 class="al-card__title">Managed support &amp; optimization</h3>
+            <p class="al-card__body">Ongoing engineering that keeps your org healthy — technical debt paydown, release management, and continuous optimization on retainer.</p>
+            <a class="al-card__link" href="services.html">Learn more →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. DIFFERENTIATORS
+         ===================================================================== -->
+    <section class="al-section al-section--navy">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Why Agentic Labs</span>
+          <h2>The AI does the typing. Judgment stays human.</h2>
+        </header>
+
+        <div class="al-grid--3">
+          <article class="al-card al-card--service al-reveal" style="background-color: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16);">
+            <span class="al-card__eyebrow" style="color:#8FD0FF;">Senior-only</span>
+            <h3 class="al-card__title" style="color:var(--al-white);">Senior-only delivery</h3>
+            <p class="al-card__body" style="color:rgba(255,255,255,.82);">No junior benches, no learning on your dime. Every engagement is led and executed by certified architects and senior developers.</p>
+          </article>
+
+          <article class="al-card al-card--service al-reveal" style="background-color: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16);">
+            <span class="al-card__eyebrow" style="color:#8FD0FF;">Leverage</span>
+            <h3 class="al-card__title" style="color:var(--al-white);">AI as leverage, not a shortcut</h3>
+            <p class="al-card__body" style="color:rgba(255,255,255,.82);">Agentic tooling removes the grunt work so our engineers spend their time on design, judgment, and edge cases — the parts that actually decide outcomes.</p>
+          </article>
+
+          <article class="al-card al-card--service al-reveal" style="background-color: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16);">
+            <span class="al-card__eyebrow" style="color:#8FD0FF;">Rigor</span>
+            <h3 class="al-card__title" style="color:var(--al-white);">Enterprise-grade rigor</h3>
+            <p class="al-card__body" style="color:rgba(255,255,255,.82);">Source control, code review, test coverage, and staged deployments on every project. AI-generated code is held to the same bar as hand-written code.</p>
+          </article>
+        </div>
+
+        <p class="al-reveal" style="margin-top: var(--al-space-7);">
+          <a class="al-btn al-btn--ghost" href="approach.html">More on our approach →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. PROCESS
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Process</span>
+          <h2>How we work.</h2>
+        </header>
+
+        <div class="al-process">
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">01</span>
+            <h3 class="al-process__title">Discover &amp; scope</h3>
+            <p class="al-process__body">We map the problem, the org, and the constraints before writing anything — so the estimate reflects reality, not optimism.</p>
+          </div>
+
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">02</span>
+            <h3 class="al-process__title">Architect</h3>
+            <p class="al-process__body">A senior architect designs the data model, integration points, and automation before a single line of code is generated.</p>
+          </div>
+
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">03</span>
+            <h3 class="al-process__title">Build</h3>
+            <p class="al-process__body">AI-accelerated development against the design, with senior review, source control, and tests on every change.</p>
+          </div>
+
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">04</span>
+            <h3 class="al-process__title">Ship &amp; support</h3>
+            <p class="al-process__body">Staged deployment, knowledge transfer, and optional managed support to keep the org healthy after launch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. WORK HIGHLIGHTS
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Selected work</span>
+          <h2>Recent engagements.</h2>
+        </header>
+
+        <div class="al-grid--3">
+          <!-- Case 1: Lead-to-cash -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="work/lead-to-cash.html" aria-hidden="true" tabindex="-1">
+              <img src="assets/case-lead-to-cash.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Sales Cloud</span>
+              <span class="al-tag al-tag--integration">Integration</span>
+            </div>
+            <h3 class="al-card__title">Lead-to-cash automation</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Cut quote-to-cash cycle time by 60%</strong> across a multi-region sales org.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="work/lead-to-cash.html">View case study →</a>
+          </article>
+
+          <!-- Case 2: Case triage engine -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="work/case-triage-engine.html" aria-hidden="true" tabindex="-1">
+              <img src="assets/case-triage.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Service Cloud</span>
+              <span class="al-tag al-tag--ai">Agentforce</span>
+            </div>
+            <h3 class="al-card__title">Agentforce case triage engine</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Auto-routed 80% of inbound cases</strong> with human review on every escalation.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="work/case-triage-engine.html">View case study →</a>
+          </article>
+
+          <!-- Case 3: Org data migration -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="work/org-data-migration.html" aria-hidden="true" tabindex="-1">
+              <img src="assets/case-migration.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Data Migration</span>
+              <span class="al-tag al-tag--integration">Integration</span>
+            </div>
+            <h3 class="al-card__title">Multi-org data migration</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Migrated 12M+ records with zero data loss</strong> during a post-acquisition consolidation.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="work/org-data-migration.html">View case study →</a>
+          </article>
+        </div>
+
+        <p class="al-reveal" style="margin-top: var(--al-space-7);">
+          <a class="al-btn al-btn--secondary" href="work.html">See all work</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. TESTIMONIALS
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">What clients say</span>
+          <h2>Trusted by teams already on Salesforce.</h2>
+        </header>
+
+        <div class="al-grid--3">
+          <!-- PLACEHOLDER: testimonial is generic placeholder — replace with a real, approved client quote -->
+          <figure class="al-card al-card--testimonial al-reveal">
+            <blockquote class="al-card__body">“They shipped in weeks what our last vendor quoted in quarters — and a senior engineer explained every decision along the way.”</blockquote>
+            <figcaption class="al-card__meta">
+              <img src="assets/avatar-1.svg" width="40" height="40" alt="" aria-hidden="true">
+              <span><strong>VP of Engineering</strong><br><span class="al-caption">Series C SaaS</span></span>
+            </figcaption>
+          </figure>
+
+          <!-- PLACEHOLDER: testimonial is generic placeholder — replace with a real, approved client quote -->
+          <figure class="al-card al-card--testimonial al-reveal">
+            <blockquote class="al-card__body">“The AI speed was obvious, but what sold us was the rigor. Tests, reviews, clean handoff. Nothing felt generated.”</blockquote>
+            <figcaption class="al-card__meta">
+              <img src="assets/avatar-2.svg" width="40" height="40" alt="" aria-hidden="true">
+              <span><strong>Head of RevOps</strong><br><span class="al-caption">Global manufacturing</span></span>
+            </figcaption>
+          </figure>
+
+          <!-- PLACEHOLDER: testimonial is generic placeholder — replace with a real, approved client quote -->
+          <figure class="al-card al-card--testimonial al-reveal">
+            <blockquote class="al-card__body">“Our Agentforce build actually holds up in production because they scoped it to our real rules, not a happy path.”</blockquote>
+            <figcaption class="al-card__meta">
+              <img src="assets/avatar-3.svg" width="40" height="40" alt="" aria-hidden="true">
+              <span><strong>Director of Salesforce</strong><br><span class="al-caption">Healthcare technology</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. INSIGHTS PREVIEW
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Insights</span>
+          <h2>From the team.</h2>
+        </header>
+
+        <div class="al-grid--3">
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="insights/ai-accelerated-not-ai-generated.html" aria-hidden="true" tabindex="-1">
+              <img src="assets/insight-ai-accelerated.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--ai">AI Practice</span>
+            </div>
+            <h3 class="al-card__title">AI-accelerated, not AI-generated</h3>
+            <p class="al-card__body">Where agentic tooling belongs in a serious Salesforce build — and where a senior engineer still has to own the call.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">MAR 2026</span> · 6 min read</p>
+            <a class="al-card__link" href="insights/ai-accelerated-not-ai-generated.html">Read →</a>
+          </article>
+
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="insights/agentforce-vs-traditional-automation.html" aria-hidden="true" tabindex="-1">
+              <img src="assets/insight-agentforce.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--ai">Agentforce</span>
+            </div>
+            <h3 class="al-card__title">Agentforce vs. traditional automation</h3>
+            <p class="al-card__body">When an agent earns its place over a Flow — and the questions to ask before you build one.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">FEB 2026</span> · 8 min read</p>
+            <a class="al-card__link" href="insights/agentforce-vs-traditional-automation.html">Read →</a>
+          </article>
+
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="insights/five-questions-before-you-sign.html" aria-hidden="true" tabindex="-1">
+              <img src="assets/insight-questions.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Buying</span>
+            </div>
+            <h3 class="al-card__title">Five questions before you sign a Salesforce partner</h3>
+            <p class="al-card__body">A short diligence checklist for technical and business buyers evaluating a development partner.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">JAN 2026</span> · 5 min read</p>
+            <a class="al-card__link" href="insights/five-questions-before-you-sign.html">Read →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         8. FAQ
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">FAQ</span>
+          <h2>Everything you need to know.</h2>
+        </header>
+
+        <div class="al-accordion al-reveal">
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="true" aria-controls="al-faq-1">
+                <span class="al-accordion__question">What does “agentic AI” actually mean in your workflow?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-1" role="region" aria-label="Answer">
+              <p class="al-accordion__answer">It means our engineers use AI agents to handle the mechanical parts of development — scaffolding, boilerplate, first-draft code, test stubs — while every design decision and every merge is made by a senior human. The AI does the typing; judgment stays human.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="al-faq-2">
+                <span class="al-accordion__question">Who actually writes and reviews the code?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-2" role="region" aria-label="Answer">
+              <p class="al-accordion__answer">Certified architects and senior developers. There is no junior bench. AI accelerates a senior engineer; it never stands in for one. Every line that reaches your org has been reviewed by a person who understands the consequences.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="al-faq-3">
+                <span class="al-accordion__question">Is my org data safe when you use AI tools?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-3" role="region" aria-label="Answer">
+              <!-- PLACEHOLDER: confirm exact tooling, data-handling terms, and retention policy with client legal/security before publishing this answer -->
+              <p class="al-accordion__answer">We use enterprise AI tooling configured so your data is not used to train third-party models, and we scope AI access to the minimum required for the task. Specific tools, data-handling terms, and retention policies are confirmed per engagement. <em>(Details to be finalized with the client's security and legal teams.)</em></p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="al-faq-4">
+                <span class="al-accordion__question">How do you price engagements?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-4" role="region" aria-label="Answer">
+              <p class="al-accordion__answer">Most work is fixed-scope with a scoped estimate up front, or a monthly retainer for ongoing support and optimization. We scope before we quote, so the number reflects the actual work rather than a placeholder we revise later.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="al-faq-5">
+                <span class="al-accordion__question">Do you work with our existing team and admins?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-5" role="region" aria-label="Answer">
+              <p class="al-accordion__answer">Yes. We integrate with in-house admins and developers, follow your source-control and release process where one exists, and hand off with documentation and knowledge transfer so your team can own what we build.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="al-faq-6">
+                <span class="al-accordion__question">Which Salesforce clouds and products do you cover?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-6" role="region" aria-label="Answer">
+              <p class="al-accordion__answer">Sales Cloud, Service Cloud, Experience Cloud, Agentforce, and custom development across Apex, Lightning Web Components, and Flow — plus integrations to the systems your org depends on. If it runs on the platform, we can architect and build it.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3>
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="al-faq-7">
+                <span class="al-accordion__question">How fast can you start?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="al-faq-7" role="region" aria-label="Answer">
+              <p class="al-accordion__answer">Discovery can usually begin within days of an initial call. Because we staff senior-only and use agentic tooling, we move from scope to shippable work faster than a traditional bench-based agency.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         9. FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Your Salesforce org, engineered for what's next.</h2>
+            <p>Talk to a senior architect about custom development, integrations, or an Agentforce build — scoped before you commit.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="contact.html">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="contact.html">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component. Other root-level pages copy this verbatim.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="index.html" aria-label="Agentic Labs — home">
+            <img src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="index.html">Home</a>
+          <a class="al-footer__link" href="services.html">Services</a>
+          <a class="al-footer__link" href="work.html">Work</a>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+          <a class="al-footer__link" href="insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<svg viewBox="0 0 800 450" width="800" height="450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstract data migration motif showing records transferring between two systems">
+  <defs>
+    <style>.mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }</style>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="450" fill="#032D60"/>
+
+  <!-- grid -->
+  <g stroke="#0B5CAB" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+  </g>
+
+  <text x="64" y="72" class="mono" font-size="13" font-weight="500" fill="#03B4A7" letter-spacing="1.5">ORG DATA MIGRATION</text>
+
+  <!-- SOURCE database cylinder -->
+  <g transform="translate(96, 150)">
+    <ellipse cx="60" cy="14" rx="60" ry="16" fill="#043a75" stroke="#0176D3" stroke-width="1.8"/>
+    <path d="M0 14 V 140 A 60 16 0 0 0 120 140 V 14" fill="#043a75" stroke="#0176D3" stroke-width="1.8"/>
+    <path d="M0 62 A 60 16 0 0 0 120 62" fill="none" stroke="#0B5CAB" stroke-width="1.5"/>
+    <path d="M0 100 A 60 16 0 0 0 120 100" fill="none" stroke="#0B5CAB" stroke-width="1.5"/>
+    <text x="60" y="188" text-anchor="middle" class="mono" font-size="11" font-weight="500" fill="#5C6470">LEGACY ORG</text>
+  </g>
+
+  <!-- TARGET database cylinder -->
+  <g transform="translate(584, 150)">
+    <ellipse cx="60" cy="14" rx="60" ry="16" fill="#0176D3" stroke="#EEF6FD" stroke-width="1.8"/>
+    <path d="M0 14 V 140 A 60 16 0 0 0 120 140 V 14" fill="#0176D3" stroke="#EEF6FD" stroke-width="1.8"/>
+    <path d="M0 62 A 60 16 0 0 0 120 62" fill="none" stroke="#EEF6FD" stroke-width="1.2" opacity="0.6"/>
+    <path d="M0 100 A 60 16 0 0 0 120 100" fill="none" stroke="#EEF6FD" stroke-width="1.2" opacity="0.6"/>
+    <text x="60" y="188" text-anchor="middle" class="mono" font-size="11" font-weight="500" fill="#EEF6FD">TARGET ORG</text>
+  </g>
+
+  <!-- transfer records in flight -->
+  <g>
+    <!-- transfer path -->
+    <path d="M232 218 H 576" fill="none" stroke="#0B5CAB" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+    <!-- record packets -->
+    <g stroke="#03B4A7" stroke-width="1.8" fill="#032D60">
+      <rect x="300" y="206" width="26" height="24" rx="4"/>
+      <rect x="380" y="206" width="26" height="24" rx="4"/>
+      <rect x="460" y="206" width="26" height="24" rx="4"/>
+    </g>
+    <g stroke="#03B4A7" stroke-width="1.6" fill="none" stroke-linecap="round">
+      <path d="M306 214 h14 M306 220 h10"/>
+      <path d="M386 214 h14 M386 220 h10"/>
+      <path d="M466 214 h14 M466 220 h10"/>
+    </g>
+    <!-- arrowhead -->
+    <path d="M560 210 l14 8 l-14 8" fill="none" stroke="#03B4A7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- validation checks above path -->
+  <g>
+    <circle cx="343" cy="164" r="12" fill="#043a75" stroke="#2E844A" stroke-width="1.8"/>
+    <path d="M337 164 l4 4 l8 -9" fill="none" stroke="#2E844A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="423" cy="164" r="12" fill="#043a75" stroke="#2E844A" stroke-width="1.8"/>
+    <path d="M417 164 l4 4 l8 -9" fill="none" stroke="#2E844A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="400" y="132" text-anchor="middle" class="mono" font-size="10" font-weight="500" fill="#5C6470">VALIDATED · DEDUPED</text>
+  </g>
+
+  <!-- metric card -->
+  <g transform="translate(310, 300)">
+    <rect x="0" y="0" width="180" height="52" rx="8" fill="#043a75" stroke="#0B5CAB" stroke-width="1.5"/>
+    <text x="16" y="24" class="mono" font-size="11" font-weight="500" fill="#5C6470">RECORDS MIGRATED</text>
+    <text x="16" y="44" class="mono" font-size="16" font-weight="500" fill="#03B4A7">2.4M · 0 LOSS</text>
+  </g>
+
+  <!-- provenance pill -->
+  <g transform="translate(64, 386)">
+    <rect x="0" y="0" width="230" height="30" rx="15" fill="none" stroke="#0176D3" stroke-width="1.5"/>
+    <circle cx="18" cy="15" r="4" fill="#03B4A7"/>
+    <text x="32" y="19" class="mono" font-size="10" font-weight="500" fill="#EEF6FD">AI-ACCELERATED · SENIOR-REVIEWED</text>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="36" viewBox="0 0 180 36" role="img" aria-label="Agentic Labs">
+  <!-- Abstract node/connector mark -->
+  <g fill="none" stroke="#0176D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 26 L16 8 L24 26" />
+    <path d="M11.5 19 L20.5 19" />
+    <circle cx="16" cy="8" r="2.6" fill="#0176D3" stroke="none" />
+    <circle cx="8" cy="26" r="2.6" fill="#0176D3" stroke="none" />
+    <circle cx="24" cy="26" r="2.6" fill="#0176D3" stroke="none" />
+  </g>
+  <!-- Wordmark -->
+  <text x="36" y="24.5" font-family="Inter, Arial, Helvetica, sans-serif" font-weight="700" font-size="20" letter-spacing="-0.4" fill="#FFFFFF">Agentic Labs</text>
+</svg>

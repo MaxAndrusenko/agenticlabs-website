@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cutting case resolution time 40% with a custom triage engine — Agentic Labs</title>
+  <meta name="description" content="Case study: a custom Service Cloud triage engine that cut case resolution time 40% for a support organization. Built by senior engineers. (Placeholder content.)">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/work/case-triage-engine.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cutting case resolution time 40% with a custom triage engine — Agentic Labs">
+  <meta property="og:description" content="Case study: a custom Service Cloud triage engine that cut case resolution time 40% for a support organization. Built by senior engineers. (Placeholder content.)">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/work/case-triage-engine.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component. Other root-level pages copy this verbatim,
+       changing only which .al-navbar__link carries .is-active + aria-current.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <header class="al-navbar">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="../index.html" aria-label="Agentic Labs — home">
+        <img src="../assets/logo.svg" width="180" height="36" alt="Agentic Labs">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="../index.html">Home</a>
+        <a class="al-navbar__link" href="../services.html">Services</a>
+        <a class="al-navbar__link is-active" href="../work.html" aria-current="page">Work</a>
+        <a class="al-navbar__link" href="../approach.html">Approach</a>
+        <a class="al-navbar__link" href="../contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="../contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="../index.html">Home</a>
+      <a class="al-navbar__link" href="../services.html">Services</a>
+      <a class="al-navbar__link is-active" href="../work.html" aria-current="page">Work</a>
+      <a class="al-navbar__link" href="../approach.html">Approach</a>
+      <a class="al-navbar__link" href="../contact.html">Contact</a>
+      <a class="al-navbar__link" href="../insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="../contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. HERO — tags, h1, industry, provenance, cover
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <p class="al-reveal" style="margin-bottom: var(--al-space-5);">
+          <a class="al-btn al-btn--ghost" href="../work.html">← Back to work</a>
+        </p>
+
+        <div class="al-grid--2" style="align-items: center;">
+          <div class="al-reveal">
+            <span class="al-eyebrow">Case study</span>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Service Cloud</span>
+              <span class="al-tag al-tag--default">Custom Development</span>
+            </div>
+            <h1>Cutting case resolution time 40% with a custom triage engine.</h1>
+            <p class="al-body-lg" style="margin-top: var(--al-space-4); max-width: 52ch;">
+              A support organization was losing time to manual case triage and misrouted work. We designed and built a custom Service Cloud triage engine that classifies and routes cases automatically — with a senior engineer owning every rule.
+              <!-- PLACEHOLDER: confirm engagement summary with client -->
+            </p>
+
+            <dl class="al-grid--2" style="margin-top: var(--al-space-6); gap: var(--al-space-5);">
+              <div>
+                <dt class="al-eyebrow" style="margin-bottom: var(--al-space-1);">Industry</dt>
+                <!-- PLACEHOLDER: confirm industry with client -->
+                <dd class="al-mono">Healthcare technology</dd>
+              </div>
+              <div>
+                <dt class="al-eyebrow" style="margin-bottom: var(--al-space-1);">Delivery</dt>
+                <dd><span class="al-provenance al-provenance--sm">AI-Accelerated · Senior-Reviewed</span></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="al-reveal">
+            <img src="../assets/case-triage.svg" width="640" height="400" alt="Diagram of a Service Cloud case triage engine: inbound cases flow through an Apex classification layer into three routing tiers connected to Omni-Channel queues." style="width: 100%; height: auto; border-radius: var(--al-radius-panel); border: 1px solid var(--al-border);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. OUTCOME STAT BAND
+         ===================================================================== -->
+    <section class="al-section al-section--navy">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-7);">
+          <span class="al-eyebrow">Outcomes</span>
+          <h2>What the triage engine changed.</h2>
+        </header>
+
+        <div class="al-stat-strip" style="margin-top: 0; padding-top: var(--al-space-7);">
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat al-reveal">
+            <span class="al-stat__num">40%</span>
+            <span class="al-stat__label">Faster case resolution</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat al-reveal">
+            <span class="al-stat__num">3-tier</span>
+            <span class="al-stat__label">Auto-routing</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real number with client -->
+          <div class="al-stat al-reveal">
+            <span class="al-stat__num">12k</span>
+            <span class="al-stat__label">Cases per month</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. BODY — The problem / Our approach / The result
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div style="display: flex; flex-direction: column; gap: var(--al-space-8); max-width: 68ch;">
+          <!-- The problem -->
+          <article class="al-reveal">
+            <span class="al-eyebrow">The problem</span>
+            <h2>Manual triage was the bottleneck.</h2>
+            <p style="margin-top: var(--al-space-4); max-width: 68ch;">
+              Every inbound case was triaged by hand. Agents read, categorized, and reassigned work before anyone could start solving it — and under load, cases landed in the wrong queue.
+              <!-- PLACEHOLDER: confirm problem detail with client -->
+            </p>
+            <p style="margin-top: var(--al-space-4); max-width: 68ch;">
+              Misrouted cases bounced between teams, first-response times slipped, and priority issues waited behind routine ones. The support organization needed routing it could trust without adding headcount to the triage step.
+              <!-- PLACEHOLDER: confirm problem detail with client -->
+            </p>
+          </article>
+
+          <!-- Our approach -->
+          <article class="al-reveal">
+            <span class="al-eyebrow">Our approach</span>
+            <h2>Classification and routing, engineered — not guessed.</h2>
+            <p style="margin-top: var(--al-space-4); max-width: 68ch;">
+              A senior architect designed the triage model against the support team's real categories and priority rules before any code was generated. AI accelerated the build; a senior developer owned every classification path and routing decision.
+              <!-- PLACEHOLDER: confirm approach detail with client -->
+            </p>
+            <ul style="margin-top: var(--al-space-4); max-width: 68ch; display: flex; flex-direction: column; gap: var(--al-space-3);">
+              <li><strong>Apex classification.</strong> Senior-built Apex classes score and categorize each inbound case against the org's real taxonomy, not a generic keyword match.</li>
+              <li><strong>Flow routing rules.</strong> Declarative Flow routing sends each case to the correct tier and queue, keeping business rules visible and maintainable for in-house admins.</li>
+              <li><strong>Omni-Channel setup.</strong> Omni-Channel distributes routed cases to the right agents by skill and capacity, so priority work reaches the right person first.</li>
+              <li><strong>Test coverage.</strong> Apex tests and staged deployment protect the routing logic, with edge cases and priority overrides covered before launch.</li>
+              <li><strong>Human-reviewed.</strong> Every rule was reviewed by a senior engineer, and escalations stay under human control rather than being silently auto-closed.</li>
+            </ul>
+            <!-- PLACEHOLDER: confirm approach detail with client -->
+          </article>
+
+          <!-- The result -->
+          <article class="al-reveal">
+            <span class="al-eyebrow">The result</span>
+            <h2>Faster resolution, fewer escalations.</h2>
+            <p style="margin-top: var(--al-space-4); max-width: 68ch;">
+              With triage automated, cases reach the right team on the first pass. First-response times dropped, resolution sped up, and the volume of misrouted work that had to be escalated or reassigned fell sharply.
+              <!-- PLACEHOLDER: confirm result detail with client -->
+            </p>
+            <p style="margin-top: var(--al-space-4); max-width: 68ch;">
+              The support organization now handles a higher case volume without adding triage headcount — and because the routing lives in reviewed Apex and Flow the in-house team can read, it stays maintainable as the categories evolve.
+              <!-- PLACEHOLDER: confirm result detail with client -->
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. EMBEDDED TESTIMONIAL
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <!-- PLACEHOLDER: testimonial is generic placeholder — replace with a real, approved client quote -->
+        <figure class="al-card al-card--testimonial al-reveal" style="max-width: 70ch; margin-inline: auto;">
+          <blockquote class="al-card__body">“The routing just works now. Cases land with the right team the first time, our response times are down, and a senior engineer walked us through every rule before it went live.”</blockquote>
+          <figcaption class="al-card__meta">
+            <img src="../assets/avatar-2.svg" width="40" height="40" alt="" aria-hidden="true">
+            <span><strong>Director of Customer Support</strong><br><span class="al-caption">Healthcare Tech</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. RELATED CASE STUDIES
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">More work</span>
+          <h2>Related case studies.</h2>
+        </header>
+
+        <div class="al-grid--2">
+          <!-- Related: Lead-to-cash -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="../work/lead-to-cash.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/case-lead-to-cash.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Sales Cloud</span>
+              <span class="al-tag al-tag--integration">Integration</span>
+            </div>
+            <h3 class="al-card__title">Lead-to-cash automation</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Cut quote-to-cash cycle time by 60%</strong> across a multi-region sales org.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="../work/lead-to-cash.html">View case study →</a>
+          </article>
+
+          <!-- Related: Org data migration -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="../work/org-data-migration.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/case-migration.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Data Migration</span>
+              <span class="al-tag al-tag--integration">Integration</span>
+            </div>
+            <h3 class="al-card__title">Multi-org data migration</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Migrated 12M+ records with zero data loss</strong> during a post-acquisition consolidation.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="../work/org-data-migration.html">View case study →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Have a case queue that needs untangling?</h2>
+            <p>Talk to a senior architect about a triage engine, Service Cloud automation, or custom development — scoped before you commit.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="../contact.html">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="../contact.html">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component. Other root-level pages copy this verbatim.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="../index.html" aria-label="Agentic Labs — home">
+            <img src="../assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="../index.html">Home</a>
+          <a class="al-footer__link" href="../services.html">Services</a>
+          <a class="al-footer__link" href="../work.html">Work</a>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+          <a class="al-footer__link" href="../insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="../privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="../cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="../privacy-policy.html">Privacy Policy</a>
+          <a href="../cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

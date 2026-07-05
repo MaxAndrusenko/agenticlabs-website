@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Contact — Agentic Labs</title>
+  <meta name="description" content="Talk to a senior Salesforce architect at Agentic Labs. Tell us about your org and we’ll follow up within one business day.">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/contact.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact — Agentic Labs">
+  <meta property="og:description" content="Talk to a senior Salesforce architect at Agentic Labs. Tell us about your org and we’ll follow up within one business day.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/contact.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component. Other root-level pages copy this verbatim,
+       changing only which .al-navbar__link carries .is-active + aria-current.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <header class="al-navbar al-navbar--on-hero">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="index.html" aria-label="Agentic Labs — home">
+        <!-- Light logo shows over the dark (banner-matched) bar; dark logo shows on hover when the bar turns white. -->
+        <img class="al-navbar__logo-img al-navbar__logo-img--light" src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+        <img class="al-navbar__logo-img al-navbar__logo-img--dark" src="assets/logo.svg" width="180" height="36" alt="" aria-hidden="true">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="index.html">Home</a>
+        <a class="al-navbar__link" href="services.html">Services</a>
+        <a class="al-navbar__link" href="work.html">Work</a>
+        <a class="al-navbar__link" href="approach.html">Approach</a>
+        <a class="al-navbar__link is-active" href="contact.html" aria-current="page">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="index.html">Home</a>
+      <a class="al-navbar__link" href="services.html">Services</a>
+      <a class="al-navbar__link" href="work.html">Work</a>
+      <a class="al-navbar__link" href="approach.html">Approach</a>
+      <a class="al-navbar__link is-active" href="contact.html" aria-current="page">Contact</a>
+      <a class="al-navbar__link" href="insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. HERO — immersive, full-viewport. Shares the home banner identity;
+         the .al-hero--contact modifier reweights the mesh to a balanced blue+teal.
+         No data-hero-accent is set, so the particle field stays full multi-hue —
+         echoing the balanced mesh. Animation is wired automatically by
+         initStarFields() via [data-hero-canvas].
+         ===================================================================== -->
+    <section class="al-hero al-hero--immersive al-hero--contact">
+      <!-- Decorative animated field: hidden from assistive tech, not focusable.
+           Renders one static frame (no rAF loop) under prefers-reduced-motion. -->
+      <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+      <!-- Contrast scrim: keeps all copy AA-legible over every animation frame. -->
+      <span class="al-hero__scrim" aria-hidden="true"></span>
+
+      <div class="al-hero__inner al-container">
+        <div class="al-hero__content al-reveal">
+          <span class="al-eyebrow">Let’s talk</span>
+          <h1 class="al-hero__title">Your Salesforce org, engineered for what’s next.</h1>
+          <p class="al-hero__sub">Talk to a senior architect about custom development, integrations, or an Agentforce build — scoped before you commit. You’ll talk to a senior engineer, not a sales rep, and we’ll respond within one business day.</p>
+          <div class="al-hero__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="#al-contact-form">Contact us</a>
+            <a class="al-btn al-btn--ghost" href="#al-contact-form">Get a scoped estimate →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. CONTACT — form + secondary options
+         ===================================================================== -->
+    <section class="al-section al-section--surface" id="al-contact-form">
+      <div class="al-container">
+        <div class="al-grid--2" style="align-items: start;">
+
+          <!-- LEFT: form -->
+          <div class="al-reveal">
+            <h2 style="margin-bottom: var(--al-space-2);">Send us the details.</h2>
+            <p style="color: var(--al-ink-500); margin-bottom: var(--al-space-6); max-width: 48ch;">The more context you share up front, the faster we can scope. Nothing here is binding.</p>
+
+            <form class="al-form" data-al-form novalidate>
+              <div class="al-field">
+                <label class="al-field__label" for="al-name">Full name</label>
+                <input class="al-field__input" type="text" id="al-name" name="name" autocomplete="name" required aria-describedby="al-name-error">
+                <span class="al-field__error" id="al-name-error" aria-live="polite">Please enter your full name.</span>
+              </div>
+
+              <div class="al-field">
+                <label class="al-field__label" for="al-email">Work email</label>
+                <input class="al-field__input" type="email" id="al-email" name="email" autocomplete="email" required aria-describedby="al-email-error">
+                <span class="al-field__error" id="al-email-error" aria-live="polite">Please enter a valid work email address.</span>
+              </div>
+
+              <div class="al-field">
+                <label class="al-field__label" for="al-company">Company</label>
+                <input class="al-field__input" type="text" id="al-company" name="company" autocomplete="organization" required aria-describedby="al-company-error">
+                <span class="al-field__error" id="al-company-error" aria-live="polite">Please enter your company name.</span>
+              </div>
+
+              <fieldset class="al-field" style="border: 0; padding: 0; margin: 0;">
+                <legend class="al-field__label" style="padding: 0;">Salesforce clouds in use</legend>
+                <div class="al-checkbox-group">
+                  <label class="al-checkbox" for="al-cloud-sales">
+                    <input type="checkbox" id="al-cloud-sales" name="clouds" value="Sales Cloud">
+                    <span>Sales Cloud</span>
+                  </label>
+                  <label class="al-checkbox" for="al-cloud-service">
+                    <input type="checkbox" id="al-cloud-service" name="clouds" value="Service Cloud">
+                    <span>Service Cloud</span>
+                  </label>
+                  <label class="al-checkbox" for="al-cloud-experience">
+                    <input type="checkbox" id="al-cloud-experience" name="clouds" value="Experience Cloud">
+                    <span>Experience Cloud</span>
+                  </label>
+                  <label class="al-checkbox" for="al-cloud-agentforce">
+                    <input type="checkbox" id="al-cloud-agentforce" name="clouds" value="Agentforce">
+                    <span>Agentforce</span>
+                  </label>
+                  <label class="al-checkbox" for="al-cloud-other">
+                    <input type="checkbox" id="al-cloud-other" name="clouds" value="Other">
+                    <span>Other</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="al-field">
+                <label class="al-field__label" for="al-details">Project details</label>
+                <textarea class="al-field__textarea" id="al-details" name="details" placeholder="What are you trying to build or fix? Share timelines, constraints, and anything already in flight." required aria-describedby="al-details-error"></textarea>
+                <span class="al-field__error" id="al-details-error" aria-live="polite">Please tell us a little about your project.</span>
+              </div>
+
+              <div>
+                <button class="al-btn al-btn--primary al-btn--lg" type="submit">Send message</button>
+              </div>
+            </form>
+
+            <!-- Success/error states live OUTSIDE the form: js/main.js hides the
+                 whole form on submit, so these must be siblings to stay visible
+                 and let role="status"/role="alert" announce to screen readers. -->
+            <!-- Success state — revealed by js/main.js on successful submit -->
+            <div data-form-success class="al-form__success" hidden role="status">Thanks — we’ll follow up within one business day.</div>
+
+            <!-- Error state — revealed by js/main.js on submit failure -->
+            <!-- PLACEHOLDER: confirm hello@agenticlabs.example is the real support address with client -->
+            <div class="al-form__error" data-form-error role="alert">Something went wrong on our end. Please try again or email us directly at hello@agenticlabs.example.</div>
+          </div>
+
+          <!-- RIGHT: secondary options card -->
+          <aside class="al-card al-reveal" aria-label="Other ways to reach us">
+            <span class="al-card__eyebrow">Prefer to talk first?</span>
+            <h2 class="al-card__title" style="font-size: 26px;">Other ways to reach us.</h2>
+            <p class="al-card__body">Skip the form and grab time directly, or send us a note by email. Either way, a senior engineer picks it up.</p>
+
+            <!-- PLACEHOLDER: Calendly/booking link — replace "#" with the real booking URL -->
+            <a class="al-btn al-btn--secondary" href="#" style="margin-top: 0; margin-bottom: var(--al-space-4);">Book a 30-minute architecture call</a>
+
+            <hr class="al-divider" style="margin-block: var(--al-space-2) var(--al-space-5);">
+
+            <p class="al-card__meta" style="margin-bottom: var(--al-space-1);">Email us directly</p>
+            <!-- PLACEHOLDER: confirm hello@agenticlabs.example is the real inbox with client -->
+            <p style="margin-bottom: var(--al-space-5);">
+              <a href="mailto:hello@agenticlabs.example">hello@agenticlabs.example</a>
+            </p>
+
+            <p class="al-caption" style="margin-top: auto;">We respond to every inquiry within one business day. No junior benches, no call-center handoffs.</p>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component. Other root-level pages copy this verbatim.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="index.html" aria-label="Agentic Labs — home">
+            <img src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="index.html">Home</a>
+          <a class="al-footer__link" href="services.html">Services</a>
+          <a class="al-footer__link" href="work.html">Work</a>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+          <a class="al-footer__link" href="insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

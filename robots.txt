@@ -1,0 +1,8 @@
+# Agentic Labs robots.txt
+# NOTE: agenticlabs.example is a placeholder domain. Replace with the
+# production domain before deploying to a live environment.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://agenticlabs.example/sitemap.xml

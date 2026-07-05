@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Agentforce vs. traditional automation: when to use which — Agentic Labs</title>
+  <meta name="description" content="A practical guide to choosing between Agentforce agents and traditional Salesforce automation (Flow, Apex) — and when combining them is the right call.">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/insights/agentforce-vs-traditional-automation.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Agentforce vs. traditional automation: when to use which — Agentic Labs">
+  <meta property="og:description" content="A practical guide to choosing between Agentforce agents and traditional Salesforce automation (Flow, Apex) — and when combining them is the right call.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/insights/agentforce-vs-traditional-automation.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component copied from index.html.
+       Subfolder page: href/src prefixed with ../. No primary nav item is active.
+       ========================================================================= -->
+  <header class="al-navbar">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="../index.html" aria-label="Agentic Labs — home">
+        <img src="../assets/logo.svg" width="180" height="36" alt="Agentic Labs">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="../index.html">Home</a>
+        <a class="al-navbar__link" href="../services.html">Services</a>
+        <a class="al-navbar__link" href="../work.html">Work</a>
+        <a class="al-navbar__link" href="../approach.html">Approach</a>
+        <a class="al-navbar__link" href="../contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="../contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="../index.html">Home</a>
+      <a class="al-navbar__link" href="../services.html">Services</a>
+      <a class="al-navbar__link" href="../work.html">Work</a>
+      <a class="al-navbar__link" href="../approach.html">Approach</a>
+      <a class="al-navbar__link" href="../contact.html">Contact</a>
+      <a class="al-navbar__link" href="../insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="../contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. ARTICLE HERO
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 72ch;">
+          <div class="al-tag-row">
+            <span class="al-tag al-tag--default">Salesforce Development</span>
+          </div>
+          <h1>Agentforce vs. traditional automation: when to use which</h1>
+          <!-- PLACEHOLDER: confirm author, publish date, and read time with client -->
+          <p class="al-card__meta" style="margin-top: var(--al-space-4);">
+            By the Agentic Labs team · <span class="al-mono">May 2026</span> · 8 min read
+          </p>
+          <!-- PLACEHOLDER: this article is an unreviewed draft — confirm all claims before publishing -->
+          <p style="margin-top: var(--al-space-3);">
+            <span class="al-badge">Draft — pending review</span>
+          </p>
+        </div>
+
+        <div class="al-reveal" style="margin-top: var(--al-space-7);">
+          <img src="../assets/insight-agentforce.svg" width="1200" height="675" alt="Diagram contrasting a deterministic Flow branching along fixed decision paths with an Agentforce agent reasoning over the same request before taking a grounded action." style="width:100%; height:auto; border-radius: var(--al-radius-panel);">
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. ARTICLE BODY
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <article style="max-width: 72ch; margin-inline: auto;">
+
+          <p class="al-body-lg">
+            "Should this be an agent or a Flow?" is the question we hear most often once a team has Agentforce turned on. It is the right question — and it rarely has a one-size answer. Agentforce and traditional automation are not competitors so much as different instruments. The skill is knowing which one the job actually calls for, and being honest about when neither one alone is enough.
+          </p>
+
+          <p>
+            This is a practical guide, not a product pitch. We build both, and we have seen both used well and badly. What follows is the framework our architects use to decide — and the guardrails we insist on when the answer is "both."
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8);">What traditional automation does well</h2>
+
+          <p>
+            Flow, Apex, and the platform's declarative rules have earned their reputation for a reason: they are <strong>deterministic</strong>. Given the same inputs, they produce the same outputs every time, and you can reason about exactly why. For most of what a Salesforce org does day to day, that predictability is not a limitation — it is the entire point.
+          </p>
+
+          <p>
+            Traditional automation is the right tool when:
+          </p>
+
+          <ul style="margin: var(--al-space-4) 0 var(--al-space-5); padding-left: var(--al-space-5); list-style: disc;">
+            <li style="margin-bottom: var(--al-space-3);">The logic is a known set of rules. If you can draw the decision tree on a whiteboard, a <strong>Flow</strong> can encode it cleanly, and an admin can maintain it.</li>
+            <li style="margin-bottom: var(--al-space-3);">You need transactional integrity — bulk-safe DML, rollback on failure, governor-limit discipline. This is where well-written <strong>Apex</strong> is irreplaceable, and where a language model has no business making the call.</li>
+            <li style="margin-bottom: var(--al-space-3);">The outcome must be auditable and repeatable. Compliance, financial calculations, and record-locking rules should behave identically on every run, with a trace you can point to.</li>
+            <li style="margin-bottom: var(--al-space-3);">Latency and cost matter at volume. A Flow firing on record update is effectively free and instantaneous; a reasoning model in the same loop is neither.</li>
+          </ul>
+
+          <p>
+            If your problem fits inside those bullets, adding an agent does not make it better — it adds nondeterminism, cost, and a new failure surface to something that already works. Start here, and stay here, unless the problem genuinely outgrows it.
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8);">What Agentforce adds</h2>
+
+          <p>
+            Agentforce is not a faster Flow. It is a different capability: an agent can <strong>reason over ambiguous input</strong>, decide which action to take, and take it — grounded in your data and constrained by the topics and actions you give it. That matters in exactly the places deterministic rules struggle.
+          </p>
+
+          <p>
+            An agent earns its place when:
+          </p>
+
+          <ul style="margin: var(--al-space-4) 0 var(--al-space-5); padding-left: var(--al-space-5); list-style: disc;">
+            <li style="margin-bottom: var(--al-space-3);"><strong>Input is natural language.</strong> A customer message, a support email, a free-text field — anything where the meaning has to be interpreted before it can be routed. Traditional automation can pattern-match keywords; an agent can understand intent.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>The path isn't a fixed tree.</strong> When the "right next step" depends on context that would take hundreds of branches to enumerate, reasoning collapses that complexity into a single, maintainable definition.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>You want grounded, bounded actions.</strong> Agentforce actions call your Apex, your Flows, and your data through defined interfaces. The reasoning is flexible; the actions it can take are not. That boundary is where a well-designed agent stays safe.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>The interaction is conversational.</strong> Multi-turn service, guided self-service, or an assistant that gathers missing information before acting — jobs that are awkward to model as a static flow.</li>
+          </ul>
+
+          <p>
+            The key phrase there is <em>grounded, bounded actions</em>. An agent that can reason but cannot act is a chatbot; an agent that can act without bounds is a liability. Agentforce is useful precisely when the reasoning is open and the action surface is deliberately closed.
+          </p>
+
+          <blockquote style="margin: var(--al-space-8) 0; padding: var(--al-space-6) var(--al-space-7); border-left: 3px solid var(--al-blue-60); background-color: var(--al-blue-10); border-radius: var(--al-radius-card); font-size: 22px; line-height: 1.4; font-weight: 600; color: var(--al-navy-90);">
+            "Use a Flow when you know every branch. Use an agent when the branching is the problem. Never use an agent to dodge the work of defining what it is allowed to do."
+          </blockquote>
+
+          <h2 style="margin-top: var(--al-space-8);">A decision framework</h2>
+
+          <p>
+            When a new requirement lands, we run it through the same short checklist before committing to an approach. Work down the list in order — the first honest "yes" usually tells you where to start.
+          </p>
+
+          <ol style="margin: var(--al-space-4) 0 var(--al-space-5); padding-left: var(--al-space-5); list-style: decimal;">
+            <li style="margin-bottom: var(--al-space-3);"><strong>Can you fully enumerate the rules?</strong> If yes, build it in Flow or Apex. Determinism is a feature; do not trade it away.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Is the input structured or free-form?</strong> Structured fields point to traditional automation. Genuinely open natural language points toward an agent.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Does the outcome need to be identical every time?</strong> If the answer is legally, financially, or contractually "yes," keep the deciding logic deterministic — even if an agent sits in front of it.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>How costly is a wrong answer, and can a human catch it?</strong> High-stakes, hard-to-reverse actions demand human review or a deterministic gate. Low-stakes, easily-corrected steps are safer places to let an agent operate.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>What is the volume and latency budget?</strong> Thousands of records per second is Flow and Apex territory. Human-paced conversations are where an agent's reasoning cost is easy to justify.</li>
+          </ol>
+
+          <p>
+            Notice that most requirements resolve to traditional automation. That is expected. Agentforce is powerful, but the majority of what an org needs is still rules you can name — and naming them is cheaper and safer than reasoning about them at runtime.
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8);">Combining both safely</h2>
+
+          <p>
+            The most durable designs we ship are rarely all-agent or all-Flow. They put reasoning where ambiguity lives and determinism where correctness lives — and they draw a clear line between the two.
+          </p>
+
+          <p>
+            In practice, that means the agent handles interpretation and orchestration, while <strong>the consequential work happens in reviewed Apex and Flow</strong> that the agent invokes as bounded actions. The agent decides <em>what</em> to attempt; your deterministic code decides <em>whether it is allowed</em> and executes it correctly. A few principles we hold to:
+          </p>
+
+          <ul style="margin: var(--al-space-4) 0 var(--al-space-5); padding-left: var(--al-space-5); list-style: disc;">
+            <li style="margin-bottom: var(--al-space-3);"><strong>Validate on the deterministic side.</strong> Never let an agent's output be the only thing standing between a request and a write. Enforce permissions, limits, and business rules in Apex or Flow, where they can be tested.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Keep actions small and explicit.</strong> Narrow, single-purpose actions are easier to reason about, easier to test, and harder to misuse than a broad "do anything" endpoint.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Design the escalation path first.</strong> Decide up front what the agent hands to a human, and make that handoff a first-class part of the flow — not an afterthought for when things go wrong.</li>
+            <li style="margin-bottom: var(--al-space-3);"><strong>Test the seams, not just the parts.</strong> The risk lives where reasoning meets execution. That boundary deserves the same test coverage and code review as any other production code.</li>
+          </ul>
+
+          <p>
+            Used this way, the two approaches reinforce each other: the agent absorbs the messiness of the real world, and your deterministic layer guarantees that whatever it decides, the org stays correct.
+          </p>
+
+          <h2 style="margin-top: var(--al-space-8);">The short version</h2>
+
+          <p>
+            Traditional automation is your default. It is predictable, cheap, auditable, and maintainable — reach for it whenever you can name the rules. Reach for Agentforce when the input is language, the paths are too many to enumerate, or the interaction is a conversation, and give it a deliberately narrow set of grounded actions. When you combine them, keep reasoning and correctness on opposite sides of a well-tested line.
+          </p>
+
+          <p>
+            The tooling is new; the discipline is not. The same rigor that governs any production change — scope, review, tests, staged deploys — is what keeps an agent from becoming the weakest part of your org. The AI does the reasoning. The judgment about where to trust it stays human.
+          </p>
+
+          <!-- Author bio -->
+          <hr class="al-divider">
+          <!-- PLACEHOLDER: confirm author name, role, and bio with client -->
+          <div class="al-card--testimonial al-card" style="flex-direction: row; align-items: center; gap: var(--al-space-4);">
+            <img src="../assets/avatar-1.svg" width="56" height="56" alt="" aria-hidden="true" style="width:56px; height:56px; border-radius: var(--al-radius-pill); flex: 0 0 auto;">
+            <div>
+              <p style="margin-bottom: var(--al-space-1);"><strong>The Agentic Labs team</strong></p>
+              <p class="al-caption">Certified Salesforce architects and senior developers. We write about building on the platform with agentic AI as leverage — never as a replacement for engineering judgment.</p>
+            </div>
+          </div>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. RELATED POSTS
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Keep reading</span>
+          <h2>Related insights</h2>
+        </header>
+
+        <div class="al-grid--2">
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="ai-accelerated-not-ai-generated.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/insight-ai-accelerated.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--ai">AI Practice</span>
+            </div>
+            <h3 class="al-card__title">AI-accelerated, not AI-generated</h3>
+            <p class="al-card__body">Where agentic tooling belongs in a serious Salesforce build — and where a senior engineer still has to own the call.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">MAR 2026</span> · 6 min read</p>
+            <a class="al-card__link" href="ai-accelerated-not-ai-generated.html">Read →</a>
+          </article>
+
+          <article class="al-card al-card--insight al-reveal">
+            <a class="al-card__media" href="five-questions-before-you-sign.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/insight-questions.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Buying</span>
+            </div>
+            <h3 class="al-card__title">Five questions before you sign a Salesforce partner</h3>
+            <p class="al-card__body">A short diligence checklist for technical and business buyers evaluating a development partner.</p>
+            <!-- PLACEHOLDER: confirm publish date with client -->
+            <p class="al-card__meta"><span class="al-mono">JAN 2026</span> · 5 min read</p>
+            <a class="al-card__link" href="five-questions-before-you-sign.html">Read →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Not sure whether it's an agent or a Flow?</h2>
+            <p>Talk to a senior architect. We'll pressure-test the requirement and scope the right approach — Agentforce, traditional automation, or a safe combination of both.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="../contact.html">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="../contact.html">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component copied from index.html.
+       Subfolder page: href/src prefixed with ../.
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="../index.html" aria-label="Agentic Labs — home">
+            <img src="../assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="../index.html">Home</a>
+          <a class="al-footer__link" href="../services.html">Services</a>
+          <a class="al-footer__link" href="../work.html">Work</a>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+          <a class="al-footer__link" href="../insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="../privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="../cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="../privacy-policy.html">Privacy Policy</a>
+          <a href="../cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

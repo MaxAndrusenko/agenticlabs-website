@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Page not found — Agentic Labs</title>
+  <meta name="description" content="The page you were looking for could not be found.">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/404.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Page not found — Agentic Labs">
+  <meta property="og:description" content="The page you were looking for could not be found.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/404.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- NOTE: This page assumes it is served from the site root and uses root-level
+       asset paths (css/styles.css, index.html, etc.). If deployed, configure the
+       host's 404 handler to serve this file (e.g. Netlify/Apache/Nginx error page). -->
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component. Other root-level pages copy this verbatim,
+       changing only which .al-navbar__link carries .is-active + aria-current.
+       (No nav item is active on the 404 page.)
+       ========================================================================= -->
+  <header class="al-navbar">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="index.html" aria-label="Agentic Labs — home">
+        <img src="assets/logo.svg" width="180" height="36" alt="Agentic Labs">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="index.html">Home</a>
+        <a class="al-navbar__link" href="services.html">Services</a>
+        <a class="al-navbar__link" href="work.html">Work</a>
+        <a class="al-navbar__link" href="approach.html">Approach</a>
+        <a class="al-navbar__link" href="contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="index.html">Home</a>
+      <a class="al-navbar__link" href="services.html">Services</a>
+      <a class="al-navbar__link" href="work.html">Work</a>
+      <a class="al-navbar__link" href="approach.html">Approach</a>
+      <a class="al-navbar__link" href="contact.html">Contact</a>
+      <a class="al-navbar__link" href="insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         404 — centered, minimal
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 60ch; margin-inline: auto; text-align: center;">
+          <span class="al-eyebrow">404</span>
+          <h1>Page not found.</h1>
+          <p class="al-body-lg" style="margin-top: var(--al-space-4); color: var(--al-ink-500);">The page you’re looking for moved or never existed.</p>
+
+          <div class="al-hero__actions" style="justify-content: center; margin-top: var(--al-space-6);">
+            <a class="al-btn al-btn--primary al-btn--lg" href="index.html">Back to home</a>
+            <a class="al-btn al-btn--ghost" href="work.html">Work</a>
+            <a class="al-btn al-btn--ghost" href="contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component. Other root-level pages copy this verbatim.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="index.html" aria-label="Agentic Labs — home">
+            <img src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="index.html">Home</a>
+          <a class="al-footer__link" href="services.html">Services</a>
+          <a class="al-footer__link" href="work.html">Work</a>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+          <a class="al-footer__link" href="insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

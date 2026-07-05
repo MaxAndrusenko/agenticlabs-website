@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="Abstract monogram avatar">
+  <rect width="96" height="96" rx="16" fill="#EEF6FD" />
+  <g fill="none" stroke="#0176D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="48" cy="34" r="14" />
+    <path d="M24 74 C24 60 34 54 48 54 C62 54 72 60 72 74" />
+  </g>
+  <circle cx="48" cy="34" r="4.5" fill="#0176D3" />
+  <text x="48" y="88" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="9" letter-spacing="1" fill="#5C6470" opacity="0">A1</text>
+</svg>

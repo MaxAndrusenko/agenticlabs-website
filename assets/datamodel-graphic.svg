@@ -1,0 +1,83 @@
+<svg viewBox="0 0 560 400" width="560" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data model sketch showing object boxes with field rows and relationship lines">
+  <defs>
+    <style>.mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }</style>
+  </defs>
+
+  <rect x="0" y="0" width="560" height="400" fill="#FFFFFF"/>
+
+  <!-- relationship lines (drawn first, behind boxes) -->
+  <g fill="none" stroke="#5C6470" stroke-width="1.6">
+    <!-- Account -> Contact -->
+    <path d="M180 96 H 250 V 96"/>
+    <!-- Account -> Opportunity -->
+    <path d="M110 148 V 250 H 128"/>
+    <!-- Opportunity -> LineItem -->
+    <path d="M240 300 H 360"/>
+  </g>
+  <!-- crow's-foot-ish relationship markers -->
+  <g stroke="#0176D3" stroke-width="1.6" fill="none">
+    <path d="M244 88 l6 8 l-6 8"/>
+    <path d="M122 244 l6 8 l-6 -8 M122 260 l6 -8"/>
+    <path d="M354 292 l6 8 l-6 8"/>
+  </g>
+
+  <!-- ACCOUNT object -->
+  <g>
+    <rect x="40" y="56" width="140" height="92" rx="8" fill="#FFFFFF" stroke="#0176D3" stroke-width="1.8"/>
+    <path d="M40 74 a8 8 0 0 1 8 -8 h124 a8 8 0 0 1 8 8 v8 h-140 z" fill="#EEF6FD"/>
+    <text x="52" y="80" class="mono" font-size="11" font-weight="500" fill="#0B5CAB">ACCOUNT</text>
+    <line x1="40" y1="82" x2="180" y2="82" stroke="#E3E7ED" stroke-width="1"/>
+    <g class="mono" font-size="10" fill="#16181D">
+      <text x="52" y="102">Name</text>
+      <text x="52" y="120">Industry</text>
+      <text x="52" y="138">Owner</text>
+    </g>
+    <g fill="#03B4A7"><circle cx="168" cy="98" r="2.5"/><circle cx="168" cy="116" r="2.5"/><circle cx="168" cy="134" r="2.5"/></g>
+  </g>
+
+  <!-- CONTACT object -->
+  <g>
+    <rect x="250" y="56" width="140" height="92" rx="8" fill="#FFFFFF" stroke="#E3E7ED" stroke-width="1.8"/>
+    <path d="M250 74 a8 8 0 0 1 8 -8 h124 a8 8 0 0 1 8 8 v8 h-140 z" fill="#F7F9FB"/>
+    <text x="262" y="80" class="mono" font-size="11" font-weight="500" fill="#16181D">CONTACT</text>
+    <line x1="250" y1="82" x2="390" y2="82" stroke="#E3E7ED" stroke-width="1"/>
+    <g class="mono" font-size="10" fill="#16181D">
+      <text x="262" y="102">FirstName</text>
+      <text x="262" y="120">Email</text>
+      <text x="262" y="138">AccountId</text>
+    </g>
+    <g fill="#5C6470"><circle cx="378" cy="98" r="2.5"/><circle cx="378" cy="116" r="2.5"/></g>
+    <circle cx="378" cy="134" r="2.5" fill="#0176D3"/>
+  </g>
+
+  <!-- OPPORTUNITY object -->
+  <g>
+    <rect x="40" y="256" width="140" height="92" rx="8" fill="#FFFFFF" stroke="#E3E7ED" stroke-width="1.8"/>
+    <path d="M40 274 a8 8 0 0 1 8 -8 h124 a8 8 0 0 1 8 8 v8 h-140 z" fill="#F7F9FB"/>
+    <text x="52" y="280" class="mono" font-size="11" font-weight="500" fill="#16181D">OPPORTUNITY</text>
+    <line x1="40" y1="282" x2="180" y2="282" stroke="#E3E7ED" stroke-width="1"/>
+    <g class="mono" font-size="10" fill="#16181D">
+      <text x="52" y="302">StageName</text>
+      <text x="52" y="320">Amount</text>
+      <text x="52" y="338">CloseDate</text>
+    </g>
+    <g fill="#5C6470"><circle cx="168" cy="298" r="2.5"/><circle cx="168" cy="316" r="2.5"/><circle cx="168" cy="334" r="2.5"/></g>
+  </g>
+
+  <!-- LINE ITEM object -->
+  <g>
+    <rect x="360" y="256" width="150" height="92" rx="8" fill="#FFFFFF" stroke="#E3E7ED" stroke-width="1.8"/>
+    <path d="M360 274 a8 8 0 0 1 8 -8 h134 a8 8 0 0 1 8 8 v8 h-150 z" fill="#F7F9FB"/>
+    <text x="372" y="280" class="mono" font-size="11" font-weight="500" fill="#16181D">LINE ITEM</text>
+    <line x1="360" y1="282" x2="510" y2="282" stroke="#E3E7ED" stroke-width="1"/>
+    <g class="mono" font-size="10" fill="#16181D">
+      <text x="372" y="302">Product</text>
+      <text x="372" y="320">Quantity</text>
+      <text x="372" y="338">UnitPrice</text>
+    </g>
+    <g fill="#5C6470"><circle cx="498" cy="298" r="2.5"/><circle cx="498" cy="316" r="2.5"/><circle cx="498" cy="334" r="2.5"/></g>
+  </g>
+
+  <!-- label -->
+  <text x="40" y="380" class="mono" font-size="10" font-weight="500" fill="#5C6470">SCHEMA · RELATIONSHIP MAP</text>
+</svg>

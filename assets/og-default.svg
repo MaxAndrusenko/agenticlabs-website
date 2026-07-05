@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Agentic Labs — Senior Salesforce engineering, accelerated by agentic AI.">
+  <rect width="1200" height="630" fill="#032D60" />
+
+  <!-- Subtle node/line motif, right side -->
+  <g fill="none" stroke="#0B5CAB" stroke-width="1.5" stroke-linecap="round" opacity="0.55">
+    <path d="M840 120 L1000 200 L920 340 L1080 300 L1000 460 L860 400" />
+    <path d="M840 120 L920 340" />
+    <path d="M1000 200 L1080 300" />
+    <path d="M920 340 L1000 460" />
+    <path d="M840 120 L860 400" />
+  </g>
+  <g fill="#0176D3">
+    <circle cx="840" cy="120" r="7" />
+    <circle cx="1000" cy="200" r="7" />
+    <circle cx="920" cy="340" r="7" />
+    <circle cx="1080" cy="300" r="7" />
+    <circle cx="1000" cy="460" r="7" />
+    <circle cx="860" cy="400" r="7" />
+  </g>
+
+  <!-- Brand mark -->
+  <g transform="translate(96 90)">
+    <g fill="none" stroke="#0176D3" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 56 L32 4 L60 56" />
+      <path d="M16 34 L48 34" />
+    </g>
+    <circle cx="32" cy="4" r="6.5" fill="#0176D3" />
+    <circle cx="4" cy="56" r="6.5" fill="#0176D3" />
+    <circle cx="60" cy="56" r="6.5" fill="#0176D3" />
+  </g>
+
+  <!-- Eyebrow -->
+  <text x="96" y="290" font-family="'JetBrains Mono', 'Courier New', monospace" font-weight="500" font-size="22" letter-spacing="3" fill="#03B4A7">SALESFORCE ENGINEERING</text>
+
+  <!-- Wordmark -->
+  <text x="94" y="380" font-family="Inter, Arial, Helvetica, sans-serif" font-weight="700" font-size="88" letter-spacing="-2" fill="#FFFFFF">Agentic Labs</text>
+
+  <!-- Tagline -->
+  <text x="96" y="452" font-family="Inter, Arial, Helvetica, sans-serif" font-weight="400" font-size="32" fill="#EEF6FD">Senior Salesforce engineering, accelerated by agentic AI.</text>
+
+  <!-- Provenance pill -->
+  <g transform="translate(96 500)">
+    <rect x="0" y="0" width="440" height="46" rx="23" fill="none" stroke="#0B5CAB" stroke-width="1.5" />
+    <text x="24" y="30" font-family="'JetBrains Mono', 'Courier New', monospace" font-weight="500" font-size="18" letter-spacing="1" fill="#EEF6FD">AI-Accelerated · Senior-Reviewed</text>
+  </g>
+</svg>

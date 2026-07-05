@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Migrating a 12-year-old Salesforce org without data loss — Agentic Labs</title>
+  <meta name="description" content="Case study: migrating a 12-year-old Salesforce org and 4.2M records to a modern architecture with zero customer records lost. (Placeholder content.)">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/work/org-data-migration.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Migrating a 12-year-old Salesforce org without data loss — Agentic Labs">
+  <meta property="og:description" content="Case study: migrating a 12-year-old Salesforce org and 4.2M records to a modern architecture with zero customer records lost. (Placeholder content.)">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/work/org-data-migration.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component copied from index.html.
+       Active link: Work. Subfolder page, so href/src are prefixed with ../
+       ========================================================================= -->
+  <header class="al-navbar">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="../index.html" aria-label="Agentic Labs — home">
+        <img src="../assets/logo.svg" width="180" height="36" alt="Agentic Labs">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="../index.html">Home</a>
+        <a class="al-navbar__link" href="../services.html">Services</a>
+        <a class="al-navbar__link is-active" href="../work.html" aria-current="page">Work</a>
+        <a class="al-navbar__link" href="../approach.html">Approach</a>
+        <a class="al-navbar__link" href="../contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="../contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="../index.html">Home</a>
+      <a class="al-navbar__link" href="../services.html">Services</a>
+      <a class="al-navbar__link is-active" href="../work.html" aria-current="page">Work</a>
+      <a class="al-navbar__link" href="../approach.html">Approach</a>
+      <a class="al-navbar__link" href="../contact.html">Contact</a>
+      <a class="al-navbar__link" href="../insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="../contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. CASE STUDY HERO
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-7);">
+          <p style="margin-bottom: var(--al-space-4);">
+            <a class="al-btn al-btn--ghost" href="../work.html">← Back to work</a>
+          </p>
+          <div class="al-tag-row">
+            <span class="al-tag al-tag--default">Experience Cloud</span>
+            <span class="al-tag al-tag--default">Data Migration</span>
+          </div>
+          <span class="al-eyebrow">Case study</span>
+          <h1>Migrating a 12-year-old org without losing a single customer record.</h1>
+          <p class="al-body-lg" style="margin-top: var(--al-space-5); max-width: 60ch;">
+            A staged migration from a heavily customized legacy org to a modern data model, with a live
+            Experience Cloud portal preserved throughout — every batch reconciled and validated by a
+            senior engineer.
+          </p>
+          <p style="margin-top: var(--al-space-5);">
+            <span class="al-provenance">AI-Accelerated · Senior-Reviewed</span>
+          </p>
+        </div>
+
+        <div class="al-reveal" style="border-radius: var(--al-radius-panel); overflow: hidden; background-color: var(--al-white); border: 1px solid var(--al-border);">
+          <img src="../assets/case-migration.svg" width="1280" height="720" alt="Diagram of a legacy Salesforce org's tangled data model being remapped through a staged, reconciled pipeline into a clean modern schema, with an Experience Cloud portal staying live throughout.">
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. AT A GLANCE — industry + outcome stats
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-grid--4">
+          <div class="al-reveal">
+            <span class="al-card__eyebrow">Industry</span>
+            <!-- PLACEHOLDER: confirm industry with client -->
+            <p class="al-card__stat" style="font-size: 26px;">Financial services</p>
+          </div>
+          <!-- PLACEHOLDER: confirm real outcome stat with client -->
+          <div class="al-reveal">
+            <span class="al-card__eyebrow">Records lost</span>
+            <p class="al-card__stat">0</p>
+            <p class="al-caption">Zero customer records lost across the full migration.</p>
+          </div>
+          <!-- PLACEHOLDER: confirm real outcome stat with client -->
+          <div class="al-reveal">
+            <span class="al-card__eyebrow">Records migrated</span>
+            <p class="al-card__stat">4.2M</p>
+            <p class="al-caption">Reconciled batch by batch against the source org.</p>
+          </div>
+          <!-- PLACEHOLDER: confirm real outcome stat with client -->
+          <div class="al-reveal">
+            <span class="al-card__eyebrow">Objects remapped</span>
+            <p class="al-card__stat">18</p>
+            <p class="al-caption">Legacy objects consolidated into a modern schema.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. THE PROBLEM
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 68ch;">
+          <span class="al-eyebrow">The problem</span>
+          <h2>Twelve years of customization, no clean seam to cut on.</h2>
+          <p style="margin-top: var(--al-space-5);">
+            The org had accumulated more than a decade of point-in-time customization — overlapping
+            objects, fields that meant different things to different teams, and automation layered on
+            automation. The underlying data model no longer matched how the business actually ran.
+          </p>
+          <p style="margin-top: var(--al-space-4);">
+            Duplicate records were widespread, with no single reliable key to match on. Worse, a live
+            Experience Cloud portal sat on top of the same data, serving real customers every day. Any
+            migration had to preserve portal access, identity, and history without a maintenance window
+            that would take the portal offline.
+          </p>
+          <ul style="margin-top: var(--al-space-5); display: flex; flex-direction: column; gap: var(--al-space-3);">
+            <li>A tangled legacy data model spread across 18 objects, several of them redundant.</li>
+            <li>Duplicate customer records with no dependable natural or external key.</li>
+            <li>A production Experience Cloud portal that had to stay live and consistent throughout.</li>
+            <li>Automation and validation rules that would fire unpredictably during a bulk load.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. THE APPROACH
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 68ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">The approach</span>
+          <h2>Architecture first, then staged migration with reconciliation on every batch.</h2>
+          <p style="margin-top: var(--al-space-5);">
+            We started with an assessment of the existing model before moving a single record, then
+            designed the target schema and a migration pipeline that could be rehearsed, reconciled, and
+            reversed. AI accelerated the mechanical work — field mapping, transform scripts, dedupe
+            heuristics — while a senior engineer signed off on every mapping and validated every batch.
+          </p>
+        </div>
+
+        <div class="al-process">
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">01</span>
+            <h3 class="al-process__title">Architecture-first assessment</h3>
+            <p class="al-process__body">Mapped the legacy model, the portal's dependencies, and the target schema before writing any migration code.</p>
+          </div>
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">02</span>
+            <h3 class="al-process__title">Dedupe &amp; AI-accelerated mapping</h3>
+            <p class="al-process__body">AI drafted mapping and transform scripts and surfaced duplicate clusters; a senior engineer reviewed and corrected every rule.</p>
+          </div>
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">03</span>
+            <h3 class="al-process__title">Sandbox rehearsals</h3>
+            <p class="al-process__body">Ran the full pipeline repeatedly in sandbox to catch automation side effects and tune batch sizing before touching production.</p>
+          </div>
+          <div class="al-process__item al-reveal">
+            <span class="al-process__num" aria-hidden="true">04</span>
+            <h3 class="al-process__title">Staged load with reconciliation</h3>
+            <p class="al-process__body">Migrated in staged batches, reconciling counts and field-level values against the source and validating every batch by hand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. THE RESULT
+         ===================================================================== -->
+    <section class="al-section al-section--navy">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 68ch;">
+          <span class="al-eyebrow">The result</span>
+          <h2>A clean migration onto a modern model, with the portal never going dark.</h2>
+          <p style="margin-top: var(--al-space-5);">
+            Every batch reconciled. No customer records were lost, and duplicates were resolved into
+            clean, canonical records on the new schema. The Experience Cloud portal stayed live through
+            the cutover, with customer identity and history intact.
+          </p>
+          <p style="margin-top: var(--al-space-4);">
+            The business came out of the migration with a data model that matches how it actually
+            operates — simpler to report on, safer to automate against, and ready for the next phase of
+            work rather than fighting a decade of accumulated debt.
+          </p>
+        </div>
+
+        <div class="al-grid--3" style="margin-top: var(--al-space-8);">
+          <!-- PLACEHOLDER: confirm real outcome stat with client -->
+          <article class="al-card al-reveal" style="background-color: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16);">
+            <p class="al-card__stat" style="color: var(--al-white);">0</p>
+            <p class="al-card__body" style="color: rgba(255,255,255,.82);">customer records lost</p>
+          </article>
+          <!-- PLACEHOLDER: confirm real outcome stat with client -->
+          <article class="al-card al-reveal" style="background-color: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16);">
+            <p class="al-card__stat" style="color: var(--al-white);">4.2M</p>
+            <p class="al-card__body" style="color: rgba(255,255,255,.82);">records migrated and reconciled</p>
+          </article>
+          <!-- PLACEHOLDER: confirm real outcome stat with client -->
+          <article class="al-card al-reveal" style="background-color: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16);">
+            <p class="al-card__stat" style="color: var(--al-white);">18</p>
+            <p class="al-card__body" style="color: rgba(255,255,255,.82);">objects remapped to a modern schema</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. TESTIMONIAL
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <!-- PLACEHOLDER: testimonial is generic placeholder — replace with a real, approved client quote -->
+        <figure class="al-card al-card--testimonial al-reveal" style="max-width: 76ch; margin-inline: auto;">
+          <blockquote class="al-card__body">“They treated our data like it was irreplaceable, because it was. Every batch was reconciled and explained, the portal never went down, and we came out the other side on a model we can actually reason about.”</blockquote>
+          <figcaption class="al-card__meta">
+            <img src="../assets/avatar-3.svg" width="40" height="40" alt="" aria-hidden="true">
+            <span><strong>Head of Salesforce</strong><br><span class="al-caption">Financial Services</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. RELATED WORK
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">Related work</span>
+          <h2>More recent engagements.</h2>
+        </header>
+
+        <div class="al-grid--2">
+          <!-- Related 1: Lead-to-cash -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="../work/lead-to-cash.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/case-lead-to-cash.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Sales Cloud</span>
+              <span class="al-tag al-tag--integration">Integration</span>
+            </div>
+            <h3 class="al-card__title">Lead-to-cash automation</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Cut quote-to-cash cycle time by 60%</strong> across a multi-region sales org.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="../work/lead-to-cash.html">View case study →</a>
+          </article>
+
+          <!-- Related 2: Case triage engine -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="../work/case-triage-engine.html" aria-hidden="true" tabindex="-1">
+              <img src="../assets/case-triage.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Service Cloud</span>
+              <span class="al-tag al-tag--ai">Agentforce</span>
+            </div>
+            <h3 class="al-card__title">Agentforce case triage engine</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Auto-routed 80% of inbound cases</strong> with human review on every escalation.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="../work/case-triage-engine.html">View case study →</a>
+          </article>
+        </div>
+
+        <p class="al-reveal" style="margin-top: var(--al-space-7);">
+          <a class="al-btn al-btn--secondary" href="../work.html">See all work</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         8. FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Facing a migration you can't afford to get wrong?</h2>
+            <p>Talk to a senior architect about a staged, reconciled migration — scoped before you commit.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="../contact.html">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="../contact.html">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component copied from index.html.
+       Subfolder page, so href/src are prefixed with ../
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="../index.html" aria-label="Agentic Labs — home">
+            <img src="../assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="../index.html">Home</a>
+          <a class="al-footer__link" href="../services.html">Services</a>
+          <a class="al-footer__link" href="../work.html">Work</a>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+          <a class="al-footer__link" href="../insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="../approach.html">Approach</a>
+          <a class="al-footer__link" href="../contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="../privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="../cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <!-- PLACEHOLDER: confirm legal entity name + year with client -->
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="../privacy-policy.html">Privacy Policy</a>
+          <a href="../cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
