@@ -97,7 +97,7 @@ server {
     }
 
     location / {
-        try_files \$uri \$uri/ \$uri.html =404;
+        try_files \$uri.html \$uri \$uri/ =404;
     }
 
     error_page 404 /404;
