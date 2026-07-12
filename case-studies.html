@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Case Studies — Agentic Labs</title>
+  <meta name="description" content="Selected Salesforce engagements — B2B Commerce, Field Service, Experience Cloud portals, and platform integrations. Anonymized case studies across regulated and enterprise industries.">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.example/case-studies.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Case Studies — Agentic Labs">
+  <meta property="og:description" content="Selected Salesforce engagements — B2B Commerce, Field Service, Experience Cloud portals, and platform integrations. Anonymized case studies across regulated and enterprise industries.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.example/case-studies.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component. Other root-level pages copy this verbatim,
+       changing only which .al-navbar__link carries .is-active + aria-current.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <header class="al-navbar al-navbar--on-hero">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="index.html" aria-label="Agentic Labs — home">
+        <!-- Light logo shows over the dark (banner-matched) bar; dark logo shows on hover when the bar turns white. -->
+        <img class="al-navbar__logo-img al-navbar__logo-img--light" src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+        <img class="al-navbar__logo-img al-navbar__logo-img--dark" src="assets/logo.svg" width="180" height="36" alt="" aria-hidden="true">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="index.html">Home</a>
+        <a class="al-navbar__link" href="services.html">Services</a>
+        <a class="al-navbar__link is-active" href="case-studies.html" aria-current="page">Case Studies</a>
+        <a class="al-navbar__link" href="approach.html">Approach</a>
+        <a class="al-navbar__link" href="contact.html">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="contact.html">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="index.html">Home</a>
+      <a class="al-navbar__link" href="services.html">Services</a>
+      <a class="al-navbar__link is-active" href="case-studies.html" aria-current="page">Case Studies</a>
+      <a class="al-navbar__link" href="approach.html">Approach</a>
+      <a class="al-navbar__link" href="contact.html">Contact</a>
+      <a class="al-navbar__link" href="insights.html">Insights</a>
+      <a class="al-btn al-btn--primary" href="contact.html">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. HERO — immersive, full-viewport. Shares the home banner identity;
+         the .al-hero--work modifier reweights the mesh teal-dominant, and
+         data-hero-accent="teal" biases the particle hues to match. Animation is
+         wired automatically by initStarFields() via [data-hero-canvas].
+         ===================================================================== -->
+    <section class="al-hero al-hero--immersive al-hero--work" data-hero-accent="teal">
+      <!-- Decorative animated field: hidden from assistive tech, not focusable.
+           Renders one static frame (no rAF loop) under prefers-reduced-motion. -->
+      <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+      <!-- Contrast scrim: keeps all copy AA-legible over every animation frame. -->
+      <span class="al-hero__scrim" aria-hidden="true"></span>
+
+      <div class="al-hero__inner al-container">
+        <div class="al-hero__content al-reveal">
+          <span class="al-eyebrow">Case studies</span>
+          <h1 class="al-hero__title">Engagements that hold up in production.</h1>
+          <p class="al-hero__sub">B2B Commerce, Field Service, Experience Cloud portals, and platform integrations — senior-led builds across regulated and enterprise industries, with source control, tests, and clean handoff.</p>
+          <div class="al-hero__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="#al-work-grid">See our work</a>
+            <a class="al-btn al-btn--ghost" href="contact.html">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. FILTER BAR + CASE GRID
+         ===================================================================== -->
+    <section class="al-section al-section--surface" id="al-work-grid">
+      <div class="al-container">
+
+        <h2 class="al-sr-only">Case studies</h2>
+
+        <div role="group" aria-label="Filter case studies by category">
+          <div class="al-filter">
+            <button class="al-filter__btn is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="al-filter__btn" type="button" data-filter="commerce" aria-pressed="false">B2B Commerce Cloud</button>
+            <button class="al-filter__btn" type="button" data-filter="field-service" aria-pressed="false">Field Service Lightning</button>
+            <button class="al-filter__btn" type="button" data-filter="experience-cloud" aria-pressed="false">Experience Cloud</button>
+            <button class="al-filter__btn" type="button" data-filter="integration" aria-pressed="false">Integration</button>
+          </div>
+        </div>
+
+        <!-- All case studies below are anonymized: client identity is described by industry
+             and region only, and outcomes are stated qualitatively. -->
+        <div class="al-grid--2 al-grid--cases">
+          <!-- Case 1: B2B Commerce — Canadian alcohol/beverage distributor -->
+          <article class="al-card al-card--case al-reveal" data-category="commerce integration">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
+                <span class="al-case-pill">Beverage Distribution</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="case-studies/b2b-commerce-beverage-distributor.html" aria-hidden="true" tabindex="-1"><img src="assets/case-b2b-commerce.svg" alt="Illustration representing a self-serve B2B wholesale ordering storefront."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Self-serve wholesale ordering for a Canadian beverage distributor.</h3>
+              <p class="al-card__body"><strong>Replaced phone, email, and fax ordering</strong> with a compliant B2B storefront that lets trade buyers reorder in minutes and frees the sales team from manual order entry.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="case-studies/b2b-commerce-beverage-distributor.html">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Case 2: Field Service Lightning — UK operator -->
+          <article class="al-card al-card--case al-reveal" data-category="field-service">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="assets/flag-gb.svg" width="30" height="30" alt="" aria-hidden="true"> United Kingdom</span>
+                <span class="al-case-pill">Field Service</span>
+                <span class="al-case-pill">Maintenance</span>
+              </div>
+              <a class="al-card__illus" href="case-studies/field-service-uk-operator.html" aria-hidden="true" tabindex="-1"><img src="assets/case-field-service.svg" alt="Illustration representing a field-service scheduling and mobile work-order app."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Scheduling and mobile work orders for a UK field-service operator.</h3>
+              <p class="al-card__body"><strong>One dispatch board, offline-capable mobile.</strong> Dispatchers schedule from a single view and engineers complete jobs on-site without signal, lifting first-time-fix and on-time arrivals.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="case-studies/field-service-uk-operator.html">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Case 3: Experience Cloud — luxury hospitality group -->
+          <article class="al-card al-card--case al-reveal" data-category="experience-cloud integration">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
+                <span class="al-case-pill">Luxury Hospitality</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="case-studies/experience-cloud-luxury-hospitality.html" aria-hidden="true" tabindex="-1"><img src="assets/case-hospitality.svg" alt="Illustration representing a branded concierge guest portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A concierge guest portal for a luxury hospitality group.</h3>
+              <p class="al-card__body"><strong>A single, branded guest experience.</strong> Guests manage bookings and requests in one portal while staff work from a unified guest view that powers repeat-visit personalization.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="case-studies/experience-cloud-luxury-hospitality.html">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Case 4: Experience Cloud — healthcare startup -->
+          <article class="al-card al-card--case al-reveal" data-category="experience-cloud">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="assets/flag-us.svg" width="30" height="30" alt="" aria-hidden="true"> United States</span>
+                <span class="al-case-pill">Healthcare</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="case-studies/experience-cloud-healthcare-startup.html" aria-hidden="true" tabindex="-1"><img src="assets/case-healthcare.svg" alt="Illustration representing a secure patient onboarding portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A patient onboarding portal for a healthcare startup.</h3>
+              <p class="al-card__body"><strong>Scaled intake without adding headcount.</strong> A secure, privacy-conscious onboarding portal lets patients self-register and submit information, so a small team could grow enrolment cleanly.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="case-studies/experience-cloud-healthcare-startup.html">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Case 5: Integration — Fintech Salesforce <-> Xero -->
+          <article class="al-card al-card--case al-reveal" data-category="integration">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="assets/flag-za.svg" width="30" height="30" alt="" aria-hidden="true"> South Africa</span>
+                <span class="al-case-pill">Fintech</span>
+                <span class="al-case-pill">Integration</span>
+              </div>
+              <a class="al-card__illus" href="case-studies/fintech-salesforce-xero-integration.html" aria-hidden="true" tabindex="-1"><img src="assets/case-fintech-xero.svg" alt="Illustration representing a two-way sync between Salesforce and Xero."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A two-way Salesforce–Xero sync for a fintech company.</h3>
+              <p class="al-card__body"><strong>One set of numbers, no re-keying.</strong> Invoices and payments flow automatically between Salesforce and Xero, so finance and sales work from the same reconciled data.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="case-studies/fintech-salesforce-xero-integration.html">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Case 6: Experience Cloud — automotive retailer -->
+          <article class="al-card al-card--case al-reveal" data-category="experience-cloud">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="assets/flag-eu.svg" width="30" height="30" alt="" aria-hidden="true"> Europe</span>
+                <span class="al-case-pill">Automotive Retail</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="case-studies/experience-cloud-automotive.html" aria-hidden="true" tabindex="-1"><img src="assets/case-automotive.svg" alt="Illustration representing a dealer and customer automotive portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A dealer and customer portal for an automotive retailer.</h3>
+              <p class="al-card__body"><strong>Self-service for customers, one workspace for dealers.</strong> Customers book service and track their vehicles while dealers manage inventory and leads from a single connected portal.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="case-studies/experience-cloud-automotive.html">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Your Salesforce org, engineered for what's next.</h2>
+            <p>Talk to a senior architect about custom development, integrations, or an Agentforce build — scoped before you commit.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="contact.html">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="contact.html">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component. Other root-level pages copy this verbatim.
+       (Subfolder pages prefix href/src with ../ )
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="index.html" aria-label="Agentic Labs — home">
+            <img src="assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="index.html">Home</a>
+          <a class="al-footer__link" href="services.html">Services</a>
+          <a class="al-footer__link" href="case-studies.html">Case Studies</a>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+          <a class="al-footer__link" href="insights.html">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="approach.html">Approach</a>
+          <a class="al-footer__link" href="contact.html">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="privacy-policy.html">Privacy Policy</a>
+          <a class="al-footer__link" href="cookie-policy.html">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

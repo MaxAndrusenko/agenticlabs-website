@@ -1768,3 +1768,93 @@ body.al-scroll-lock { overflow: hidden; }
      the rAF loop when reduce is set. */
   .al-hero--immersive::before { animation: none; }
 }
+
+/* =============================================================================
+   CASE-STUDY CARDS — additive layer over the original design system.
+   Appended last so it wins the cascade. Keeps the Case Studies card design
+   (country/industry/work pills, circular flag, laptop illustration, outlined
+   "View case study" button) while the rest of the site stays original.
+   ============================================================================ */
+.al-card--case { padding: 0; overflow: hidden; position: relative; padding-top: 0; }
+
+.al-card--case .al-card__media {
+  margin: 0;
+  border-radius: 0;
+  aspect-ratio: 5 / 4;
+  background: linear-gradient(168deg, #1477e0 0%, #0e63c8 30%, #0a3b78 66%, #061627 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pills — stacked top-left */
+.al-card--case .al-case-pills {
+  position: absolute; z-index: 2;
+  top: clamp(1.25rem, 3vw, 2rem); left: clamp(1.25rem, 3vw, 2rem);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  max-width: 62%;
+}
+.al-case-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--al-font-sans); font-size: 1.02rem; font-weight: 600;
+  line-height: 1.15; color: var(--al-white); text-transform: none; letter-spacing: 0;
+  background: rgba(255,255,255,0.15);
+  padding: 11px 22px; border-radius: var(--al-radius-pill);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.al-case-pill--country { background: rgba(255,255,255,0.22); font-weight: 700; padding-left: 8px; }
+/* Specificity must beat the original `.al-card__media img` rule (0-1-1). */
+.al-card--case .al-case-pill__flag {
+  width: 30px; height: 30px; min-width: 30px; border-radius: 50%; flex: 0 0 30px;
+  object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,0.55);
+}
+
+/* Laptop illustration — bleeds off the bottom-right */
+.al-card--case .al-card__illus {
+  position: absolute; z-index: 1; right: -6%; bottom: -7%;
+  width: 62%; max-width: 380px; margin: 0; display: block;
+}
+.al-card--case .al-card__illus img { width: 100%; height: auto; display: block; object-fit: contain; }
+
+/* Body below the panel */
+.al-card--case .al-card__body-wrap {
+  display: flex; flex-direction: column; gap: var(--al-space-4);
+  padding: clamp(1.5rem, 2.5vw, 2rem); flex: 1;
+}
+.al-card--case .al-card__title { margin: 0; font-size: clamp(1.35rem, 2vw, 1.7rem); line-height: 1.2; color: var(--al-navy-90); }
+.al-card--case .al-card__body { margin: 0; font-size: 16px; color: var(--al-ink-500); }
+
+/* Outlined pill "View case study" button (Learn-More style) — rounded on purpose,
+   distinct from the site's default sharp buttons. */
+.al-btn--outline {
+  margin-top: auto; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--al-font-sans); font-weight: 600; font-size: 15px;
+  padding: 12px 26px; border-radius: var(--al-radius-pill);
+  border: 1.5px solid var(--al-blue-60); background: transparent; color: var(--al-blue-60);
+}
+.al-btn--outline:hover { background: var(--al-blue-60); color: var(--al-white); gap: 12px; }
+
+/* Case grid: 2-up */
+@media (min-width: 768px) {
+  .al-grid--cases { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Narrower 3-up homepage row: dial the big pieces down */
+.al-grid--3 .al-case-pill { font-size: 0.86rem; padding: 8px 16px; }
+.al-grid--3 .al-case-pill__flag { width: 24px; height: 24px; flex: 0 0 24px; }
+.al-grid--3 .al-card__illus { width: 58%; }
+.al-grid--3 .al-card--case .al-card__title { font-size: 20px; }
+
+@media (max-width: 560px) {
+  .al-card--case .al-card__media { aspect-ratio: 16 / 11; }
+  .al-card--case .al-case-pills { max-width: 66%; }
+  .al-card__illus { width: 58%; }
+}
+
+/* Case-study detail-page prose (Challenge / What we built / Outcome) */
+.al-prose { max-width: 760px; }
+.al-prose h2 { margin-top: var(--al-space-7); margin-bottom: var(--al-space-3); color: var(--al-navy-90); }
+.al-prose h2:first-child { margin-top: 0; }
+.al-prose p { color: var(--al-ink-900); margin-bottom: var(--al-space-4); }
+.al-prose ul { display: flex; flex-direction: column; gap: var(--al-space-2); margin: 0 0 var(--al-space-4); padding-left: 1.15em; }
+.al-prose li { color: var(--al-ink-900); line-height: 1.6; }
