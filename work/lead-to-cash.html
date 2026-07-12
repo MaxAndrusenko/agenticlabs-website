@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Rebuilding a broken lead-to-cash pipeline — Agentic Labs</title>
+  <meta name="description" content="Case study: how Agentic Labs rebuilt a Series C SaaS company’s lead-to-cash pipeline across Sales Cloud, integrations, and Agentforce. (Placeholder content.)">
+
+  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <link rel="canonical" href="https://agenticlabs.cloud/work/lead-to-cash">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rebuilding a broken lead-to-cash pipeline — Agentic Labs">
+  <meta property="og:description" content="Case study: how Agentic Labs rebuilt a Series C SaaS company’s lead-to-cash pipeline across Sales Cloud, integrations, and Agentforce. (Placeholder content.)">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../assets/og-default.svg">
+  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
+  <meta property="og:url" content="https://agenticlabs.cloud/work/lead-to-cash">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Skip link — first focusable element -->
+  <a class="al-skip-link" href="#al-main">Skip to content</a>
+
+  <!-- =========================================================================
+       NAVBAR — canonical component copied verbatim from index.html.
+       Changes for this page: "Work" link carries .is-active + aria-current,
+       and all href/src are prefixed with ../ for this subfolder location.
+       ========================================================================= -->
+  <header class="al-navbar">
+    <div class="al-navbar__inner">
+      <a class="al-navbar__logo" href="/" aria-label="Agentic Labs — home">
+        <img src="../assets/logo.svg" width="180" height="36" alt="Agentic Labs">
+      </a>
+
+      <nav class="al-navbar__links" aria-label="Primary">
+        <a class="al-navbar__link" href="/">Home</a>
+        <a class="al-navbar__link" href="/services">Services</a>
+        <a class="al-navbar__link is-active" href="/work" aria-current="page">Work</a>
+        <a class="al-navbar__link" href="/approach">Approach</a>
+        <a class="al-navbar__link" href="/contact">Contact</a>
+      </nav>
+
+      <a class="al-btn al-btn--primary al-navbar__cta" href="/contact">Contact us</a>
+
+      <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay menu (duplicates the primary links) -->
+    <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+      <a class="al-navbar__link" href="/">Home</a>
+      <a class="al-navbar__link" href="/services">Services</a>
+      <a class="al-navbar__link is-active" href="/work" aria-current="page">Work</a>
+      <a class="al-navbar__link" href="/approach">Approach</a>
+      <a class="al-navbar__link" href="/contact">Contact</a>
+      <a class="al-navbar__link" href="/insights">Insights</a>
+      <a class="al-btn al-btn--primary" href="/contact">Contact us</a>
+    </nav>
+  </header>
+
+  <main id="al-main">
+
+    <!-- =====================================================================
+         1. HERO — case study header
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 820px;">
+          <!-- PLACEHOLDER: this entire case study is illustrative placeholder content — replace with a real, client-approved engagement before publishing. -->
+          <p style="margin-bottom: var(--al-space-5);">
+            <span class="al-badge">Placeholder case study</span>
+          </p>
+
+          <div class="al-tag-row">
+            <span class="al-tag al-tag--default">Sales Cloud</span>
+            <span class="al-tag al-tag--integration">Integration</span>
+            <span class="al-tag al-tag--ai">Agentforce</span>
+          </div>
+
+          <h1>Rebuilding a broken lead-to-cash pipeline for a Series C SaaS company.</h1>
+
+          <!-- PLACEHOLDER: confirm industry and delivery lead with client -->
+          <p class="al-body-lg" style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5); max-width: 60ch; color: var(--al-ink-500);">
+            How a senior architect redesigned the data model, rebuilt the automation, and wired billing back together — with every line human-reviewed.
+          </p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: var(--al-space-3); align-items: center;">
+            <!-- PLACEHOLDER: confirm industry classification with client -->
+            <span class="al-provenance al-provenance--sm">Industry: B2B SaaS (Series C)</span>
+            <!-- PLACEHOLDER: confirm delivery lead with client -->
+            <span class="al-provenance al-provenance--sm">Lead: Senior Architect</span>
+          </div>
+        </div>
+
+        <!-- Cover image — full-width feature -->
+        <div class="al-reveal" style="margin-top: var(--al-space-8);">
+          <!-- PLACEHOLDER: replace cover with a real project visual once approved -->
+          <img
+            src="../assets/case-lead-to-cash.svg"
+            width="1280"
+            height="640"
+            alt="Architecture diagram of a rebuilt lead-to-cash pipeline linking Sales Cloud lead capture, a redesigned data model, a billing and ERP integration, and an Agentforce lead-triage agent through a central review layer."
+            style="width: 100%; border-radius: var(--al-radius-panel); border: 1px solid var(--al-border);">
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. OUTCOME STAT BAND
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-7);">
+          <span class="al-eyebrow">Outcomes at a glance</span>
+          <h2>What the rebuild delivered.</h2>
+        </header>
+
+        <div class="al-stat-strip al-stat-strip--3" style="border-top: none; margin-top: 0; padding-top: 0;">
+          <!-- PLACEHOLDER: confirm real outcome metric with client -->
+          <div class="al-stat al-reveal">
+            <span class="al-stat__num">38%</span>
+            <span class="al-stat__label">Faster quote-to-cash</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real outcome metric with client -->
+          <div class="al-stat al-reveal">
+            <span class="al-stat__num">3 systems</span>
+            <span class="al-stat__label">Integrated end to end</span>
+          </div>
+          <!-- PLACEHOLDER: confirm real delivery timeline with client -->
+          <div class="al-stat al-reveal">
+            <span class="al-stat__num">6 weeks</span>
+            <span class="al-stat__label">From scope to launch</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. BODY — constrained reading column
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <div class="al-reveal" style="max-width: 720px; margin-inline: auto;">
+
+          <!-- PLACEHOLDER: all body copy below is generic placeholder narrative — verify every detail with the client before publishing. -->
+
+          <h2>The problem</h2>
+          <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5);">
+            A fast-growing Series C SaaS company had outgrown a lead-to-cash process that had been stitched together one workaround at a time. Lead capture was disconnected — marketing forms, partner referrals, and inbound sign-ups landed in different objects with no shared ownership rules, so reps chased duplicates while genuinely new demand sat untouched. Routing depended on a chain of point-and-click automations that nobody fully understood and no one wanted to change.
+          </p>
+          <p style="margin-bottom: var(--al-space-7);">
+            Downstream, the cracks widened. Pricing and approvals ran through a manual CPQ process kept alive in spreadsheets, so every non-standard quote became a bottleneck. The handoff into billing was worse: opportunities that closed in Salesforce were re-keyed by hand into the billing and ERP systems, which meant delayed invoices, revenue-recognition mismatches, and a finance team that no longer trusted the numbers in the CRM. Quote-to-cash had quietly become the company's slowest, least predictable process.
+          </p>
+
+          <h2>Our approach</h2>
+          <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5);">
+            We started where the failures actually originated: the data model. A senior architect redesigned how leads, accounts, opportunities, quotes, and orders relate — establishing clear ownership, deduplication keys, and a single source of truth before any automation was touched. That design became the contract every later decision was measured against.
+          </p>
+          <p style="margin-bottom: var(--al-space-5);">
+            From there we rebuilt the automation deliberately. Deterministic, high-volume logic — routing, approvals, order creation — moved into Apex where it could be tested and reasoned about; genuinely declarative steps stayed in Flow so the client's admins could own them. The billing and ERP handoff was re-implemented as an event-driven integration over platform events, so a closed opportunity reliably produces an invoice without anyone re-typing a record.
+          </p>
+          <p style="margin-bottom: var(--al-space-5);">
+            For lead triage, we scoped an Agentforce agent to the parts of the process that genuinely benefit from judgment at scale — enriching, classifying, and prioritizing inbound leads against the new data model — with hard guardrails and a human in the loop on anything ambiguous. It accelerates the queue; it does not silently decide who a rep never calls.
+          </p>
+          <p style="margin-bottom: var(--al-space-7);">
+            AI accelerated the mechanical work throughout — scaffolding classes, drafting tests, generating first-pass mappings — but every line that reached the org was read, understood, and approved by a senior engineer. The AI did the typing. Judgment stayed human.
+          </p>
+
+          <h2>The result</h2>
+          <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5);">
+            The rebuilt pipeline moves a lead from capture to invoice as one continuous, observable process instead of a series of manual handoffs. Finance and revenue operations now work from the same numbers, quotes clear faster, and the automation is documented and owned rather than feared. Specifically, the engagement delivered:
+          </p>
+          <ul style="margin-bottom: var(--al-space-5); padding-left: var(--al-space-5); list-style: disc;">
+            <!-- PLACEHOLDER: confirm each outcome with client -->
+            <li style="margin-bottom: var(--al-space-3);">A single, documented data model spanning lead capture through order and billing.</li>
+            <li style="margin-bottom: var(--al-space-3);">An event-driven integration to the billing and ERP systems that eliminated manual re-keying.</li>
+            <li style="margin-bottom: var(--al-space-3);">A scoped Agentforce triage agent with guardrails and human review on every escalation.</li>
+            <li style="margin-bottom: var(--al-space-3);">Full source control, test coverage, and staged deployment across the rebuild.</li>
+            <li>A knowledge-transfer handoff so the in-house team owns and extends what we built.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. EMBEDDED TESTIMONIAL
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <!-- PLACEHOLDER: testimonial is generic placeholder — replace with a real, approved client quote and attribution -->
+        <figure class="al-card al-card--testimonial al-reveal" style="max-width: 720px; margin-inline: auto;">
+          <blockquote class="al-card__body">“For the first time, sales and finance are looking at the same pipeline. The handoffs that used to break every quarter-end just work now — and we understand exactly how, because they documented all of it.”</blockquote>
+          <figcaption class="al-card__meta">
+            <img src="../assets/avatar-1.svg" width="40" height="40" alt="" aria-hidden="true">
+            <span><strong>VP of Revenue Operations</strong><br><span class="al-caption">Series C SaaS</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. RELATED CASE STUDIES
+         ===================================================================== -->
+    <section class="al-section">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">More work</span>
+          <h2>Related case studies.</h2>
+        </header>
+
+        <div class="al-grid--2">
+          <!-- Related: Case triage engine -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="/work/case-triage-engine" aria-hidden="true" tabindex="-1">
+              <img src="../assets/case-triage.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Service Cloud</span>
+              <span class="al-tag al-tag--ai">Agentforce</span>
+            </div>
+            <h3 class="al-card__title">Agentforce case triage engine</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Auto-routed 80% of inbound cases</strong> with human review on every escalation.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="/work/case-triage-engine">View case study →</a>
+          </article>
+
+          <!-- Related: Org data migration -->
+          <article class="al-card al-card--case al-reveal">
+            <a class="al-card__media" href="/work/org-data-migration" aria-hidden="true" tabindex="-1">
+              <img src="../assets/case-migration.svg" alt="" aria-hidden="true">
+            </a>
+            <div class="al-tag-row">
+              <span class="al-tag al-tag--default">Data Migration</span>
+              <span class="al-tag al-tag--integration">Integration</span>
+            </div>
+            <h3 class="al-card__title">Multi-org data migration</h3>
+            <!-- PLACEHOLDER: confirm real outcome stat with client -->
+            <p class="al-card__body"><strong>Migrated 12M+ records with zero data loss</strong> during a post-acquisition consolidation.</p>
+            <p><span class="al-provenance al-provenance--sm">Lead: Senior Architect</span></p>
+            <a class="al-card__link" href="/work/org-data-migration">View case study →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. FINAL CTA BAND
+         ===================================================================== -->
+    <section class="al-section al-section--surface">
+      <div class="al-container">
+        <div class="al-cta-band al-reveal">
+          <div>
+            <h2>Have a pipeline that's fighting you?</h2>
+            <p>Talk to a senior architect about untangling lead-to-cash — data model, integrations, and Agentforce, scoped before you commit.</p>
+          </div>
+          <div class="al-cta-band__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Contact us</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="/contact">Get a scoped estimate</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER — canonical component copied verbatim from index.html.
+       All href/src prefixed with ../ for this subfolder location.
+       ========================================================================= -->
+  <footer class="al-footer">
+    <div class="al-container">
+      <div class="al-footer__grid">
+        <div class="al-footer__brand">
+          <a href="/" aria-label="Agentic Labs — home">
+            <img src="../assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+          </a>
+          <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
+          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
+        </div>
+
+        <nav class="al-footer__col" aria-label="Main pages">
+          <span class="al-footer__heading">Main pages</span>
+          <a class="al-footer__link" href="/">Home</a>
+          <a class="al-footer__link" href="/services">Services</a>
+          <a class="al-footer__link" href="/work">Work</a>
+          <a class="al-footer__link" href="/approach">Approach</a>
+          <a class="al-footer__link" href="/contact">Contact</a>
+          <a class="al-footer__link" href="/insights">Insights</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Company">
+          <span class="al-footer__heading">Company</span>
+          <a class="al-footer__link" href="/approach">Approach</a>
+          <a class="al-footer__link" href="/contact">Contact</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Legal">
+          <span class="al-footer__heading">Legal</span>
+          <a class="al-footer__link" href="/privacy-policy">Privacy Policy</a>
+          <a class="al-footer__link" href="/cookie-policy">Cookie Policy</a>
+        </nav>
+
+        <nav class="al-footer__col" aria-label="Connect">
+          <span class="al-footer__heading">Connect</span>
+          <!-- PLACEHOLDER: confirm real LinkedIn + social URLs with client -->
+          <a class="al-footer__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="al-footer__link" href="#">X / Twitter</a>
+          <a class="al-footer__link" href="#">GitHub</a>
+        </nav>
+      </div>
+
+      <div class="al-footer__bottom">
+        <p>© 2026 Agentic Labs. All rights reserved.</p>
+        <div class="al-footer__legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/cookie-policy">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
