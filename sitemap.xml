@@ -13,26 +13,44 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://agenticlabs.cloud/work</loc>
-    <lastmod>2026-07-02</lastmod>
+    <loc>https://agenticlabs.cloud/case-studies</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://agenticlabs.cloud/work/lead-to-cash</loc>
-    <lastmod>2026-07-02</lastmod>
+    <loc>https://agenticlabs.cloud/case-studies/b2b-commerce-beverage-distributor</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://agenticlabs.cloud/work/case-triage-engine</loc>
-    <lastmod>2026-07-02</lastmod>
+    <loc>https://agenticlabs.cloud/case-studies/field-service-uk-operator</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://agenticlabs.cloud/work/org-data-migration</loc>
-    <lastmod>2026-07-02</lastmod>
+    <loc>https://agenticlabs.cloud/case-studies/experience-cloud-luxury-hospitality</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agenticlabs.cloud/case-studies/experience-cloud-healthcare-startup</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agenticlabs.cloud/case-studies/fintech-salesforce-xero-integration</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agenticlabs.cloud/case-studies/experience-cloud-automotive</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

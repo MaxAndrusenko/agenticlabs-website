@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 380" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="scrhp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef3fb"/>
+    </linearGradient>
+    <linearGradient id="deckhp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dfe4ec"/><stop offset="1" stop-color="#b7c0cf"/>
+    </linearGradient>
+    <linearGradient id="herohp" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5a0" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0ea5a0" stop-opacity="0.04"/>
+    </linearGradient>
+    <filter id="lshp" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="22" stdDeviation="26" flood-color="#05070f" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#lshp)">
+    <!-- lid / bezel -->
+    <rect x="60" y="26" width="440" height="292" rx="18" fill="#1f2733"/>
+    <!-- screen -->
+    <rect x="74" y="40" width="412" height="264" rx="6" fill="url(#scrhp)"/>
+  </g>
+
+  <!-- browser chrome -->
+  <path d="M74 46 a6 6 0 0 1 6 -6 h400 a6 6 0 0 1 6 6 v26 H74 Z" fill="#f1f5fc"/>
+  <circle cx="92" cy="59" r="4.5" fill="#d3ddf0"/>
+  <circle cx="108" cy="59" r="4.5" fill="#dde5f4"/>
+  <circle cx="124" cy="59" r="4.5" fill="#e6ebf6"/>
+  <rect x="150" y="51" width="300" height="16" rx="8" fill="#e4ebf8"/>
+
+  <!-- hero band -->
+  <rect x="74" y="72" width="412" height="118" fill="url(#herohp)"/>
+  <!-- left copy blocks -->
+  <rect x="98" y="98" width="150" height="16" rx="8" fill="#c6d3ec"/>
+  <rect x="98" y="124" width="196" height="10" rx="5" fill="#d7e0f2"/>
+  <rect x="98" y="142" width="120" height="10" rx="5" fill="#d7e0f2"/>
+  <rect x="98" y="166" width="96" height="24" rx="12" fill="#0ea5a0"/>
+  <!-- industry icon on the right of the hero -->
+  <g transform="translate(392 130) scale(0.62)" fill="none" stroke="#0ea5a0" stroke-width="9"
+     stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M-44 40 h88 M-38 40 v-18 a38 38 0 0 1 76 0 v18"/><line x1="0" y1="-38" x2="0" y2="-20"/><path d="M0 -72 l7 15 l16 2 l-12 12 l3 16 l-14 -8 l-14 8 l3 -16 l-12 -12 l16 -2 z" transform="translate(0 -8) scale(0.7)"/>
+  </g>
+
+  <!-- content cards -->
+  <rect x="98" y="212" width="116" height="66" rx="9" fill="#ffffff" stroke="#e4ebf8" stroke-width="2"/>
+  <rect x="222" y="212" width="116" height="66" rx="9" fill="#ffffff" stroke="#e4ebf8" stroke-width="2"/>
+  <rect x="346" y="212" width="116" height="66" rx="9" fill="#ffffff" stroke="#e4ebf8" stroke-width="2"/>
+
+  <!-- laptop base / deck -->
+  <path d="M40 318 H520 L544 348 H16 Z" fill="url(#deckhp)"/>
+  <rect x="238" y="318" width="84" height="7" rx="3.5" fill="#9aa5b6"/>
+  <path d="M16 348 H544 L540 356 a4 4 0 0 1 -4 3 H24 a4 4 0 0 1 -4 -3 Z" fill="#c7cfda"/>
+</svg>
