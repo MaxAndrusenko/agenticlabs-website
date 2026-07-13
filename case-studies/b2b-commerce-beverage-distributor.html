@@ -73,80 +73,359 @@
   <main id="al-main">
 
     <!-- =====================================================================
-         1. HERO
+         1. HERO — breadcrumb + eyebrow + h1 + sub + meta pills + actions,
+         with the "compliant storefront laptop" mockup on the right.
          ===================================================================== -->
-    <section class="al-hero al-hero--immersive al-hero--work" data-hero-accent="teal">
+    <section class="al-hero al-hero--immersive al-hero--work al-cs-hero" data-hero-accent="teal">
       <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
       <span class="al-hero__scrim" aria-hidden="true"></span>
 
       <div class="al-hero__inner al-container">
-        <div class="al-hero__content al-reveal">
-          <span class="al-eyebrow">Case study · B2B Commerce</span>
-          <h1 class="al-hero__title">Self-serve wholesale ordering for a Canadian beverage distributor.</h1>
-          <p class="al-hero__sub">We replaced phone, email, and fax ordering with a compliant Salesforce B2B Commerce storefront — so trade buyers reorder in minutes and the sales team is off manual data entry.</p>
-          <div class="al-hero__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Start a similar project</a>
-            <a class="al-btn al-btn--ghost" href="/case-studies">← All case studies</a>
+        <div class="al-cs-hero__grid">
+          <div class="al-hero__content al-reveal">
+            <nav class="al-cs-breadcrumb" aria-label="Breadcrumb">
+              <a href="/case-studies">Case Studies</a>
+              <span class="al-cs-breadcrumb__sep" aria-hidden="true">/</span>
+              <span aria-current="page">B2B Commerce</span>
+            </nav>
+            <span class="al-eyebrow">Case study · B2B Commerce</span>
+            <h1 class="al-hero__title">Self-serve wholesale ordering for a Canadian beverage distributor.</h1>
+            <p class="al-hero__sub">We replaced phone, email, and fax ordering with a compliant Salesforce B2B Commerce storefront — so trade buyers reorder in minutes and the sales team is off manual data entry.</p>
+
+            <ul class="al-cs-meta">
+              <li class="al-cs-meta__pill al-cs-meta__pill--country"><img class="al-cs-meta__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</li>
+              <li class="al-cs-meta__pill">Beverage Distribution</li>
+              <li class="al-cs-meta__pill">B2B Commerce Cloud</li>
+              <li class="al-cs-meta__pill">Implementation</li>
+            </ul>
+
+            <div class="al-hero__actions">
+              <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Start a similar project</a>
+              <a class="al-btn al-btn--ghost" href="/case-studies"><span aria-hidden="true">←</span> All case studies</a>
+            </div>
+          </div>
+
+          <!-- Hero product mockup: compliant storefront on a laptop (decorative) -->
+          <div class="al-cs-hero__media al-reveal" aria-hidden="true">
+            <div class="al-cs-laptop">
+              <div class="al-cs-laptop__screen">
+                <div class="al-cs-laptop__bar">
+                  <span class="al-cs-laptop__dots"><i></i><i></i><i></i></span>
+                  <span class="al-cs-laptop__url">storefront.wholesale</span>
+                </div>
+                <div class="al-cs-laptop__viewport">
+                  <div class="al-cs-laptop__toolbar">
+                    <span class="al-cs-laptop__reorder"><span aria-hidden="true">↻</span> Reorder from history</span>
+                    <span class="al-cs-laptop__search"></span>
+                  </div>
+                  <div class="al-cs-laptop__tiles">
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">$—— / case</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper"><span>–</span><b>1</b><span>+</span></span>
+                        <span class="al-cs-tile__add">Add</span>
+                      </span>
+                    </div>
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">$—— / case</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper"><span>–</span><b>1</b><span>+</span></span>
+                        <span class="al-cs-tile__add">Add</span>
+                      </span>
+                    </div>
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">$—— / case</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper"><span>–</span><b>1</b><span>+</span></span>
+                        <span class="al-cs-tile__add">Add</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="al-cs-laptop__base"></span>
+              <span class="al-cs-laptop__badge"><span aria-hidden="true">✓</span> Licensed · ON</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         2. AT A GLANCE
+         2. AT A GLANCE — white fact panel (region / industry / platform / work)
          ===================================================================== -->
-    <section class="al-section al-section--surface">
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-glance-h">
       <div class="al-container">
         <!-- This engagement is anonymized: the client is described by industry and region only,
              and outcomes are stated qualitatively. -->
-        <div class="al-grid--3">
-          <div>
-            <span class="al-eyebrow">Industry</span>
-            <p>Regulated alcohol &amp; beverage distribution</p>
+        <span class="al-eyebrow">At a glance</span>
+        <h2 id="al-cs-glance-h" class="al-sr-only">At a glance</h2>
+
+        <div class="al-cs-glance al-reveal">
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Region</span>
+            <p class="al-cs-glance__value">Canada <span aria-hidden="true">🇨🇦</span></p>
           </div>
-          <div>
-            <span class="al-eyebrow">Region</span>
-            <p>Canada</p>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Industry</span>
+            <p class="al-cs-glance__value">Regulated alcohol &amp; beverage distribution</p>
           </div>
-          <div>
-            <span class="al-eyebrow">Platform</span>
-            <p>Salesforce B2B Commerce · Integration</p>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Platform</span>
+            <p class="al-cs-glance__value">Salesforce B2B Commerce</p>
           </div>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Work type</span>
+            <p class="al-cs-glance__value">Implementation · Integration</p>
+          </div>
+        </div>
+
+        <p class="al-cs-glance__note"><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed · Scope fixed before you commit</span></p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. NARRATIVE — three numbered blocks (challenge / built / outcome)
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-story-h">
+      <div class="al-container">
+        <h2 id="al-cs-story-h" class="al-sr-only">How we approached it</h2>
+
+        <div class="al-cs-narrative">
+          <!-- 01 Challenge -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">01</span>
+              <span class="al-cs-step__label">Challenge</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">Orders were trapped in phone, email, and fax.</h3>
+              <p>Trade buyers placed orders by phone, email, and fax. Every order was re-keyed by a sales rep, pricing and stock availability were opaque to buyers, and the business had to enforce the rules that come with selling a regulated product — licensing, provincial restrictions, and quantity controls — on every single transaction.</p>
+            </div>
+          </article>
+
+          <!-- 02 What we built -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">02</span>
+              <span class="al-cs-step__label">What we built</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">A compliant storefront that does the transcribing.</h3>
+              <p>We built a self-serve wholesale storefront with the regulatory rules baked into the buy flow, wired straight through to the back office.</p>
+              <ul class="al-cs-checklist">
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Compliant B2B Commerce storefront</strong> — account-specific catalogs, contract pricing, and negotiated terms.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Reorder-from-history &amp; saved lists</strong> — so recurring wholesale orders take minutes, not calls.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Regulatory guardrails in the buy flow</strong> — licensing and jurisdiction rules enforced on restricted products.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Integration to order-management &amp; ERP</strong> — online orders flow through with no re-keying.</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 03 Outcome -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">03</span>
+              <span class="al-cs-step__label">Outcome</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">Buyers self-serve; the team stops transcribing.</h3>
+              <p>Buyers now self-serve their reorders around the clock instead of waiting on a rep. Order-entry errors dropped as manual re-keying disappeared, and the sales team was freed to focus on relationships and new accounts rather than transcribing orders.</p>
+              <p>Pricing and availability are consistent and transparent for every buyer — the same numbers, every time.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         3. NARRATIVE
+         4. SOLUTION HIGHLIGHTS — four capability cards
          ===================================================================== -->
-    <section class="al-section">
-      <div class="al-container al-prose">
-        <h2>The challenge</h2>
-        <p>Trade buyers placed orders by phone, email, and fax. Every order was re-keyed by a sales rep, pricing and stock availability were opaque to buyers, and the business had to enforce the rules that come with selling a regulated product — licensing, provincial restrictions, and quantity controls — on every transaction.</p>
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-caps-h">
+      <div class="al-container">
+        <div class="al-cs-section-head">
+          <span class="al-eyebrow">Solution highlights</span>
+          <h2 id="al-cs-caps-h">Everything a regulated wholesale buyer needs, in one flow.</h2>
+        </div>
 
-        <h2>What we built</h2>
-        <ul>
-          <li>A compliant <strong>B2B Commerce storefront</strong> with account-specific catalogs, contract pricing, and negotiated terms.</li>
-          <li><strong>Reorder-from-history</strong> and saved lists so recurring wholesale orders take minutes.</li>
-          <li><strong>Regulatory guardrails</strong> built into the buying flow to enforce licensing and jurisdiction rules on restricted products.</li>
-          <li><strong>Integration</strong> to the order-management and back-office systems so online orders flow straight through without re-keying.</li>
-        </ul>
+        <div class="al-cs-caps">
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 6h7M14 10h5M14 16h7M14 20h5"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Account-specific catalogs &amp; pricing</h3>
+            <p class="al-cs-cap__body">Every buyer signs in to their own catalog, contract prices, and negotiated terms — no more price lists over email.</p>
+          </article>
 
-        <h2>The outcome</h2>
-        <p>Buyers now self-serve their reorders around the clock instead of waiting on a rep, order-entry errors dropped as manual re-keying disappeared, and the sales team was freed to focus on relationships and new accounts rather than transcribing orders. Pricing and availability are consistent and transparent for every buyer.</p>
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 20v-4h4"/><path d="M12 8v4l3 2"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Reorder from history &amp; saved lists</h3>
+            <p class="al-cs-cap__body">Recurring wholesale orders rebuilt in a couple of taps from past orders and saved lists.</p>
+          </article>
 
-        <p><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed</span></p>
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Regulatory guardrails, in the flow</h3>
+            <p class="al-cs-cap__body">Licensing, provincial restrictions, and quantity limits enforced at add-to-cart and checkout — not after the fact.</p>
+          </article>
+
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13l-3-3M20 17H7l3 3"/><path d="M4 7v3M20 17v-3"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Straight-through to ERP</h3>
+            <p class="al-cs-cap__body">Orders post to order-management and the back office automatically. No rep re-keys anything.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         4. CTA BAND
+         5. SPOTLIGHT — navy panel: reorder-flow vignette + pull-quote
          ===================================================================== -->
-    <section class="al-section">
+    <section class="al-section" aria-labelledby="al-cs-spot-h">
+      <div class="al-container">
+        <h2 id="al-cs-spot-h" class="al-sr-only">In their words</h2>
+
+        <div class="al-cs-spotlight al-reveal">
+          <!-- Reorder-flow vignette (decorative) -->
+          <div class="al-cs-flow" aria-hidden="true">
+            <div class="al-cs-flow__tabs">
+              <span class="al-cs-flow__tab is-active">Reorder from history</span>
+              <span class="al-cs-flow__tab">Saved lists</span>
+            </div>
+            <ul class="al-cs-flow__rows">
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Weekly core — 42 SKUs</b><em>Ordered Jun 3</em></span>
+                <span class="al-cs-flow__btn">Reorder</span>
+              </li>
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Patio season top-up</b><em>Ordered May 27</em></span>
+                <span class="al-cs-flow__btn">Reorder</span>
+              </li>
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Cider &amp; RTD refill</b><em>Ordered May 19</em></span>
+                <span class="al-cs-flow__btn">Reorder</span>
+              </li>
+            </ul>
+            <p class="al-cs-flow__note"><span aria-hidden="true">✓</span> Provincial limit applied — max 10 cases / week</p>
+          </div>
+
+          <!-- Pull-quote -->
+          <figure class="al-cs-quote">
+            <blockquote class="al-cs-quote__text">The rep used to spend the morning typing in orders off voicemail and fax. Now the order is just there — priced, reconciled, and compliant before anyone sits down.</blockquote>
+            <figcaption class="al-cs-quote__by">Operations lead · national beverage distributor (anonymized)</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. TECH & STACK — chip strip
+         ===================================================================== -->
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-stack-h">
+      <div class="al-container">
+        <div class="al-cs-section-head">
+          <span class="al-eyebrow">Tech &amp; stack</span>
+          <h2 id="al-cs-stack-h">Built on the platform, integrated to the back office.</h2>
+        </div>
+
+        <ul class="al-cs-chips al-reveal">
+          <li class="al-cs-chip">Salesforce B2B Commerce Cloud</li>
+          <li class="al-cs-chip">Apex</li>
+          <li class="al-cs-chip">Lightning Web Components</li>
+          <li class="al-cs-chip">Flow</li>
+          <li class="al-cs-chip">Platform Events</li>
+          <li class="al-cs-chip">REST / Middleware integration</li>
+          <li class="al-cs-chip">Order Management</li>
+          <li class="al-cs-chip">ERP sync</li>
+          <li class="al-cs-chip">Sandbox → CI/CD</li>
+          <li class="al-cs-chip">Git source control</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. RELATED CASE STUDIES — reuse existing al-card--case, 3-up
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-related-h">
+      <div class="al-container">
+        <div class="al-cs-section-head al-cs-section-head--split">
+          <div>
+            <span class="al-eyebrow">More work</span>
+            <h2 id="al-cs-related-h">Related case studies</h2>
+          </div>
+          <a class="al-btn al-btn--ghost al-cs-section-head__link" href="/case-studies">All case studies <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <div class="al-grid--3">
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-gb.svg" width="30" height="30" alt="" aria-hidden="true"> United Kingdom</span>
+                <span class="al-case-pill">Field Service</span>
+                <span class="al-case-pill">Maintenance</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/field-service-uk-operator" aria-hidden="true" tabindex="-1"><img src="../assets/case-field-service.svg" alt="Illustration representing a field-service scheduling and mobile work-order app."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Scheduling and mobile work orders for a UK field-service operator.</h3>
+              <p class="al-card__body">One dispatch board, offline-capable mobile — lifting first-time-fix and on-time arrivals.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/field-service-uk-operator">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
+                <span class="al-case-pill">Luxury Hospitality</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/experience-cloud-luxury-hospitality" aria-hidden="true" tabindex="-1"><img src="../assets/case-hospitality.svg" alt="Illustration representing a branded concierge guest portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A concierge guest portal for a luxury hospitality group.</h3>
+              <p class="al-card__body">A single, branded guest experience that powers repeat-visit personalization.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/experience-cloud-luxury-hospitality">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-us.svg" width="30" height="30" alt="" aria-hidden="true"> United States</span>
+                <span class="al-case-pill">Healthcare</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/experience-cloud-healthcare-startup" aria-hidden="true" tabindex="-1"><img src="../assets/case-healthcare.svg" alt="Illustration representing a secure patient onboarding portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A patient onboarding portal for a healthcare startup.</h3>
+              <p class="al-card__body">Scaled intake without adding headcount — a secure, privacy-conscious self-registration portal.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/experience-cloud-healthcare-startup">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         8. CTA BAND
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-cta-h">
       <div class="al-container">
         <div class="al-cta-band al-reveal">
           <div>
-            <h2>Have a wholesale or commerce build in mind?</h2>
+            <h2 id="al-cs-cta-h">Have a wholesale or commerce build in mind?</h2>
             <p>Talk to a senior architect about a B2B Commerce storefront or a back-office integration — scoped before you commit.</p>
           </div>
           <div class="al-cta-band__actions">

@@ -73,80 +73,358 @@
   <main id="al-main">
 
     <!-- =====================================================================
-         1. HERO
+         1. HERO — breadcrumb + eyebrow + h1 + sub + meta pills + actions,
+         with the "patient intake portal laptop" mockup on the right.
          ===================================================================== -->
-    <section class="al-hero al-hero--immersive al-hero--work" data-hero-accent="teal">
+    <section class="al-hero al-hero--immersive al-hero--work al-cs-hero" data-hero-accent="teal">
       <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
       <span class="al-hero__scrim" aria-hidden="true"></span>
 
       <div class="al-hero__inner al-container">
-        <div class="al-hero__content al-reveal">
-          <span class="al-eyebrow">Case study · Experience Cloud</span>
-          <h1 class="al-hero__title">A patient onboarding portal for a healthcare startup.</h1>
-          <p class="al-hero__sub">We built a secure, privacy-conscious onboarding portal on Experience Cloud so patients self-register and submit their information — letting a small team scale enrolment cleanly.</p>
-          <div class="al-hero__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Start a similar project</a>
-            <a class="al-btn al-btn--ghost" href="/case-studies">← All case studies</a>
+        <div class="al-cs-hero__grid">
+          <div class="al-hero__content al-reveal">
+            <nav class="al-cs-breadcrumb" aria-label="Breadcrumb">
+              <a href="/case-studies">Case Studies</a>
+              <span class="al-cs-breadcrumb__sep" aria-hidden="true">/</span>
+              <span aria-current="page">Experience Cloud</span>
+            </nav>
+            <span class="al-eyebrow">Case study · Experience Cloud</span>
+            <h1 class="al-hero__title">A patient onboarding portal for a healthcare startup.</h1>
+            <p class="al-hero__sub">We built a secure, privacy-conscious onboarding portal on Experience Cloud so patients self-register and submit their information — letting a small team scale enrolment cleanly.</p>
+
+            <ul class="al-cs-meta">
+              <li class="al-cs-meta__pill al-cs-meta__pill--country"><img class="al-cs-meta__flag" src="../assets/flag-us.svg" width="30" height="30" alt="" aria-hidden="true"> United States</li>
+              <li class="al-cs-meta__pill">Healthcare</li>
+              <li class="al-cs-meta__pill">Experience Cloud</li>
+              <li class="al-cs-meta__pill">Implementation</li>
+            </ul>
+
+            <div class="al-hero__actions">
+              <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Start a similar project</a>
+              <a class="al-btn al-btn--ghost" href="/case-studies"><span aria-hidden="true">←</span> All case studies</a>
+            </div>
+          </div>
+
+          <!-- Hero product mockup: patient intake portal on a laptop (decorative) -->
+          <div class="al-cs-hero__media al-reveal" aria-hidden="true">
+            <div class="al-cs-laptop">
+              <div class="al-cs-laptop__screen">
+                <div class="al-cs-laptop__bar">
+                  <span class="al-cs-laptop__dots"><i></i><i></i><i></i></span>
+                  <span class="al-cs-laptop__url">patient.intake</span>
+                </div>
+                <div class="al-cs-laptop__viewport">
+                  <div class="al-cs-laptop__toolbar">
+                    <span class="al-cs-laptop__reorder"><span aria-hidden="true">☰</span> New intakes</span>
+                    <span class="al-cs-laptop__search"></span>
+                  </div>
+                  <div class="al-cs-laptop__tiles">
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">Intake #A-104 · New</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper">PII</span>
+                        <span class="al-cs-tile__add">Route</span>
+                      </span>
+                    </div>
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">Intake #A-105 · New</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper">PII</span>
+                        <span class="al-cs-tile__add">Route</span>
+                      </span>
+                    </div>
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">Intake #A-106 · New</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper">PII</span>
+                        <span class="al-cs-tile__add">Route</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="al-cs-laptop__base"></span>
+              <span class="al-cs-laptop__badge"><span aria-hidden="true">✓</span> Access controlled</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         2. AT A GLANCE
+         2. AT A GLANCE — white fact panel (region / industry / platform / work)
          ===================================================================== -->
-    <section class="al-section al-section--surface">
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-glance-h">
       <div class="al-container">
         <!-- This engagement is anonymized: the client is described by industry and region only,
              and outcomes are stated qualitatively. -->
-        <div class="al-grid--3">
-          <div>
-            <span class="al-eyebrow">Industry</span>
-            <p>Healthcare startup</p>
+        <span class="al-eyebrow">At a glance</span>
+        <h2 id="al-cs-glance-h" class="al-sr-only">At a glance</h2>
+
+        <div class="al-cs-glance al-reveal">
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Region</span>
+            <p class="al-cs-glance__value">United States <span aria-hidden="true">🇺🇸</span></p>
           </div>
-          <div>
-            <span class="al-eyebrow">Region</span>
-            <p>Early-stage</p>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Industry</span>
+            <p class="al-cs-glance__value">Healthcare startup</p>
           </div>
-          <div>
-            <span class="al-eyebrow">Platform</span>
-            <p>Salesforce Experience Cloud · Custom Development</p>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Platform</span>
+            <p class="al-cs-glance__value">Salesforce Experience Cloud · Custom Development</p>
           </div>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Work type</span>
+            <p class="al-cs-glance__value">Implementation</p>
+          </div>
+        </div>
+
+        <p class="al-cs-glance__note"><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed · Scope fixed before you commit</span></p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. NARRATIVE — three numbered blocks (challenge / built / outcome)
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-story-h">
+      <div class="al-container">
+        <h2 id="al-cs-story-h" class="al-sr-only">How we approached it</h2>
+
+        <div class="al-cs-narrative">
+          <!-- 01 Challenge -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">01</span>
+              <span class="al-cs-step__label">Challenge</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">Manual intake couldn't keep up — and the data was sensitive.</h3>
+              <p>Patient intake was manual and didn't scale with a growing waitlist. The information involved was sensitive and needed careful, privacy-conscious handling, and the startup's small team couldn't keep pace with onboarding by hand.</p>
+            </div>
+          </article>
+
+          <!-- 02 What we built -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">02</span>
+              <span class="al-cs-step__label">What we built</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">A secure portal that lets patients onboard themselves.</h3>
+              <p>We built a self-service onboarding portal with privacy designed in from the first field — so a small team could scale intake cleanly.</p>
+              <ul class="al-cs-checklist">
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Secure self-registration</strong> — patients enrol and submit structured intake forms themselves.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Privacy-conscious data model</strong> — access controls so sensitive information is seen only by the right people.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Automated routing</strong> — new intakes go to the right team with no manual triage.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Built to scale</strong> — a foundation that grows with enrolment as the startup grows.</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 03 Outcome -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">03</span>
+              <span class="al-cs-step__label">Outcome</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">Intake scales; the team oversees instead of operating.</h3>
+              <p>The startup scaled patient intake without adding headcount, sensitive data is handled with appropriate safeguards, and onboarding moved from a manual bottleneck to a self-service flow the small team can oversee rather than operate by hand.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         3. NARRATIVE
+         4. SOLUTION HIGHLIGHTS — four capability cards
          ===================================================================== -->
-    <section class="al-section">
-      <div class="al-container al-prose">
-        <h2>The challenge</h2>
-        <p>Patient intake was manual and didn't scale with a growing waitlist. The information involved was sensitive and needed careful, privacy-conscious handling, and the startup's small team couldn't keep pace with onboarding by hand.</p>
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-caps-h">
+      <div class="al-container">
+        <div class="al-cs-section-head">
+          <span class="al-eyebrow">Solution highlights</span>
+          <h2 id="al-cs-caps-h">Everything intake needs, handled securely.</h2>
+        </div>
 
-        <h2>What we built</h2>
-        <ul>
-          <li>A <strong>secure onboarding portal</strong> for patient self-registration and structured intake forms.</li>
-          <li>A <strong>privacy-conscious data model and access controls</strong> so sensitive information is only seen by the right people.</li>
-          <li><strong>Automation</strong> that routes new intakes to the right team and removes manual triage.</li>
-          <li>A foundation designed to <strong>scale with enrolment</strong> as the startup grows.</li>
-        </ul>
+        <div class="al-cs-caps">
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Patients onboard themselves</h3>
+            <p class="al-cs-cap__body">Secure self-registration and structured intake forms replace manual, by-hand enrolment.</p>
+          </article>
 
-        <h2>The outcome</h2>
-        <p>The startup scaled patient intake without adding headcount, sensitive data is handled with appropriate safeguards, and onboarding moved from a manual bottleneck to a self-service flow the small team can oversee rather than operate by hand.</p>
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Privacy by design</h3>
+            <p class="al-cs-cap__body">A privacy-conscious data model and access controls keep sensitive information with only the right people.</p>
+          </article>
 
-        <p><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed</span></p>
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h6a4 4 0 0 1 0 8H6"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Routed automatically</h3>
+            <p class="al-cs-cap__body">New intakes flow to the right team without manual triage.</p>
+          </article>
+
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 12l9 5 9-5"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Built to scale</h3>
+            <p class="al-cs-cap__body">A foundation designed to grow with enrolment, not buckle under it.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         4. CTA BAND
+         5. SPOTLIGHT — navy panel: intake-flow vignette + pull-quote
          ===================================================================== -->
-    <section class="al-section">
+    <section class="al-section" aria-labelledby="al-cs-spot-h">
+      <div class="al-container">
+        <h2 id="al-cs-spot-h" class="al-sr-only">In their words</h2>
+
+        <div class="al-cs-spotlight al-reveal">
+          <!-- Intake-flow vignette (decorative) -->
+          <div class="al-cs-flow" aria-hidden="true">
+            <div class="al-cs-flow__tabs">
+              <span class="al-cs-flow__tab is-active">New intakes</span>
+              <span class="al-cs-flow__tab">In review</span>
+            </div>
+            <ul class="al-cs-flow__rows">
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Intake #A-104</b><em>Submitted 2m ago</em></span>
+                <span class="al-cs-flow__btn">Route</span>
+              </li>
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Intake #A-105</b><em>Submitted 9m ago</em></span>
+                <span class="al-cs-flow__btn">Route</span>
+              </li>
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Intake #A-106</b><em>Submitted 14m ago</em></span>
+                <span class="al-cs-flow__btn">Route</span>
+              </li>
+            </ul>
+            <p class="al-cs-flow__note"><span aria-hidden="true">✓</span> Sensitive fields masked · role-based access</p>
+          </div>
+
+          <!-- Pull-quote -->
+          <figure class="al-cs-quote">
+            <blockquote class="al-cs-quote__text">We went from a growing waitlist we couldn't keep up with to intake that runs itself — securely — while our small team just oversees it.</blockquote>
+            <figcaption class="al-cs-quote__by">Founder · early-stage healthcare startup (anonymized)</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. TECH & STACK — chip strip
+         ===================================================================== -->
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-stack-h">
+      <div class="al-container">
+        <div class="al-cs-section-head">
+          <span class="al-eyebrow">Tech &amp; stack</span>
+          <h2 id="al-cs-stack-h">Built on Experience Cloud, with the data controls the domain requires.</h2>
+        </div>
+
+        <ul class="al-cs-chips al-reveal">
+          <li class="al-cs-chip">Salesforce Experience Cloud</li>
+          <li class="al-cs-chip">Apex</li>
+          <li class="al-cs-chip">Lightning Web Components</li>
+          <li class="al-cs-chip">Flow</li>
+          <li class="al-cs-chip">Field-level security</li>
+          <li class="al-cs-chip">Role-based access</li>
+          <li class="al-cs-chip">Automated routing</li>
+          <li class="al-cs-chip">Custom intake forms</li>
+          <li class="al-cs-chip">Sandbox → CI/CD</li>
+          <li class="al-cs-chip">Git source control</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. RELATED CASE STUDIES — reuse existing al-card--case, 3-up
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-related-h">
+      <div class="al-container">
+        <div class="al-cs-section-head al-cs-section-head--split">
+          <div>
+            <span class="al-eyebrow">More work</span>
+            <h2 id="al-cs-related-h">Related case studies</h2>
+          </div>
+          <a class="al-btn al-btn--ghost al-cs-section-head__link" href="/case-studies">All case studies <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <div class="al-grid--3">
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
+                <span class="al-case-pill">Beverage Distribution</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/b2b-commerce-beverage-distributor" aria-hidden="true" tabindex="-1"><img src="../assets/case-b2b-commerce.svg" alt="Illustration representing a self-serve B2B wholesale storefront."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Self-serve wholesale ordering for a Canadian beverage distributor.</h3>
+              <p class="al-card__body">Replaced phone, email, and fax with a compliant B2B storefront — trade buyers reorder in minutes.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/b2b-commerce-beverage-distributor">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-gb.svg" width="30" height="30" alt="" aria-hidden="true"> United Kingdom</span>
+                <span class="al-case-pill">Field Service</span>
+                <span class="al-case-pill">Maintenance</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/field-service-uk-operator" aria-hidden="true" tabindex="-1"><img src="../assets/case-field-service.svg" alt="Illustration representing a field-service scheduling and mobile work-order app."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Scheduling and mobile work orders for a UK field-service operator.</h3>
+              <p class="al-card__body">One dispatch board, offline-capable mobile — lifting first-time-fix and on-time arrivals.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/field-service-uk-operator">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
+                <span class="al-case-pill">Luxury Hospitality</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/experience-cloud-luxury-hospitality" aria-hidden="true" tabindex="-1"><img src="../assets/case-hospitality.svg" alt="Illustration representing a branded concierge guest portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A concierge guest portal for a luxury hospitality group.</h3>
+              <p class="al-card__body">A single, branded guest experience that powers repeat-visit personalization.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/experience-cloud-luxury-hospitality">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         8. CTA BAND
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-cta-h">
       <div class="al-container">
         <div class="al-cta-band al-reveal">
           <div>
-            <h2>Building a patient or member experience?</h2>
+            <h2 id="al-cs-cta-h">Building a patient or member experience?</h2>
             <p>Talk to a senior architect about a secure Experience Cloud portal with the data controls your domain requires — scoped before you commit.</p>
           </div>
           <div class="al-cta-band__actions">

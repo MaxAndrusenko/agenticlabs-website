@@ -73,80 +73,358 @@
   <main id="al-main">
 
     <!-- =====================================================================
-         1. HERO
+         1. HERO — breadcrumb + eyebrow + h1 + sub + meta pills + actions,
+         with the "concierge guest portal laptop" mockup on the right.
          ===================================================================== -->
-    <section class="al-hero al-hero--immersive al-hero--work" data-hero-accent="teal">
+    <section class="al-hero al-hero--immersive al-hero--work al-cs-hero" data-hero-accent="teal">
       <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
       <span class="al-hero__scrim" aria-hidden="true"></span>
 
       <div class="al-hero__inner al-container">
-        <div class="al-hero__content al-reveal">
-          <span class="al-eyebrow">Case study · Experience Cloud</span>
-          <h1 class="al-hero__title">A concierge guest portal for a luxury hospitality group.</h1>
-          <p class="al-hero__sub">We unified fragmented guest data behind a single branded Experience Cloud portal — so guests self-serve bookings and requests, and staff work from one guest view that powers repeat-visit personalization.</p>
-          <div class="al-hero__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Start a similar project</a>
-            <a class="al-btn al-btn--ghost" href="/case-studies">← All case studies</a>
+        <div class="al-cs-hero__grid">
+          <div class="al-hero__content al-reveal">
+            <nav class="al-cs-breadcrumb" aria-label="Breadcrumb">
+              <a href="/case-studies">Case Studies</a>
+              <span class="al-cs-breadcrumb__sep" aria-hidden="true">/</span>
+              <span aria-current="page">Experience Cloud</span>
+            </nav>
+            <span class="al-eyebrow">Case study · Experience Cloud</span>
+            <h1 class="al-hero__title">A concierge guest portal for a luxury hospitality group.</h1>
+            <p class="al-hero__sub">We unified fragmented guest data behind a single branded Experience Cloud portal — so guests self-serve bookings and requests, and staff work from one guest view that powers repeat-visit personalization.</p>
+
+            <ul class="al-cs-meta">
+              <li class="al-cs-meta__pill al-cs-meta__pill--country"><img class="al-cs-meta__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</li>
+              <li class="al-cs-meta__pill">Luxury Hospitality</li>
+              <li class="al-cs-meta__pill">Experience Cloud</li>
+              <li class="al-cs-meta__pill">Implementation</li>
+            </ul>
+
+            <div class="al-hero__actions">
+              <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Start a similar project</a>
+              <a class="al-btn al-btn--ghost" href="/case-studies"><span aria-hidden="true">←</span> All case studies</a>
+            </div>
+          </div>
+
+          <!-- Hero product mockup: concierge guest portal on a laptop (decorative) -->
+          <div class="al-cs-hero__media al-reveal" aria-hidden="true">
+            <div class="al-cs-laptop">
+              <div class="al-cs-laptop__screen">
+                <div class="al-cs-laptop__bar">
+                  <span class="al-cs-laptop__dots"><i></i><i></i><i></i></span>
+                  <span class="al-cs-laptop__url">guest.portal</span>
+                </div>
+                <div class="al-cs-laptop__viewport">
+                  <div class="al-cs-laptop__toolbar">
+                    <span class="al-cs-laptop__reorder"><span aria-hidden="true">☰</span> Concierge requests</span>
+                    <span class="al-cs-laptop__search"></span>
+                  </div>
+                  <div class="al-cs-laptop__tiles">
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">Suite 1203 · Late checkout</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper">Today</span>
+                        <span class="al-cs-tile__add">View</span>
+                      </span>
+                    </div>
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">Villa 7 · Spa booking</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper">6:00pm</span>
+                        <span class="al-cs-tile__add">View</span>
+                      </span>
+                    </div>
+                    <div class="al-cs-tile">
+                      <span class="al-cs-tile__thumb"></span>
+                      <span class="al-cs-tile__price">Room 908 · Airport car</span>
+                      <span class="al-cs-tile__row">
+                        <span class="al-cs-tile__stepper">Tmrw</span>
+                        <span class="al-cs-tile__add">View</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="al-cs-laptop__base"></span>
+              <span class="al-cs-laptop__badge"><span aria-hidden="true">✓</span> Profile unified</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         2. AT A GLANCE
+         2. AT A GLANCE — white fact panel (region / industry / platform / work)
          ===================================================================== -->
-    <section class="al-section al-section--surface">
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-glance-h">
       <div class="al-container">
         <!-- This engagement is anonymized: the client is described by industry and region only,
              and outcomes are stated qualitatively. -->
-        <div class="al-grid--3">
-          <div>
-            <span class="al-eyebrow">Industry</span>
-            <p>Luxury hospitality</p>
+        <span class="al-eyebrow">At a glance</span>
+        <h2 id="al-cs-glance-h" class="al-sr-only">At a glance</h2>
+
+        <div class="al-cs-glance al-reveal">
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Region</span>
+            <p class="al-cs-glance__value">Canada <span aria-hidden="true">🇨🇦</span></p>
           </div>
-          <div>
-            <span class="al-eyebrow">Region</span>
-            <p>International</p>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Industry</span>
+            <p class="al-cs-glance__value">Luxury hospitality</p>
           </div>
-          <div>
-            <span class="al-eyebrow">Platform</span>
-            <p>Salesforce Experience Cloud · Integration</p>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Platform</span>
+            <p class="al-cs-glance__value">Salesforce Experience Cloud · Integration</p>
           </div>
+          <div class="al-cs-glance__item">
+            <span class="al-cs-glance__label">Work type</span>
+            <p class="al-cs-glance__value">Implementation</p>
+          </div>
+        </div>
+
+        <p class="al-cs-glance__note"><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed · Scope fixed before you commit</span></p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. NARRATIVE — three numbered blocks (challenge / built / outcome)
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-story-h">
+      <div class="al-container">
+        <h2 id="al-cs-story-h" class="al-sr-only">How we approached it</h2>
+
+        <div class="al-cs-narrative">
+          <!-- 01 Challenge -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">01</span>
+              <span class="al-cs-step__label">Challenge</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">Guest data was scattered across properties.</h3>
+              <p>Guest data was scattered across properties and booking systems, so no one had a complete picture of a guest's history or preferences. There was no unified, on-brand self-service channel, which made the kind of personalization a luxury brand depends on slow and manual.</p>
+            </div>
+          </article>
+
+          <!-- 02 What we built -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">02</span>
+              <span class="al-cs-step__label">What we built</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">One branded portal, one unified guest profile.</h3>
+              <p>We unified guest data behind a single branded portal — for guests to self-serve, and for staff to work from one complete view.</p>
+              <ul class="al-cs-checklist">
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Branded Experience Cloud portal</strong> — guests manage bookings and submit concierge requests in your brand.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Unified guest profile</strong> — history and preferences consolidated across every property.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Booking &amp; PMS integrations</strong> — the portal reflects live reservations, not stale copies.</span></li>
+                <li><span class="al-cs-checklist__mark" aria-hidden="true">✓</span><span><strong>Staff console</strong> — front-of-house works from the same single guest view.</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 03 Outcome -->
+          <article class="al-cs-step al-reveal">
+            <div class="al-cs-step__aside">
+              <span class="al-cs-step__bar" aria-hidden="true"></span>
+              <span class="al-cs-step__index">03</span>
+              <span class="al-cs-step__label">Outcome</span>
+            </div>
+            <div class="al-cs-step__main">
+              <h3 class="al-cs-step__head">Guests self-serve; staff personalize at scale.</h3>
+              <p>Guests now have one branded place to manage their stay, staff act on a complete guest profile instead of piecing it together, and the group can personalize for repeat guests at scale — with far less manual coordination between properties.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         3. NARRATIVE
+         4. SOLUTION HIGHLIGHTS — four capability cards
          ===================================================================== -->
-    <section class="al-section">
-      <div class="al-container al-prose">
-        <h2>The challenge</h2>
-        <p>Guest data was scattered across properties and booking systems, so no one had a complete picture of a guest's history or preferences. There was no unified, on-brand self-service channel, which made the kind of personalization a luxury brand depends on slow and manual.</p>
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-caps-h">
+      <div class="al-container">
+        <div class="al-cs-section-head">
+          <span class="al-eyebrow">Solution highlights</span>
+          <h2 id="al-cs-caps-h">Everything a guest — and your staff — need, in one portal.</h2>
+        </div>
 
-        <h2>What we built</h2>
-        <ul>
-          <li>A <strong>branded Experience Cloud portal</strong> where guests manage bookings and submit concierge requests.</li>
-          <li>A <strong>unified guest profile</strong> consolidating history and preferences across properties.</li>
-          <li><strong>Integrations</strong> to booking and property-management systems so the portal reflects live reservations.</li>
-          <li>A <strong>staff console</strong> that surfaces the same single guest view to front-of-house teams.</li>
-        </ul>
+        <div class="al-cs-caps">
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">A portal in your brand</h3>
+            <p class="al-cs-cap__body">Guests manage bookings and concierge requests in a single, on-brand Experience Cloud portal.</p>
+          </article>
 
-        <h2>The outcome</h2>
-        <p>Guests now have one branded place to manage their stay, staff act on a complete guest profile instead of piecing it together, and the group can personalize for repeat guests at scale — with far less manual coordination between properties.</p>
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">One guest profile</h3>
+            <p class="al-cs-cap__body">History and preferences consolidated across every property, so nobody starts from scratch.</p>
+          </article>
 
-        <p><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed</span></p>
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13l-3-3M20 17H7l3 3"/><path d="M4 7v3M20 17v-3"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">Live, not stale</h3>
+            <p class="al-cs-cap__body">Integrations to booking and property-management systems keep the portal in step with real reservations.</p>
+          </article>
+
+          <article class="al-cs-cap al-reveal">
+            <span class="al-cs-cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 6h7M14 10h5M14 16h7M14 20h5"/></svg>
+            </span>
+            <h3 class="al-cs-cap__title">One view for staff</h3>
+            <p class="al-cs-cap__body">Front-of-house teams act on the same complete guest profile the portal shows.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         4. CTA BAND
+         5. SPOTLIGHT — navy panel: guest-request flow vignette + pull-quote
          ===================================================================== -->
-    <section class="al-section">
+    <section class="al-section" aria-labelledby="al-cs-spot-h">
+      <div class="al-container">
+        <h2 id="al-cs-spot-h" class="al-sr-only">In their words</h2>
+
+        <div class="al-cs-spotlight al-reveal">
+          <!-- Guest-request flow vignette (decorative) -->
+          <div class="al-cs-flow" aria-hidden="true">
+            <div class="al-cs-flow__tabs">
+              <span class="al-cs-flow__tab is-active">Bookings</span>
+              <span class="al-cs-flow__tab">Requests</span>
+            </div>
+            <ul class="al-cs-flow__rows">
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Suite 1203 · Late checkout</b><em>Requested 08:12</em></span>
+                <span class="al-cs-flow__btn">View</span>
+              </li>
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Villa 7 · Spa for two</b><em>Requested 09:40</em></span>
+                <span class="al-cs-flow__btn">View</span>
+              </li>
+              <li class="al-cs-flow__row">
+                <span class="al-cs-flow__info"><b>Room 908 · Airport transfer</b><em>Requested 10:05</em></span>
+                <span class="al-cs-flow__btn">View</span>
+              </li>
+            </ul>
+            <p class="al-cs-flow__note"><span aria-hidden="true">✓</span> Preferences synced across every property</p>
+          </div>
+
+          <!-- Pull-quote -->
+          <figure class="al-cs-quote">
+            <blockquote class="al-cs-quote__text">Before, we pieced a guest's history together from three systems while they waited. Now the whole profile is just there — and it follows them to every property.</blockquote>
+            <figcaption class="al-cs-quote__by">Guest experience director · luxury hospitality group (anonymized)</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. TECH & STACK — chip strip
+         ===================================================================== -->
+    <section class="al-section al-section--surface" aria-labelledby="al-cs-stack-h">
+      <div class="al-container">
+        <div class="al-cs-section-head">
+          <span class="al-eyebrow">Tech &amp; stack</span>
+          <h2 id="al-cs-stack-h">Built on Experience Cloud, integrated to your booking systems.</h2>
+        </div>
+
+        <ul class="al-cs-chips al-reveal">
+          <li class="al-cs-chip">Salesforce Experience Cloud</li>
+          <li class="al-cs-chip">LWR</li>
+          <li class="al-cs-chip">Apex</li>
+          <li class="al-cs-chip">Lightning Web Components</li>
+          <li class="al-cs-chip">Flow</li>
+          <li class="al-cs-chip">REST / Middleware integration</li>
+          <li class="al-cs-chip">PMS / Booking integration</li>
+          <li class="al-cs-chip">Unified guest profile</li>
+          <li class="al-cs-chip">Sandbox → CI/CD</li>
+          <li class="al-cs-chip">Git source control</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. RELATED CASE STUDIES — reuse existing al-card--case, 3-up
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-related-h">
+      <div class="al-container">
+        <div class="al-cs-section-head al-cs-section-head--split">
+          <div>
+            <span class="al-eyebrow">More work</span>
+            <h2 id="al-cs-related-h">Related case studies</h2>
+          </div>
+          <a class="al-btn al-btn--ghost al-cs-section-head__link" href="/case-studies">All case studies <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <div class="al-grid--3">
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
+                <span class="al-case-pill">Beverage Distribution</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/b2b-commerce-beverage-distributor" aria-hidden="true" tabindex="-1"><img src="../assets/case-b2b-commerce.svg" alt="Illustration representing a self-serve B2B wholesale storefront."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Self-serve wholesale ordering for a Canadian beverage distributor.</h3>
+              <p class="al-card__body">Replaced phone, email, and fax with a compliant B2B storefront — trade buyers reorder in minutes.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/b2b-commerce-beverage-distributor">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-gb.svg" width="30" height="30" alt="" aria-hidden="true"> United Kingdom</span>
+                <span class="al-case-pill">Field Service</span>
+                <span class="al-case-pill">Maintenance</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/field-service-uk-operator" aria-hidden="true" tabindex="-1"><img src="../assets/case-field-service.svg" alt="Illustration representing a field-service scheduling and mobile work-order app."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">Scheduling and mobile work orders for a UK field-service operator.</h3>
+              <p class="al-card__body">One dispatch board, offline-capable mobile — lifting first-time-fix and on-time arrivals.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/field-service-uk-operator">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="al-card al-card--case al-reveal">
+            <div class="al-card__media">
+              <div class="al-case-pills">
+                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-us.svg" width="30" height="30" alt="" aria-hidden="true"> United States</span>
+                <span class="al-case-pill">Healthcare</span>
+                <span class="al-case-pill">Implementation</span>
+              </div>
+              <a class="al-card__illus" href="/case-studies/experience-cloud-healthcare-startup" aria-hidden="true" tabindex="-1"><img src="../assets/case-healthcare.svg" alt="Illustration representing a secure patient onboarding portal."></a>
+            </div>
+            <div class="al-card__body-wrap">
+              <h3 class="al-card__title">A patient onboarding portal for a healthcare startup.</h3>
+              <p class="al-card__body">Scaled intake without adding headcount — a secure, privacy-conscious self-registration portal.</p>
+              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/experience-cloud-healthcare-startup">View case study <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         8. CTA BAND
+         ===================================================================== -->
+    <section class="al-section" aria-labelledby="al-cs-cta-h">
       <div class="al-container">
         <div class="al-cta-band al-reveal">
           <div>
-            <h2>Want a branded portal your customers actually use?</h2>
+            <h2 id="al-cs-cta-h">Want a branded portal your customers actually use?</h2>
             <p>Talk to a senior architect about an Experience Cloud portal and the integrations behind it — scoped before you commit.</p>
           </div>
           <div class="al-cta-band__actions">
