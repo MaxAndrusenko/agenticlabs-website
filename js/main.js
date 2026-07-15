@@ -188,7 +188,10 @@
 
     // Reduced motion OR no IO support -> reveal everything immediately.
     if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
-      targets.forEach(function (el) { el.classList.add('is-visible'); });
+      targets.forEach(function (el) {
+        el.classList.add('is-visible');
+        runCountUps(el, true); // true = jump straight to final value
+      });
       return;
     }
 
@@ -201,11 +204,44 @@
         var idx = group.indexOf(el);
         if (idx > 0) { el.style.transitionDelay = (idx * 60) + 'ms'; }
         el.classList.add('is-visible');
+        runCountUps(el, false); // animate 0 -> value as the card comes alive
         obs.unobserve(el); // reveal once
       });
     }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
 
     targets.forEach(function (el) { observer.observe(el); });
+  }
+
+  /* Count-up helper for the case-study screens. Any [data-countup] inside a
+     revealed element animates 0 -> data-to once. Honours data-prefix / data-suffix
+     and data-sep (thousands separators). When `instant` (reduced motion / no IO),
+     the final value is written immediately with no motion. Decorative numbers. */
+  function runCountUps(root, instant) {
+    var nodes = $$('[data-countup]', root);
+    if (!nodes.length) { return; }
+    nodes.forEach(function (node) {
+      if (node.getAttribute('data-counted')) { return; } // once
+      node.setAttribute('data-counted', '1');
+      var to     = parseFloat(node.getAttribute('data-to')) || 0;
+      var prefix = node.getAttribute('data-prefix') || '';
+      var suffix = node.getAttribute('data-suffix') || '';
+      var sep    = node.hasAttribute('data-sep');
+      var format = function (n) {
+        var s = String(n);
+        if (sep) { s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+        return prefix + s + suffix;
+      };
+      if (instant) { node.textContent = format(to); return; }
+      var dur = 700, start = null;
+      function step(ts) {
+        if (start === null) { start = ts; }
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        node.textContent = format(Math.round(to * eased));
+        if (p < 1) { requestAnimationFrame(step); }
+      }
+      requestAnimationFrame(step);
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -342,45 +378,72 @@
      Hooks: .al-filter__btn[data-filter="all|sales-cloud|service-cloud|
             experience-cloud|agentforce|integration|data-migration"]
             and .al-card--case[data-category~="…"] (space-separated tokens).
-     Behaviour: clicking a filter shows only matching cases, updates .is-active
-     + aria-pressed on the buttons. "all" shows everything.
+     Behaviour: MULTI-SELECT. Category buttons toggle independently and combine
+     with OR logic (a card shows if it matches ANY active filter). "all" and the
+     optional [data-filter-clear] button both reset the selection. The clear
+     button is revealed only once 2+ filters are active. Buttons reflect state
+     via .is-active + aria-pressed.
      ------------------------------------------------------------------------ */
   function initWorkFilter() {
-    var buttons = $$('.al-filter__btn[data-filter]');
-    var cards   = $$('.al-card--case[data-category]');
+    var buttons  = $$('.al-filter__btn[data-filter]');
+    var cards    = $$('.al-card--case[data-category]');
     if (!buttons.length || !cards.length) { return; } // no-op if absent
+
+    var allBtn      = buttons.filter(function (b) { return b.getAttribute('data-filter') === 'all'; })[0];
+    var catButtons  = buttons.filter(function (b) { return b.getAttribute('data-filter') !== 'all'; });
+    var clearBtn    = document.querySelector('[data-filter-clear]');
+
+    // Set of currently-active category filters. Empty set === "All".
+    var selected = [];
 
     function tokensOf(card) {
       return (card.getAttribute('data-category') || '').split(/\s+/).filter(Boolean);
     }
 
-    function applyFilter(filter) {
+    function apply() {
+      var showAll = selected.length === 0;
+
       cards.forEach(function (card) {
-        var match = (filter === 'all') || tokensOf(card).indexOf(filter) !== -1;
+        var tokens = tokensOf(card);
+        // OR logic: a card matches if it carries ANY selected category.
+        var match = showAll || selected.some(function (f) { return tokens.indexOf(f) !== -1; });
         card.hidden = !match;
         // Belt-and-braces for CSS that may override [hidden].
         card.style.display = match ? '' : 'none';
       });
-      buttons.forEach(function (btn) {
-        var active = btn.getAttribute('data-filter') === filter;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+
+      catButtons.forEach(function (btn) {
+        var on = selected.indexOf(btn.getAttribute('data-filter')) !== -1;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
+
+      if (allBtn) {
+        allBtn.classList.toggle('is-active', showAll);
+        allBtn.setAttribute('aria-pressed', showAll ? 'true' : 'false');
+      }
+
+      // Clear button only surfaces once 2+ filters are active.
+      if (clearBtn) { clearBtn.hidden = selected.length < 2; }
     }
 
-    // Delegate so the whole filter bar is handled with one listener.
-    buttons.forEach(function (btn) {
+    // Category buttons toggle in/out of the selection.
+    catButtons.forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
-        applyFilter(btn.getAttribute('data-filter'));
+        var f = btn.getAttribute('data-filter');
+        var i = selected.indexOf(f);
+        if (i === -1) { selected.push(f); } else { selected.splice(i, 1); }
+        apply();
       });
     });
 
-    // Initial state: honour a pre-set .is-active button, else default to "all".
-    var initial = buttons.filter(function (b) {
-      return b.classList.contains('is-active');
-    })[0];
-    applyFilter(initial ? initial.getAttribute('data-filter') : 'all');
+    // "All" and "Clear" both reset the selection.
+    function reset(e) { if (e) { e.preventDefault(); } selected = []; apply(); }
+    if (allBtn)   { allBtn.addEventListener('click', reset); }
+    if (clearBtn) { clearBtn.addEventListener('click', reset); }
+
+    apply(); // initial state: everything visible, "All" active
   }
 
   /* ------------------------------------------------------------------------
@@ -607,7 +670,12 @@
      every other blue surface gets a <canvas.al-star-field> injected as its first
      child. Idempotent and safe on any page — no-ops where the hosts are absent. */
   function initStarFields() {
-    var hosts = $$('.al-hero--immersive, .al-section--navy, .al-cta-band');
+    // Page-scoped opt-out: pages flagged `.al-no-starfield` (e.g. case-study
+    // pages) get a static on-brand gradient instead of the animated particle
+    // field. Early-return so NO canvas is injected and NO rAF loop is started
+    // (cheaper and cleaner than hiding an already-running field with CSS).
+    if (document.body.classList.contains('al-no-starfield')) { return; }
+    var hosts = $$('.al-hero--immersive, .al-section--navy, .al-cta-band, .al-footer');
     var seen = [];
     hosts.forEach(function (host) {
       if (seen.indexOf(host) !== -1) { return; } // one field per host

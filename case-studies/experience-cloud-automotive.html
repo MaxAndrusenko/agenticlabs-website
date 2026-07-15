@@ -28,7 +28,7 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="al-no-starfield">
   <!-- Skip link — first focusable element -->
   <a class="al-skip-link" href="#al-main">Skip to content</a>
 
@@ -45,7 +45,7 @@
       <nav class="al-navbar__links" aria-label="Primary">
         <a class="al-navbar__link" href="/">Home</a>
         <a class="al-navbar__link" href="/services">Services</a>
-        <a class="al-navbar__link is-active" href="/case-studies" aria-current="page">Case Studies</a>
+        <a class="al-navbar__link is-active" href="/case-studies" aria-current="page">Portfolio</a>
         <a class="al-navbar__link" href="/approach">Approach</a>
         <a class="al-navbar__link" href="/contact">Contact</a>
       </nav>
@@ -62,7 +62,7 @@
     <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
       <a class="al-navbar__link" href="/">Home</a>
       <a class="al-navbar__link" href="/services">Services</a>
-      <a class="al-navbar__link is-active" href="/case-studies" aria-current="page">Case Studies</a>
+      <a class="al-navbar__link is-active" href="/case-studies" aria-current="page">Portfolio</a>
       <a class="al-navbar__link" href="/approach">Approach</a>
       <a class="al-navbar__link" href="/contact">Contact</a>
       <a class="al-navbar__link" href="/insights">Insights</a>
@@ -84,7 +84,7 @@
         <div class="al-cs-hero__grid">
           <div class="al-hero__content al-reveal">
             <nav class="al-cs-breadcrumb" aria-label="Breadcrumb">
-              <a href="/case-studies">Case Studies</a>
+              <a href="/case-studies">Portfolio</a>
               <span class="al-cs-breadcrumb__sep" aria-hidden="true">/</span>
               <span aria-current="page">Experience Cloud</span>
             </nav>
@@ -105,49 +105,48 @@
             </div>
           </div>
 
-          <!-- Hero product mockup: dealer & customer portal on a laptop (decorative) -->
+          <!-- Hero product mockup: same laptop + per-industry screen as the card, on a
+               matching gradient stage (decorative — column is aria-hidden). -->
           <div class="al-cs-hero__media al-reveal" aria-hidden="true">
-            <div class="al-cs-laptop">
-              <div class="al-cs-laptop__screen">
-                <div class="al-cs-laptop__bar">
-                  <span class="al-cs-laptop__dots"><i></i><i></i><i></i></span>
-                  <span class="al-cs-laptop__url">dealer.portal</span>
-                </div>
-                <div class="al-cs-laptop__viewport">
-                  <div class="al-cs-laptop__toolbar">
-                    <span class="al-cs-laptop__reorder"><span aria-hidden="true">☰</span> Service &amp; inventory</span>
-                    <span class="al-cs-laptop__search"></span>
-                  </div>
-                  <div class="al-cs-laptop__tiles">
-                    <div class="al-cs-tile">
-                      <span class="al-cs-tile__thumb"></span>
-                      <span class="al-cs-tile__price">Service · VIN …8821</span>
-                      <span class="al-cs-tile__row">
-                        <span class="al-cs-tile__stepper">Booked</span>
-                        <span class="al-cs-tile__add">View</span>
+            <div class="al-cs-stage al-cs-stage--auto">
+              <div class="al-cs-stage__laptop">
+                <span class="al-laptop">
+                  <span class="al-laptop__bezel">
+                    <span class="al-laptop__screen">
+                      <span class="al-scr">
+                        <span class="al-scr__chrome"><span class="al-scr__dots"><i></i><i></i><i></i></span><span class="al-scr__addr">my.autogruppe.eu</span></span>
+                        <span class="al-scr__app">
+                          <span class="al-scr__head"><span class="al-scr__brand">AutoGruppe</span><span class="al-chip al-chip--grey">Anna Becker &middot; Porsche Panamera</span></span>
+                          <span class="al-auto__hero">
+                            <span class="al-auto__photo"><img src="/assets/case-auto-vehicle.jpg" alt=""></span>
+                            <span class="al-auto__info">
+                              <span class="al-auto__plate">B-AG 2043</span>
+                              <span class="al-auto__km">42,180 km</span>
+                              <span class="al-auto__due"><i></i> Service in 1,200 km</span>
+                              <span class="al-auto__charge"><span class="al-muted">Charge</span> <b>68%</b> <span class="al-prog"><span class="al-prog__fill" style="--p:68%"></span></span></span>
+                              <span class="al-muted" style="font-size:.62em">Range 320 km</span>
+                            </span>
+                          </span>
+                          <span class="al-auto__tiles">
+                            <span class="al-auto__tile"><span class="al-ico">&#128197;</span>Book service</span>
+                            <span class="al-auto__tile"><span class="al-ico">&#128295;</span>Track repair</span>
+                            <span class="al-auto__tile"><span class="al-ico">&#128663;</span>Test drive</span>
+                          </span>
+                          <span class="al-auto__track">
+                            <span class="al-lbl" style="display:flex;justify-content:space-between"><span>Repair status</span><span style="text-transform:none;letter-spacing:0">ETA Thu 16:00</span></span>
+                            <span class="al-auto__steps">
+                              <span class="al-auto__step al-auto__step--done"><i></i>Received</span>
+                              <span class="al-auto__step al-auto__step--now"><i></i>In workshop</span>
+                              <span class="al-auto__step"><i></i>Ready</span>
+                            </span>
+                          </span>
+                        </span>
                       </span>
-                    </div>
-                    <div class="al-cs-tile">
-                      <span class="al-cs-tile__thumb"></span>
-                      <span class="al-cs-tile__price">Lead · Model X drive</span>
-                      <span class="al-cs-tile__row">
-                        <span class="al-cs-tile__stepper">New</span>
-                        <span class="al-cs-tile__add">View</span>
-                      </span>
-                    </div>
-                    <div class="al-cs-tile">
-                      <span class="al-cs-tile__thumb"></span>
-                      <span class="al-cs-tile__price">Stock · 12 units</span>
-                      <span class="al-cs-tile__row">
-                        <span class="al-cs-tile__stepper">Live</span>
-                        <span class="al-cs-tile__add">View</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                    </span>
+                  </span>
+                  <span class="al-laptop__base"></span>
+                </span>
               </div>
-              <span class="al-cs-laptop__base"></span>
-              <span class="al-cs-laptop__badge"><span aria-hidden="true">✓</span> Customer notified</span>
             </div>
           </div>
         </div>
@@ -182,8 +181,6 @@
             <p class="al-cs-glance__value">Implementation</p>
           </div>
         </div>
-
-        <p class="al-cs-glance__note"><span class="al-provenance">Senior-led · AI-accelerated, senior-reviewed · Scope fixed before you commit</span></p>
       </div>
     </section>
 
@@ -367,15 +364,45 @@
           <a class="al-btn al-btn--ghost al-cs-section-head__link" href="/case-studies">All case studies <span aria-hidden="true">&rarr;</span></a>
         </div>
 
-        <div class="al-grid--3">
-          <article class="al-card al-card--case al-reveal">
+        <div class="al-grid--2 al-grid--cases">
+          <article class="al-card al-card--case al-case--beverage al-reveal">
             <div class="al-card__media">
               <div class="al-case-pills">
                 <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
                 <span class="al-case-pill">Beverage Distribution</span>
                 <span class="al-case-pill">Implementation</span>
               </div>
-              <a class="al-card__illus" href="/case-studies/b2b-commerce-beverage-distributor" aria-hidden="true" tabindex="-1"><img src="../assets/case-b2b-commerce.svg" alt="Illustration representing a self-serve B2B wholesale storefront."></a>
+              <a class="al-card__illus" href="/case-studies/b2b-commerce-beverage-distributor" aria-hidden="true" tabindex="-1">
+                <span class="al-laptop">
+                  <span class="al-laptop__bezel">
+                    <span class="al-laptop__screen">
+                      <span class="al-scr">
+                        <span class="al-scr__chrome"><span class="al-scr__dots"><i></i><i></i><i></i></span><span class="al-scr__addr">orders.distributor.ca</span></span>
+                        <span class="al-scr__app">
+                          <span class="al-scr__head"><span class="al-scr__brand">NORTHWIND BEVERAGES</span><span class="al-chip al-chip--amber">Licensed &middot; ON <b>&check;</b></span></span>
+                          <span class="al-bev__row1">
+                            <span class="al-panel al-bev__chart">
+                              <span class="al-lbl">Weekly orders</span>
+                              <span class="al-bars"><span class="al-bar" style="--h:40%"></span><span class="al-bar" style="--h:54%"></span><span class="al-bar" style="--h:47%"></span><span class="al-bar" style="--h:66%"></span><span class="al-bar" style="--h:58%"></span><span class="al-bar al-bar--accent" style="--h:96%"></span></span>
+                            </span>
+                            <span class="al-bev__stat">
+                              <span class="al-muted" style="font-size:.74em">This week</span>
+                              <span class="al-bignum"><span class="al-countup" data-to="4720" data-prefix="$" data-sep>$4,720</span></span>
+                              <span class="al-delta">&#9650; 12% WoW</span>
+                            </span>
+                          </span>
+                          <span class="al-lbl">Reorder from history</span>
+                          <span class="al-bev__line"><span>Lager 355ml &middot; 24-pk</span><span class="al-blue">$28.40 /cs</span><span class="al-bev__tot">$227.20</span></span>
+                          <span class="al-bev__line"><span>IPA 473ml &middot; 12-pk</span><span class="al-blue">$19.90 /cs</span><span class="al-bev__tot">$79.60</span></span>
+                          <span class="al-bev__sub"><span class="al-muted">Subtotal</span> <b>$369.00</b></span>
+                          <span class="al-scr-btn al-scr-btn--blue">&#8635; Reorder all</span>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                  <span class="al-laptop__base"></span>
+                </span>
+              </a>
             </div>
             <div class="al-card__body-wrap">
               <h3 class="al-card__title">Self-serve wholesale ordering for a Canadian beverage distributor.</h3>
@@ -383,34 +410,50 @@
               <a class="al-card__link al-btn al-btn--outline" href="/case-studies/b2b-commerce-beverage-distributor">View case study <span aria-hidden="true">→</span></a>
             </div>
           </article>
-          <article class="al-card al-card--case al-reveal">
+          <article class="al-card al-card--case al-case--field al-reveal">
             <div class="al-card__media">
               <div class="al-case-pills">
                 <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-gb.svg" width="30" height="30" alt="" aria-hidden="true"> United Kingdom</span>
                 <span class="al-case-pill">Field Service</span>
                 <span class="al-case-pill">Maintenance</span>
               </div>
-              <a class="al-card__illus" href="/case-studies/field-service-uk-operator" aria-hidden="true" tabindex="-1"><img src="../assets/case-field-service.svg" alt="Illustration representing a field-service scheduling and mobile work-order app."></a>
+              <a class="al-card__illus" href="/case-studies/field-service-uk-operator" aria-hidden="true" tabindex="-1">
+                <span class="al-laptop">
+                  <span class="al-laptop__bezel">
+                    <span class="al-laptop__screen">
+                      <span class="al-scr">
+                        <span class="al-scr__chrome"><span class="al-scr__dots"><i></i><i></i><i></i></span><span class="al-scr__addr">fsl.operator.co.uk/dispatch</span></span>
+                        <span class="al-scr__app">
+                          <span class="al-scr__head"><span class="al-scr__brand">Dispatch Board</span><span class="al-muted al-mono" style="font-size:.72em">Tue 14 Jul</span><span class="al-chip al-chip--teal" style="margin-left:auto">First-time fix 92%</span></span>
+                          <span class="al-fs__axis"><span>08</span><span>10</span><span>12</span><span>14</span><span>16</span></span>
+                          <span class="al-fs__grid">
+                            <span class="al-fs__row"><span class="al-fs__who">A. Shah</span><span class="al-fs__track"><span class="al-fs__bar al-fs__bar--teal" style="left:12.5%;width:25%">WO-3312</span></span></span>
+                            <span class="al-fs__row"><span class="al-fs__who">M. Doyle</span><span class="al-fs__track"><span class="al-fs__bar al-fs__bar--blue" style="left:25%;width:37.5%">WO-3319 Pump</span><span class="al-fs__bar al-fs__bar--amber" style="left:78%;width:14%">SLA</span></span></span>
+                            <span class="al-fs__row"><span class="al-fs__who">R. Okafor</span><span class="al-fs__track"><span class="al-fs__bar al-fs__bar--green" style="left:0;width:50%">WO-3330</span></span></span>
+                            <span class="al-fs__now" style="left:63%"></span>
+                            <span class="al-fs__mobile">
+                              <span class="al-chip al-chip--grey" style="align-self:flex-start">&#8856; Offline &check;</span>
+                              <span class="al-mtitle">WO-3319 &middot; Pump</span>
+                              <span class="al-maddr">12 Canal St, Leeds</span>
+                              <span class="al-fs__check al-fs__check--on">&check; Isolate supply</span>
+                              <span class="al-fs__check al-fs__check--on">&check; Replace seal</span>
+                              <span class="al-fs__check al-fs__check--off">&#9723; Pressure test</span>
+                              <span class="al-scr-btn al-scr-btn--blue">Complete job</span>
+                            </span>
+                          </span>
+                          <span class="al-fs__strip"><span class="al-muted">Jobs today</span> <b>18/20</b> <span class="al-muted">completed</span> <span class="al-chip al-chip--green" style="margin-left:auto">On-time 96%</span></span>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                  <span class="al-laptop__base"></span>
+                </span>
+              </a>
             </div>
             <div class="al-card__body-wrap">
               <h3 class="al-card__title">Scheduling and mobile work orders for a UK field-service operator.</h3>
               <p class="al-card__body">One dispatch board, offline-capable mobile — lifting first-time-fix and on-time arrivals.</p>
               <a class="al-card__link al-btn al-btn--outline" href="/case-studies/field-service-uk-operator">View case study <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="al-card al-card--case al-reveal">
-            <div class="al-card__media">
-              <div class="al-case-pills">
-                <span class="al-case-pill al-case-pill--country"><img class="al-case-pill__flag" src="../assets/flag-ca.svg" width="30" height="30" alt="" aria-hidden="true"> Canada</span>
-                <span class="al-case-pill">Luxury Hospitality</span>
-                <span class="al-case-pill">Implementation</span>
-              </div>
-              <a class="al-card__illus" href="/case-studies/experience-cloud-luxury-hospitality" aria-hidden="true" tabindex="-1"><img src="../assets/case-hospitality.svg" alt="Illustration representing a branded concierge guest portal."></a>
-            </div>
-            <div class="al-card__body-wrap">
-              <h3 class="al-card__title">A concierge guest portal for a luxury hospitality group.</h3>
-              <p class="al-card__body">A single, branded guest experience that powers repeat-visit personalization.</p>
-              <a class="al-card__link al-btn al-btn--outline" href="/case-studies/experience-cloud-luxury-hospitality">View case study <span aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -448,14 +491,13 @@
             <img src="../assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
           </a>
           <p>Senior Salesforce architects and developers who use agentic AI as leverage, never as a replacement.</p>
-          <p><span class="al-provenance">AI-Accelerated · Senior-Reviewed</span></p>
         </div>
 
         <nav class="al-footer__col" aria-label="Main pages">
           <span class="al-footer__heading">Main pages</span>
           <a class="al-footer__link" href="/">Home</a>
           <a class="al-footer__link" href="/services">Services</a>
-          <a class="al-footer__link" href="/case-studies">Case Studies</a>
+          <a class="al-footer__link" href="/case-studies">Portfolio</a>
           <a class="al-footer__link" href="/approach">Approach</a>
           <a class="al-footer__link" href="/contact">Contact</a>
           <a class="al-footer__link" href="/insights">Insights</a>
