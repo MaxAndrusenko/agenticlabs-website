@@ -63,9 +63,6 @@ app.post('/api/contact', async function (req, res) {
   const email = String(body.email || '').trim();
   const company = String(body.company || '').trim();
   const details = String(body.details || '').trim();
-  const clouds = Array.isArray(body.clouds)
-    ? body.clouds.map(function (c) { return String(c).trim(); }).filter(Boolean)
-    : [];
 
   if (!name || !email || !company || !details) {
     return res.status(400).json({ error: 'Missing required fields.' });
@@ -74,7 +71,6 @@ app.post('/api/contact', async function (req, res) {
     return res.status(400).json({ error: 'Invalid email address.' });
   }
 
-  const cloudsLine = clouds.length ? clouds.join(', ') : 'Not specified';
   const subject = 'New contact from ' + name + ' — ' + company;
 
   const html =
@@ -82,7 +78,6 @@ app.post('/api/contact', async function (req, res) {
     '<p><strong>Name:</strong> ' + escapeHtml(name) + '</p>' +
     '<p><strong>Email:</strong> ' + escapeHtml(email) + '</p>' +
     '<p><strong>Company:</strong> ' + escapeHtml(company) + '</p>' +
-    '<p><strong>Salesforce clouds:</strong> ' + escapeHtml(cloudsLine) + '</p>' +
     '<p><strong>Project details:</strong></p>' +
     '<p>' + escapeHtml(details).replace(/\n/g, '<br>') + '</p>';
 

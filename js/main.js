@@ -315,13 +315,11 @@
 
     function formPayload(form) {
       var data = new FormData(form);
-      var clouds = data.getAll('clouds').map(function (v) { return String(v); });
       return {
         name: String(data.get('name') || '').trim(),
         email: String(data.get('email') || '').trim(),
         company: String(data.get('company') || '').trim(),
-        details: String(data.get('details') || '').trim(),
-        clouds: clouds
+        details: String(data.get('details') || '').trim()
       };
     }
 
@@ -339,9 +337,15 @@
         if (success.setAttribute) { success.setAttribute('role', 'status'); }
         if (success.focus) {
           if (!success.hasAttribute('tabindex')) { success.setAttribute('tabindex', '-1'); }
-          success.focus();
+          try { success.focus({ preventScroll: true }); }
+          catch (err) { success.focus(); }
         }
       }
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+      });
     }
 
     function showSubmitError(form) {
