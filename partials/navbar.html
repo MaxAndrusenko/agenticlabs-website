@@ -1,0 +1,36 @@
+<header class="al-navbar">
+  <div class="al-navbar__inner">
+    <a class="al-navbar__logo" href="/" aria-label="Agentic Labs — home">
+      <!-- Light logo over dark/on-hero bar; dark logo on white bar (default + hover). -->
+      <img class="al-navbar__logo-img al-navbar__logo-img--light" src="/assets/logo-light.svg" width="180" height="36" alt="Agentic Labs">
+      <img class="al-navbar__logo-img al-navbar__logo-img--dark" src="/assets/logo.svg" width="180" height="36" alt="" aria-hidden="true">
+    </a>
+
+    <nav class="al-navbar__links" aria-label="Primary">
+      <a class="al-navbar__link" href="/">Home</a>
+      <a class="al-navbar__link" href="/services">Services</a>
+      <a class="al-navbar__link" href="/case-studies">Portfolio</a>
+      <a class="al-navbar__link" href="/approach">Approach</a>
+      <a class="al-navbar__link" href="/contact">Contact</a>
+    </nav>
+
+    <a class="al-btn al-btn--primary al-navbar__cta" href="/contact">Contact us</a>
+
+    <button class="al-navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="al-mobile-menu" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile overlay menu (duplicates the primary links + Insights) -->
+  <nav class="al-mobile-menu" id="al-mobile-menu" aria-label="Mobile">
+    <a class="al-navbar__link" href="/">Home</a>
+    <a class="al-navbar__link" href="/services">Services</a>
+    <a class="al-navbar__link" href="/case-studies">Portfolio</a>
+    <a class="al-navbar__link" href="/approach">Approach</a>
+    <a class="al-navbar__link" href="/contact">Contact</a>
+    <a class="al-navbar__link" href="/insights">Insights</a>
+    <a class="al-btn al-btn--primary" href="/contact">Contact us</a>
+  </nav>
+</header>

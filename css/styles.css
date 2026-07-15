@@ -558,6 +558,10 @@ hr {
   width: auto;
 }
 
+/* Dual logo: dark on white bar by default; on-hero rules flip to light. */
+.al-navbar__logo-img--light { display: none; }
+.al-navbar__logo-img--dark  { display: block; }
+
 .al-navbar__links {
   display: flex;
   align-items: center;
@@ -922,24 +926,6 @@ body.al-scroll-lock { overflow: hidden; }
   pointer-events: none;      /* decorative: never intercept clicks or focus */
   background: transparent;   /* each surface's own navy shows through */
   opacity: var(--al-star-field-opacity);
-}
-
-/* ---- 9b-i. STATIC GRADIENT FALLBACK (`.al-no-starfield` pages) --------------
-   Case-study pages opt out of the animated field (JS early-returns in
-   initStarFields()). Without the particle canvas the CTA band and footer read
-   as flat navy, so layer a subtle, motionless on-brand gradient over their navy
-   base — same brand hues as the hero blooms (blue / teal / purple), no motion,
-   no dots. background-image sits over each surface's existing background-color,
-   so the navy still anchors contrast for the light text. */
-.al-no-starfield .al-cta-band {
-  background-image:
-    radial-gradient(120% 150% at 10% 0%, rgba(1, 118, 211, .46) 0%, rgba(1, 118, 211, 0) 58%),
-    radial-gradient(130% 160% at 100% 100%, rgba(3, 180, 167, .34) 0%, rgba(3, 180, 167, 0) 58%);
-}
-.al-no-starfield .al-footer {
-  background-image:
-    radial-gradient(80% 130% at 0% 0%, rgba(1, 118, 211, .30) 0%, rgba(1, 118, 211, 0) 60%),
-    radial-gradient(80% 130% at 100% 0%, rgba(117, 38, 227, .24) 0%, rgba(117, 38, 227, 0) 60%);
 }
 
 /* -----------------------------------------------------------------------------
@@ -2479,7 +2465,11 @@ body.al-scroll-lock { overflow: hidden; }
    16. FOOTER
    ----------------------------------------------------------------------------- */
 .al-footer {
+  /* Static on-brand blooms over black — same look site-wide (no star-field here). */
   background-color: #000000;
+  background-image:
+    radial-gradient(80% 130% at 0% 0%, rgba(1, 118, 211, .30) 0%, rgba(1, 118, 211, 0) 60%),
+    radial-gradient(80% 130% at 100% 0%, rgba(117, 38, 227, .24) 0%, rgba(117, 38, 227, 0) 60%);
   color: rgba(255, 255, 255, .72);
   padding-block: var(--al-space-9) var(--al-space-7);
 }
@@ -3142,6 +3132,7 @@ body.al-scroll-lock { overflow: hidden; }
 
   .al-card:hover { transform: none; }
   .al-card__link:hover { gap: 6px; }
+  .al-cs-chip:hover { transform: none; }
 
   .al-service:hover { transform: none; }
   .al-service:hover .al-service__icon { transform: none; }
@@ -3712,14 +3703,40 @@ body.al-scroll-lock { overflow: hidden; }
 .al-cs-chip {
   display: inline-flex;
   align-items: center;
-  padding: 9px 18px;
+  gap: 10px;
+  padding: 11px 18px 11px 14px;
   font-family: var(--al-font-mono);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--al-navy-90);
-  background: var(--al-white);
-  border: 1px solid var(--al-border);
+  background:
+    linear-gradient(180deg, #F5FAFE 0%, var(--al-blue-10) 100%);
+  border: 1px solid rgba(1, 118, 211, .22);
   border-radius: var(--al-radius-pill);
+  box-shadow:
+    0 1px 2px rgba(3, 45, 96, .05),
+    inset 0 1px 0 rgba(255, 255, 255, .85);
+  transition:
+    transform var(--al-t-fast) var(--al-ease),
+    border-color var(--al-t-fast) var(--al-ease),
+    box-shadow var(--al-t-fast) var(--al-ease),
+    background-color var(--al-t-fast) var(--al-ease);
+}
+.al-cs-chip::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 1.5px;
+  background: var(--al-blue-60);
+}
+.al-cs-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(1, 118, 211, .4);
+  background:
+    linear-gradient(180deg, var(--al-white) 0%, #E4F0FB 100%);
+  box-shadow: 0 8px 20px rgba(3, 45, 96, .1);
 }
 
 /* ---- Responsive: case-study detail --------------------------------------- */
