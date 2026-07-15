@@ -921,6 +921,24 @@ body.al-scroll-lock { overflow: hidden; }
   opacity: var(--al-star-field-opacity);
 }
 
+/* ---- 9b-i. STATIC GRADIENT FALLBACK (`.al-no-starfield` pages) --------------
+   Case-study pages opt out of the animated field (JS early-returns in
+   initStarFields()). Without the particle canvas the CTA band and footer read
+   as flat navy, so layer a subtle, motionless on-brand gradient over their navy
+   base — same brand hues as the hero blooms (blue / teal / purple), no motion,
+   no dots. background-image sits over each surface's existing background-color,
+   so the navy still anchors contrast for the light text. */
+.al-no-starfield .al-cta-band {
+  background-image:
+    radial-gradient(120% 150% at 10% 0%, rgba(1, 118, 211, .46) 0%, rgba(1, 118, 211, 0) 58%),
+    radial-gradient(130% 160% at 100% 100%, rgba(3, 180, 167, .34) 0%, rgba(3, 180, 167, 0) 58%);
+}
+.al-no-starfield .al-footer {
+  background-image:
+    radial-gradient(80% 130% at 0% 0%, rgba(1, 118, 211, .30) 0%, rgba(1, 118, 211, 0) 60%),
+    radial-gradient(80% 130% at 100% 0%, rgba(117, 38, 227, .24) 0%, rgba(117, 38, 227, 0) 60%);
+}
+
 /* -----------------------------------------------------------------------------
    10. PROVENANCE TAGS
    ----------------------------------------------------------------------------- */
@@ -1593,6 +1611,21 @@ body.al-scroll-lock { overflow: hidden; }
   outline-offset: 2px;
 }
 
+/* Clear-all pill — revealed by JS only when 2+ filters are active. */
+.al-filter__clear {
+  margin-left: var(--al-space-2);
+  color: var(--al-ink-500);
+  border-color: var(--al-border);
+  border-style: dashed;
+}
+.al-filter__clear[hidden] { display: none; }
+.al-filter__clear:hover {
+  color: var(--al-error);
+  border-color: var(--al-error);
+  background-color: var(--al-error-tint);
+}
+.al-filter__clear > span { margin-left: 2px; font-weight: 700; }
+
 /* -----------------------------------------------------------------------------
    18. MOTION — scroll reveal
    ----------------------------------------------------------------------------- */
@@ -1877,6 +1910,16 @@ body.al-scroll-lock { overflow: hidden; }
 .al-cs-hero .al-hero__content { max-width: none; }
 .al-cs-hero .al-hero__sub { max-width: 46ch; }
 
+/* Keep the whole detail banner — including the "Start a similar project" CTA —
+   within one viewport on laptop screens. The long case titles rendered up to
+   64px and wrapped to ~6 lines, so content overflowed the 100svh hero and
+   pushed the CTA below the fold. Trim the title scale + vertical rhythm so it
+   fits; the hero still fills the screen via its min-height. */
+.al-cs-hero { padding-block: clamp(20px, 4vh, 52px) clamp(20px, 4vh, 44px); }
+.al-cs-hero .al-hero__title { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.1; }
+.al-cs-hero .al-hero__sub { font-size: clamp(15px, 1.4vw, 17px); }
+.al-cs-hero .al-cs-meta { margin-bottom: var(--al-space-5); }
+
 /* Breadcrumb over the dark hero */
 .al-cs-breadcrumb {
   display: flex;
@@ -2068,17 +2111,27 @@ body.al-scroll-lock { overflow: hidden; }
 .al-cs-laptop__badge span { color: var(--al-teal); font-weight: 700; }
 
 /* ---- 3. AT A GLANCE panel ------------------------------------------------- */
+/* Wider + more prominent than the surrounding prose: break out of the
+   container's side padding on both edges (using the same responsive
+   --al-container-pad token so it stays in sync across breakpoints), and switch
+   from the flat white card to an on-brand navy gradient. Text flips to light
+   values for WCAG-AA over the dark gradient. */
 .al-cs-glance {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--al-space-6);
-  padding: var(--al-space-7);
-  background: var(--al-white);
-  border: 1px solid var(--al-border);
+  margin-inline: calc(-1 * var(--al-container-pad));
+  padding: var(--al-space-8) var(--al-space-8);
+  background:
+    radial-gradient(120% 180% at 8% 0%, rgba(1, 118, 211, .55) 0%, rgba(1, 118, 211, 0) 60%),
+    radial-gradient(120% 180% at 100% 100%, rgba(3, 180, 167, .38) 0%, rgba(3, 180, 167, 0) 58%),
+    linear-gradient(150deg, #063A78 0%, var(--al-navy-90) 55%, #021F45 100%);
+  border: 1px solid rgba(255, 255, 255, .12);
   border-radius: var(--al-radius-panel);
+  box-shadow: 0 24px 60px -28px rgba(2, 15, 38, .5);
 }
 .al-cs-glance__item + .al-cs-glance__item {
-  border-left: 1px solid var(--al-border);
+  border-left: 1px solid rgba(255, 255, 255, .16);
   padding-left: var(--al-space-6);
 }
 .al-cs-glance__label {
@@ -2089,13 +2142,13 @@ body.al-scroll-lock { overflow: hidden; }
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--al-ink-500);
+  color: #8FD0FF;
 }
 .al-cs-glance__value {
   font-size: 17px;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--al-navy-90);
+  color: var(--al-white);
 }
 .al-cs-glance__note { margin-top: var(--al-space-5); }
 
@@ -2304,7 +2357,7 @@ body.al-scroll-lock { overflow: hidden; }
   .al-cs-glance { grid-template-columns: repeat(2, 1fr); gap: var(--al-space-5); padding: var(--al-space-6); }
   .al-cs-glance__item:nth-child(3) { border-left: 0; padding-left: 0; }
   .al-cs-glance__item + .al-cs-glance__item { border-left: 0; padding-left: 0; }
-  .al-cs-glance__item:nth-child(even) { border-left: 1px solid var(--al-border); padding-left: var(--al-space-5); }
+  .al-cs-glance__item:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, .16); padding-left: var(--al-space-5); }
   .al-cs-spotlight { grid-template-columns: 1fr; gap: var(--al-space-7); padding: var(--al-space-7); }
 }
 
@@ -2317,8 +2370,365 @@ body.al-scroll-lock { overflow: hidden; }
   .al-cs-glance { grid-template-columns: 1fr; }
   .al-cs-glance__item + .al-cs-glance__item,
   .al-cs-glance__item:nth-child(even) { border-left: 0; padding-left: 0; }
-  .al-cs-glance__item + .al-cs-glance__item { border-top: 1px solid var(--al-border); padding-top: var(--al-space-5); }
+  .al-cs-glance__item + .al-cs-glance__item { border-top: 1px solid rgba(255, 255, 255, .16); padding-top: var(--al-space-5); }
   .al-cs-section-head--split { align-items: flex-start; }
   .al-cs-laptop__tiles { gap: 8px; }
   .al-cs-quote__text { font-size: 21px; }
 }
+
+/* =============================================================================
+   CASE-STUDY CARD REDESIGN v2 — per-industry gradient panels + HTML/CSS
+   product screens inside an enlarged laptop, with a scroll-triggered
+   "come alive" animation. Additive layer, appended last so it wins the
+   cascade. Scoped to `.al-grid--cases` so the home 3-up (`.al-grid--3`) and
+   any other reuse keep the original flat-SVG laptop untouched.
+   Screens are decorative (aria-hidden); every status uses icon + text.
+   ============================================================================= */
+
+/* --- Panel: wider/shorter than the original 5/4, per the redesign ---------- */
+.al-grid--cases .al-card--case .al-card__media { aspect-ratio: 15 / 8; }
+
+/* Per-industry 4-stop gradients (168deg, bright top-left -> near-black) ----- */
+.al-case--beverage   .al-card__media { background: linear-gradient(168deg,#F0A93B 0%,#D97A2B 30%,#8A3F1E 66%,#061627 100%); }
+.al-case--field      .al-card__media { background: linear-gradient(168deg,#17B0A6 0%,#0E8C97 30%,#0A4E6E 66%,#061627 100%); }
+.al-case--hospitality .al-card__media { background: linear-gradient(168deg,#E8C88B 0%,#B9925A 30%,#4A3A5E 66%,#061627 100%); }
+.al-case--healthcare .al-card__media { background: linear-gradient(168deg,#3FB0E0 0%,#1E86C7 30%,#0A4877 66%,#061627 100%); }
+.al-case--fintech    .al-card__media { background: linear-gradient(168deg,#7C5CE0 0%,#5433B8 30%,#2A2A6E 66%,#061627 100%); }
+.al-case--auto       .al-card__media { background: linear-gradient(168deg,#5B7A99 0%,#33506F 30%,#1A2C44 66%,#061627 100%); }
+
+/* Navy-scrim pills on the two LIGHT cards (amber, champagne) so white text
+   keeps WCAG-AA over the bright top band. */
+.al-case--beverage .al-case-pill,
+.al-case--hospitality .al-case-pill { background: rgba(10,18,38,.45); border: 1px solid rgba(255,255,255,.30); }
+.al-case--beverage .al-case-pill--country,
+.al-case--hospitality .al-case-pill--country { background: rgba(10,18,38,.5); }
+/* The other four keep the white-glass pill but gain the 1px inner border. */
+.al-grid--cases .al-case-pill { border: 1px solid rgba(255,255,255,.30); }
+
+/* --- Enlarged laptop, bleeding bottom-right -------------------------------- */
+.al-grid--cases .al-card--case .al-card__illus {
+  right: -4%; bottom: -6%; width: 70%; max-width: 440px;
+  container-type: inline-size;              /* screen text scales with laptop */
+}
+/* Related grids on detail pages are 3-up (`.al-grid--3.al-grid--cases`) rather
+   than the Portfolio's 2-up, so each card — and thus the container-query width
+   driving the screen's `cqw` type — is narrower. Widen the laptop and drop the
+   px cap for the 3-up case so the product screen reads at a legible size instead
+   of collapsing to a nub. Additive; the 2-up Portfolio rule above is untouched. */
+.al-grid--3.al-grid--cases .al-card--case .al-card__illus {
+  width: 84%; max-width: none;
+}
+.al-laptop { display: block; position: relative; width: 100%; font-size: 2.7cqw; }
+.al-laptop__bezel {
+  display: block; position: relative; background: #1F2733;
+  border-radius: 1.1em 1.1em 0 0; padding: .7em .7em .55em;
+  box-shadow: 0 26px 55px -14px rgba(3,20,40,.55);
+}
+.al-laptop__screen {
+  display: block; position: relative; aspect-ratio: 16 / 10.2;
+  border-radius: .45em; overflow: hidden; background: #fff;
+}
+.al-laptop__base {
+  display: block; height: .7em; margin: 0 -2.6em; border-radius: 0 0 .5em .5em;
+  background: linear-gradient(#C9D0D8,#AEB7C1);
+}
+.al-laptop__base::after {
+  content: ""; display: block; width: 16%; height: .28em; margin: .18em auto 0;
+  border-radius: 0 0 .3em .3em; background: rgba(0,0,0,.14);
+}
+
+/* --- Shared screen scaffold ----------------------------------------------- */
+.al-scr {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  font-family: var(--al-font-sans); font-size: 1em; line-height: 1.25;
+  color: #16181D; background: #fff; overflow: hidden;
+}
+.al-scr__chrome {
+  display: flex; align-items: center; gap: .6em;
+  padding: .5em .7em; background: #F1F3F6; border-bottom: 1px solid #E3E7ED; flex: 0 0 auto;
+}
+.al-scr__dots { display: flex; gap: .34em; flex: 0 0 auto; }
+.al-scr__dots i { width: .55em; height: .55em; border-radius: 50%; background: #D6DBE2; }
+.al-scr__dots i:nth-child(1) { background: #FF5F57; }
+.al-scr__dots i:nth-child(2) { background: #FEBC2E; }
+.al-scr__dots i:nth-child(3) { background: #28C840; }
+.al-scr__addr {
+  flex: 1 1 auto; min-width: 0; background: #fff; border: 1px solid #E3E7ED;
+  border-radius: .5em; padding: .22em .7em; font-family: var(--al-font-mono);
+  font-size: .82em; color: #5C6470; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.al-scr__app {
+  flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column;
+  gap: .62em; padding: .82em .9em;
+}
+.al-scr__head { display: flex; align-items: center; justify-content: space-between; gap: .5em; }
+.al-scr__brand { font-weight: 700; font-size: 1.02em; color: #032D60; white-space: nowrap; }
+
+/* Screen primitives shared across cards */
+.al-lbl { font-family: var(--al-font-mono); font-size: .66em; letter-spacing: .08em;
+  text-transform: uppercase; color: #8A93A0; }
+.al-muted { color: #5C6470; }
+.al-mono  { font-family: var(--al-font-mono); }
+.al-blue  { color: #0176D3; }
+.al-scr .al-red { color: #BA0517; }
+.al-chip {
+  display: inline-flex; align-items: center; gap: .3em; font-size: .74em; font-weight: 600;
+  padding: .22em .6em; border-radius: 999px; white-space: nowrap; border: 1px solid transparent;
+}
+.al-chip b { font-weight: 700; }
+.al-chip--green  { background: #EAF6EE; color: #2E844A; }
+.al-chip--amber  { background: #FDF3E4; color: #9A5A16; }
+.al-chip--blue   { background: #EAF4FD; color: #0B5CAB; }
+.al-chip--teal   { background: #E5F7F5; color: #0A7268; }
+.al-chip--grey   { background: #EEF1F5; color: #5C6470; }
+.al-chip--gold   { background: #F3E7CE; color: #6E5525; }
+.al-scr-btn {
+  align-self: flex-start; margin-top: auto; border: 0; border-radius: .45em;
+  font-family: var(--al-font-sans); font-weight: 600; font-size: .82em;
+  padding: .5em 1em; cursor: default; white-space: nowrap;
+}
+.al-scr-btn--blue { background: #0176D3; color: #fff; }
+.al-scr-btn--gold { background: #B9925A; color: #16181D; }
+
+/* Bar chart (flexbox). Bars grow from 0 -> --h when the card is revealed. */
+.al-bars { display: flex; align-items: flex-end; gap: .34em; height: 100%; }
+.al-bar {
+  flex: 1 1 0; min-width: 0; height: var(--h,50%); border-radius: .18em .18em 0 0;
+  background: #C4D2E4; transform: scaleY(0); transform-origin: bottom;
+  transition: transform .7s var(--al-ease);
+}
+.al-bar--accent { background: #0176D3; }
+.al-case--fintech .al-bar { background: #CBBEF2; }
+.al-case--fintech .al-bar--accent { background: #5433B8; }
+.al-card--case.is-visible .al-bar { transform: scaleY(1); }
+.al-bar:nth-child(2) { transition-delay: .05s; }
+.al-bar:nth-child(3) { transition-delay: .10s; }
+.al-bar:nth-child(4) { transition-delay: .15s; }
+.al-bar:nth-child(5) { transition-delay: .20s; }
+.al-bar:nth-child(6) { transition-delay: .25s; }
+
+/* Progress / charge bars. Fill sweeps left -> right on reveal. */
+.al-prog { position: relative; height: .5em; border-radius: 999px; background: #E7ECF2; overflow: hidden; }
+.al-prog__fill {
+  position: absolute; inset: 0; width: var(--p,60%); border-radius: 999px;
+  background: #0176D3; transform: scaleX(0); transform-origin: left;
+  transition: transform .8s var(--al-ease);
+}
+.al-case--hospitality .al-prog__fill { background: #B9925A; }
+.al-case--auto .al-prog__fill { background: #2E844A; }
+.al-card--case.is-visible .al-prog__fill { transform: scaleX(1); }
+
+/* --- 1. Beverage — B2B order pad ------------------------------------------ */
+.al-bev__row1 { display: flex; gap: .7em; align-items: stretch; }
+.al-panel { background: #F7F9FB; border: 1px solid #E3E7ED; border-radius: .4em; padding: .5em .55em; }
+.al-bev__chart { flex: 1 1 62%; display: flex; flex-direction: column; gap: .35em; }
+.al-bev__chart .al-bars { height: 3.2em; }
+.al-bev__stat { flex: 1 1 38%; display: flex; flex-direction: column; justify-content: center; gap: .12em; }
+.al-bignum { font-weight: 800; font-size: 1.5em; color: #032D60; letter-spacing: -.01em; }
+.al-delta { font-size: .74em; font-weight: 600; color: #2E844A; }
+.al-bev__line { display: flex; align-items: center; gap: .5em; font-size: .84em; }
+.al-bev__line > :first-child { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.al-bev__line .al-blue { flex: 0 0 auto; font-family: var(--al-font-mono); font-size: .92em; }
+.al-bev__tot { flex: 0 0 auto; font-weight: 700; font-family: var(--al-font-mono); }
+.al-bev__sub { text-align: right; font-size: .9em; }
+.al-bev__sub b { font-weight: 800; font-family: var(--al-font-mono); color: #032D60; }
+
+/* --- 2. Field service — dispatch board + offline mobile card --------------- */
+.al-fs__axis { display: flex; justify-content: space-between; font-family: var(--al-font-mono);
+  font-size: .64em; color: #8A93A0; padding: 0 0 .1em; }
+.al-fs__grid { position: relative; display: flex; flex-direction: column; gap: .4em; }
+.al-fs__row { display: flex; align-items: center; gap: .5em; }
+.al-fs__who { flex: 0 0 4.4em; font-size: .78em; font-weight: 600; white-space: nowrap; }
+.al-fs__track { position: relative; flex: 1 1 auto; height: 1.35em; background: #F2F5F8;
+  border-radius: .25em; overflow: hidden; }
+.al-fs__bar { position: absolute; top: .18em; bottom: .18em; border-radius: .22em;
+  display: flex; align-items: center; padding: 0 .4em; color: #fff; font-size: .64em; font-weight: 600;
+  white-space: nowrap; overflow: hidden; transform: scaleX(0); transform-origin: left;
+  transition: transform .6s var(--al-ease); }
+.al-card--case.is-visible .al-fs__bar { transform: scaleX(1); }
+.al-fs__bar--teal { background: #0E8C97; }
+.al-fs__bar--blue { background: #0176D3; }
+.al-fs__bar--amber { background: #D97A2B; }
+.al-fs__bar--green { background: #2E844A; }
+.al-fs__now { position: absolute; top: -.1em; bottom: -.1em; width: 0; border-left: 1.5px dashed #0176D3; z-index: 2; }
+.al-fs__now::after { content: "now"; position: absolute; top: -1em; left: 50%; transform: translateX(-50%);
+  font-family: var(--al-font-mono); font-size: .58em; color: #0176D3; }
+.al-fs__strip { display: flex; align-items: center; gap: .5em; font-size: .78em; margin-top: .1em; }
+.al-fs__strip b { font-family: var(--al-font-mono); }
+.al-fs__mobile {
+  position: absolute; right: .5em; bottom: .5em; width: 33%; z-index: 3;
+  background: #fff; border: 1px solid #E3E7ED; border-radius: .5em;
+  box-shadow: 0 10px 22px -8px rgba(3,20,40,.4); padding: .5em .55em;
+  display: flex; flex-direction: column; gap: .28em;
+}
+.al-fs__mobile .al-mtitle { font-size: .78em; font-weight: 700; }
+.al-fs__mobile .al-maddr { font-size: .66em; color: #5C6470; }
+.al-fs__check { font-size: .68em; display: flex; align-items: center; gap: .3em; }
+.al-fs__check--on { color: #2E844A; }
+.al-fs__check--off { color: #A6AEB9; }
+.al-fs__mobile .al-scr-btn { align-self: stretch; text-align: center; margin-top: .2em; font-size: .72em; padding: .35em; }
+
+/* --- 3. Hospitality — guest portal ---------------------------------------- */
+.al-hos__hero {
+  display: flex; flex-direction: column; gap: .1em;
+  position: relative; border-radius: .45em; overflow: hidden; padding: .7em .8em; color: #fff;
+  background: linear-gradient(120deg,#B9925A 0%,#7A5E52 55%,#4A3A5E 100%);
+}
+.al-hos__hero .al-greet { font-weight: 700; font-size: 1.05em; }
+.al-hos__hero .al-sub { font-size: .74em; opacity: .92; }
+.al-hos__plat { position: absolute; top: .6em; right: .7em; }
+.al-hos__pts { display: flex; align-items: center; gap: .5em; }
+.al-hos__pts .al-prog { flex: 1 1 auto; }
+.al-hos__pts .al-pct { font-weight: 700; font-size: .82em; color: #6E5525; }
+.al-hos__cards { display: flex; gap: .55em; }
+.al-hos__cc { flex: 1 1 0; min-width: 0; border: 1px solid #EADFC7; border-radius: .4em; padding: .5em .55em;
+  display: flex; flex-direction: column; gap: .2em; }
+.al-hos__cc .al-cc-t { font-size: .82em; font-weight: 700; }
+.al-hos__cc .al-cc-m { font-size: .68em; color: #5C6470; }
+
+/* --- 4. Healthcare — patient dashboard ------------------------------------ */
+.al-hc__top { display: flex; gap: .7em; align-items: center; }
+.al-ring { position: relative; flex: 0 0 auto; width: 4.1em; height: 4.1em; }
+.al-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.al-ring__track { fill: none; stroke: #E1EAF2; stroke-width: 5; }
+.al-ring__arc { fill: none; stroke: #0176D3; stroke-width: 5; stroke-linecap: round;
+  stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset .9s var(--al-ease); }
+.al-card--case.is-visible .al-ring__arc { stroke-dashoffset: var(--dash,13); }
+.al-ring__num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.25em; color: #032D60; }
+.al-ring__cap { display: block; text-align: center; }
+.al-hc__intake { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .3em; }
+.al-hc__pctrow { display: flex; align-items: center; gap: .5em; }
+.al-hc__pctrow .al-prog { flex: 1 1 auto; }
+.al-hc__pctrow .al-pct { font-weight: 700; font-size: .82em; color: #0B5CAB; }
+.al-hc__chips { display: flex; gap: .4em; flex-wrap: wrap; }
+.al-hc__vitals { display: flex; align-items: center; gap: .6em; background: #F7F9FB;
+  border: 1px solid #E3E7ED; border-radius: .4em; padding: .45em .6em; }
+.al-hc__vitals .al-vlab { display: flex; flex-direction: column; }
+.al-hc__vitals .al-vlab b { font-family: var(--al-font-mono); font-weight: 700; font-size: .92em; }
+.al-ecg { flex: 1 1 auto; height: 2em; }
+.al-ecg path { fill: none; stroke: #E8536A; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 320; stroke-dashoffset: 320; transition: stroke-dashoffset 1.1s var(--al-ease); }
+.al-card--case.is-visible .al-ecg path { stroke-dashoffset: 0; }
+.al-hc__appt { display: flex; align-items: center; gap: .5em; border: 1px solid #E3E7ED; border-radius: .4em; padding: .4em .55em; }
+.al-avatar { flex: 0 0 auto; width: 1.9em; height: 1.9em; border-radius: 50%; background: #EAF4FD;
+  color: #0B5CAB; font-weight: 700; font-size: .72em; display: flex; align-items: center; justify-content: center; }
+.al-hc__appt .al-ap-m { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.al-hc__appt .al-ap-m span { font-size: .66em; color: #5C6470; }
+.al-hc__appt .al-ap-m b { font-size: .82em; font-weight: 700; }
+
+/* --- 5. Fintech — sync + reconciliation ----------------------------------- */
+.al-fin__dot { display: inline-block; width: .5em; height: .5em; border-radius: 50%; background: #03B4A7; }
+.al-card--case.is-visible .al-fin__pulse .al-fin__dot { animation: al-fin-pulse 1.8s ease-in-out infinite; }
+@keyframes al-fin-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(3,180,167,.5); } 50% { box-shadow: 0 0 0 .35em rgba(3,180,167,0); } }
+.al-fin__diagram { display: flex; align-items: center; gap: .5em; }
+.al-fin__tile { flex: 1 1 0; text-align: center; font-size: .78em; font-weight: 700; padding: .4em .3em;
+  border-radius: .4em; border: 1px solid #E3E7ED; background: #F7F9FB; }
+.al-fin__tile--sf { color: #0B5CAB; background: #EAF4FD; border-color: #CFE4F8; }
+.al-fin__tile--xero { color: #0A7268; background: #E5F7F5; border-color: #CDEDE9; }
+.al-fin__swap { flex: 0 0 auto; font-size: 1.1em; color: #5433B8; font-weight: 700; }
+.al-fin__count { flex: 0 0 auto; font-size: .68em; color: #5C6470; text-align: left; line-height: 1.2; }
+.al-fin__count b { display: block; font-family: var(--al-font-mono); color: #16181D; font-size: 1.05em; }
+.al-tbl { display: flex; flex-direction: column; font-size: .74em; }
+.al-tbl__r { display: flex; align-items: center; gap: .5em; padding: .22em 0; border-top: 1px solid #EEF1F5; }
+.al-tbl__r--head { border-top: 0; color: #8A93A0; font-family: var(--al-font-mono); font-size: .86em; letter-spacing: .04em; }
+.al-tbl__r > span:nth-child(1) { flex: 1 1 auto; font-family: var(--al-font-mono); }
+.al-tbl__r > span:nth-child(2),
+.al-tbl__r > span:nth-child(3) { flex: 0 0 3.6em; text-align: right; font-family: var(--al-font-mono); }
+.al-tbl__r > span:nth-child(4) { flex: 0 0 auto; text-align: right; }
+.al-fin__foot { display: flex; align-items: flex-end; gap: .7em; }
+.al-fin__foot .al-bars { height: 2.6em; flex: 1 1 50%; }
+.al-fin__foot .al-fr { flex: 1 1 50%; display: flex; flex-direction: column; gap: .1em; }
+.al-fin__foot .al-fr b { font-weight: 800; font-size: 1.15em; color: #032D60; font-family: var(--al-font-mono); }
+
+/* --- 6. Automotive — vehicle portal --------------------------------------- */
+.al-auto__hero { display: flex; gap: .6em; background: #F7F9FB; border: 1px solid #E3E7ED;
+  border-radius: .45em; padding: .5em; }
+.al-auto__photo { flex: 0 0 40%; border-radius: .35em; overflow: hidden; aspect-ratio: 3 / 2; }
+.al-auto__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.al-auto__info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: .18em; }
+.al-auto__plate { align-self: flex-start; font-family: var(--al-font-mono); font-weight: 700; font-size: .72em;
+  background: #EEF1F5; border-radius: .25em; padding: .1em .45em; letter-spacing: .05em; }
+.al-auto__km { font-weight: 800; font-size: 1.05em; font-family: var(--al-font-mono); color: #032D60; }
+.al-auto__due { font-size: .68em; color: #5C6470; display: flex; align-items: center; gap: .3em; }
+.al-auto__due i { width: .5em; height: .5em; border-radius: 50%; background: #BA0517; flex: 0 0 auto; }
+.al-auto__charge { display: flex; align-items: center; gap: .4em; font-size: .68em; }
+.al-auto__charge .al-prog { flex: 1 1 auto; height: .4em; }
+.al-auto__tiles { display: flex; gap: .45em; }
+.al-auto__tile { flex: 1 1 0; text-align: center; border: 1px solid #E3E7ED; border-radius: .4em;
+  padding: .4em .2em; font-size: .68em; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: .15em; }
+.al-auto__tile .al-ico { font-size: 1.1em; }
+.al-auto__track { display: flex; flex-direction: column; gap: .3em; }
+.al-auto__steps { position: relative; display: flex; justify-content: space-between; padding: 0 .3em; }
+.al-auto__steps::before { content: ""; position: absolute; left: 1em; right: 1em; top: .45em; height: 2px; background: #E3E7ED; }
+.al-auto__steps::after { content: ""; position: absolute; left: 1em; top: .45em; height: 2px; width: 0; background: #0176D3;
+  transition: width .8s var(--al-ease); }
+.al-card--case.is-visible .al-auto__steps::after { width: 42%; }
+.al-auto__step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: .2em; font-size: .64em; }
+.al-auto__step i { width: .7em; height: .7em; border-radius: 50%; background: #C4D2E4; border: 2px solid #fff; box-shadow: 0 0 0 1px #C4D2E4; }
+.al-auto__step--done i { background: #0176D3; box-shadow: 0 0 0 1px #0176D3; }
+.al-auto__step--now i  { background: #0176D3; box-shadow: 0 0 0 1px #0176D3; }
+.al-auto__step--now { font-weight: 700; color: #0B5CAB; }
+
+/* --- 3-up (home) / narrow: hide the dense screens, fall back to clean panel -
+   The home page keeps the original <img> laptop, so these v2 screens only ever
+   render inside `.al-grid--cases`. Nothing to override for `.al-grid--3`. ---- */
+
+/* --- Reduced motion: the global `*` rule (§20) already forces
+   transition/animation durations to ~0, and initScrollReveal adds .is-visible
+   immediately, so every screen paints in its final/filled state with no motion.
+   No extra rules needed here. ------------------------------------------------ */
+
+/* =============================================================================
+   CASE-STUDY DETAIL HERO — reuse the redesigned card laptop + per-industry
+   product screen (the exact `.al-laptop` block from /case-studies) on a
+   gradient "stage" so the detail hero reads as the same design family as its
+   card. Additive; light-theme; the whole media column is decorative
+   (aria-hidden). Screen animations mirror the card's, but are gated on the hero
+   media's own `.is-visible` (added by the .al-reveal system) since the hero
+   laptop is NOT inside `.al-card--case`.
+   ============================================================================= */
+
+/* Gradient stage behind the laptop — echoes the card's media panel. */
+.al-cs-stage {
+  position: relative;
+  border-radius: 22px;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  overflow: hidden;
+  box-shadow: 0 32px 70px -22px rgba(2, 15, 38, .7);
+}
+.al-cs-stage::after {                     /* 1px inner hairline for definition */
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); pointer-events: none;
+}
+/* Per-industry gradients — identical stops to the cards (see §CARD REDESIGN v2). */
+.al-cs-stage--beverage    { background: linear-gradient(168deg,#F0A93B 0%,#D97A2B 30%,#8A3F1E 66%,#061627 100%); }
+.al-cs-stage--field       { background: linear-gradient(168deg,#17B0A6 0%,#0E8C97 30%,#0A4E6E 66%,#061627 100%); }
+.al-cs-stage--hospitality { background: linear-gradient(168deg,#E8C88B 0%,#B9925A 30%,#4A3A5E 66%,#061627 100%); }
+.al-cs-stage--healthcare  { background: linear-gradient(168deg,#3FB0E0 0%,#1E86C7 30%,#0A4877 66%,#061627 100%); }
+.al-cs-stage--fintech     { background: linear-gradient(168deg,#7C5CE0 0%,#5433B8 30%,#2A2A6E 66%,#061627 100%); }
+.al-cs-stage--auto        { background: linear-gradient(168deg,#5B7A99 0%,#33506F 30%,#1A2C44 66%,#061627 100%); }
+
+/* Query container that scales the laptop's cqw-based type. */
+.al-cs-stage__laptop {
+  container-type: inline-size;
+  width: 100%; max-width: 460px; margin-inline: auto;
+}
+.al-cs-stage .al-laptop { width: 100%; }
+
+/* Per-industry screen accents — the card scopes these to `.al-case--*`, which
+   isn't present on the hero, so re-map them onto the stage to match the card. */
+.al-cs-stage--hospitality .al-prog__fill { background: #B9925A; }
+.al-cs-stage--auto .al-prog__fill { background: #2E844A; }
+.al-cs-stage--fintech .al-bar { background: #CBBEF2; }
+.al-cs-stage--fintech .al-bar--accent { background: #5433B8; }
+
+/* Bring the reused card screens alive on the hero (mirror of the
+   `.al-card--case.is-visible …` triggers, gated on this column's reveal). */
+.al-cs-hero__media.is-visible .al-bar { transform: scaleY(1); }
+.al-cs-hero__media.is-visible .al-prog__fill { transform: scaleX(1); }
+.al-cs-hero__media.is-visible .al-fs__bar { transform: scaleX(1); }
+.al-cs-hero__media.is-visible .al-ring__arc { stroke-dashoffset: var(--dash, 13); }
+.al-cs-hero__media.is-visible .al-ecg path { stroke-dashoffset: 0; }
+.al-cs-hero__media.is-visible .al-auto__steps::after { width: 42%; }
+.al-cs-hero__media.is-visible .al-fin__pulse .al-fin__dot { animation: al-fin-pulse 1.8s ease-in-out infinite; }
