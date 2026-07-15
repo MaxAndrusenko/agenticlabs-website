@@ -670,12 +670,9 @@
      every other blue surface gets a <canvas.al-star-field> injected as its first
      child. Idempotent and safe on any page — no-ops where the hosts are absent. */
   function initStarFields() {
-    // Page-scoped opt-out: pages flagged `.al-no-starfield` (e.g. case-study
-    // pages) get a static on-brand gradient instead of the animated particle
-    // field. Early-return so NO canvas is injected and NO rAF loop is started
-    // (cheaper and cleaner than hiding an already-running field with CSS).
-    if (document.body.classList.contains('al-no-starfield')) { return; }
-    var hosts = $$('.al-hero--immersive, .al-section--navy, .al-cta-band, .al-footer');
+    // Footer uses a static CSS gradient (not particles) so it stays consistent
+    // across every page — including when it is injected via data-al-include.
+    var hosts = $$('.al-hero--immersive, .al-section--navy, .al-cta-band');
     var seen = [];
     hosts.forEach(function (host) {
       if (seen.indexOf(host) !== -1) { return; } // one field per host
@@ -791,18 +788,115 @@
   }
 
   /* ------------------------------------------------------------------------
-     Boot — run every initialiser. Each one guards its own hooks, so calling
-     them all on every page is safe.
+     9) HTML PARTIALS (navbar, footer, …)
+     Hook: <div data-al-include="navbar|footer"></div>
+     Navbar options on the mount:
+       data-al-nav-on-hero  — add .al-navbar--on-hero (dark bar over hero)
+     Active link is inferred from location.pathname after inject.
+     Absolute asset/link paths in partials work from any page depth.
+     Returns a Promise so boot can wire nav behaviours after mounts resolve.
+     ------------------------------------------------------------------------ */
+  var includeCache = {};
+
+  function fetchPartial(name) {
+    if (!includeCache[name]) {
+      includeCache[name] = fetch('/partials/' + encodeURIComponent(name) + '.html')
+        .then(function (res) {
+          if (!res.ok) { throw new Error('partial ' + name + ' → ' + res.status); }
+          return res.text();
+        })
+        .catch(function (err) {
+          includeCache[name] = null; // allow retry on later mounts
+          if (typeof console !== 'undefined' && console.warn) {
+            console.warn('[al] include failed:', name, err);
+          }
+          return null;
+        });
+    }
+    return includeCache[name];
+  }
+
+  function navActiveHref(pathname) {
+    var path = (pathname || '/').split('?')[0].split('#')[0];
+    if (path.length > 1 && path.charAt(path.length - 1) === '/') {
+      path = path.slice(0, -1);
+    }
+    if (/\.html$/i.test(path)) {
+      path = path.replace(/\.html$/i, '');
+    }
+    if (path === '' || path === '/' || path === '/index') { return '/'; }
+    if (path === '/services' || path.indexOf('/services/') === 0) { return '/services'; }
+    if (path === '/case-studies' || path.indexOf('/case-studies/') === 0 ||
+        path === '/work' || path.indexOf('/work/') === 0) {
+      return '/case-studies';
+    }
+    if (path === '/approach') { return '/approach'; }
+    if (path === '/contact') { return '/contact'; }
+    if (path === '/insights' || path.indexOf('/insights/') === 0) { return '/insights'; }
+    return null; // legal / 404 / etc. — no active item
+  }
+
+  function enhanceNavbar(header, onHero) {
+    if (!header || !header.classList) { return; }
+    if (onHero) { header.classList.add('al-navbar--on-hero'); }
+
+    var href = navActiveHref(window.location.pathname);
+    if (!href) { return; }
+
+    $$('.al-navbar__link', header).forEach(function (link) {
+      if (link.getAttribute('href') === href) {
+        link.classList.add('is-active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+
+  function initIncludes() {
+    var mounts = $$('[data-al-include]');
+    if (!mounts.length) { return Promise.resolve(); }
+
+    return Promise.all(mounts.map(function (el) {
+      var name = (el.getAttribute('data-al-include') || '').trim();
+      if (!name) { return Promise.resolve(); }
+
+      var onHero = el.hasAttribute('data-al-nav-on-hero');
+
+      return fetchPartial(name).then(function (html) {
+        if (!html || !el.parentNode) { return; }
+        var wrap = document.createElement('div');
+        wrap.innerHTML = html.trim();
+        var nodes = Array.prototype.slice.call(wrap.childNodes);
+        var insertedHeader = null;
+        nodes.forEach(function (node) {
+          if (node.nodeType === 1 && node.classList && node.classList.contains('al-navbar')) {
+            insertedHeader = node;
+          }
+          el.parentNode.insertBefore(node, el);
+        });
+        el.parentNode.removeChild(el);
+
+        if (name === 'navbar' && insertedHeader) {
+          enhanceNavbar(insertedHeader, onHero);
+        }
+      });
+    }));
+  }
+
+  /* ------------------------------------------------------------------------
+     Boot — run every initialiser. Includes resolve first so navbar/footer
+     hooks exist before mobile-nav / sticky-nav (and friends) bind to them.
      ------------------------------------------------------------------------ */
   function init() {
-    initMobileNav();
-    initStickyNav();
-    initAccordion();
-    initScrollReveal();
-    initForms();
-    initWorkFilter();
-    initStarFields();
-    initHelpChat();
+    initIncludes().then(function () {
+      initMobileNav();
+      initStickyNav();
+      initAccordion();
+      initScrollReveal();
+      initForms();
+      initWorkFilter();
+      initStarFields();
+      initHelpChat();
+    });
   }
 
   if (document.readyState === 'loading') {
