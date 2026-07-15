@@ -449,8 +449,8 @@
   /* ------------------------------------------------------------------------
      7) STAR FIELD — animated particle-network background on every blue surface
      Hosts: .al-hero--immersive (home hero — keeps its own <canvas.al-hero__canvas>
-            plus its gradient mesh + scrim, §9a) AND .al-section--navy, .al-cta-band
-            and .al-footer, into which initStarFields() INJECTS a decorative
+            plus its gradient mesh + scrim, §9a) AND .al-section--navy and
+            .al-cta-band, into which initStarFields() INJECTS a decorative
             <canvas.al-star-field> as the first child. Because this file is shared,
             every blue surface on every page lights up with ZERO HTML edits.
      Core: createStarField(host, canvas, opts) builds one field of drifting nodes
@@ -703,6 +703,94 @@
   }
 
   /* ------------------------------------------------------------------------
+     8) HELP CHAT — floating “Need help?” widget, bottom-right.
+     Injected once into <body> on every page (no HTML edits required). Opens a
+     small chat-style panel with Contact us CTAs. Escape / outside click close.
+     ------------------------------------------------------------------------ */
+  function initHelpChat() {
+    if ($('[data-al-help]')) { return; } // idempotent
+
+    var root = document.createElement('div');
+    root.className = 'al-help';
+    root.setAttribute('data-al-help', '');
+    root.innerHTML =
+      '<div class="al-help__panel" id="al-help-panel" role="dialog" aria-modal="false" aria-labelledby="al-help-title" hidden>' +
+        '<div class="al-help__header">' +
+          '<div class="al-help__header-text">' +
+            '<h2 class="al-help__title" id="al-help-title">Contact us</h2>' +
+            '<span class="al-help__status">Usually replies within 1 business day</span>' +
+          '</div>' +
+          '<button class="al-help__close" type="button" data-al-help-close aria-label="Close help">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+              '<path d="M6 6l12 12M18 6L6 18"/>' +
+            '</svg>' +
+          '</button>' +
+        '</div>' +
+        '<div class="al-help__body">' +
+          '<p class="al-help__bubble">Hi — looking for Salesforce solutions tailored to your business? Let\'s talk.</p>' +
+          '<div class="al-help__actions">' +
+            '<a class="al-btn al-btn--primary" href="/contact">Contact us</a>' +
+            '<a class="al-btn al-btn--secondary" href="/contact">Get a scoped estimate</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<button class="al-help__launcher" type="button" data-al-help-toggle aria-expanded="false" aria-controls="al-help-panel">' +
+        '<span class="al-help__launcher-icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M21 12a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.3-.25-3.3-.7L3 21l1.3-5.7A8.4 8.4 0 013.5 12 8.5 8.5 0 0112 3.5h.5A8.5 8.5 0 0121 12z"/>' +
+          '</svg>' +
+        '</span>' +
+        '<span class="al-help__launcher-label al-help__launcher-label--open">Contact us</span>' +
+        '<span class="al-help__launcher-label al-help__launcher-label--close">Close</span>' +
+      '</button>';
+
+    document.body.appendChild(root);
+
+    var panel = $('#al-help-panel', root);
+    var toggle = $('[data-al-help-toggle]', root);
+    var closeBtn = $('[data-al-help-close]', root);
+
+    function isOpen() { return root.classList.contains('is-open'); }
+
+    function openPanel() {
+      root.classList.add('is-open');
+      panel.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      // Defer focus so the panel is visible before moving keyboard focus.
+      window.setTimeout(function () {
+        if (closeBtn) { closeBtn.focus(); }
+      }, 0);
+    }
+
+    function closePanel() {
+      root.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      // Keep in DOM for exit animation; mark hidden after transition.
+      window.setTimeout(function () {
+        if (!isOpen()) { panel.hidden = true; }
+      }, prefersReducedMotion() ? 0 : 200);
+      toggle.focus();
+    }
+
+    function togglePanel() { isOpen() ? closePanel() : openPanel(); }
+
+    toggle.addEventListener('click', togglePanel);
+    closeBtn.addEventListener('click', closePanel);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) {
+        e.preventDefault();
+        closePanel();
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!isOpen()) { return; }
+      if (!root.contains(e.target)) { closePanel(); }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      Boot — run every initialiser. Each one guards its own hooks, so calling
      them all on every page is safe.
      ------------------------------------------------------------------------ */
@@ -714,6 +802,7 @@
     initForms();
     initWorkFilter();
     initStarFields();
+    initHelpChat();
   }
 
   if (document.readyState === 'loading') {
