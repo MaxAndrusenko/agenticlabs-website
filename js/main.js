@@ -245,13 +245,10 @@
   }
 
   /* ------------------------------------------------------------------------
-     5) STATIC FORM HANDLING
+     5) CONTACT FORM → POST /api/contact (Resend via Express)
      Hook: form[data-al-form] with .al-field wrappers containing inputs and a
-     sibling .al-field__error; success node = [data-form-success].
-     Behaviour: on submit preventDefault, validate required fields + email
-     format, mark invalid fields with .has-error + aria-invalid and show inline
-     error text; if valid, hide the form and reveal the success node.
-     (No backend — mimics Webflow native form behaviour.)
+     sibling .al-field__error; success = [data-form-success]; error =
+     [data-form-error]. Validates client-side, then submits JSON to the API.
      ------------------------------------------------------------------------ */
   function initForms() {
     var forms = $$('form[data-al-form]');
@@ -316,10 +313,54 @@
       return true;
     }
 
+    function formPayload(form) {
+      var data = new FormData(form);
+      var clouds = data.getAll('clouds').map(function (v) { return String(v); });
+      return {
+        name: String(data.get('name') || '').trim(),
+        email: String(data.get('email') || '').trim(),
+        company: String(data.get('company') || '').trim(),
+        details: String(data.get('details') || '').trim(),
+        clouds: clouds
+      };
+    }
+
+    function showSuccess(form) {
+      var success = $('[data-form-success]', form.parentNode || document) ||
+                    document.querySelector('[data-form-success]');
+      var errorEl = $('[data-form-error]', form.parentNode || document);
+      if (errorEl) { errorEl.classList.remove('is-visible'); }
+      form.hidden = true;
+      form.style.display = 'none';
+      if (success) {
+        success.hidden = false;
+        success.removeAttribute('hidden');
+        success.classList.add('is-visible');
+        if (success.setAttribute) { success.setAttribute('role', 'status'); }
+        if (success.focus) {
+          if (!success.hasAttribute('tabindex')) { success.setAttribute('tabindex', '-1'); }
+          success.focus();
+        }
+      }
+    }
+
+    function showSubmitError(form) {
+      var errorEl = $('[data-form-error]', form.parentNode || document) ||
+                    document.querySelector('[data-form-error]');
+      if (errorEl) {
+        errorEl.classList.add('is-visible');
+        if (errorEl.focus) {
+          if (!errorEl.hasAttribute('tabindex')) { errorEl.setAttribute('tabindex', '-1'); }
+          errorEl.focus();
+        }
+      }
+    }
+
     forms.forEach(function (form) {
       var controls = $$('input, textarea, select', form).filter(function (c) {
         return c.type !== 'hidden' && c.type !== 'submit' && c.type !== 'button';
       });
+      var submitBtn = $('button[type="submit"]', form);
 
       // Clear a field's error state as the user corrects it.
       controls.forEach(function (control) {
@@ -352,23 +393,29 @@
           return;
         }
 
-        // Success path — static demo, no network request.
-        var success = $('[data-form-success]', form.parentNode || document) ||
-                      document.querySelector('[data-form-success]');
-        form.hidden = true;
-        form.style.display = 'none';
-        if (success) {
-          success.hidden = false;
-          success.removeAttribute('hidden');
-          // CSS hides [data-form-success] with display:none and reveals it via
-          // .is-visible (display:flex); removing [hidden] alone isn't enough.
-          success.classList.add('is-visible');
-          if (success.setAttribute) { success.setAttribute('role', 'status'); }
-          if (success.focus) {
-            if (!success.hasAttribute('tabindex')) { success.setAttribute('tabindex', '-1'); }
-            success.focus();
-          }
+        var errorEl = $('[data-form-error]', form.parentNode || document);
+        if (errorEl) { errorEl.classList.remove('is-visible'); }
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.setAttribute('aria-busy', 'true');
         }
+
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(formPayload(form))
+        }).then(function (res) {
+          if (!res.ok) { throw new Error('Request failed'); }
+          showSuccess(form);
+        }).catch(function () {
+          showSubmitError(form);
+        }).finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-busy');
+          }
+        });
       });
     });
   }

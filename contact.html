@@ -39,33 +39,6 @@
   <main id="al-main">
 
     <!-- =====================================================================
-         1. HERO — immersive, full-viewport. Shares the home banner identity;
-         the .al-hero--contact modifier reweights the mesh to a balanced blue+teal.
-         No data-hero-accent is set, so the particle field stays full multi-hue —
-         echoing the balanced mesh. Animation is wired automatically by
-         initStarFields() via [data-hero-canvas].
-         ===================================================================== -->
-    <section class="al-hero al-hero--immersive al-hero--contact">
-      <!-- Decorative animated field: hidden from assistive tech, not focusable.
-           Renders one static frame (no rAF loop) under prefers-reduced-motion. -->
-      <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
-      <!-- Contrast scrim: keeps all copy AA-legible over every animation frame. -->
-      <span class="al-hero__scrim" aria-hidden="true"></span>
-
-      <div class="al-hero__inner al-container">
-        <div class="al-hero__content al-reveal">
-          <span class="al-eyebrow">Let’s talk</span>
-          <h1 class="al-hero__title">Your Salesforce org, engineered for what’s next.</h1>
-          <p class="al-hero__sub">Talk to a senior architect about custom development, integrations, or an Agentforce build — scoped before you commit. You’ll talk to a senior engineer, not a sales rep, and we’ll respond within one business day.</p>
-          <div class="al-hero__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="#al-contact-form">Contact us</a>
-            <a class="al-btn al-btn--ghost" href="#al-contact-form">Get a scoped estimate →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
          2. CONTACT — form + secondary options
          ===================================================================== -->
     <section class="al-section al-section--surface" id="al-contact-form">
@@ -77,7 +50,8 @@
             <h2 style="margin-bottom: var(--al-space-2);">Send us the details.</h2>
             <p style="color: var(--al-ink-500); margin-bottom: var(--al-space-6); max-width: 48ch;">The more context you share up front, the faster we can scope. Nothing here is binding.</p>
 
-            <form class="al-form" data-al-form novalidate>
+            <!-- Submits via js/main.js → POST /api/contact → Resend -->
+            <form class="al-form" data-al-form action="/api/contact" method="post" novalidate>
               <div class="al-field">
                 <label class="al-field__label" for="al-name">Full name</label>
                 <input class="al-field__input" type="text" id="al-name" name="name" autocomplete="name" required aria-describedby="al-name-error">
@@ -140,8 +114,7 @@
             <div data-form-success class="al-form__success" hidden role="status">Thanks — we’ll follow up within one business day.</div>
 
             <!-- Error state — revealed by js/main.js on submit failure -->
-            <!-- PLACEHOLDER: confirm hello@agenticlabs.example is the real support address with client -->
-            <div class="al-form__error" data-form-error role="alert">Something went wrong on our end. Please try again or email us directly at hello@agenticlabs.example.</div>
+            <div class="al-form__error" data-form-error role="alert">Something went wrong on our end. Please try again or email us directly at hello@agenticlabs.cloud</div>
           </div>
 
           <!-- RIGHT: secondary options card -->
@@ -156,9 +129,8 @@
             <hr class="al-divider" style="margin-block: var(--al-space-2) var(--al-space-5);">
 
             <p class="al-card__meta" style="margin-bottom: var(--al-space-1);">Email us directly</p>
-            <!-- PLACEHOLDER: confirm hello@agenticlabs.example is the real inbox with client -->
             <p style="margin-bottom: var(--al-space-5);">
-              <a href="mailto:hello@agenticlabs.example">hello@agenticlabs.example</a>
+              <a href="mailto:hello@agenticlabs.cloud">hello@agenticlabs.cloud</a>
             </p>
 
             <p class="al-caption" style="margin-top: auto;">We respond to every inquiry within one business day. No junior benches, no call-center handoffs.</p>

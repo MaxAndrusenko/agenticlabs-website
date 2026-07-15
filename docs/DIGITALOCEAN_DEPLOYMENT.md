@@ -206,12 +206,19 @@ nginx -t
 systemctl reload nginx
 ```
 
-## 11. Later Express API
+## 11. Contact API (Express + Resend)
 
-When the site needs APIs or a database, keep the static site where it is and add Express behind Nginx:
+The contact form posts to `/api/contact`. Keep the static site where it is and run Express behind Nginx.
 
-1. Run Express on `127.0.0.1:3000`.
-2. Manage it with `systemd`.
+1. On the droplet, install Node 18+, then from the release directory:
+
+```bash
+cp .env.example .env
+# Edit .env: replace re_xxxxxxxxx with your real Resend API key
+npm install --omit=dev
+```
+
+2. Run Express on `127.0.0.1:3000` (e.g. `npm start`) and manage it with `systemd`.
 3. Add this block to `/etc/nginx/sites-available/agenticlabs`:
 
 ```nginx

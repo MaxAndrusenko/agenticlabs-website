@@ -3,3 +3,8 @@
 
 # macOS
 .DS_Store
+
+# Node / Resend API
+node_modules/
+.env
+.env.local
