@@ -670,6 +670,12 @@
      every other blue surface gets a <canvas.al-star-field> injected as its first
      child. Idempotent and safe on any page — no-ops where the hosts are absent. */
   function initStarFields() {
+    // Pages can opt out of the animated particle field via <body data-no-star-field>
+    // (e.g. case-study detail pages): the blue surfaces then keep their static CSS
+    // gradient backgrounds — the immersive hero's drifting mesh (§9a) and the CTA
+    // band's bloom gradient (§9b) — with no canvas injected or animated.
+    if (document.body && document.body.hasAttribute('data-no-star-field')) { return; }
+
     // Footer uses a static CSS gradient (not particles) so it stays consistent
     // across every page — including when it is injected via data-al-include.
     var hosts = $$('.al-hero--immersive, .al-section--navy, .al-cta-band');
