@@ -90,6 +90,14 @@ server {
         try_files \$uri =404;
     }
 
+    location = /work {
+        return 301 /case-studies;
+    }
+
+    location = /work/ {
+        return 301 /case-studies;
+    }
+
     location ~* \.(?:css|js|svg|png|jpg|jpeg|gif|webp|ico|woff2?)$ {
         expires 30d;
         add_header Cache-Control "public, immutable";
