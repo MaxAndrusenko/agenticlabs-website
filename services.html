@@ -3,16 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Progressive enhancement flag: added synchronously before first paint so the
+       capability accordions render CLOSED when JS is available (no open-then-collapse
+       flash), while staying OPEN/readable if JS never runs. See styles.css
+       "html.js .al-sv-cap__panel". This is the only script besides js/main.js. -->
+  <script>document.documentElement.classList.add('js');</script>
 
   <title>Services — Agentic Labs</title>
-  <meta name="description" content="Salesforce architecture, custom development, Agentforce and AI integration, and managed support — delivered by senior engineers, AI-accelerated and human-reviewed.">
+  <meta name="description" content="Senior Salesforce expertise across Sales, Service, Experience, Field Service, Commerce, CPQ, Data Cloud, Marketing Cloud and Agentforce — plus architecture, development, integration and support. Engage us for one project or an end-to-end program.">
 
   <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
   <link rel="canonical" href="https://agenticlabs.cloud/services">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Services — Agentic Labs">
-  <meta property="og:description" content="Salesforce architecture, custom development, Agentforce and AI integration, and managed support — delivered by senior engineers, AI-accelerated and human-reviewed.">
+  <meta property="og:description" content="Senior Salesforce expertise across every cloud — plus the architecture, development, integration and support behind them. Engage us for one project or an end-to-end program.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/og-default.svg">
   <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
@@ -29,150 +34,749 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<!-- data-no-star-field: services opts out of the animated particle field. The
+     hero is LIGHT; the capabilities section is the static brand-gradient showcase
+     (see styles.css "SERVICES — CAPABILITIES ACCORDION"). CTA band keeps its bloom. -->
+<body data-no-star-field>
   <!-- Skip link — first focusable element -->
   <a class="al-skip-link" href="#al-main">Skip to content</a>
 
-  <!-- NAVBAR — loaded from /partials/navbar.html via data-al-include -->
-  <div data-al-include="navbar" data-al-nav-on-hero></div>
+  <!-- NAVBAR — loaded from /partials/navbar.html via data-al-include.
+       Default (light) style — the page opens on a white hero, not a dark hero. -->
+  <div data-al-include="navbar"></div>
 
   <main id="al-main">
 
     <!-- =====================================================================
-         1. HERO — immersive, full-viewport. Shares the home banner identity
-         (navy base, drifting brand-gradient mesh, animated particle-network
-         canvas, contrast scrim, on-hero navbar, type system); the
-         .al-hero--services modifier reweights the mesh blue-dominant, and
-         data-hero-accent="blue" biases the particle hues to match. The animation
-         is wired automatically by initStarFields() via [data-hero-canvas] — no
-         per-page JS. The base gradient + scrim render a complete, legible hero
-         even if JS/canvas never runs (progressive enhancement).
+         1. HERO — light, expertise + credibility (single <h1>)
+         White section with a soft, legible brand-gradient wash (no canvas). Carries
+         the page's single <h1>, an independence-first sub, dual CTAs, and a
+         credibility stat strip whose numbers animate via [data-countup].
          ===================================================================== -->
-    <section class="al-hero al-hero--immersive al-hero--services" data-hero-accent="blue">
-      <!-- Decorative animated field: hidden from assistive tech, not focusable.
-           Renders one static frame (no rAF loop) under prefers-reduced-motion. -->
-      <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
-      <!-- Contrast scrim: keeps all copy AA-legible over every animation frame. -->
-      <span class="al-hero__scrim" aria-hidden="true"></span>
-
-      <div class="al-hero__inner al-container">
-        <div class="al-hero__content al-reveal">
-          <span class="al-eyebrow">What we do</span>
-          <h1 class="al-hero__title">Salesforce delivery, built for how AI actually works.</h1>
-          <p class="al-hero__sub">Architecture, custom development, Agentforce, and managed support — engineered by certified architects and shipped with AI as leverage, not a shortcut.</p>
-          <div class="al-hero__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="#architecture">Explore services</a>
-            <a class="al-btn al-btn--ghost" href="/contact">Contact us</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         2. ARCHITECTURE & ADVISORY
-         ===================================================================== -->
-    <section class="al-section al-section--surface" id="architecture">
+    <section class="al-section al-sv-hero" id="top">
       <div class="al-container">
-        <div class="al-grid--2" style="align-items: center;">
-          <div class="al-reveal">
-            <span class="al-eyebrow">Architecture &amp; advisory</span>
-            <h2>Architecture &amp; advisory</h2>
-            <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5); max-width: 56ch;">Org assessment, technical roadmaps, and scalable data models before a single line of code ships. We map the failure modes early, so the build has a foundation that holds as you scale rather than one you have to unwind later.</p>
-            <ul style="display: flex; flex-direction: column; gap: var(--al-space-2); margin-bottom: var(--al-space-5);">
-              <li>Org health &amp; technical debt assessments</li>
-              <li>Solution &amp; technical architecture design</li>
-              <li>Scalable data-model design</li>
-              <li>Integration architecture</li>
-              <li>Technical roadmaps &amp; release strategy</li>
-              <li>Governance / center-of-excellence setup</li>
-            </ul>
-            <p class="al-caption">Related work: <a href="/case-studies/fintech-salesforce-xero-integration">Salesforce–Xero integration →</a></p>
+        <div class="al-sv-hero__inner al-reveal">
+          <span class="al-eyebrow">Services</span>
+          <h1 class="al-sv-hero__title">Senior Salesforce expertise — for a single cloud or your entire org.</h1>
+          <p class="al-sv-hero__sub">From Sales, Service, Experience, Field Service, Commerce and CPQ to Data Cloud, Marketing Cloud and Agentforce — plus the architecture, development, integration and support behind them. Engage us for one project or an end-to-end program. AI-accelerated, human-reviewed.</p>
+          <div class="al-sv-hero__actions">
+            <a class="al-btn al-btn--primary al-btn--lg" href="#capabilities">Explore services</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="/contact">Book an assessment</a>
           </div>
+        </div>
 
-          <div class="al-reveal">
-            <img src="assets/hero-graphic.svg" width="640" height="520" alt="A code editor panel showing a reviewed Apex lead-routing class overlapping an architecture diagram that links Sales Cloud, MuleSoft, a data model, and Agentforce to a central verification hub." style="width: 100%; border-radius: var(--al-radius-panel);">
+        <div class="al-stat-strip al-sv-hero__stats al-reveal">
+          <div class="al-stat">
+            <span class="al-stat__num"><span data-countup data-to="9">0</span></span>
+            <span class="al-stat__label">Products we deliver</span>
+          </div>
+          <div class="al-stat">
+            <span class="al-stat__num"><span data-countup data-to="6">0</span></span>
+            <span class="al-stat__label">Industries shipped</span>
+          </div>
+          <div class="al-stat">
+            <span class="al-stat__num"><span data-countup data-to="5">0</span></span>
+            <span class="al-stat__label">Countries</span>
+          </div>
+          <div class="al-stat">
+            <span class="al-stat__num"><span data-countup data-to="100" data-suffix="%">0</span></span>
+            <span class="al-stat__label">Senior-built</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         3. CUSTOM DEVELOPMENT
+         2. CAPABILITIES — 13 independent services as expandable cards
+         Dark brand-gradient showcase (reuses .al-sv-products background + head
+         colours). Two labelled sub-groups (9 products + 4 engineering services).
+         Each card is an ACCORDION: a real <button class="al-accordion__trigger">
+         header (icon + name + one-liner + expand icon) over a
+         .al-accordion__panel with a "What we do" list, tech chips and a per-service
+         CTA. Card is dark-glass at rest; flips to the white look on hover OR when
+         its trigger is aria-expanded (via :has()). Panel copy is dual-legible —
+         light on the dark glass, dark on the flipped-white card — so it reads in
+         BOTH states (and stays readable if JS never runs; see the CSS notes).
+         Accent discipline: blue = core products/services, teal = Data/Integration/
+         Commerce, purple = Agentforce/AI.
          ===================================================================== -->
-    <section class="al-section" id="development">
+    <section class="al-section al-sv-products al-sv-caps" id="capabilities">
       <div class="al-container">
-        <div class="al-grid--2" style="align-items: center;">
-          <div class="al-reveal">
-            <img src="assets/code-graphic.svg" width="640" height="480" alt="A code editor panel showing a reviewed Apex class alongside a Lightning Web Component, marked as human-reviewed." style="width: 100%; border-radius: var(--al-radius-panel);">
+        <div class="al-sv-head al-reveal">
+          <span class="al-eyebrow">Capabilities</span>
+          <h2>Thirteen services. Engage us for one, or all of them.</h2>
+          <p class="al-sv-head__lede">Deep, senior expertise in every service below — no bundled platform, no juniors. Expand any card to see what we actually do, and talk to us about that one service on its own.</p>
+        </div>
+
+        <div class="al-sv-capgroups">
+
+          <!-- GROUP A — Salesforce products (9) -->
+          <div class="al-sv-capgroup">
+            <div class="al-sv-capgroup__head al-reveal">
+              <span class="al-sv-capgroup__kicker">Salesforce products</span>
+              <span class="al-sv-capgroup__count">9 services</span>
+            </div>
+
+            <div class="al-sv-capgrid">
+
+              <!-- 1. Sales Cloud -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-sales">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Sales Cloud</span>
+                      <span class="al-sv-cap__desc">The lead-to-cash core, configured for how your team actually sells.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-sales">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Lead &amp; opportunity model design</li>
+                      <li>Sales process &amp; stage automation</li>
+                      <li>Forecasting &amp; pipeline management</li>
+                      <li>Territory &amp; assignment rules</li>
+                      <li>Activity capture</li>
+                      <li>Reporting &amp; dashboards</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Sales Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Flow</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Apex</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Reports</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Sales Cloud <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 2. Service Cloud -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-service">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Service Cloud</span>
+                      <span class="al-sv-cap__desc">Case management and support operations that scale with the business.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-service">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Case lifecycle &amp; routing</li>
+                      <li>Omni-Channel &amp; queues</li>
+                      <li>Knowledge base</li>
+                      <li>Escalations, entitlements &amp; SLAs</li>
+                      <li>Automated notifications</li>
+                      <li>Service analytics</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Service Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Omni-Channel</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Flow</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Apex</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Service Cloud <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 3. Experience Cloud -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-experience">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 010 18 15 15 0 010-18z"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Experience Cloud</span>
+                      <span class="al-sv-cap__desc">Secure customer &amp; partner portals built on LWR.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-experience">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>LWR site design &amp; build</li>
+                      <li>Custom LWC components</li>
+                      <li>Authentication &amp; role-based access</li>
+                      <li>Custom intake forms</li>
+                      <li>Member &amp; guest journeys</li>
+                      <li>Brand theming</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Experience Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">LWR</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">LWC</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Role-based access</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Experience Cloud <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 4. Field Service -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-field">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-6h11l3 4h2v6h-2"/><circle cx="7.5" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/><path d="M9.5 17h6"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Field Service</span>
+                      <span class="al-sv-cap__desc">Dispatch, scheduling and offline mobile for teams in the field.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-field">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Dispatch console &amp; schedule optimization</li>
+                      <li>Work order &amp; appointment model</li>
+                      <li>Offline mobile (Mobile SDK)</li>
+                      <li>Push notifications</li>
+                      <li>First-time-fix workflows</li>
+                      <li>Asset &amp; inventory tracking</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Field Service</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Scheduling &amp; Optimization</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Mobile SDK / Offline</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Push Notifications</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Field Service <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 5. B2B Commerce Cloud -->
+              <article class="al-sv-cap al-sv-cap--teal al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-commerce">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-4.5h15L21 9"/><path d="M4 9v10.5h16V9"/><path d="M3 9h18"/><path d="M9.5 13h5"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">B2B Commerce Cloud</span>
+                      <span class="al-sv-cap__desc">Self-serve wholesale storefronts wired straight to the back office.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-commerce">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Storefront &amp; catalog build</li>
+                      <li>Account-based pricing &amp; entitlements</li>
+                      <li>Cart &amp; checkout</li>
+                      <li>Order management</li>
+                      <li>ERP sync</li>
+                      <li>Reorder &amp; self-service</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">B2B Commerce</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Order Management</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">ERP sync</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Platform Events</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about B2B Commerce <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 6. CPQ & Revenue Cloud -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-cpq">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.5L13 21a2 2 0 01-2.8 0l-7-7A2 2 0 012.6 12.6V4.5A1.5 1.5 0 014 3h8.1a2 2 0 011.4.6l7 7a2 2 0 010 2.9z"/><circle cx="7.5" cy="7.5" r="1.4"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">CPQ &amp; Revenue Cloud</span>
+                      <span class="al-sv-cap__desc">Quote-to-cash: configure, price, quote and bill without spreadsheets.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-cpq">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Product &amp; pricing model</li>
+                      <li>Guided quoting &amp; approvals</li>
+                      <li>Discounting guardrails</li>
+                      <li>Contracts &amp; renewals</li>
+                      <li>Billing / revenue (Revenue Cloud)</li>
+                      <li>CRM integration</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">CPQ</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Revenue Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Flow</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Apex</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about CPQ &amp; Revenue Cloud <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 7. Data Cloud (teal) -->
+              <article class="al-sv-cap al-sv-cap--teal al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-data">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Data Cloud</span>
+                      <span class="al-sv-cap__desc">The unification layer — one trusted, real-time profile from every source.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-data">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Data-model harmonization</li>
+                      <li>Identity resolution</li>
+                      <li>Calculated insights</li>
+                      <li>Segmentation</li>
+                      <li>Activation into Sales &amp; Service</li>
+                      <li>Grounding Agentforce</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Data Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Identity resolution</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Calculated insights</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Segmentation</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Data Cloud <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 8. Agentforce & AI (purple) -->
+              <article class="al-sv-cap al-sv-cap--purple al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-agent">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="2.5"/><path d="M12 8V5"/><circle cx="12" cy="3.5" r="1.5"/><path d="M9.5 13h.01M14.5 13h.01"/><path d="M2 13v3M22 13v3"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Agentforce &amp; AI</span>
+                      <span class="al-sv-cap__desc">Grounded AI agents and automation that hold up in production, not just a demo.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-agent">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Agent design &amp; grounded actions</li>
+                      <li>Prompt &amp; action engineering</li>
+                      <li>Einstein / LLM integration</li>
+                      <li>Guardrails, testing &amp; eval</li>
+                      <li>Data grounding &amp; security review</li>
+                      <li>Production monitoring</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Agentforce</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Einstein / LLM</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Grounded actions</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Guardrails &amp; eval</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Agentforce &amp; AI <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 9. Marketing Cloud (blue) -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-marketing">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l17-7-4 17-5-6-8-4z"/><path d="M11 15l3-6"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Marketing Cloud</span>
+                      <span class="al-sv-cap__desc">Lifecycle journeys and messaging connected to your CRM data.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-marketing">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Journey design &amp; automation</li>
+                      <li>Email / SMS build</li>
+                      <li>Segmentation &amp; audiences</li>
+                      <li>CRM &amp; Data Cloud integration</li>
+                      <li>Deliverability &amp; consent</li>
+                      <li>Campaign analytics</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Marketing Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Journeys</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Data Cloud</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Consent</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Marketing Cloud <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+            </div>
           </div>
 
-          <div class="al-reveal">
-            <span class="al-eyebrow">Custom development</span>
-            <h2>Custom development</h2>
-            <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5); max-width: 56ch;">Apex, LWC, and Flow builds engineered by senior developers, AI-accelerated, human-reviewed line by line. The tooling removes the boilerplate; correctness, maintainability, and the merge decision stay with a person who understands the consequences.</p>
-            <ul style="display: flex; flex-direction: column; gap: var(--al-space-2); margin-bottom: var(--al-space-5);">
-              <li>Apex triggers &amp; batch jobs</li>
-              <li>Lightning Web Components (LWC)</li>
-              <li>Flow automation</li>
-              <li>REST/SOAP &amp; platform-event integrations</li>
-              <li>Automated test coverage</li>
-              <li>CI/CD &amp; release management</li>
-            </ul>
-            <p class="al-caption">Related work: <a href="/case-studies/experience-cloud-healthcare-startup">Patient onboarding portal →</a> · <a href="/case-studies/field-service-uk-operator">Field Service scheduling →</a></p>
+          <!-- GROUP B — Engineering & delivery services (4) -->
+          <div class="al-sv-capgroup">
+            <div class="al-sv-capgroup__head al-reveal">
+              <span class="al-sv-capgroup__kicker">Engineering &amp; delivery services</span>
+              <span class="al-sv-capgroup__count">4 services</span>
+            </div>
+
+            <div class="al-sv-capgrid">
+
+              <!-- 10. Architecture & Advisory -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-arch">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Architecture &amp; Advisory</span>
+                      <span class="al-sv-cap__desc">Org assessments, data models and roadmaps before a line of code ships.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-arch">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Org health &amp; tech-debt assessment</li>
+                      <li>Solution &amp; technical architecture</li>
+                      <li>Scalable data-model design</li>
+                      <li>Integration architecture</li>
+                      <li>Technical roadmaps &amp; release strategy</li>
+                      <li>Governance / CoE setup</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Architecture</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Data modeling</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Governance</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Roadmaps</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Architecture &amp; Advisory <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 11. Custom Development -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-dev">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13 5l-2 14"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Custom Development</span>
+                      <span class="al-sv-cap__desc">Apex, LWC and Flow — senior-built, human-reviewed line by line.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-dev">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Apex triggers &amp; batch</li>
+                      <li>Lightning Web Components</li>
+                      <li>Flow automation</li>
+                      <li>Platform Events</li>
+                      <li>Automated test coverage</li>
+                      <li>Code review &amp; quality gates</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Apex</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">LWC</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Flow</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Platform Events</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Custom Development <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 12. Integration (teal) -->
+              <article class="al-sv-cap al-sv-cap--teal al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-integration">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6"/><path d="M10.5 6.5l1.5-1.5a3.5 3.5 0 015 5l-1.5 1.5"/><path d="M13.5 17.5L12 19a3.5 3.5 0 01-5-5l1.5-1.5"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Integration</span>
+                      <span class="al-sv-cap__desc">Two systems, one reconciled set of numbers — resilient by design.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-integration">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>REST / SOAP &amp; middleware</li>
+                      <li>Named Credentials</li>
+                      <li>Platform Events</li>
+                      <li>ERP / finance sync (e.g. Xero)</li>
+                      <li>Idempotency &amp; retry</li>
+                      <li>Monitoring &amp; logging</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">REST / SOAP</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Named Credentials</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Xero API</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">ERP sync</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Integration <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 13. Managed Support & Optimization -->
+              <article class="al-sv-cap al-sv-cap--blue al-reveal">
+                <h3 class="al-sv-cap__heading">
+                  <button class="al-accordion__trigger al-sv-cap__trigger" type="button" aria-expanded="false" aria-controls="cap-support">
+                    <span class="al-sv-cap__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
+                    </span>
+                    <span class="al-sv-cap__head">
+                      <span class="al-sv-cap__name">Managed Support &amp; Optimization</span>
+                      <span class="al-sv-cap__desc">A senior engineer stays close to your org long after launch.</span>
+                    </span>
+                    <span class="al-accordion__icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="al-accordion__panel al-sv-cap__panel" id="cap-support">
+                  <div class="al-sv-cap__panel-inner">
+                    <span class="al-sv-cap__what">What we do</span>
+                    <ul class="al-sv-cap__list">
+                      <li>Ongoing release management</li>
+                      <li>Performance tuning &amp; optimization</li>
+                      <li>Proactive org-health monitoring</li>
+                      <li>Enhancements &amp; bug fixes</li>
+                      <li>Tech-debt reduction</li>
+                      <li>SLA-based support</li>
+                    </ul>
+                    <ul class="al-cs-chips al-sv-cap__chips">
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">DevOps Center / Copado</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">CI/CD</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Salesforce Shield</li>
+                      <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Monitoring</li>
+                    </ul>
+                    <a class="al-sv-cap__cta" href="/contact">Talk to us about Managed Support <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </div>
+              </article>
+
+            </div>
           </div>
+
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         4. AGENTFORCE & AI INTEGRATION
+         3. HOW WE DELIVER — process timeline + engagement models (light)
+         White section. A numbered, connected 6-step timeline (accent nodes + a
+         connecting rail; horizontal on desktop, vertical on mobile, reveal-
+         staggered), a differentiator callout, then a row of 4 engagement-model
+         cards for how a lead can work with us.
          ===================================================================== -->
-    <section class="al-section al-section--surface" id="agentforce">
+    <section class="al-section" id="how">
       <div class="al-container">
-        <div class="al-grid--2" style="align-items: center;">
-          <div class="al-reveal">
-            <span class="al-eyebrow">Agentforce &amp; AI</span>
-            <h2>Agentforce &amp; AI integration</h2>
-            <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5); max-width: 56ch;">AI agents, grounded actions, and automation designed to hold up in production, not just a demo. We scope agents to your real business rules, wire in guardrails, and test against the edge cases that decide whether an agent is trustworthy.</p>
-            <ul style="display: flex; flex-direction: column; gap: var(--al-space-2); margin-bottom: var(--al-space-5);">
-              <li>Agentforce agent design &amp; grounded actions</li>
-              <li>Prompt &amp; action engineering</li>
-              <li>Einstein / LLM integrations</li>
-              <li>Guardrails, testing &amp; evaluation</li>
-              <li>Data grounding &amp; security review</li>
-              <li>Production monitoring</li>
-            </ul>
-            <p class="al-caption">Related work: <a href="/case-studies">See all case studies →</a></p>
-          </div>
+        <div class="al-sv-head al-reveal">
+          <span class="al-eyebrow">How we deliver</span>
+          <h2>A senior team, a disciplined process.</h2>
+          <p class="al-sv-head__lede">The same path on every engagement — whether it's a single cloud or an end-to-end program. You always know what happens next.</p>
+        </div>
 
-          <div class="al-reveal">
-            <img src="assets/datamodel-graphic.svg" width="640" height="480" alt="A diagram of an AI agent grounded on a Salesforce data model, with guardrails and monitoring wrapped around its actions." style="width: 100%; border-radius: var(--al-radius-panel);">
-          </div>
+        <ol class="al-sv-timeline al-reveal">
+          <li class="al-sv-step">
+            <span class="al-sv-step__node">01</span>
+            <span class="al-sv-step__name">Discovery</span>
+            <span class="al-sv-step__desc">We map the goal, the org and the constraints before scoping anything.</span>
+          </li>
+          <li class="al-sv-step">
+            <span class="al-sv-step__node">02</span>
+            <span class="al-sv-step__name">Architecture</span>
+            <span class="al-sv-step__desc">Data model, solution design and integration approach, agreed up front.</span>
+          </li>
+          <li class="al-sv-step">
+            <span class="al-sv-step__node">03</span>
+            <span class="al-sv-step__name">Build</span>
+            <span class="al-sv-step__desc">We implement in short, reviewable increments.</span>
+          </li>
+          <li class="al-sv-step">
+            <span class="al-sv-step__node">04</span>
+            <span class="al-sv-step__name">QA &amp; test</span>
+            <span class="al-sv-step__desc">Automated coverage plus human review against real scenarios.</span>
+          </li>
+          <li class="al-sv-step">
+            <span class="al-sv-step__node">05</span>
+            <span class="al-sv-step__name">Deploy</span>
+            <span class="al-sv-step__desc">Controlled release through sandboxes and CI/CD, with a rollback path.</span>
+          </li>
+          <li class="al-sv-step">
+            <span class="al-sv-step__node">06</span>
+            <span class="al-sv-step__name">Support &amp; optimize</span>
+            <span class="al-sv-step__desc">We stay close — monitoring, tuning and improving after launch.</span>
+          </li>
+        </ol>
+
+        <div class="al-sv-callout al-reveal">
+          <span class="al-sv-callout__mark" aria-hidden="true">✦</span>
+          <p><strong>AI as leverage, not a shortcut.</strong> We use AI to move faster — but every line is reviewed by a senior engineer before it ships.</p>
+        </div>
+
+        <div class="al-sv-engage-head al-reveal">
+          <span class="al-sv-capgroup__kicker al-sv-engage-kicker">Engagement models</span>
+          <p class="al-sv-engage-lede">Four ways to work with us — pick the one that fits the problem.</p>
+        </div>
+        <div class="al-sv-engage-grid">
+          <article class="al-sv-engage al-reveal">
+            <h3 class="al-sv-engage__name">Fixed-scope project</h3>
+            <p class="al-sv-engage__desc">Defined outcome, timeline and price.</p>
+          </article>
+          <article class="al-sv-engage al-reveal">
+            <h3 class="al-sv-engage__name">Staff augmentation</h3>
+            <p class="al-sv-engage__desc">Specialists embedded in your team.</p>
+          </article>
+          <article class="al-sv-engage al-reveal">
+            <h3 class="al-sv-engage__name">Managed service</h3>
+            <p class="al-sv-engage__desc">Ongoing retainer for releases &amp; support.</p>
+          </article>
+          <article class="al-sv-engage al-reveal">
+            <h3 class="al-sv-engage__name">Advisory / assessment</h3>
+            <p class="al-sv-engage__desc">Architecture review &amp; roadmap, standalone.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         5. MANAGED SUPPORT & OPTIMIZATION
+         4. FULL TECH & STACK MATRIX (surface)
+         Surface section. Reuses the grouped chip panel (.al-sv-stack-panel /
+         .al-sv-stack-group) with seven confirmed-in-scope categories, each a
+         labelled block of wrapping grey chips.
          ===================================================================== -->
-    <section class="al-section" id="support">
+    <section class="al-section al-section--surface" id="stack">
       <div class="al-container">
-        <div class="al-grid--2" style="align-items: center;">
-          <div class="al-reveal">
-            <img src="assets/arch-graphic.svg" width="640" height="480" alt="A dashboard view of ongoing org-health monitoring, release cadence, and performance metrics over time." style="width: 100%; border-radius: var(--al-radius-panel);">
-          </div>
+        <div class="al-sv-head al-reveal">
+          <span class="al-eyebrow">Tech &amp; stack</span>
+          <h2>The full stack behind the work.</h2>
+          <p class="al-sv-head__lede">Every technology we work in, grouped by discipline — all in scope, all shipped.</p>
+        </div>
 
-          <div class="al-reveal">
-            <span class="al-eyebrow">Managed support</span>
-            <h2>Managed support &amp; optimization</h2>
-            <p style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-5); max-width: 56ch;">Ongoing releases, performance tuning, and org health, so nothing rots after launch. A senior engineer stays close to your org — shipping enhancements, paying down technical debt, and catching problems before they reach your users.</p>
-            <ul style="display: flex; flex-direction: column; gap: var(--al-space-2); margin-bottom: var(--al-space-5);">
-              <li>Ongoing release management</li>
-              <li>Performance tuning &amp; org optimization</li>
-              <li>Proactive org-health monitoring</li>
-              <li>Enhancements &amp; bug fixes</li>
-              <li>Technical-debt reduction</li>
-              <li>SLA-based support</li>
+        <div class="al-sv-stack-panel al-reveal">
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">Clouds &amp; products</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Sales Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Service Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Experience Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Field Service</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">B2B Commerce</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">CPQ / Revenue Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Data Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Marketing Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Agentforce</li>
+            </ul>
+          </div>
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">Development</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Apex</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Lightning Web Components</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">LWR</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Flow</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Platform Events</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">SOQL / SOSL</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Jest</li>
+            </ul>
+          </div>
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">Integration</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">REST / SOAP</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Named Credentials</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Platform Events</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Middleware</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">ERP sync</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Xero API</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Idempotency &amp; retry</li>
+            </ul>
+          </div>
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">Data &amp; AI</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Data Cloud</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Identity resolution</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Calculated insights</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Segmentation</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Einstein / LLM</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Agentforce</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Grounding &amp; guardrails</li>
+            </ul>
+          </div>
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">DevOps &amp; delivery</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">DevOps Center / Copado</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Git source control</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Sandbox &rarr; CI/CD</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Scratch orgs</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Code Analyzer</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Automated test coverage</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Monitoring &amp; logging</li>
+            </ul>
+          </div>
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">Security &amp; compliance</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Salesforce Shield</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Field-level security</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Role-based access</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Sharing model</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">PII masking</li>
+            </ul>
+          </div>
+          <div class="al-sv-stack-group">
+            <span class="al-sv-stack-group__label">Mobile &amp; field</span>
+            <ul class="al-cs-chips">
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Mobile SDK / Offline</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Scheduling &amp; Optimization</li>
+              <li class="al-cs-chip al-cs-chip--grey al-cs-chip--sm">Push Notifications</li>
             </ul>
           </div>
         </div>
@@ -180,18 +784,64 @@
     </section>
 
     <!-- =====================================================================
-         6. FINAL CTA BAND
+         5. WHY US — senior-expertise proof (white)
+         White section. Four proof points as flat cards. No countups here (kept
+         distinct from the hero stat strip).
+         ===================================================================== -->
+    <section class="al-section al-sv-why" id="why">
+      <div class="al-container">
+        <div class="al-sv-head al-reveal">
+          <span class="al-eyebrow">Why Agentic Labs</span>
+          <h2>Deep expertise. Real outcomes.</h2>
+          <p class="al-sv-head__lede">Independence-first delivery — engage us for one service or your whole org, and get the same standard either way. AI-accelerated, human-reviewed, and accountable to what actually ships.</p>
+        </div>
+
+        <div class="al-sv-why-grid">
+          <article class="al-sv-whycard al-reveal">
+            <span class="al-sv-whycard__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
+            </span>
+            <h3 class="al-sv-whycard__title">Architecture-first</h3>
+            <p class="al-sv-whycard__desc">Scalable data models and design before a line of code ships.</p>
+          </article>
+          <article class="al-sv-whycard al-reveal">
+            <span class="al-sv-whycard__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13.5L7 21l5-3 5 3-1.5-7.5"/></svg>
+            </span>
+            <h3 class="al-sv-whycard__title">Certified specialists</h3>
+            <p class="al-sv-whycard__desc">Certified across every cloud we deliver.</p>
+          </article>
+          <article class="al-sv-whycard al-reveal">
+            <span class="al-sv-whycard__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12l1-9z"/></svg>
+            </span>
+            <h3 class="al-sv-whycard__title">AI-accelerated, human-reviewed</h3>
+            <p class="al-sv-whycard__desc">Speed without the risk — every line reviewed.</p>
+          </article>
+          <article class="al-sv-whycard al-reveal">
+            <span class="al-sv-whycard__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 010 18 15 15 0 010-18z"/></svg>
+            </span>
+            <h3 class="al-sv-whycard__title">Proven in production</h3>
+            <p class="al-sv-whycard__desc">Shipped across industries, sectors and geographies.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. FINAL CTA BAND — independence framing, dual paths (both to /contact)
          ===================================================================== -->
     <section class="al-section al-section--surface">
       <div class="al-container">
         <div class="al-cta-band al-reveal">
           <div>
-            <h2>Your Salesforce org, engineered for what's next.</h2>
-            <p>Talk to a senior architect about architecture, custom development, an Agentforce build, or ongoing support — scoped before you commit.</p>
+            <h2>One cloud, one integration, or your whole org.</h2>
+            <p>Engage us for a single service or an end-to-end program — every engagement gets the same rigorous, human-reviewed delivery. Tell us what you need, or start with an architecture assessment.</p>
           </div>
           <div class="al-cta-band__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Contact us</a>
-            <a class="al-btn al-btn--secondary al-btn--lg" href="/contact">Get a scoped estimate</a>
+            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Talk to a senior architect</a>
+            <a class="al-btn al-btn--secondary al-btn--lg" href="/contact">Book an architecture assessment</a>
           </div>
         </div>
       </div>

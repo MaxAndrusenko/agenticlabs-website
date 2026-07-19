@@ -3919,3 +3919,1749 @@ body.al-scroll-lock { overflow: hidden; }
 .al-cs-hero__media.is-visible .al-ecg path { stroke-dashoffset: 0; }
 .al-cs-hero__media.is-visible .al-auto__steps::after { width: 42%; }
 .al-cs-hero__media.is-visible .al-fin__pulse .al-fin__dot { animation: al-fin-pulse 1.8s ease-in-out infinite; }
+
+/* =============================================================================
+   SERVICES PAGE (al-sv-*) — additive layer for the redesigned /services.html.
+   Prefixed al-sv-* to avoid collisions. Reuses existing tokens + the case-study
+   screen primitives (.al-laptop / .al-scr / .al-chip / .al-prog / .al-bars).
+   Three self-contained blocks:
+     A. Connected-platform flow diagram (navy surface, animated pulse)
+     B. Capability pillars — sticky rail navigator + six pillar blocks
+     C. Pillar visual panels (stat / prog / bars / agent laptop) + responsive
+   Accent discipline: teal = Data, blue = Sales/core, purple = Agentforce/AI,
+   navy = practice work. Every animation degrades to a static frame under
+   prefers-reduced-motion (see the block at the very end).
+   ============================================================================= */
+
+/* ---- A. CONNECTED PLATFORM ------------------------------------------------ */
+.al-sv-platform__head { max-width: 60ch; }
+.al-sv-platform__lede {
+  margin-top: var(--al-space-4);
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(214, 228, 245, .90);   /* AA on navy */
+  max-width: 62ch;
+}
+
+.al-sv-flow {
+  display: flex;
+  align-items: stretch;
+  gap: var(--al-space-3);
+  margin-top: var(--al-space-8);
+}
+
+.al-sv-node {
+  --a: var(--al-blue-60);
+  --a-light: #8FD0FF;
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-2);
+  padding: var(--al-space-5) var(--al-space-5) var(--al-space-6);
+  border-radius: var(--al-radius-panel);
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+  overflow: hidden;
+}
+.al-sv-node::before {                 /* accent top rule */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 3px;
+  background: var(--a);
+}
+.al-sv-node--data  { --a: var(--al-teal);    --a-light: #7FE0D8; }
+.al-sv-node--sales { --a: var(--al-blue-60); --a-light: #8FD0FF; }
+.al-sv-node--agent { --a: var(--al-purple);  --a-light: #C9A6F5; }
+
+.al-sv-node__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--al-space-2);
+  border-radius: var(--al-radius-card);
+  color: var(--a-light);
+  background: color-mix(in srgb, var(--a) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--a) 40%, transparent);
+}
+.al-sv-node__icon svg { width: 26px; height: 26px; }
+
+.al-sv-node__step {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--a-light);
+}
+.al-sv-node__title {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--al-white);
+}
+.al-sv-node__desc {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(214, 228, 245, .82);
+}
+
+/* Connector rail + travelling pulse (decorative) */
+.al-sv-conn {
+  flex: 0 1 56px;
+  min-width: 28px;
+  align-self: center;
+  position: relative;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(143, 208, 255, .12), rgba(143, 208, 255, .45), rgba(143, 208, 255, .12));
+}
+.al-sv-conn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
+  border-radius: 50%;
+  background: #BCE2FF;
+  box-shadow: 0 0 10px 1px rgba(143, 208, 255, .85);
+  animation: al-sv-flow-x 2.6s var(--al-ease) infinite;
+}
+.al-sv-conn:nth-of-type(4)::after { animation-delay: 1.3s; } /* second connector offset */
+
+@keyframes al-sv-flow-x {
+  0%   { left: 0;    opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+.al-sv-platform__foot {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--al-space-3);
+  margin-top: var(--al-space-7);
+  padding-top: var(--al-space-5);
+  border-top: 1px solid rgba(255, 255, 255, .16);
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(214, 228, 245, .90);
+  max-width: 74ch;
+}
+.al-sv-platform__foot-mark {
+  flex: 0 0 auto;
+  color: #8FD0FF;
+  font-weight: 700;
+}
+
+/* ---- B. CAPABILITY PILLARS ------------------------------------------------ */
+.al-sv-pillars {
+  display: grid;
+  grid-template-columns: 244px minmax(0, 1fr);
+  gap: var(--al-space-8);
+  align-items: start;
+}
+
+/* Sticky navigator */
+.al-sv-rail {
+  position: sticky;
+  top: calc(var(--al-navbar-h) + var(--al-space-5));
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+}
+.al-sv-rail__label {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-ink-500);
+  padding-left: var(--al-space-3);
+}
+.al-sv-rail__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 2px solid var(--al-border);
+}
+.al-sv-rail__link {
+  display: flex;
+  align-items: center;
+  gap: var(--al-space-3);
+  margin-left: -2px;                  /* overlap the list border */
+  padding: 10px var(--al-space-3);
+  border-left: 2px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--al-ink-500);
+  transition: color var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease),
+              background-color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-rail__link:hover { color: var(--al-navy-90); }
+.al-sv-rail__link.is-active {
+  color: var(--al-navy-90);
+  font-weight: 600;
+  border-left-color: var(--al-blue-60);
+  background: linear-gradient(90deg, var(--al-blue-10), transparent);
+}
+.al-sv-rail__dot {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--al-ink-500);
+  transition: transform var(--al-t-fast) var(--al-ease);
+}
+.al-sv-rail__link.is-active .al-sv-rail__dot { transform: scale(1.25); }
+/* Per-pillar dot accents (order matches the pillar blocks) */
+.al-sv-rail__list li:nth-child(1) .al-sv-rail__dot { background: var(--al-navy-70); }
+.al-sv-rail__list li:nth-child(2) .al-sv-rail__dot { background: var(--al-blue-60); }
+.al-sv-rail__list li:nth-child(3) .al-sv-rail__dot { background: var(--al-blue-60); }
+.al-sv-rail__list li:nth-child(4) .al-sv-rail__dot { background: var(--al-purple); }
+.al-sv-rail__list li:nth-child(5) .al-sv-rail__dot { background: var(--al-teal); }
+.al-sv-rail__list li:nth-child(6) .al-sv-rail__dot { background: var(--al-navy-70); }
+.al-sv-rail__cta { margin-top: var(--al-space-4); justify-content: center; }
+
+/* Pillar blocks */
+.al-sv-pillars__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-8);
+}
+.al-sv-pillar {
+  --sv: var(--al-blue-60);
+  --sv-t: var(--al-blue-70);
+  --sv-tint: var(--al-blue-10);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: var(--al-space-7);
+  align-items: start;
+  scroll-margin-top: calc(var(--al-navbar-h) + var(--al-space-6));
+  padding: var(--al-space-6) 0 var(--al-space-6) var(--al-space-6);
+  border-top: 1px solid var(--al-border);
+}
+.al-sv-pillar::before {               /* accent left rule */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--al-space-6);
+  width: 4px;
+  height: 44px;
+  border-radius: var(--al-radius-pill);
+  background: var(--sv);
+}
+.al-sv-pillar--advisory { --sv: var(--al-navy-70); --sv-t: var(--al-navy-70); --sv-tint: var(--al-navy-tint); }
+.al-sv-pillar--dev      { --sv: var(--al-blue-60); --sv-t: var(--al-blue-70); --sv-tint: var(--al-blue-10); }
+.al-sv-pillar--sales    { --sv: var(--al-blue-60); --sv-t: var(--al-blue-70); --sv-tint: var(--al-blue-10); }
+.al-sv-pillar--agent    { --sv: var(--al-purple);  --sv-t: var(--al-purple-70); --sv-tint: var(--al-purple-tint); }
+.al-sv-pillar--data     { --sv: var(--al-teal);    --sv-t: var(--al-teal-70);   --sv-tint: var(--al-teal-tint); }
+.al-sv-pillar--support  { --sv: var(--al-navy-70); --sv-t: var(--al-navy-70); --sv-tint: var(--al-navy-tint); }
+
+.al-sv-pillar__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--al-space-2);
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sv-t);
+  margin-bottom: var(--al-space-3);
+}
+.al-sv-pillar__idx {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  padding: 2px 6px;
+  border-radius: var(--al-radius-pill);
+  background: var(--sv-tint);
+  color: var(--sv-t);
+  font-weight: 700;
+}
+.al-sv-pillar__title {
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--al-navy-90);
+  margin-bottom: var(--al-space-4);
+}
+.al-sv-pillar__lede {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--al-ink-900);
+  margin-bottom: var(--al-space-5);
+  max-width: 54ch;
+}
+.al-sv-pillar__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--al-space-2) var(--al-space-5);
+  margin-bottom: var(--al-space-5);
+}
+.al-sv-pillar__list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--al-ink-900);
+}
+.al-sv-pillar__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 9px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sv);
+}
+.al-sv-pillar__rel { margin-top: var(--al-space-2); }
+.al-sv-pillar__rel a { color: var(--sv-t); font-weight: 500; }
+.al-sv-pillar__rel a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---- C. PILLAR VISUAL PANELS ---------------------------------------------- */
+.al-sv-pillar__aside { align-self: stretch; }
+
+.al-sv-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-4);
+  padding: var(--al-space-5);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-panel);
+  box-shadow: 0 10px 28px rgba(3, 45, 96, .07);
+}
+.al-sv-panel__label {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sv-t);
+}
+.al-sv-panel__cap {
+  margin-top: auto;
+  padding-top: var(--al-space-2);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--al-ink-500);
+}
+
+/* Big metric */
+.al-sv-metric { display: flex; flex-direction: column; gap: 2px; }
+.al-sv-metric--row { flex-direction: row; align-items: center; }
+.al-sv-metric__num {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--al-navy-90);
+  font-variant-numeric: tabular-nums;
+}
+.al-sv-metric__cap {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--al-ink-500);
+  max-width: 30ch;
+}
+
+/* Label + progress + value rows */
+.al-sv-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px var(--al-space-3);
+}
+.al-sv-row__label { font-size: 14px; color: var(--al-ink-900); }
+.al-sv-row__val {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  font-family: var(--al-font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--al-navy-90);
+  text-align: right;
+}
+.al-sv-row .al-prog { grid-column: 1 / -1; }
+
+/* Per-pillar accent for progress fills + bars (reuse case-study primitives) */
+.al-sv-pillar--data  .al-prog__fill { background: var(--al-teal); }
+.al-sv-pillar--data  .al-bar--accent { background: var(--al-teal); }
+.al-sv-pillar--agent .al-prog__fill { background: var(--al-purple); }
+.al-sv-pillar--agent .al-bar--accent { background: var(--al-purple); }
+
+/* Reveal triggers — the panels aren't inside .al-card--case, so re-map the
+   case-study screen animations onto this aside's own reveal (.al-reveal adds
+   .is-visible; under reduced-motion it is added immediately -> filled frame). */
+.al-sv-pillar__aside.is-visible .al-prog__fill { transform: scaleX(1); }
+.al-sv-pillar__aside.is-visible .al-bar { transform: scaleY(1); }
+
+/* Bars wrapper (gives .al-bars a height outside the cqw laptop context) */
+.al-sv-barwrap { height: 84px; }
+.al-sv-barwrap--sm { height: 52px; }
+.al-sv-barwrap .al-bars { height: 100%; }
+.al-sv-barwrap .al-bar { border-radius: 3px 3px 0 0; }
+
+/* Architecture layer stack */
+.al-sv-stack { display: flex; flex-direction: column; gap: 0; }
+.al-sv-stack__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--al-space-3);
+  padding: var(--al-space-3) var(--al-space-4);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+  background: var(--al-surface);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--al-navy-90);
+}
+.al-sv-stack__row--core {
+  background: var(--al-blue-10);
+  border-color: #CBE3F7;
+}
+.al-sv-stack__chips { display: inline-flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.al-sv-stack__flow {
+  display: flex;
+  justify-content: center;
+  height: 16px;
+}
+.al-sv-stack__flowdot {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--al-border), var(--sv));
+}
+
+/* Data Cloud identity-merge row */
+.al-sv-merge {
+  display: flex;
+  align-items: center;
+  gap: var(--al-space-3);
+  padding: var(--al-space-4);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+  background: var(--al-surface);
+}
+.al-sv-merge__srcs { display: inline-flex; flex-direction: column; gap: 4px; }
+.al-sv-merge__arrow { color: var(--al-teal-70); font-weight: 700; font-size: 18px; }
+.al-sv-merge__out { display: flex; flex-direction: column; gap: 2px; }
+.al-sv-merge__out b { font-size: 16px; color: var(--al-navy-90); }
+
+/* Agentforce laptop console */
+.al-sv-laptop {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
+}
+.al-sv-laptop .al-laptop { width: 100%; }
+.al-sv-agent__dot {
+  display: inline-block;
+  width: .5em; height: .5em;
+  border-radius: 50%;
+  background: currentColor;
+}
+.al-sv-agent__msg {
+  max-width: 88%;
+  padding: .5em .7em;
+  font-size: .82em;
+  line-height: 1.4;
+  border-radius: .6em;
+}
+.al-sv-agent__msg--user {
+  align-self: flex-end;
+  background: var(--al-blue-10);
+  color: var(--al-navy-90);
+  border-bottom-right-radius: .2em;
+}
+.al-sv-agent__msg--bot {
+  align-self: flex-start;
+  background: #F1F3F6;
+  color: #16181D;
+  border-bottom-left-radius: .2em;
+}
+.al-sv-agent__action {
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+  padding: .55em .65em;
+  border: 1px solid #E5D7F8;
+  border-left: 3px solid var(--al-purple);
+  border-radius: .5em;
+  background: #FBF8FF;
+}
+.al-sv-agent__arow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5em;
+  font-size: .76em;
+  color: var(--al-ink-500);
+}
+.al-sv-agent__guards { display: flex; flex-wrap: wrap; gap: .4em; }
+
+/* Pillar reveal stagger */
+.al-sv-pillar .al-sv-pillar__aside { transition-delay: 80ms; }
+
+/* ---- RESPONSIVE ----------------------------------------------------------- */
+@media (max-width: 991px) {
+  .al-sv-flow { flex-direction: column; }
+  .al-sv-conn {
+    width: 2px;
+    height: 44px;
+    align-self: center;
+    background: linear-gradient(180deg, rgba(143, 208, 255, .12), rgba(143, 208, 255, .45), rgba(143, 208, 255, .12));
+  }
+  .al-sv-conn::after {
+    top: 0;
+    left: 50%;
+    margin-top: 0;
+    margin-left: -4.5px;
+    animation-name: al-sv-flow-y;
+  }
+
+  /* Rail becomes a horizontal chip strip above the pillars */
+  .al-sv-pillars { grid-template-columns: 1fr; gap: var(--al-space-6); }
+  .al-sv-rail {
+    position: static;
+    top: auto;
+    gap: var(--al-space-3);
+  }
+  .al-sv-rail__label { padding-left: 0; }
+  .al-sv-rail__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--al-space-2);
+    border-left: 0;
+  }
+  .al-sv-rail__link {
+    margin-left: 0;
+    padding: 8px 14px;
+    border: 1px solid var(--al-border);
+    border-radius: var(--al-radius-pill);
+  }
+  .al-sv-rail__link.is-active {
+    border-color: var(--al-blue-60);
+    background: var(--al-blue-10);
+  }
+  .al-sv-rail__cta { display: none; }  /* CTA already lives in the closing band */
+}
+
+@keyframes al-sv-flow-y {
+  0%   { top: 0;    opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@media (max-width: 767px) {
+  .al-sv-pillar {
+    grid-template-columns: 1fr;
+    gap: var(--al-space-5);
+    padding-left: var(--al-space-5);
+  }
+  .al-sv-pillar__list { grid-template-columns: 1fr; }
+  .al-sv-pillar__title { font-size: 24px; }
+  .al-sv-pillar .al-sv-pillar__aside { transition-delay: 0ms; }
+  .al-sv-node__title { font-size: 20px; }
+}
+
+/* ---- REDUCED MOTION ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Freeze the travelling pulse; leave the static gradient rail visible. */
+  .al-sv-conn::after { animation: none; opacity: .9; left: 50%; margin-left: -4.5px; top: 50%; margin-top: -4.5px; }
+  /* Fills / bars are set to their final frame immediately by initScrollReveal
+     (.is-visible added at once), and the global reduced-motion rule zeroes the
+     transition duration — so panels paint filled with no motion. */
+}
+
+/* =============================================================================
+   SERVICES PAGE REDESIGN (al-sv-* v2) — additive layer for the approved
+   /services.html rebuild. Replaces the old 3-node flow + sticky-rail pillars
+   with: a layered platform stack (navy), a 7-card product grid + featured
+   Agentforce showcase (surface), an engineering-practices row (white), and a
+   grouped tech-&-stack chip panel (surface). Uses ONLY existing :root tokens and
+   reuses the case-study screen primitives (.al-laptop / .al-scr / .al-cs-chip /
+   .al-prog / .al-sv-agent__*). Accent discipline: purple = Agentforce/AI,
+   teal = Data/Integration, blue = Sales/core, navy = practices. Every animation
+   degrades to a static frame under prefers-reduced-motion (block at the end).
+   ============================================================================= */
+
+/* ---- Shared section head (surface/white sections 3–5) --------------------- */
+.al-sv-head { max-width: 62ch; margin-bottom: var(--al-space-7); }
+.al-sv-head__lede {
+  margin-top: var(--al-space-3);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--al-ink-900);
+  max-width: 60ch;
+}
+
+/* ---- SECTION 2: LAYERED PLATFORM STACK (navy) ----------------------------- */
+.al-sv-layers {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  margin-top: var(--al-space-8);
+}
+.al-sv-layer {
+  --la: #8FD0FF;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+  padding: var(--al-space-5) var(--al-space-6);
+  border-radius: var(--al-radius-panel);
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+  overflow: hidden;
+}
+.al-sv-layer::before {                /* accent edge */
+  content: "";
+  position: absolute;
+  background: var(--la);
+}
+/* Top two tiers: accent LEFT edge */
+.al-sv-layer--automate::before,
+.al-sv-layer--act::before { left: 0; top: 0; bottom: 0; width: 4px; }
+/* Base tier: teal TOP edge — the foundation slab everything rests on */
+.al-sv-layer--foundation::before { left: 0; right: 0; top: 0; height: 4px; }
+
+.al-sv-layer--automate   { --la: #C9A6F5; }   /* purple  · Agentforce/AI */
+.al-sv-layer--act        { --la: #8FD0FF; }   /* blue    · products */
+.al-sv-layer--foundation { --la: #7FE0D8; }   /* teal    · platform/integration */
+
+.al-sv-layer__label {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--la);
+}
+.al-sv-layer__title {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--al-white);
+}
+.al-sv-layer__sub {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(214, 228, 245, .82);
+  max-width: 68ch;
+}
+.al-sv-layer__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--al-space-2);
+}
+.al-sv-layer__pill {
+  font-family: var(--al-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--al-radius-pill);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: rgba(214, 228, 245, .92);
+}
+/* Products tier: identical pills carry a subtle blue edge to echo the tier accent */
+.al-sv-layer--act .al-sv-layer__pill { border-color: rgba(143, 208, 255, .30); }
+
+/* Vertical connector rail + upward pulse-dot between tiers (decorative) */
+.al-sv-rung {
+  align-self: center;
+  position: relative;
+  width: 2px;
+  height: 32px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(143, 208, 255, .12), rgba(143, 208, 255, .45), rgba(143, 208, 255, .12));
+}
+.al-sv-rung::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  margin-left: -4.5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #BCE2FF;
+  box-shadow: 0 0 10px 1px rgba(143, 208, 255, .85);
+  animation: al-sv-rise 2.6s var(--al-ease) infinite;
+}
+@keyframes al-sv-rise {
+  0%   { top: 100%; opacity: 0; }   /* rise from the foundation upward */
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 0;    opacity: 0; }
+}
+
+/* ---- SECTION 3: FEATURED SHOWCASE ----------------------------------------- */
+.al-sv-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--al-space-7);
+  align-items: center;
+  margin-bottom: var(--al-space-8);
+  padding: var(--al-space-6);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-panel);
+  box-shadow: 0 10px 28px rgba(3, 45, 96, .07);
+}
+.al-sv-feature__stage { min-width: 0; }
+.al-sv-feature__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-4);
+  min-width: 0;
+}
+.al-sv-feature__label {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-purple-70);
+}
+.al-sv-feature__desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--al-ink-900);
+  max-width: 52ch;
+}
+/* Scope the Data Cloud tile inside the feature to teal (panel label + fill). */
+.al-sv-panel--data { --sv-t: var(--al-teal-70); }
+.al-sv-feature .al-prog__fill { background: var(--al-teal); }
+/* The feature isn't a .al-card--case / .al-sv-pillar__aside, so re-map the
+   case-study reveal trigger onto its own .al-reveal .is-visible state. */
+.al-sv-feature.is-visible .al-prog__fill { transform: scaleX(1); }
+
+/* ---- SECTION 3: PRODUCT CARD GRID ----------------------------------------- */
+.al-sv-prod-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--al-space-5);
+}
+.al-sv-prod {
+  --pa: var(--al-blue-60);
+  --pa-t: var(--al-blue-70);
+  --pa-tint: var(--al-blue-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+  padding: var(--al-space-5);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+  /* Card is its own .al-reveal target: opacity carries the scroll-in fade (the
+     base .al-reveal opacity transition would otherwise be clobbered by this
+     shorthand), transform carries both the reveal slide and the hover lift, and
+     box-shadow/border carry hover. Kept snappy so the staggered reveal reads
+     smoothly and hover stays instant once the stagger delay is cleared (JS). */
+  transition: opacity var(--al-t-reveal) ease-out,
+              transform var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-prod:hover {
+  box-shadow: var(--al-shadow-hover);
+  transform: translateY(-2px);
+  border-color: #D3DDE9;
+}
+.al-sv-prod--blue   { --pa: var(--al-blue-60); --pa-t: var(--al-blue-70);   --pa-tint: var(--al-blue-10); }
+.al-sv-prod--teal   { --pa: var(--al-teal);    --pa-t: var(--al-teal-70);   --pa-tint: var(--al-teal-tint); }
+.al-sv-prod--purple { --pa: var(--al-purple);  --pa-t: var(--al-purple-70); --pa-tint: var(--al-purple-tint); }
+
+.al-sv-prod__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--al-radius-btn);
+  background: var(--pa-tint);
+  color: var(--pa-t);
+}
+.al-sv-prod__icon svg { width: 22px; height: 22px; }
+.al-sv-prod__name {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--al-navy-90);
+}
+.al-sv-prod__desc {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--al-ink-900);
+}
+.al-sv-prod__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--al-space-2);
+}
+.al-sv-prod__rel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: var(--al-space-2);
+  font-size: 14px;
+}
+.al-sv-prod__rel a {
+  color: var(--pa-t);
+  font-weight: 500;
+  width: fit-content;
+}
+.al-sv-prod__rel a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---- Reusable chip modifiers: grey recolor + compact size ------------------
+   Additive over .al-cs-chip (case-study tech strip). Base component untouched. */
+.al-cs-chip--grey {
+  color: var(--al-ink-900);
+  background: linear-gradient(180deg, #FBFCFD 0%, #EEF1F5 100%);
+  border-color: var(--al-border);
+}
+.al-cs-chip--grey::before { background: var(--al-ink-500); }
+.al-cs-chip--grey:hover {
+  border-color: #CBD3DD;
+  background: linear-gradient(180deg, var(--al-white) 0%, #E7EBF0 100%);
+}
+.al-cs-chip--sm {
+  font-size: 13px;
+  padding: 6px 12px 6px 10px;
+  gap: 7px;
+}
+.al-cs-chip--sm::before { width: 6px; height: 6px; }
+
+/* ---- SECTION 4: ENGINEERING PRACTICES (white) ----------------------------- */
+.al-sv-practice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--al-space-5);
+}
+.al-sv-practice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+  padding: var(--al-space-5);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+}
+.al-sv-practice__idx {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-width: 30px;
+  padding: 3px 8px;
+  border-radius: var(--al-radius-btn);
+  background: var(--al-navy-tint);
+  color: var(--al-navy-70);
+  font-family: var(--al-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+.al-sv-practice__title {
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--al-navy-90);
+}
+.al-sv-practice__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-2);
+}
+.al-sv-practice__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--al-ink-900);
+}
+.al-sv-practice__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--al-blue-60);
+}
+
+/* ---- SECTION 5: GROUPED TECH & STACK PANEL (surface) ---------------------- */
+.al-sv-stack-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--al-space-6) var(--al-space-7);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-panel);
+  box-shadow: 0 10px 28px rgba(3, 45, 96, .06);
+}
+.al-sv-stack-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+  padding-block: var(--al-space-5);
+}
+.al-sv-stack-group + .al-sv-stack-group { border-top: 1px solid var(--al-border); }
+.al-sv-stack-group:first-child { padding-top: 0; }
+.al-sv-stack-group:last-child  { padding-bottom: 0; }
+.al-sv-stack-group__label {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-ink-500);
+}
+
+/* ---- RESPONSIVE ----------------------------------------------------------- */
+@media (max-width: 991px) {
+  .al-sv-prod-grid      { grid-template-columns: repeat(2, 1fr); }
+  .al-sv-practice-grid  { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+  .al-sv-feature { grid-template-columns: 1fr; gap: var(--al-space-6); }
+  .al-sv-prod-grid { grid-template-columns: 1fr; }
+  .al-sv-layer__title { font-size: 20px; }
+  .al-sv-stack-panel { padding: var(--al-space-5) var(--al-space-5); }
+}
+@media (max-width: 479px) {
+  .al-sv-practice-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- REDUCED MOTION ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Freeze the upward pulse-dot at the rail's midpoint — leaves a static rail. */
+  .al-sv-rung::after { animation: none; top: 50%; margin-top: -4.5px; opacity: .9; }
+  /* Product-card hover lift is disabled (mirrors the global .al-card rule). */
+  .al-sv-prod:hover { transform: none; }
+  /* The feature's Match-confidence fill is set to its final frame immediately by
+     initScrollReveal (.is-visible added at once); the global reduced-motion rule
+     zeroes the transition, so it paints filled with no sweep. */
+}
+
+/* =============================================================================
+   SERVICES PAGE — OPENER OVERRIDES (hero section removed)
+   The immersive hero was removed; the layered platform section is now the page
+   opener. These rules (a) make it fill the first viewport below the sticky
+   navbar, (b) size the promoted <h1>, (c) compress internal spacing so the whole
+   stack fits one screen on typical laptop heights, and (d) retire the removed
+   product-card "Related work" links. All additive; tokens only.
+   ============================================================================= */
+
+/* The connected-platform section now carries the page's single <h1>. Keep it
+   controlled (not the 56px global h1) so the stack fits the viewport. */
+.al-sv-platform__head h1 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Compress the stack so head + three tiers + foot fit one screen. */
+.al-sv-platform__lede { font-size: 16px; line-height: 1.6; max-width: 78ch; }
+.al-sv-layers        { margin-top: var(--al-space-5); }
+.al-sv-layer         { padding: var(--al-space-4) var(--al-space-5); gap: var(--al-space-2); }
+.al-sv-rung          { height: 18px; }
+.al-sv-platform__foot {
+  margin-top: var(--al-space-4);
+  padding-top: var(--al-space-4);
+}
+
+/* Fill the first viewport (below the 68px sticky navbar) and center the stack.
+   Desktop/tablet only — on phones the stack flows naturally at its own height. */
+@media (min-width: 768px) {
+  .al-sv-platform {
+    display: flex;
+    align-items: center;
+    min-height: calc(100svh - var(--al-navbar-h));
+    padding-block: var(--al-space-6);
+  }
+  .al-sv-platform > .al-container { width: 100%; }
+}
+
+/* Case-study links were removed from the product cards. */
+.al-sv-prod__rel { display: none; }
+
+/* =============================================================================
+   SERVICES — SECTION SWAP: LIGHT opener + DARK product showcase
+   The connected-platform opener is now a LIGHT (white) section; the products
+   section is the dark brand-gradient showcase with solid-navy cards that flip to
+   white on hover. Page opts out of the particle field (<body data-no-star-field>)
+   so both backgrounds are static CSS. Additive over the al-sv-* base rules above;
+   tokens only. Every accent respects the -70 text tokens for AA.
+   ============================================================================= */
+
+/* ---- A. OPENER (connected platform) → LIGHT MODE ------------------------- */
+.al-sv-platform { background: var(--al-white); }
+
+/* Head + foot: dark heading, muted lede/foot on white. */
+.al-sv-platform__lede      { color: var(--al-ink-500); }
+.al-sv-platform__foot      { color: var(--al-ink-500); border-top-color: var(--al-border); }
+.al-sv-platform__foot-mark { color: var(--al-blue-60); }
+
+/* Tiles: glass → solid light cards with a soft shadow. */
+.al-sv-layer {
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  box-shadow: 0 6px 20px rgba(3, 45, 96, .06);
+}
+/* Accent edge → full-strength brand token; label → AA -70 text token. */
+.al-sv-layer--automate   { --la: var(--al-purple);  --la-text: var(--al-purple-70); }
+.al-sv-layer--act        { --la: var(--al-blue-60); --la-text: var(--al-blue-70); }
+.al-sv-layer--foundation { --la: var(--al-teal);    --la-text: var(--al-teal-70); }
+.al-sv-layer__label { color: var(--la-text); }
+.al-sv-layer__title { color: var(--al-navy-90); }
+.al-sv-layer__sub   { color: var(--al-ink-500); }
+
+/* Pills on light: foundation → grey surface; products → blue tint. */
+.al-sv-layer__pill {
+  background: var(--al-surface);
+  border: 1px solid var(--al-border);
+  color: var(--al-ink-900);
+}
+.al-sv-layer--act .al-sv-layer__pill {
+  background: var(--al-blue-10);
+  border-color: rgba(1, 118, 211, .22);
+  color: var(--al-blue-70);
+}
+
+/* Connector rail + pulse → darker blue for visibility on white. */
+.al-sv-rung {
+  background: linear-gradient(180deg, rgba(1,118,211,.10), rgba(1,118,211,.42), rgba(1,118,211,.10));
+}
+.al-sv-rung::after {
+  background: var(--al-blue-60);
+  box-shadow: 0 0 8px 1px rgba(1, 118, 211, .5);
+}
+
+/* ---- B. PRODUCTS SHOWCASE → DARK BRAND GRADIENT -------------------------- */
+.al-sv-products {
+  background-color: var(--al-hero-navy);          /* #021B3A base */
+  background-image:
+    radial-gradient(1100px 640px at 10% -12%, rgba(1, 118, 211, .34), transparent 60%),
+    radial-gradient(950px 640px at 104% 4%, rgba(117, 38, 227, .24), transparent 56%),
+    radial-gradient(1050px 760px at 74% 116%, rgba(3, 180, 167, .18), transparent 58%);
+  background-repeat: no-repeat;
+  color: rgba(255, 255, 255, .82);
+}
+.al-sv-products .al-sv-head h2      { color: var(--al-white); }
+.al-sv-products .al-sv-head__lede   { color: rgba(214, 228, 245, .90); }
+.al-sv-products .al-eyebrow         { color: #8FD0FF; }
+
+/* Product cards: solid navy at rest → flip to the white card on hover.
+   All colour-carrying props transition so the flip is smooth. */
+.al-sv-products .al-sv-prod {
+  /* Same dark-glass fill as the featured block (.al-sv-products .al-sv-feature). */
+  background: rgba(255, 255, 255, .05);
+  border-color: rgba(255, 255, 255, .14);
+  transition: opacity var(--al-t-reveal) ease-out,
+              transform var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease),
+              background-color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-products .al-sv-prod__name { color: var(--al-white); }
+.al-sv-products .al-sv-prod__desc { color: rgba(214, 228, 245, .82); }
+.al-sv-products .al-sv-prod--blue   { --pa-light: #8FD0FF; }
+.al-sv-products .al-sv-prod--teal   { --pa-light: #7FE0D8; }
+.al-sv-products .al-sv-prod--purple { --pa-light: #C9A6F5; }
+.al-sv-products .al-sv-prod__icon {
+  background: color-mix(in srgb, var(--pa) 26%, transparent);
+  color: var(--pa-light, #8FD0FF);
+}
+.al-sv-products .al-sv-prod .al-cs-chip--grey {
+  color: rgba(214, 228, 245, .92);
+  background: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .16);
+}
+.al-sv-products .al-sv-prod .al-cs-chip--grey::before { background: rgba(255, 255, 255, .5); }
+
+/* Smooth colour flip of the inner bits */
+.al-sv-products .al-sv-prod__name,
+.al-sv-products .al-sv-prod__desc,
+.al-sv-products .al-sv-prod__icon,
+.al-sv-products .al-sv-prod .al-cs-chip--grey {
+  transition: color var(--al-t-fast) var(--al-ease),
+              background-color var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease);
+}
+
+/* Hover: white card (the current light look) + keep the lift + shadow. */
+.al-sv-products .al-sv-prod:hover {
+  background: var(--al-white);
+  border-color: rgba(255, 255, 255, .55);
+  /* Even white halo (0 offset + spread) so the flipped-white card glows off the
+     dark gradient — a crisp inner ring, a wide soft glow, and a navy drop shadow
+     underneath for grounding/depth. */
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .45),
+              0 0 40px 8px rgba(255, 255, 255, .32),
+              0 16px 40px rgba(3, 45, 96, .30);
+  transform: translateY(-2px);
+}
+.al-sv-products .al-sv-prod:hover .al-sv-prod__name { color: var(--al-navy-90); }
+.al-sv-products .al-sv-prod:hover .al-sv-prod__desc { color: var(--al-ink-900); }
+.al-sv-products .al-sv-prod:hover .al-sv-prod__icon { background: var(--pa-tint); color: var(--pa-t); }
+.al-sv-products .al-sv-prod:hover .al-cs-chip--grey {
+  color: var(--al-ink-900);
+  background: linear-gradient(180deg, #FBFCFD 0%, #EEF1F5 100%);
+  border-color: var(--al-border);
+}
+.al-sv-products .al-sv-prod:hover .al-cs-chip--grey::before { background: var(--al-ink-500); }
+
+/* ---- C. FEATURED BLOCK on the gradient (dark glass) --------------------- */
+.al-sv-products .al-sv-feature {
+  background: rgba(255, 255, 255, .05);
+  border-color: rgba(255, 255, 255, .14);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+}
+.al-sv-products .al-sv-feature__label { color: #C9A6F5; }
+.al-sv-products .al-sv-feature__desc  { color: rgba(214, 228, 245, .86); }
+/* Data Cloud tile → dark glass */
+.al-sv-products .al-sv-panel {
+  background: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .16);
+  box-shadow: none;
+}
+.al-sv-products .al-sv-panel__label   { color: #7FE0D8; }
+.al-sv-products .al-sv-panel__cap     { color: rgba(214, 228, 245, .70); }
+.al-sv-products .al-sv-metric__num    { color: var(--al-white); }
+.al-sv-products .al-sv-metric__cap    { color: rgba(214, 228, 245, .72); }
+.al-sv-products .al-sv-row__label     { color: rgba(214, 228, 245, .86); }
+.al-sv-products .al-sv-row__val       { color: var(--al-white); }
+.al-sv-products .al-sv-merge__arrow   { color: #7FE0D8; }
+.al-sv-products .al-sv-merge__out b   { color: var(--al-white); }
+.al-sv-products .al-sv-panel .al-lbl  { color: rgba(214, 228, 245, .78); }
+/* Progress track + the merge tile chips → dark-glass variants */
+.al-sv-products .al-sv-panel .al-prog { background: rgba(255, 255, 255, .12); }
+.al-sv-products .al-sv-panel .al-chip--grey {
+  color: rgba(214, 228, 245, .92);
+  background: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .16);
+}
+
+/* =============================================================================
+   SERVICES PAGE — APPROVED REBUILD (al-sv-* v3)  [ADDITIVE — appended last]
+   Rebuild of /services.html around the approved independence-first structure:
+     1. HERO         — light, expertise + credibility stat strip (.al-sv-hero)
+     2. CAPABILITIES — 13 services as expandable accordion cards on the dark
+                       brand-gradient showcase; dark-glass at rest, flip to the
+                       white look on hover OR when expanded (.al-sv-cap*)
+     3. HOW WE DELIVER — 6-step process timeline + engagement models (.al-sv-timeline,
+                       .al-sv-callout, .al-sv-engage*)
+     4. TECH & STACK — reuses the grouped chip panel (.al-sv-stack-*), 7 categories
+     5. WHY US       — four proof cards (.al-sv-why-grid / .al-sv-whycard)
+   Reuses existing tokens + primitives: .al-container/.al-section, .al-eyebrow,
+   .al-btn, .al-stat-strip/[data-countup], .al-reveal, .al-accordion__trigger/
+   __panel/__icon (initAccordion), .al-cs-chip(--grey/--sm), .al-cta-band.
+   Accent discipline: purple = Agentforce/AI, teal = Data/Integration/Commerce,
+   blue = core products/services. AA everywhere; every animation degrades to a
+   static frame under prefers-reduced-motion (block at the end). Tokens only.
+   ============================================================================= */
+
+/* ---- 1. HERO (light) ------------------------------------------------------ */
+.al-sv-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--al-white);
+  padding-block: var(--al-space-9) var(--al-space-8);
+}
+/* Subtle, legible brand-gradient wash (decorative, no canvas). */
+.al-sv-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(720px 380px at 12% -12%, rgba(1, 118, 211, .10), transparent 60%),
+    radial-gradient(680px 420px at 100% 6%, rgba(117, 38, 227, .07), transparent 58%);
+}
+.al-sv-hero > .al-container { position: relative; z-index: 1; }
+.al-sv-hero__inner { max-width: 62ch; }
+.al-sv-hero__title {
+  font-size: clamp(32px, 4.6vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin-bottom: var(--al-space-5);
+}
+.al-sv-hero__sub {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--al-ink-900);
+  max-width: 70ch;
+  margin-bottom: var(--al-space-6);
+}
+.al-sv-hero__actions { display: flex; flex-wrap: wrap; gap: var(--al-space-3); }
+
+/* Fill the first viewport (below the 68px sticky navbar) and vertically centre
+   the hero content — desktop/tablet only; on phones it flows at its own height. */
+@media (min-width: 768px) {
+  .al-sv-hero {
+    display: flex;
+    align-items: center;
+    min-height: calc(100svh - var(--al-navbar-h));
+    padding-block: var(--al-space-7);
+  }
+  .al-sv-hero > .al-container { width: 100%; }
+}
+
+/* ---- 2. CAPABILITIES — sub-groups + accordion cards ----------------------- */
+.al-sv-capgroups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-8);
+}
+.al-sv-capgroup__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--al-space-3);
+  margin-bottom: var(--al-space-5);
+  padding-bottom: var(--al-space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+}
+.al-sv-capgroup__kicker {
+  font-family: var(--al-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8FD0FF;
+}
+.al-sv-capgroup__count {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(214, 228, 245, .70);
+}
+.al-sv-capgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--al-space-5);
+  align-items: start;
+}
+
+/* Card shell: dark-glass at rest (mirrors the product-showcase treatment). */
+.al-sv-cap {
+  --pa: var(--al-blue-60);
+  --pa-t: var(--al-blue-70);
+  --pa-tint: var(--al-blue-10);
+  --pa-light: #8FD0FF;
+  border-radius: var(--al-radius-card);
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .14);
+  overflow: hidden;
+  /* opacity carries the scroll-in fade; transform carries reveal slide + hover
+     lift (kept at t-fast like .al-sv-prod); colour props carry the flip. */
+  transition: opacity var(--al-t-reveal) ease-out,
+              transform var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease),
+              background-color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap--blue   { --pa: var(--al-blue-60); --pa-t: var(--al-blue-70);   --pa-tint: var(--al-blue-10);   --pa-light: #8FD0FF; }
+.al-sv-cap--teal   { --pa: var(--al-teal);    --pa-t: var(--al-teal-70);   --pa-tint: var(--al-teal-tint); --pa-light: #7FE0D8; }
+.al-sv-cap--purple { --pa: var(--al-purple);  --pa-t: var(--al-purple-70); --pa-tint: var(--al-purple-tint); --pa-light: #C9A6F5; }
+
+/* h3 wraps the trigger (ARIA APG pattern) — neutralise the global h3 type so the
+   visual heading is .al-sv-cap__name. */
+.al-sv-cap__heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: normal;
+  color: inherit;
+}
+/* Trigger: full-width header button (overrides the base .al-accordion__trigger). */
+.al-sv-cap__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--al-space-4);
+  width: 100%;
+  padding: var(--al-space-5);
+  text-align: left;
+}
+.al-sv-cap__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--al-radius-btn);
+  background: color-mix(in srgb, var(--pa) 26%, transparent);
+  color: var(--pa-light);
+  transition: background-color var(--al-t-fast) var(--al-ease),
+              color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__icon svg { width: 22px; height: 22px; }
+.al-sv-cap__head { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.al-sv-cap__name {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--al-white);
+  transition: color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__desc {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: rgba(214, 228, 245, .82);
+  transition: color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__trigger .al-accordion__icon {
+  flex: 0 0 auto;
+  color: var(--pa-light);
+}
+
+/* Panel: progressive enhancement — OPEN by default so content is readable if JS
+   never runs; the synchronous `html.js` flag (set in <head>) collapses it before
+   first paint when JS is present, and initAccordion then drives it. */
+.al-sv-cap__panel { max-height: none; }
+html.js .al-sv-cap__panel { max-height: 0; }
+.al-sv-cap__panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+  padding: 0 var(--al-space-5) var(--al-space-5);
+}
+.al-sv-cap__what {
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pa-light);
+  transition: color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--al-space-1) var(--al-space-4);
+}
+.al-sv-cap__list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(214, 228, 245, .90);
+  transition: color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--pa-light);
+  transition: background-color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__chips { margin-top: var(--al-space-1); }
+.al-sv-cap__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: var(--al-space-1);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pa-light);
+  transition: color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-cap__cta:hover { text-decoration: underline; text-underline-offset: 2px; }
+.al-sv-cap__cta:focus-visible { outline: 2px solid var(--pa-light); outline-offset: 3px; border-radius: 2px; }
+
+/* FLIP: white look on hover OR when the card's trigger is expanded. Panel copy is
+   dual-legible — light on dark glass (rest / no-JS) and dark on the flipped-white
+   card — so it reads in both states. */
+.al-sv-cap:hover,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) {
+  background: var(--al-white);
+  border-color: rgba(255, 255, 255, .55);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .45),
+              0 0 40px 8px rgba(255, 255, 255, .28),
+              0 16px 40px rgba(3, 45, 96, .30);
+}
+.al-sv-cap:hover { transform: translateY(-2px); }
+
+.al-sv-cap:hover .al-sv-cap__name,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__name { color: var(--al-navy-90); }
+.al-sv-cap:hover .al-sv-cap__desc,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__desc { color: var(--al-ink-500); }
+.al-sv-cap:hover .al-sv-cap__icon,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__icon { background: var(--pa-tint); color: var(--pa-t); }
+.al-sv-cap:hover .al-accordion__icon,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-accordion__icon { color: var(--pa-t); }
+.al-sv-cap:hover .al-sv-cap__what,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__what { color: var(--pa-t); }
+.al-sv-cap:hover .al-sv-cap__list li,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__list li { color: var(--al-ink-900); }
+.al-sv-cap:hover .al-sv-cap__list li::before,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__list li::before { background: var(--pa); }
+.al-sv-cap:hover .al-sv-cap__cta,
+.al-sv-cap:has(.al-accordion__trigger[aria-expanded="true"]) .al-sv-cap__cta { color: var(--pa-t); }
+
+/* ---- 3. HOW WE DELIVER — process timeline + engagement models (light) ----- */
+.al-sv-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--al-space-5);
+  margin-top: var(--al-space-7);
+}
+/* Connecting rail behind the node row (horizontal on desktop). */
+.al-sv-timeline::before {
+  content: "";
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  right: 21px;
+  height: 2px;
+  z-index: 0;
+  background: linear-gradient(90deg, var(--al-blue-10), var(--al-blue-60), var(--al-blue-10));
+}
+.al-sv-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-2);
+}
+.al-sv-step__node {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--al-radius-pill);
+  background: var(--al-white);
+  border: 2px solid var(--al-blue-60);
+  color: var(--al-blue-70);
+  font-family: var(--al-font-mono);
+  font-size: 14px;
+  font-weight: 500;
+}
+.al-sv-step__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--al-navy-90);
+  line-height: 1.3;
+}
+.al-sv-step__desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--al-ink-500);
+}
+
+/* Differentiator callout */
+.al-sv-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--al-space-4);
+  margin-top: var(--al-space-7);
+  padding: var(--al-space-5) var(--al-space-6);
+  background: var(--al-blue-10);
+  border: 1px solid rgba(1, 118, 211, .22);
+  border-left: 4px solid var(--al-blue-60);
+  border-radius: var(--al-radius-panel);
+}
+.al-sv-callout__mark { flex: 0 0 auto; color: var(--al-blue-60); font-size: 20px; line-height: 1.4; }
+.al-sv-callout p { font-size: 16px; line-height: 1.6; color: var(--al-ink-900); max-width: 82ch; }
+.al-sv-callout strong { color: var(--al-navy-90); }
+
+/* Engagement models */
+.al-sv-engage-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--al-space-3);
+  flex-wrap: wrap;
+  margin-top: var(--al-space-8);
+  margin-bottom: var(--al-space-5);
+}
+.al-sv-engage-kicker { color: var(--al-blue-70); }   /* recolour the mono kicker for the light section */
+.al-sv-engage-lede { font-size: 15px; color: var(--al-ink-500); }
+.al-sv-engage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--al-space-5);
+}
+.al-sv-engage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-2);
+  padding: var(--al-space-5);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-top: 3px solid var(--al-blue-60);
+  border-radius: var(--al-radius-card);
+  transition: transform var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease);
+}
+.al-sv-engage:hover { transform: translateY(-2px); box-shadow: var(--al-shadow-hover); }
+.al-sv-engage__name { font-size: 18px; font-weight: 600; color: var(--al-navy-90); line-height: 1.3; }
+.al-sv-engage__desc { font-size: 14px; line-height: 1.5; color: var(--al-ink-500); }
+
+/* ---- 5. WHY US — proof cards (light) -------------------------------------- */
+.al-sv-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--al-space-5);
+}
+.al-sv-whycard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+  padding: var(--al-space-5);
+  background: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+}
+.al-sv-whycard__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--al-radius-btn);
+  background: var(--al-blue-10);
+  color: var(--al-blue-70);
+}
+.al-sv-whycard__icon svg { width: 22px; height: 22px; }
+.al-sv-whycard__title { font-size: 18px; font-weight: 600; color: var(--al-navy-90); line-height: 1.3; }
+.al-sv-whycard__desc { font-size: 15px; line-height: 1.55; color: var(--al-ink-500); }
+
+/* ---- RESPONSIVE ----------------------------------------------------------- */
+@media (max-width: 991px) {
+  .al-sv-engage-grid { grid-template-columns: repeat(2, 1fr); }
+  .al-sv-why-grid    { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+  .al-sv-capgrid { grid-template-columns: 1fr; }
+  .al-sv-cap__list { grid-template-columns: 1fr; }
+
+  /* Timeline → vertical rail with node beside each step. */
+  .al-sv-timeline { grid-template-columns: 1fr; gap: var(--al-space-5); }
+  .al-sv-timeline::before {
+    top: 21px;
+    bottom: 21px;
+    left: 21px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--al-blue-10), var(--al-blue-60), var(--al-blue-10));
+  }
+  .al-sv-step {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    column-gap: var(--al-space-4);
+    row-gap: 2px;
+  }
+  .al-sv-step__node { grid-column: 1; grid-row: 1; align-self: start; }
+  .al-sv-step__name { grid-column: 2; grid-row: 1; align-self: center; }
+  .al-sv-step__desc { grid-column: 2; grid-row: 2; }
+}
+@media (max-width: 479px) {
+  .al-sv-engage-grid { grid-template-columns: 1fr; }
+  .al-sv-why-grid    { grid-template-columns: 1fr; }
+}
+
+/* ---- REDUCED MOTION ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Flip is instant (global rule zeroes transition-duration); drop the hover lift. */
+  .al-sv-cap:hover { transform: none; }
+  .al-sv-engage:hover { transform: none; }
+  /* Accordion panels: initAccordion opens/closes instantly via inline max-height;
+     the `html.js` collapse still applies, so panels start closed and open with no
+     animation. No timeline/stat animations to freeze here (reveal + count-ups are
+     rendered to their final frame immediately by initScrollReveal under reduce). */
+}
+
+/* =============================================================================
+   SERVICES — PROCESS TIMELINE ANIMATION (v2 — "stepper completing")
+   The ::before rail becomes a faint STATIC TRACK that always holds the structure;
+   a ::after coloured FILL sweeps along it (left→right desktop, top→bottom mobile),
+   and each node LIGHTS UP in sequence as the fill reaches it — its number turning
+   solid, its label rising in, with a soft one-shot ping. Driven by .is-visible on
+   .al-sv-timeline (it carries .al-reveal). Structure survives with no JS (faint
+   track + outline numbered nodes + visible labels); under prefers-reduced-motion
+   everything snaps to the completed state (global rule zeroes transitions) and the
+   ping is gated off.
+   ============================================================================= */
+/* Container carries no block fade — the fill + nodes carry the motion. */
+.al-sv-timeline.al-reveal { opacity: 1; transform: none; }
+
+/* Per-step index for a single calc-based stagger (fill sweeps ~0 → 1s). */
+.al-sv-step { --i: 0; }
+.al-sv-step:nth-child(2) { --i: 1; }
+.al-sv-step:nth-child(3) { --i: 2; }
+.al-sv-step:nth-child(4) { --i: 3; }
+.al-sv-step:nth-child(5) { --i: 4; }
+.al-sv-step:nth-child(6) { --i: 5; }
+
+/* Rail: ::before is now a faint track; ::after is the coloured fill that grows. */
+.al-sv-timeline::before { background: rgba(1, 118, 211, .16); }
+.al-sv-timeline::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 21px;
+  left: 21px;
+  right: 21px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--al-blue-60), var(--al-purple));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.3s var(--al-ease);
+}
+.al-sv-timeline.is-visible::after { transform: scaleX(1); }
+
+/* Nodes light up in sequence — the default outline state stays valid with no JS. */
+.al-sv-step__node {
+  transition: background-color .45s var(--al-ease), border-color .45s var(--al-ease),
+              color .45s var(--al-ease), box-shadow .45s var(--al-ease),
+              transform .45s var(--al-ease);
+  transition-delay: calc(var(--i, 0) * .2s);
+}
+.al-sv-timeline.is-visible .al-sv-step__node {
+  background: var(--al-blue-60);
+  border-color: var(--al-blue-60);
+  color: #fff;
+  transform: scale(1.06);
+  box-shadow: 0 0 0 5px rgba(1, 118, 211, .12);
+}
+
+/* Labels rise in, staggered (JS only — fully visible without JS). */
+html.js .al-sv-step__name,
+html.js .al-sv-step__desc {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .5s var(--al-ease), transform .5s var(--al-ease);
+  transition-delay: calc(var(--i, 0) * .2s);
+}
+.al-sv-timeline.is-visible .al-sv-step__name,
+.al-sv-timeline.is-visible .al-sv-step__desc { opacity: 1; transform: none; }
+
+/* One-shot ping ring as each node activates (motion-OK only). */
+.al-sv-step__node::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--al-radius-pill);
+  border: 2px solid var(--al-blue-60);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .al-sv-timeline.is-visible .al-sv-step__node::after {
+    animation: al-sv-node-ping .8s var(--al-ease) 1 both;
+    animation-delay: calc(var(--i, 0) * .2s + .15s);
+  }
+}
+@keyframes al-sv-node-ping {
+  0%   { opacity: .55; transform: scale(.85); }
+  100% { opacity: 0;   transform: scale(1.75); }
+}
+
+/* Mobile: the fill runs top→bottom to match the vertical rail. */
+@media (max-width: 767px) {
+  .al-sv-timeline::after {
+    top: 21px;
+    bottom: 21px;
+    left: 21px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--al-blue-60), var(--al-purple));
+    transform: scaleY(0);
+    transform-origin: center top;
+  }
+  .al-sv-timeline.is-visible::after { transform: scaleY(1); }
+}
+
+/* =============================================================================
+   SERVICES — WHY US (enriched)
+   Elevated proof cards on a soft brand-gradient wash: accent top-rule, gradient
+   icon tile, hover lift. Overrides the flat .al-sv-whycard base above.
+   ============================================================================= */
+.al-sv-why { position: relative; overflow: hidden; }
+.al-sv-why::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(700px 380px at 6% -12%, rgba(1, 118, 211, .09), transparent 60%),
+    radial-gradient(640px 400px at 100% 4%, rgba(117, 38, 227, .06), transparent 58%);
+}
+.al-sv-why > .al-container { position: relative; z-index: 1; }
+
+.al-sv-whycard {
+  position: relative;
+  overflow: hidden;
+  gap: var(--al-space-4);
+  padding: var(--al-space-6) var(--al-space-5);
+  border-radius: var(--al-radius-panel);
+  box-shadow: 0 6px 18px rgba(3, 45, 96, .05);
+  transition: transform var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease);
+}
+.al-sv-whycard::before {                 /* accent top-rule */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--al-blue-60), var(--al-navy-70));
+}
+.al-sv-whycard__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--al-radius-card);
+  background: linear-gradient(150deg, var(--al-blue-60), var(--al-navy-90));
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(1, 118, 211, .26);
+}
+.al-sv-whycard__icon svg { width: 24px; height: 24px; }
+.al-sv-whycard__title { font-size: 19px; }
+.al-sv-whycard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(3, 45, 96, .13);
+  border-color: #D3DDE9;
+}
+@media (prefers-reduced-motion: reduce) {
+  .al-sv-whycard:hover { transform: none; }
+}

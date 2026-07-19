@@ -202,7 +202,14 @@
         // ~60ms stagger among siblings revealed in the same batch.
         var group = el.parentElement ? $$('.al-reveal', el.parentElement) : [el];
         var idx = group.indexOf(el);
-        if (idx > 0) { el.style.transitionDelay = (idx * 60) + 'ms'; }
+        if (idx > 0) {
+          var delay = idx * 60;
+          el.style.transitionDelay = delay + 'ms';
+          // Clear the stagger delay once the reveal has played, so it can't leak
+          // into later transitions on the same element (e.g. a hover lift that
+          // would otherwise feel laggy by up to the full stagger delay).
+          window.setTimeout(function () { el.style.transitionDelay = ''; }, delay + 450);
+        }
         el.classList.add('is-visible');
         runCountUps(el, false); // animate 0 -> value as the card comes alive
         obs.unobserve(el); // reveal once
@@ -886,6 +893,47 @@
   }
 
   /* ------------------------------------------------------------------------
+     7b) SERVICES PILLAR RAIL — scroll-spy for the sticky capability navigator.
+     Hooks: .al-sv-rail__link[href="#id"] anchors + the matching pillar
+     sections (id). Highlights the link whose pillar is nearest the viewport
+     centre via IntersectionObserver, mirroring state with .is-active +
+     aria-current. Progressive enhancement: the anchors already navigate with
+     no JS; this only adds the active highlight. No-ops if absent or if IO is
+     unsupported (the first link keeps its initial is-active state).
+     ------------------------------------------------------------------------ */
+  function initServicesNav() {
+    var links = $$('.al-sv-rail__link');
+    if (!links.length || !('IntersectionObserver' in window)) { return; }
+
+    var map = {};
+    var sections = [];
+    links.forEach(function (link) {
+      var id = (link.getAttribute('href') || '').replace(/^#/, '');
+      var sec = id && document.getElementById(id);
+      if (sec) { map[id] = link; sections.push(sec); }
+    });
+    if (!sections.length) { return; }
+
+    function setActive(id) {
+      links.forEach(function (link) {
+        var on = link === map[id];
+        link.classList.toggle('is-active', on);
+        if (on) { link.setAttribute('aria-current', 'true'); }
+        else { link.removeAttribute('aria-current'); }
+      });
+    }
+
+    // A band across the viewport middle: the pillar crossing it wins.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { setActive(entry.target.id); }
+      });
+    }, { root: null, rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+    sections.forEach(function (sec) { io.observe(sec); });
+  }
+
+  /* ------------------------------------------------------------------------
      8) HELP CHAT — floating “Need help?” widget, bottom-right.
      Injected once into <body> on every page (no HTML edits required). Opens a
      small chat-style panel with Contact us CTAs. Escape / outside click close.
@@ -1080,6 +1128,7 @@
       initScrollReveal();
       initForms();
       initWorkFilter();
+      initServicesNav();
       initStarFields();
       initHelpChat();
     });
