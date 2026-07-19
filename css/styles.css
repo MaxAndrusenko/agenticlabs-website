@@ -2399,6 +2399,28 @@ body.al-scroll-lock { overflow: hidden; }
 }
 .al-field.has-error .al-field__error { display: block; }
 
+/* Honeypot — off-screen, not display:none (some bots skip display:none fields). */
+.al-hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.al-field--recaptcha {
+  margin-bottom: var(--al-space-2);
+}
+.al-recaptcha {
+  min-height: 78px;
+}
+.al-field--recaptcha.has-error .al-recaptcha {
+  outline: 2px solid var(--al-error);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 /* Checkbox group */
 .al-checkbox-group {
   display: flex;

@@ -52,6 +52,12 @@
 
             <!-- Submits via js/main.js → POST /api/contact → Resend -->
             <form class="al-form" data-al-form action="/api/contact" method="post" novalidate>
+              <!-- Honeypot for bots — visually hidden; leave empty -->
+              <div class="al-hp" aria-hidden="true">
+                <label for="al-website">Website</label>
+                <input type="text" id="al-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
               <div class="al-field">
                 <label class="al-field__label" for="al-name">Full name</label>
                 <input class="al-field__input" type="text" id="al-name" name="name" autocomplete="name" required aria-describedby="al-name-error">
@@ -74,6 +80,11 @@
                 <label class="al-field__label" for="al-details">Project details</label>
                 <textarea class="al-field__textarea" id="al-details" name="details" placeholder="What are you trying to build or fix? Share timelines, constraints, and anything already in flight." required aria-describedby="al-details-error"></textarea>
                 <span class="al-field__error" id="al-details-error" aria-live="polite">Please tell us a little about your project.</span>
+              </div>
+
+              <div class="al-field al-field--recaptcha" data-al-recaptcha-field>
+                <div class="al-recaptcha" data-al-recaptcha aria-describedby="al-recaptcha-error"></div>
+                <span class="al-field__error" id="al-recaptcha-error" aria-live="polite">Please confirm you are not a robot.</span>
               </div>
 
               <div>

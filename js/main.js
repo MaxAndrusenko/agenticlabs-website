@@ -245,16 +245,18 @@
   }
 
   /* ------------------------------------------------------------------------
-     5) CONTACT FORM → POST /api/contact (Resend via Express)
+     5) CONTACT FORM → POST /api/contact (Resend via Express + reCAPTCHA v2)
      Hook: form[data-al-form] with .al-field wrappers containing inputs and a
-     sibling .al-field__error; success = [data-form-success]; error =
-     [data-form-error]. Validates client-side, then submits JSON to the API.
+     sibling .al-field__error; optional [data-al-recaptcha] widget mount;
+     success = [data-form-success]; error = [data-form-error].
      ------------------------------------------------------------------------ */
   function initForms() {
     var forms = $$('form[data-al-form]');
     if (!forms.length) { return; } // no-op if absent
 
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var recaptchaSiteKey = '';
+    var recaptchaScriptPromise = null;
 
     function fieldOf(control) {
       return control.closest ? control.closest('.al-field') : null;
@@ -282,6 +284,22 @@
         var err = errorNode(field);
         if (err) { err.textContent = ''; }
       }
+    }
+
+    function setRecaptchaError(form, message) {
+      var field = $('[data-al-recaptcha-field]', form);
+      if (!field) { return; }
+      field.classList.add('has-error');
+      var err = errorNode(field);
+      if (err && message) { err.textContent = message; }
+    }
+
+    function clearRecaptchaError(form) {
+      var field = $('[data-al-recaptcha-field]', form);
+      if (!field) { return; }
+      field.classList.remove('has-error');
+      var err = errorNode(field);
+      if (err) { err.textContent = ''; }
     }
 
     function validateControl(control) {
@@ -313,13 +331,32 @@
       return true;
     }
 
-    function formPayload(form) {
+    function getRecaptchaToken(form) {
+      var widgetId = form.getAttribute('data-recaptcha-widget-id');
+      if (!recaptchaSiteKey || widgetId === null || !window.grecaptcha) { return ''; }
+      try {
+        return window.grecaptcha.getResponse(Number(widgetId)) || '';
+      } catch (err) {
+        return window.grecaptcha.getResponse() || '';
+      }
+    }
+
+    function resetRecaptcha(form) {
+      var widgetId = form.getAttribute('data-recaptcha-widget-id');
+      if (!window.grecaptcha || widgetId === null) { return; }
+      try { window.grecaptcha.reset(Number(widgetId)); }
+      catch (err) { try { window.grecaptcha.reset(); } catch (e2) { /* ignore */ } }
+    }
+
+    function formPayload(form, recaptchaToken) {
       var data = new FormData(form);
       return {
         name: String(data.get('name') || '').trim(),
         email: String(data.get('email') || '').trim(),
         company: String(data.get('company') || '').trim(),
-        details: String(data.get('details') || '').trim()
+        details: String(data.get('details') || '').trim(),
+        website: String(data.get('website') || '').trim(),
+        recaptchaToken: recaptchaToken || ''
       };
     }
 
@@ -348,17 +385,87 @@
       });
     }
 
-    function showSubmitError(form) {
+    function showSubmitError(form, message) {
       var errorEl = $('[data-form-error]', form.parentNode || document) ||
                     document.querySelector('[data-form-error]');
       if (errorEl) {
+        if (message) { errorEl.textContent = message; }
         errorEl.classList.add('is-visible');
         if (errorEl.focus) {
           if (!errorEl.hasAttribute('tabindex')) { errorEl.setAttribute('tabindex', '-1'); }
           errorEl.focus();
         }
       }
+      resetRecaptcha(form);
     }
+
+    function loadRecaptchaScript() {
+      if (window.grecaptcha && window.grecaptcha.render) {
+        return Promise.resolve();
+      }
+      if (recaptchaScriptPromise) { return recaptchaScriptPromise; }
+      recaptchaScriptPromise = new Promise(function (resolve, reject) {
+        var existing = document.querySelector('script[data-al-recaptcha-api]');
+        if (existing) {
+          existing.addEventListener('load', function () { resolve(); });
+          existing.addEventListener('error', function () { reject(new Error('reCAPTCHA failed to load')); });
+          return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+        script.async = true;
+        script.defer = true;
+        script.setAttribute('data-al-recaptcha-api', '1');
+        script.onload = function () { resolve(); };
+        script.onerror = function () { reject(new Error('reCAPTCHA failed to load')); };
+        document.head.appendChild(script);
+      });
+      return recaptchaScriptPromise;
+    }
+
+    function mountRecaptcha(form) {
+      var mount = $('[data-al-recaptcha]', form);
+      if (!mount || !recaptchaSiteKey) { return Promise.resolve(); }
+      return loadRecaptchaScript().then(function () {
+        return new Promise(function (resolve) {
+          var tryRender = function () {
+            if (!window.grecaptcha || !window.grecaptcha.render) {
+              window.setTimeout(tryRender, 50);
+              return;
+            }
+            if (form.getAttribute('data-recaptcha-widget-id') !== null) {
+              resolve();
+              return;
+            }
+            var widgetId = window.grecaptcha.render(mount, {
+              sitekey: recaptchaSiteKey,
+              callback: function () { clearRecaptchaError(form); },
+              'expired-callback': function () { clearRecaptchaError(form); }
+            });
+            form.setAttribute('data-recaptcha-widget-id', String(widgetId));
+            resolve();
+          };
+          tryRender();
+        });
+      }).catch(function (err) {
+        console.warn('[contact form] reCAPTCHA init failed:', err);
+      });
+    }
+
+    function loadPublicConfig() {
+      return fetch('/api/public-config', { headers: { 'Accept': 'application/json' } })
+        .then(function (res) { return res.ok ? res.json() : {}; })
+        .then(function (cfg) {
+          recaptchaSiteKey = (cfg && cfg.recaptchaSiteKey) || '';
+        })
+        .catch(function () {
+          recaptchaSiteKey = '';
+        });
+    }
+
+    loadPublicConfig().then(function () {
+      forms.forEach(function (form) { mountRecaptcha(form); });
+    });
 
     forms.forEach(function (form) {
       var controls = $$('input, textarea, select', form).filter(function (c) {
@@ -383,7 +490,6 @@
         e.preventDefault();
         var firstInvalid = null;
         var allValid = true;
-
         controls.forEach(function (control) {
           var ok = validateControl(control);
           if (!ok) {
@@ -391,6 +497,16 @@
             if (!firstInvalid) { firstInvalid = control; }
           }
         });
+
+        clearRecaptchaError(form);
+        var recaptchaToken = getRecaptchaToken(form);
+        if (recaptchaSiteKey && !recaptchaToken) {
+          allValid = false;
+          setRecaptchaError(form, 'Please confirm you are not a robot.');
+          if (!firstInvalid) {
+            firstInvalid = $('[data-al-recaptcha]', form) || submitBtn;
+          }
+        }
 
         if (!allValid) {
           if (firstInvalid && firstInvalid.focus) { firstInvalid.focus(); }
@@ -404,16 +520,29 @@
           submitBtn.disabled = true;
           submitBtn.setAttribute('aria-busy', 'true');
         }
-
+        debugger; 
         fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(formPayload(form))
+          body: JSON.stringify(formPayload(form, recaptchaToken))
         }).then(function (res) {
-          if (!res.ok) { throw new Error('Request failed'); }
-          showSuccess(form);
-        }).catch(function () {
-          showSubmitError(form);
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            if (!res.ok) {
+              var err = new Error((data && data.error) || 'Request failed');
+              err.status = res.status;
+              err.payload = data;
+              throw err;
+            }
+            showSuccess(form);
+          });
+        }).catch(function (err) {
+          var msg = (err && err.message) || '';
+          if (err && err.status === 429) {
+            msg = 'Too many messages from this connection. Please try again later.';
+          } else if (!msg || msg === 'Request failed' || msg === 'Failed to fetch') {
+            msg = 'Something went wrong on our end. Please try again or email us directly at hello@agenticlabs.cloud';
+          }
+          showSubmitError(form, msg);
         }).finally(function () {
           if (submitBtn) {
             submitBtn.disabled = false;
