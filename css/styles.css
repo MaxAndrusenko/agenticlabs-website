@@ -928,6 +928,17 @@ body.al-scroll-lock { overflow: hidden; }
   opacity: var(--al-star-field-opacity);
 }
 
+/* Pages that opt out of the particle field (<body data-no-star-field>, e.g. case
+   studies) get no injected canvas, so the CTA band would fall back to flat navy.
+   Give it a static brand-bloom gradient instead — echoing the immersive hero's
+   mesh (§9a) — so the surface still reads as a gradient, just without animation. */
+[data-no-star-field] .al-cta-band {
+  background-image:
+    radial-gradient(58% 130% at 14% 16%, var(--al-hero-bloom-blue),   transparent 60%),
+    radial-gradient(52% 130% at 88% 84%, var(--al-hero-bloom-purple), transparent 60%),
+    radial-gradient(64% 150% at 72% 8%,  var(--al-hero-bloom-teal),   transparent 62%);
+}
+
 /* -----------------------------------------------------------------------------
    10. PROVENANCE TAGS
    ----------------------------------------------------------------------------- */
