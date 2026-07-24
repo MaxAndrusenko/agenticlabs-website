@@ -4,19 +4,92 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Approach — Agentic Labs</title>
-  <meta name="description" content="How Agentic Labs works: senior-only delivery, AI as leverage not a shortcut, and enterprise-grade rigor on every Salesforce engagement.">
+  <title>Our Approach — Free Salesforce Org Audit, Weekly Payments, No Lock-In | Agentic Labs</title>
+  <meta name="description" content="Senior Salesforce developers, accelerated by AI agents. Start with a free audit of your org, then shape and adjust the engagement around how you want to work.">
 
-  <!-- Canonical URL. NOTE: agenticlabs.example is a PLACEHOLDER domain — swap for the client's real domain before launch. -->
+  <!-- Canonical URL. NOTE: agenticlabs.cloud is the live domain convention used site-wide. -->
   <link rel="canonical" href="https://agenticlabs.cloud/approach">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Approach — Agentic Labs">
-  <meta property="og:description" content="How Agentic Labs works: senior-only delivery, AI as leverage not a shortcut, and enterprise-grade rigor on every Salesforce engagement.">
+  <meta property="og:title" content="Our Approach — Free Org Audit, Weekly Payments, No Lock-In | Agentic Labs">
+  <meta property="og:description" content="Senior Salesforce developers, accelerated by AI agents. Start with a free audit of your org, then shape and adjust the engagement around how you want to work.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/og-default.svg">
-  <!-- PLACEHOLDER: og:url uses the placeholder domain agenticlabs.example -->
   <meta property="og:url" content="https://agenticlabs.cloud/approach">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Our Approach — Free Org Audit, Weekly Payments, No Lock-In | Agentic Labs">
+  <meta name="twitter:description" content="Senior Salesforce developers, accelerated by AI agents. Start with a free org audit, then adjust the engagement around how you want to work.">
+  <meta name="twitter:image" content="assets/og-default.svg">
+
+  <!-- FAQPage structured data. Mirrors the rendered FAQ (§08). Question 8
+       (partner status) is intentionally OMITTED — its answer is an unresolved
+       placeholder, so it must not ship as a machine-readable claim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the audit really free? What’s the catch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No catch, no obligation. It costs us a few days of senior time and it’s the most honest sales pitch we have. If it tells you your org is in good shape, that’s a fair outcome."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What access do you need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A read-only integration user, or a refreshed sandbox. We don’t need production write access at any point during the audit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will you sign an NDA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Before the intake call, if you’d like. We’ll sign yours or send ours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the first week disappoints?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You pay for that week and stop. That’s what the structure is for."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who actually writes the code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Named senior Salesforce developers, with AI agents assisting. You’ll know who is on your engagement and you’ll speak with them at every weekly demo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you work alongside our in-house team or existing partner?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We work inside your pipeline, your standards, and your review process."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How small an engagement will you take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One week of remediation work is a perfectly good engagement. The entry point is identical whether it’s one week or four quarters."
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -29,252 +102,705 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <!-- Skip link — first focusable element -->
+<body data-no-star-field>
+  <!-- Skip link — first focusable element. Skips BOTH the navbar and the sticky
+       sub-nav straight to the page content. -->
   <a class="al-skip-link" href="#al-main">Skip to content</a>
 
-  <!-- NAVBAR — loaded from /partials/navbar.html via data-al-include -->
+  <!-- NAVBAR — loaded from /partials/navbar.html via data-al-include.
+       data-al-nav-on-hero: dark bar over the immersive navy hero. -->
   <div data-al-include="navbar" data-al-nav-on-hero></div>
 
   <main id="al-main">
 
     <!-- =====================================================================
-         1. HERO — immersive, full-viewport. Shares the home banner identity;
-         the .al-hero--approach modifier reweights the mesh purple-dominant, and
-         data-hero-accent="purple" biases the particle hues to match. Animation is
-         wired automatically by initStarFields() via [data-hero-canvas].
+         01. HERO — immersive navy (purple-biased mesh; shares the banner identity
+         via .al-hero--immersive + .al-hero--approach, particle hues biased purple
+         through data-hero-accent). Single <h1>. No stat strip.
          ===================================================================== -->
-    <section class="al-hero al-hero--immersive al-hero--approach" data-hero-accent="purple">
-      <!-- Decorative animated field: hidden from assistive tech, not focusable.
-           Renders one static frame (no rAF loop) under prefers-reduced-motion. -->
+    <section class="al-hero al-hero--immersive al-hero--approach al-ap-anchor" id="approach-hero" data-hero-accent="purple">
+      <!-- Decorative animated field: hidden from assistive tech, not focusable. -->
       <canvas class="al-hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
       <!-- Contrast scrim: keeps all copy AA-legible over every animation frame. -->
       <span class="al-hero__scrim" aria-hidden="true"></span>
 
       <div class="al-hero__inner al-container">
         <div class="al-hero__content al-reveal">
-          <span class="al-eyebrow">How we work</span>
-          <h1 class="al-hero__title">The AI does the typing. Judgment stays human.</h1>
-          <p class="al-hero__sub">A four-step method — discover, architect, build, ship — where senior engineers own every decision and agentic tooling removes the grunt work.</p>
+          <span class="al-eyebrow">Our approach</span>
+          <h1 class="al-hero__title">Easy to start. Easy to adjust.</h1>
+          <p class="al-hero__sub">Senior Salesforce developers, accelerated by AI agents. We start with a free audit of your org and shape the engagement around how you want to work — then adjust it as the work changes.</p>
           <div class="al-hero__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="#al-process">See our process</a>
-            <a class="al-btn al-btn--ghost" href="#al-team">Meet the team →</a>
+            <a class="al-btn al-btn--primary al-btn--lg" href="#approach-audit-form">Get your free org audit</a>
+            <a class="al-btn al-btn--ghost" href="#approach-audit">See what the audit covers →</a>
           </div>
+          <ul class="al-hero__points">
+            <li>Free org audit, no obligation</li>
+            <li>Terms that fit your finance team</li>
+            <li>Notice period, never a lock-in</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         2. STORY
+         STICKY SUB-NAV — secondary sticky bar under the navbar. Real <a> anchors
+         (keyboard-operable, skippable, not a focus trap), horizontally scrollable
+         on mobile. Active item filled blue-60 (reuses the filter/tag pill look).
+         Live active-section tracking is progressive enhancement (initApproachNav()
+         in js/main.js) and no-ops without JS.
          ===================================================================== -->
-    <section class="al-section al-section--surface">
+    <nav class="al-subnav" aria-label="On this page">
       <div class="al-container">
-        <div class="al-grid--2" style="align-items: center; gap: var(--al-space-8);">
-          <div class="al-reveal">
-            <span class="al-eyebrow">Why we exist</span>
-            <h2>Built for the gap in the middle of the market.</h2>
-            <p style="margin-top: var(--al-space-5); max-width: 60ch;">Most teams evaluating a Salesforce partner face a bad choice. On one side sit agencies that win on price by staffing junior, offshore benches and letting clients absorb the cost of learning on the job. On the other sit vendors overselling AI — promising that a model can architect and ship production software on its own, then handing over code no senior engineer would sign off on.</p>
-            <p style="margin-top: var(--al-space-4); max-width: 60ch;">We started Agentic Labs because neither model respects the work. Salesforce orgs are load-bearing systems. The failure modes are expensive, and they show up months later — in a data model that can't scale, an integration that silently drops records, or an automation that behaves fine in a demo and breaks under real volume.</p>
-            <p style="margin-top: var(--al-space-4); max-width: 60ch;">Our bet is simple. Senior judgment paired with agentic tooling is the right model — not senior judgment alone, and not tooling alone. The AI removes the grunt work so experienced engineers spend their time on design, edge cases, and the calls that actually decide whether a build holds up. That is where expertise earns its keep, and it is the one thing AI can't do for you.</p>
-          </div>
+        <div class="al-subnav__inner">
+          <a class="al-subnav__link is-active" href="#approach-hero">01 Approach</a>
+          <a class="al-subnav__link" href="#approach-why">02 Why</a>
+          <a class="al-subnav__link" href="#approach-audit">03 Audit</a>
+          <a class="al-subnav__link" href="#approach-start">04 Start</a>
+          <a class="al-subnav__link" href="#approach-weekly">05 Weekly</a>
+          <a class="al-subnav__link" href="#approach-exit">06 Exit</a>
+          <a class="al-subnav__link" href="#approach-delivery">07 Delivery</a>
+          <a class="al-subnav__link" href="#approach-faq">08 FAQ</a>
+          <a class="al-subnav__link" href="#approach-audit-form">09 Get audit</a>
+        </div>
+      </div>
+    </nav>
 
+    <!-- =====================================================================
+         02. WHY (white). Two-column intro (H2 left, body right) + three peer cards
+         with a mono kicker and a thin blue top accent rule (NO numbering).
+         ===================================================================== -->
+    <section class="al-section al-ap-anchor" id="approach-why">
+      <div class="al-container">
+        <div class="al-grid--2 al-ap-intro">
           <div class="al-reveal">
-            <img src="assets/arch-graphic.svg" width="560" height="400" alt="An architecture diagram linking Sales Cloud, an integration layer, a core data model, and Agentforce to a central senior-review checkpoint before anything ships." style="width: 100%; height: auto; border-radius: var(--al-radius-panel);">
+            <span class="al-eyebrow">Our approach</span>
+            <h2>Most engagements ask for trust up front. We’d rather earn it.</h2>
           </div>
+          <div class="al-reveal">
+            <p class="al-body-lg" style="margin-bottom: var(--al-space-4);">Long contracts, opaque scoping, junior developers billed at senior rates, and an org only your vendor understands — these are the reasons Salesforce projects go wrong, and they all trace back to the same thing: commercial structures that make it expensive to leave.</p>
+            <p class="al-body-lg">We built our approach on the opposite assumption. If leaving is cheap and easy, we have to be worth keeping every week. That’s the whole deal.</p>
+          </div>
+        </div>
+
+        <div class="al-grid--3" style="margin-top: var(--al-space-8);">
+          <article class="al-card al-ap-card al-reveal">
+            <span class="al-card__eyebrow">Transparent</span>
+            <h3 class="al-card__title">Transparent before you pay</h3>
+            <p class="al-card__body" style="margin-bottom: 0;">A free audit of your org, run by a senior developer. You keep the findings whether or not you hire us.</p>
+          </article>
+
+          <article class="al-card al-ap-card al-reveal">
+            <span class="al-card__eyebrow">Short cycles</span>
+            <h3 class="al-card__title">Pay in short cycles</h3>
+            <p class="al-card__body" style="margin-bottom: 0;">Weekly scope, weekly demo, weekly invoice — until you stop worrying. Then whatever terms suit your finance team.</p>
+          </article>
+
+          <article class="al-card al-ap-card al-reveal">
+            <span class="al-card__eyebrow">Leave anytime</span>
+            <h3 class="al-card__title">Leave whenever</h3>
+            <p class="al-card__body" style="margin-bottom: 0;">Your code, your org, your documentation, from the first commit. One week’s notice. No exit fee.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         3. THREE PILLARS
+         03. THE FREE ORG AUDIT (surface). Three stacked sub-blocks with visible
+         mono sub-headings — fully readable with NO JS (no tabs). Then a callout.
          ===================================================================== -->
-    <section class="al-section">
+    <section class="al-section al-section--surface al-ap-anchor" id="approach-audit">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 62ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">The free org audit</span>
+          <h2>Start with the truth about your org</h2>
+          <p class="al-body-lg" style="margin-top: var(--al-space-4); color: var(--al-ink-500);">Before we quote anything, we look at what you actually have. The audit is free, runs over five business days, needs read-only access, and ends with a document you own — even if you never work with us again.</p>
+        </header>
+
+        <!-- Sub-block: What we examine — 8 rows, 2-col grid, 2px top rule each -->
+        <div class="al-ap-block al-reveal">
+          <span class="al-ap-subhead">What we examine</span>
+          <div class="al-ap-examine">
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Architecture &amp; data model</span>
+              <span class="al-ap-examine__detail">Object and field sprawl, utilization, relationship integrity, storage pressure</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Automation</span>
+              <span class="al-ap-examine__detail">Flow and Apex trigger conflicts, remaining Workflow Rule and Process Builder exposure, order-of-execution risks, recursion</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Apex &amp; code quality</span>
+              <span class="al-ap-examine__detail">Coverage and assertion quality, bulkification, SOQL/DML in loops, governor-limit exposure, static analysis findings</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Security &amp; access</span>
+              <span class="al-ap-examine__detail">Profile and permission-set sprawl, sharing model, field-level security gaps, guest user exposure, connected app scopes</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Integrations <span class="al-tag al-tag--integration">Integration</span></span>
+              <span class="al-ap-examine__detail">API consumption against limits, auth patterns, error handling and retries, middleware dependencies</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Release management</span>
+              <span class="al-ap-examine__detail">Source control, sandbox strategy, deployment pipeline, environment drift</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Licensing &amp; spend</span>
+              <span class="al-ap-examine__detail">Unassigned and underused licenses, overlapping features, provisioning waste</span>
+            </div>
+            <div class="al-ap-examine__row">
+              <span class="al-ap-examine__area">Release &amp; AI readiness <span class="al-tag al-tag--ai">AI</span></span>
+              <span class="al-ap-examine__detail">Impact of upcoming Salesforce releases, deprecation exposure, data readiness for Agentforce and Data Cloud</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-block: What you get — 6 cards (3-col) with a blue-10 check tile -->
+        <div class="al-ap-block al-reveal">
+          <span class="al-ap-subhead">What you get</span>
+          <div class="al-grid--3">
+            <article class="al-card al-reveal">
+              <span class="al-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+              </span>
+              <h3 class="al-card__title">Org health scorecard</h3>
+              <p class="al-card__body" style="margin-bottom: 0;">A weighted score per area, so you can see at a glance where the real risk sits.</p>
+            </article>
+            <article class="al-card al-reveal">
+              <span class="al-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+              </span>
+              <h3 class="al-card__title">Prioritized findings register</h3>
+              <p class="al-card__body" style="margin-bottom: 0;">Every finding with severity, remediation effort, and business impact.</p>
+            </article>
+            <article class="al-card al-reveal">
+              <span class="al-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+              </span>
+              <h3 class="al-card__title">Quick wins</h3>
+              <p class="al-card__body" style="margin-bottom: 0;">Fixes your own team can ship in under a week — yours to run with immediately.</p>
+            </article>
+            <article class="al-card al-reveal">
+              <span class="al-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+              </span>
+              <h3 class="al-card__title">90-day remediation roadmap</h3>
+              <p class="al-card__body" style="margin-bottom: 0;">Sequenced work with dependencies mapped, ready to hand to any team.</p>
+            </article>
+            <article class="al-card al-reveal">
+              <span class="al-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+              </span>
+              <h3 class="al-card__title">60-minute walkthrough</h3>
+              <p class="al-card__body" style="margin-bottom: 0;">A live session with the senior developer who actually ran your audit.</p>
+            </article>
+            <article class="al-card al-reveal">
+              <span class="al-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+              </span>
+              <h3 class="al-card__title">Editable formats</h3>
+              <p class="al-card__body" style="margin-bottom: 0;">Everything yours to keep, share, or hand to another vendor. No lock-in.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Sub-block: How it runs — 4 ordered process steps (numerals legitimate) -->
+        <div class="al-ap-block al-reveal">
+          <span class="al-ap-subhead">How it runs</span>
+          <div class="al-process">
+            <div class="al-process__item al-reveal">
+              <span class="al-process__num" aria-hidden="true">01</span>
+              <h3 class="al-process__title">Intake call</h3>
+              <p class="al-process__body">30 minutes. Your goals, your constraints, who needs to be in the room.</p>
+            </div>
+            <div class="al-process__item al-reveal">
+              <span class="al-process__num" aria-hidden="true">02</span>
+              <h3 class="al-process__title">Read-only access</h3>
+              <p class="al-process__body">An integration user or a sandbox refresh. We never need production write access for the audit.</p>
+            </div>
+            <div class="al-process__item al-reveal">
+              <span class="al-process__num" aria-hidden="true">03</span>
+              <h3 class="al-process__title">Five business days</h3>
+              <p class="al-process__body">Focused analysis. No disruption to your team, no meetings required.</p>
+            </div>
+            <div class="al-process__item al-reveal">
+              <span class="al-process__num" aria-hidden="true">04</span>
+              <h3 class="al-process__title">Findings walkthrough</h3>
+              <p class="al-process__body">We present, you challenge, you keep the report.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Callout: no obligation -->
+        <div class="al-callout al-reveal" style="margin-top: var(--al-space-8);">
+          <span class="al-callout__kicker">No obligation</span>
+          <p>No follow-up sequence, no card details. If the report says your org is healthy and you don’t need us, that’s a fair outcome and we’ll say so.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         04. EASY ENTRY (white). Horizontal timeline (desktop) / vertical (mobile)
+         of 5 nodes on a decorative connector. Order conveyed by markup + mono day
+         labels, not colour. The DAYS 1–5 node carries the Week rail; DAY 6 uses a
+         ringed demo marker. Below: a bordered note strip.
+         ===================================================================== -->
+    <section class="al-section al-section--navy al-ap-anchor" id="approach-start">
       <div class="al-container">
         <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
-          <span class="al-eyebrow">How we work</span>
-          <h2>Three principles behind every engagement.</h2>
+          <span class="al-eyebrow">Easy entry</span>
+          <h2>From first call to first commit in under two weeks</h2>
         </header>
+
+        <ol class="al-ap-timeline al-reveal">
+          <li class="al-ap-tl__node">
+            <span class="al-ap-tl__marker" aria-hidden="true"></span>
+            <span class="al-ap-tl__day">Day 0</span>
+            <h3 class="al-ap-tl__title">Intro call</h3>
+            <p class="al-ap-tl__body">30 minutes. Goals, systems, constraints.</p>
+          </li>
+
+          <li class="al-ap-tl__node al-ap-tl__node--wide">
+            <span class="al-ap-tl__marker" aria-hidden="true"></span>
+            <span class="al-ap-tl__day">Days 1–5</span>
+            <h3 class="al-ap-tl__title">Free org audit</h3>
+            <p class="al-ap-tl__body">Read-only access, zero disruption.</p>
+            <!-- Signature Week rail: Mon–Fri, FRI accented + demo dot -->
+            <div class="al-week al-week--compact" role="group" aria-label="Audit week, Monday to Friday">
+              <div class="al-week__cell"><span class="al-week__day">Mon</span></div>
+              <div class="al-week__cell"><span class="al-week__day">Tue</span></div>
+              <div class="al-week__cell"><span class="al-week__day">Wed</span></div>
+              <div class="al-week__cell"><span class="al-week__day">Thu</span></div>
+              <div class="al-week__cell al-week__cell--demo">
+                <span class="al-week__day">Fri</span>
+                <span class="al-week__dot" aria-hidden="true"></span>
+              </div>
+            </div>
+          </li>
+
+          <li class="al-ap-tl__node">
+            <span class="al-ap-tl__marker al-ap-tl__marker--demo" aria-hidden="true"></span>
+            <span class="al-ap-tl__day">Day 6</span>
+            <h3 class="al-ap-tl__title">Findings walkthrough</h3>
+            <p class="al-ap-tl__body">Report is yours either way.</p>
+          </li>
+
+          <li class="al-ap-tl__node">
+            <span class="al-ap-tl__marker" aria-hidden="true"></span>
+            <span class="al-ap-tl__day">Day 7</span>
+            <h3 class="al-ap-tl__title">First sprint scoped</h3>
+            <p class="al-ap-tl__body">One week, fixed scope, fixed price, written acceptance criteria.</p>
+          </li>
+
+          <li class="al-ap-tl__node">
+            <span class="al-ap-tl__marker" aria-hidden="true"></span>
+            <span class="al-ap-tl__day">Day 8+</span>
+            <h3 class="al-ap-tl__title">Work starts</h3>
+            <p class="al-ap-tl__body">Friday demo, invoice after, and a fresh decision to continue.</p>
+          </li>
+        </ol>
+
+        <div class="al-note al-reveal">
+          <span class="al-note__kicker">No procurement marathon</span>
+          <p>Our starting paperwork is a short mutual NDA, a two-page MSA, and a one-week statement of work. We’ll sign yours instead if your legal team prefers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         05. WEEKLY PAYMENTS (surface). Annotated Week rail in a white card, then a
+         "how a week works" checklist, then three post-trust-period option cards and
+         an exposure callout.
+         ===================================================================== -->
+    <section class="al-section al-section--surface al-ap-anchor" id="approach-weekly">
+      <div class="al-container">
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-7);">
+          <span class="al-eyebrow">Weekly payments</span>
+          <h2>We invoice weekly until you stop thinking about it</h2>
+          <p class="al-body-lg" style="margin-top: var(--al-space-4);">A new vendor relationship puts all the risk on your side of the table. Weekly cycles move it back to ours.</p>
+        </header>
+
+        <!-- Signature: annotated Week rail inside a white card -->
+        <div class="al-week-card al-reveal">
+          <div class="al-week" role="group" aria-label="A payment week, Monday to Friday">
+            <div class="al-week__cell">
+              <span class="al-week__day">Mon</span>
+              <span class="al-week__note">Scope + price agreed, in writing</span>
+            </div>
+            <div class="al-week__cell">
+              <span class="al-week__day">Tue</span>
+              <span class="al-week__note">Build against the agreed scope</span>
+            </div>
+            <div class="al-week__cell">
+              <span class="al-week__day">Wed</span>
+              <span class="al-week__note">Build against the agreed scope</span>
+            </div>
+            <div class="al-week__cell">
+              <span class="al-week__day">Thu</span>
+              <span class="al-week__note">Build against the agreed scope</span>
+            </div>
+            <div class="al-week__cell al-week__cell--demo">
+              <span class="al-week__day">Fri</span>
+              <span class="al-week__dot" aria-hidden="true"></span>
+              <span class="al-week__note">Demo shipped → invoice follows</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="al-ap-block al-reveal">
+          <span class="al-ap-subhead">How a week works</span>
+          <ul class="al-checklist">
+            <li class="al-checklist__item">Scope and price for the week are agreed in advance, in writing.</li>
+            <li class="al-checklist__item">We demo what shipped on Friday.</li>
+            <li class="al-checklist__item">The invoice follows the demo — we bill for delivered work, not planned work.</li>
+            <li class="al-checklist__item">If a week disappoints, you stop. You’ve risked one week.</li>
+          </ul>
+        </div>
+
+        <p class="al-body-lg al-reveal" style="max-width: 64ch; margin-top: var(--al-space-8); margin-bottom: var(--al-space-6);">After the trust period — usually four to eight weeks — you choose what happens next. We’ll recommend one. You decide.</p>
 
         <div class="al-grid--3">
           <article class="al-card al-reveal">
-            <span class="al-card__eyebrow">Senior-only</span>
-            <h3 class="al-card__title">Senior-only delivery</h3>
-            <p class="al-card__body">There is no junior bench and no offshore rotation absorbing hours on your budget. Every engagement is led and executed by architects and senior engineers who have shipped in real production orgs and lived with the consequences.</p>
-            <p class="al-card__body" style="margin-bottom: 0;">That means the person scoping your work is the person doing it. You are not paying senior rates to supervise juniors learning on the job — you are paying for engineers who already know where the platform bites.</p>
+            <span class="al-card__eyebrow">Stay weekly</span>
+            <h3 class="al-card__title">Stay weekly</h3>
+            <p class="al-card__body" style="margin-bottom: 0;">Keep the same rhythm for as long as it’s working. Nothing changes.</p>
           </article>
-
           <article class="al-card al-reveal">
-            <span class="al-card__eyebrow">Leverage</span>
-            <h3 class="al-card__title">AI as leverage, not a shortcut</h3>
-            <p class="al-card__body">We use agentic tooling for the mechanical parts of development — boilerplate, scaffolding, first-draft tests, and documentation. It compresses the hours that used to go to typing so our engineers can spend them on judgment instead.</p>
-            <p class="al-card__body" style="margin-bottom: 0;">What AI does not do is decide. Every line it drafts is read, understood, and owned by a senior human before it goes anywhere near your org. The AI does the typing; the judgment stays human.</p>
+            <span class="al-card__eyebrow">Monthly retainer</span>
+            <h3 class="al-card__title">Monthly retainer</h3>
+            <p class="al-card__body" style="margin-bottom: 0;">Move to a monthly cycle once the relationship is settled — whatever suits your finance team.</p>
           </article>
-
           <article class="al-card al-reveal">
-            <span class="al-card__eyebrow">Rigor</span>
-            <h3 class="al-card__title">Enterprise-grade rigor</h3>
-            <p class="al-card__body">Source control, code review, meaningful test coverage, and staged release management are not optional add-ons — they are how we work by default, on every project regardless of size.</p>
-            <p class="al-card__body" style="margin-bottom: 0;">AI-accelerated code is held to exactly the same bar as hand-written code, because your org can't tell the difference and can't afford downtime. If it wouldn't pass review written by hand, it doesn't ship because a model wrote it faster.</p>
+            <span class="al-card__eyebrow">Milestone</span>
+            <h3 class="al-card__title">Milestone fixed-price</h3>
+            <p class="al-card__body" style="margin-bottom: 0;">Switch to milestone-based fixed price for larger programs of work.</p>
           </article>
+        </div>
+
+        <div class="al-callout al-reveal" style="margin-top: var(--al-space-8);">
+          <ul class="al-checklist">
+            <li class="al-checklist__item"><strong>For the first two months, your maximum exposure at any moment is one week of work.</strong></li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         4. PROCESS
+         06. EASY EXIT (NAVY — the visual climax). Inherits the star-field
+         treatment. A 6-item checklist with #8FD0FF checks + white dividers, then a
+         closing paragraph. The ONLY navy content section on the page.
          ===================================================================== -->
-    <section class="al-section al-section--navy" id="al-process">
+    <section class="al-section al-section--navy al-ap-anchor" id="approach-exit">
       <div class="al-container">
-        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
-          <span class="al-eyebrow">Process</span>
-          <h2>From scope to shipped, without surprises.</h2>
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-7);">
+          <span class="al-eyebrow">Easy exit</span>
+          <h2>Leaving should cost you nothing but the notice</h2>
         </header>
 
-        <div class="al-process">
-          <div class="al-process__item al-reveal">
-            <span class="al-process__num" aria-hidden="true">01</span>
-            <h3 class="al-process__title">Discover &amp; scope</h3>
-            <p class="al-process__body">We map the problem, the org, and the constraints before writing anything — so the estimate reflects reality, not optimism.</p>
-          </div>
+        <ul class="al-checklist al-checklist--divided al-reveal">
+          <li class="al-checklist__item">Every commit lands in your repository, from day one — never ours.</li>
+          <li class="al-checklist__item">All configuration deployed through your pipeline, into your org.</li>
+          <li class="al-checklist__item">Documentation written as we go, not assembled during offboarding.</li>
+          <li class="al-checklist__item">No proprietary frameworks, no unmanaged black boxes, no license traps.</li>
+          <li class="al-checklist__item">One week’s written notice. No termination fee, no minimum term, no clawback.</li>
+          <li class="al-checklist__item">Structured handover: knowledge-transfer session, runbook, and an open-items register for whoever picks it up.</li>
+        </ul>
 
-          <div class="al-process__item al-reveal">
-            <span class="al-process__num" aria-hidden="true">02</span>
-            <h3 class="al-process__title">Architect</h3>
-            <p class="al-process__body">A senior architect designs the data model, integration points, and automation before a single line of code is generated.</p>
-          </div>
-
-          <div class="al-process__item al-reveal">
-            <span class="al-process__num" aria-hidden="true">03</span>
-            <h3 class="al-process__title">Build</h3>
-            <p class="al-process__body">AI-accelerated development against the design, with senior review, source control, and tests on every change.</p>
-          </div>
-
-          <div class="al-process__item al-reveal">
-            <span class="al-process__num" aria-hidden="true">04</span>
-            <h3 class="al-process__title">Ship &amp; support</h3>
-            <p class="al-process__body">Staged deployment, knowledge transfer, and optional managed support to keep the org healthy after launch.</p>
-          </div>
-        </div>
+        <p class="al-reveal" style="max-width: 66ch; margin-top: var(--al-space-7); color: rgba(255, 255, 255, .82);">We’d rather lose a client cleanly and be recommended, than keep one who wants to leave. Every guarantee above is written into the MSA, not just this page — ask for the clause numbers and we’ll send them before you sign.</p>
       </div>
     </section>
 
     <!-- =====================================================================
-         5. TEAM
+         07. HOW THE WORK GETS DONE (white). Two-column Human/AI comparison where
+         the HUMAN column is DOM-first and dominant (blue accent) and the AI column
+         is subordinate (purple-70 header + AI chip). Human precedes AI in the DOM
+         for every pair. Then a "Quality gates" strip with 2px blue top rules; the
+         last gate carries a MON → FRI Week-rail tick.
          ===================================================================== -->
-    <section class="al-section" id="al-team">
+    <section class="al-section al-ap-anchor" id="approach-delivery">
       <div class="al-container">
-        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
-          <span class="al-eyebrow">The team</span>
-          <h2>Senior engineers who own the work.</h2>
-          <!-- PLACEHOLDER: real headshots and full bios are pending — confirm names, roles, certifications, and photos with client before launch. -->
-          <p style="margin-top: var(--al-space-4); max-width: 62ch;">Real headshots and bios are pending. The profiles below use placeholder names, roles, and abstract avatars as stand-ins until the client provides finalized team details.</p>
+        <header class="al-reveal" style="max-width: 64ch; margin-bottom: var(--al-space-8);">
+          <span class="al-eyebrow">How the work gets done</span>
+          <h2>Senior developers, accountable. AI agents, accelerating.</h2>
+          <p class="al-body-lg" style="margin-top: var(--al-space-4);">Every line of code that reaches your org is owned by a named senior Salesforce developer. AI agents make that developer faster. They don’t replace judgment, and they don’t get merge rights.</p>
         </header>
 
-        <div class="al-grid--3">
-          <!-- PLACEHOLDER: confirm real name, role, and certification with client -->
-          <article class="al-card al-card--testimonial al-reveal" style="align-items: flex-start;">
-            <div class="al-card__meta" style="display: flex; align-items: center; gap: var(--al-space-3); margin-bottom: var(--al-space-4);">
-              <img src="assets/avatar-1.svg" width="56" height="56" alt="" aria-hidden="true" style="width: 56px; height: 56px; border-radius: var(--al-radius-pill);">
-              <span>
-                <strong style="color: var(--al-navy-90);">Placeholder Name</strong><br>
-                <span class="al-caption">Senior Salesforce Architect</span>
-              </span>
+        <div class="al-compare al-reveal">
+          <div class="al-compare__head">
+            <div class="al-compare__col-head al-compare__col-head--human">
+              <span class="al-compare__role">Human</span>
+              <span class="al-compare__col-title">Senior developer — owns it</span>
             </div>
-            <p class="al-card__body" style="margin-bottom: var(--al-space-3);">Leads data-model and org strategy work — the decisions that decide whether a build scales or has to be rewritten in a year.</p>
-            <!-- PLACEHOLDER: confirm certification with client -->
-            <p><span class="al-provenance al-provenance--sm">Certified Application Architect</span></p>
-          </article>
+            <div class="al-compare__col-head al-compare__col-head--ai">
+              <span class="al-compare__role">AI <span class="al-tag al-tag--ai">AI</span></span>
+              <span class="al-compare__col-title">Agents — assist only</span>
+            </div>
+          </div>
 
-          <!-- PLACEHOLDER: confirm real name, role, and certification with client -->
-          <article class="al-card al-card--testimonial al-reveal" style="align-items: flex-start;">
-            <div class="al-card__meta" style="display: flex; align-items: center; gap: var(--al-space-3); margin-bottom: var(--al-space-4);">
-              <img src="assets/avatar-2.svg" width="56" height="56" alt="" aria-hidden="true" style="width: 56px; height: 56px; border-radius: var(--al-radius-pill);">
-              <span>
-                <strong style="color: var(--al-navy-90);">Placeholder Name</strong><br>
-                <span class="al-caption">Lead LWC Engineer</span>
-              </span>
-            </div>
-            <p class="al-card__body" style="margin-bottom: var(--al-space-3);">Owns front-end and Apex delivery — Lightning Web Components and server-side logic built for correctness, tested, and reviewed before it ships.</p>
-            <!-- PLACEHOLDER: confirm certification with client -->
-            <p><span class="al-provenance al-provenance--sm">Platform Developer II</span></p>
-          </article>
+          <div class="al-compare__row">
+            <div class="al-compare__cell al-compare__cell--human"><span class="al-compare__cell-role">Human</span>Solution architecture and trade-offs</div>
+            <div class="al-compare__cell al-compare__cell--ai"><span class="al-compare__cell-role">AI</span>Boilerplate and scaffolding</div>
+          </div>
+          <div class="al-compare__row">
+            <div class="al-compare__cell al-compare__cell--human"><span class="al-compare__cell-role">Human</span>Data model and sharing design</div>
+            <div class="al-compare__cell al-compare__cell--ai"><span class="al-compare__cell-role">AI</span>Apex test generation and edge-case enumeration</div>
+          </div>
+          <div class="al-compare__row">
+            <div class="al-compare__cell al-compare__cell--human"><span class="al-compare__cell-role">Human</span>Security decisions</div>
+            <div class="al-compare__cell al-compare__cell--ai"><span class="al-compare__cell-role">AI</span>First-pass review and static analysis</div>
+          </div>
+          <div class="al-compare__row">
+            <div class="al-compare__cell al-compare__cell--human"><span class="al-compare__cell-role">Human</span>Code review and merge approval</div>
+            <div class="al-compare__cell al-compare__cell--ai"><span class="al-compare__cell-role">AI</span>Documentation drafts</div>
+          </div>
+          <div class="al-compare__row">
+            <div class="al-compare__cell al-compare__cell--human"><span class="al-compare__cell-role">Human</span>Your weekly demo and communication</div>
+            <div class="al-compare__cell al-compare__cell--ai"><span class="al-compare__cell-role">AI</span>Regression sweeps across the org</div>
+          </div>
+          <div class="al-compare__row">
+            <div class="al-compare__cell al-compare__cell--human"><span class="al-compare__cell-role">Human</span>Production deployments</div>
+            <div class="al-compare__cell al-compare__cell--ai"><span class="al-compare__cell-role">AI</span>Refactor candidates and impact analysis</div>
+          </div>
+        </div>
 
-          <!-- PLACEHOLDER: confirm real name, role, and certification with client -->
-          <article class="al-card al-card--testimonial al-reveal" style="align-items: flex-start;">
-            <div class="al-card__meta" style="display: flex; align-items: center; gap: var(--al-space-3); margin-bottom: var(--al-space-4);">
-              <img src="assets/avatar-3.svg" width="56" height="56" alt="" aria-hidden="true" style="width: 56px; height: 56px; border-radius: var(--al-radius-pill);">
-              <span>
-                <strong style="color: var(--al-navy-90);">Placeholder Name</strong><br>
-                <span class="al-caption">Integration Architect</span>
+        <div class="al-ap-block al-reveal">
+          <span class="al-ap-subhead">Quality gates</span>
+          <div class="al-gates">
+            <div class="al-gate">Static analysis on every pull request</div>
+            <div class="al-gate">Coverage above your org minimum — assertions reviewed, not just percentages</div>
+            <div class="al-gate">Human review before every merge, without exception</div>
+            <div class="al-gate">Deployment through your pipeline, never hand-built change sets</div>
+            <div class="al-gate">
+              Friday demo against the acceptance criteria written on Monday
+              <!-- MON → FRI tick, echoing the Week rail -->
+              <span class="al-week-tick" aria-hidden="true">
+                <span class="al-week-tick__day">Mon</span>
+                <span class="al-week-tick__arrow">→</span>
+                <span class="al-week-tick__day">Fri</span>
+                <span class="al-week__dot"></span>
               </span>
             </div>
-            <p class="al-card__body" style="margin-bottom: var(--al-space-3);">Designs the connections between Salesforce and the systems your business depends on — so records move reliably and nothing is silently dropped.</p>
-            <!-- PLACEHOLDER: confirm certification with client -->
-            <p><span class="al-provenance al-provenance--sm">Certified Integration Architect</span></p>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         6. CERTIFICATIONS / STATS
+         08. FAQ (surface). Existing .al-accordion pattern — real <button> triggers
+         with aria-expanded + aria-controls, first item open by default. Item 8
+         (partner status) carries a visible PLACEHOLDER note and is OMITTED from the
+         FAQ JSON-LD in <head>.
          ===================================================================== -->
-    <section class="al-section al-section--surface">
+    <section class="al-section al-section--surface al-ap-anchor" id="approach-faq">
       <div class="al-container">
-        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-8);">
-          <span class="al-eyebrow">Credentials</span>
-          <h2>Certified, and held to a production bar.</h2>
-          <!-- PLACEHOLDER: all certifications and stats below are placeholders — confirm the team's actual credentials and numbers with client. -->
-          <p style="margin-top: var(--al-space-4); max-width: 64ch;">The certifications and figures below are placeholders pending confirmation. Certification names are used descriptively to describe the team's credentials; Agentic Labs makes no claim of official Salesforce partner status, which is unconfirmed.</p>
+        <header class="al-reveal" style="max-width: 60ch; margin-bottom: var(--al-space-7);">
+          <span class="al-eyebrow">FAQ</span>
+          <h2>Questions skeptics ask</h2>
         </header>
 
-        <!-- PLACEHOLDER: confirm the team's actual certifications with client -->
-        <div class="al-tag-row al-reveal" style="margin-bottom: var(--al-space-8);">
-          <span class="al-tag al-tag--default">Certified Application Architect</span>
-          <span class="al-tag al-tag--default">Platform Developer II</span>
-          <span class="al-tag al-tag--integration">Certified Integration Architect</span>
-          <span class="al-tag al-tag--ai">Agentforce Specialist</span>
-        </div>
+        <div class="al-accordion al-reveal" style="max-width: 860px;">
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="true" aria-controls="faq-1">
+                <span class="al-accordion__question">Is the audit really free? What’s the catch?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-1">
+              <p class="al-accordion__answer">No catch, no obligation. It costs us a few days of senior time and it’s the most honest sales pitch we have. If it tells you your org is in good shape, that’s a fair outcome.</p>
+            </div>
+          </div>
 
-        <div class="al-stat-strip">
-          <!-- PLACEHOLDER: confirm real number with client -->
-          <div class="al-stat al-reveal">
-            <span class="al-stat__num">100%</span>
-            <span class="al-stat__label">Senior-staffed</span>
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-2">
+                <span class="al-accordion__question">What access do you need?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-2">
+              <p class="al-accordion__answer">A read-only integration user, or a refreshed sandbox. We don’t need production write access at any point during the audit.</p>
+            </div>
           </div>
-          <!-- PLACEHOLDER: confirm real number with client -->
-          <div class="al-stat al-reveal">
-            <span class="al-stat__num">40+</span>
-            <span class="al-stat__label">Orgs shipped</span>
+
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-3">
+                <span class="al-accordion__question">Will you sign an NDA?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-3">
+              <p class="al-accordion__answer">Before the intake call, if you’d like. We’ll sign yours or send ours.</p>
+            </div>
           </div>
-          <!-- PLACEHOLDER: confirm real number with client -->
-          <div class="al-stat al-reveal">
-            <span class="al-stat__num">15+</span>
-            <span class="al-stat__label">Years combined Salesforce experience</span>
+
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-4">
+                <span class="al-accordion__question">What if the first week disappoints?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-4">
+              <p class="al-accordion__answer">You pay for that week and stop. That’s what the structure is for.</p>
+            </div>
           </div>
-          <!-- PLACEHOLDER: confirm real number with client -->
-          <div class="al-stat al-reveal">
-            <span class="al-stat__num">0</span>
-            <span class="al-stat__label">Junior benches</span>
+
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-5">
+                <span class="al-accordion__question">Who actually writes the code?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-5">
+              <p class="al-accordion__answer">Named senior Salesforce developers, with AI agents assisting. You’ll know who is on your engagement and you’ll speak with them at every weekly demo.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-6">
+                <span class="al-accordion__question">Can you work alongside our in-house team or existing partner?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-6">
+              <p class="al-accordion__answer">Yes. We work inside your pipeline, your standards, and your review process.</p>
+            </div>
+          </div>
+
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-7">
+                <span class="al-accordion__question">How small an engagement will you take?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-7">
+              <p class="al-accordion__answer">One week of remediation work is a perfectly good engagement. The entry point is identical whether it’s one week or four quarters.</p>
+            </div>
+          </div>
+
+          <!-- PLACEHOLDER: confirm partner tier & certifications with client before
+               launch, or remove this question. Do NOT assert partner status. This
+               item is intentionally excluded from the FAQ JSON-LD in <head>. -->
+          <div class="al-accordion__item">
+            <h3 style="margin: 0;">
+              <button class="al-accordion__trigger" type="button" aria-expanded="false" aria-controls="faq-8">
+                <span class="al-accordion__question">Are you a Salesforce partner?</span>
+                <span class="al-accordion__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="al-accordion__panel" id="faq-8">
+              <p class="al-accordion__answer"><span class="al-badge" style="margin-bottom: var(--al-space-3);">Placeholder — do not publish</span><br>[PLACEHOLDER — confirm partner tier &amp; certifications with client before launch, or remove this question. Do not assert partner status.]</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         7. FINAL CTA BAND
+         09. CLOSING CTA + AUDIT FORM (white). LEFT: pitch + reassurance list +
+         ghost CTA to /contact. RIGHT: audit-request form in a card — reuses the
+         existing form[data-al-form] → /api/contact mechanism (see js/main.js §5).
          ===================================================================== -->
-    <section class="al-section">
+    <section class="al-section al-section--navy al-ap-anchor" id="approach-audit-form">
       <div class="al-container">
-        <div class="al-cta-band al-reveal">
-          <div>
-            <h2>Work with senior engineers, accelerated by AI.</h2>
-            <p>Talk to a senior architect about custom development, integrations, or an Agentforce build — scoped before you commit.</p>
+        <div class="al-grid--2" style="align-items: start; gap: var(--al-space-8);">
+
+          <!-- LEFT: pitch -->
+          <div class="al-reveal">
+            <span class="al-eyebrow">Get started</span>
+            <h2>Find out what your org actually looks like</h2>
+            <p class="al-body-lg" style="margin-top: var(--al-space-4); margin-bottom: var(--al-space-6);">Five business days. Read-only access. No obligation. A report you keep.</p>
+
+            <ul class="al-checklist" style="margin-bottom: var(--al-space-6);">
+              <li class="al-checklist__item">You keep the report either way</li>
+              <li class="al-checklist__item">No card details, ever</li>
+              <li class="al-checklist__item">We reply within one business day</li>
+            </ul>
+
+            <a class="al-btn al-btn--secondary" href="/contact">Talk to a senior developer</a>
           </div>
-          <div class="al-cta-band__actions">
-            <a class="al-btn al-btn--primary al-btn--lg" href="/contact">Contact us</a>
-            <a class="al-btn al-btn--secondary al-btn--lg" href="/contact">Get a scoped estimate</a>
+
+          <!-- RIGHT: audit-request form -->
+          <div class="al-reveal">
+            <div class="al-card">
+              <!-- Submits via js/main.js → POST /api/contact → Resend + reCAPTCHA v2 -->
+              <form class="al-form" data-al-form action="/api/contact" method="post" novalidate>
+                <!-- Honeypot for bots — visually hidden; leave empty -->
+                <div class="al-hp" aria-hidden="true">
+                  <label for="ap-website">Website</label>
+                  <input type="text" id="ap-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <!-- Source marker so the inbox can tell audit requests from generic
+                     contact messages (see js/main.js formPayload + server/index.js). -->
+                <input type="hidden" name="_source" value="approach-audit">
+
+                <div class="al-field">
+                  <label class="al-field__label" for="ap-name">Name</label>
+                  <input class="al-field__input" type="text" id="ap-name" name="name" autocomplete="name" required aria-describedby="ap-name-error">
+                  <span class="al-field__error" id="ap-name-error" aria-live="polite">Please enter your name.</span>
+                </div>
+
+                <div class="al-field">
+                  <label class="al-field__label" for="ap-email">Work email</label>
+                  <input class="al-field__input" type="email" id="ap-email" name="email" autocomplete="email" required aria-describedby="ap-email-error">
+                  <span class="al-field__error" id="ap-email-error" aria-live="polite">Please enter a valid work email address.</span>
+                </div>
+
+                <div class="al-field">
+                  <label class="al-field__label" for="ap-company">Company</label>
+                  <input class="al-field__input" type="text" id="ap-company" name="company" autocomplete="organization" required aria-describedby="ap-company-error">
+                  <span class="al-field__error" id="ap-company-error" aria-live="polite">Please enter your company name.</span>
+                </div>
+
+                <div class="al-field">
+                  <label class="al-field__label" for="ap-orgtype">Salesforce org type</label>
+                  <select class="al-field__select" id="ap-orgtype" name="orgType">
+                    <option value="">Select…</option>
+                    <option value="Production">Production</option>
+                    <option value="Sandbox">Sandbox</option>
+                    <option value="Both">Both</option>
+                  </select>
+                </div>
+
+                <div class="al-field">
+                  <label class="al-field__label" for="ap-users">Rough user count</label>
+                  <input class="al-field__input" type="text" id="ap-users" name="userCount" inputmode="numeric" autocomplete="off">
+                </div>
+
+                <div class="al-field">
+                  <label class="al-field__label" for="ap-details">Message <span style="text-transform: none; letter-spacing: 0;">(optional)</span></label>
+                  <textarea class="al-field__textarea" id="ap-details" name="details" placeholder="Anything you’d like us to focus on? Timelines, constraints, or what prompted this."></textarea>
+                </div>
+
+                <div class="al-field al-field--recaptcha" data-al-recaptcha-field>
+                  <div class="al-recaptcha" data-al-recaptcha aria-describedby="ap-recaptcha-error"></div>
+                  <span class="al-field__error" id="ap-recaptcha-error" aria-live="polite">Please confirm you are not a robot.</span>
+                </div>
+
+                <div>
+                  <button class="al-btn al-btn--primary al-btn--lg" type="submit">Request the free audit</button>
+                  <p class="al-caption" style="margin-top: var(--al-space-3);">We reply within one business day. No sequences, no drip campaigns.</p>
+                </div>
+              </form>
+
+              <!-- Success/error states live OUTSIDE the form: js/main.js hides the
+                   whole form on submit, so these must be siblings to stay visible
+                   and let role="status"/role="alert" announce to screen readers. -->
+              <div data-form-success class="al-form__success" hidden role="status">
+                <h3>Request received.</h3>
+                <p>We reply within one business day — then we’ll set up read-only access and get started on your free audit. Nothing is billed and nothing is binding.</p>
+              </div>
+
+              <div class="al-form__error" data-form-error role="alert">Something went wrong on our end. Please try again or email us directly at hello@agenticlabs.cloud</div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
