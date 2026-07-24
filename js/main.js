@@ -363,6 +363,12 @@
         company: String(data.get('company') || '').trim(),
         details: String(data.get('details') || '').trim(),
         website: String(data.get('website') || '').trim(),
+        // Optional extras — present on the Approach audit form, absent (empty) on
+        // the plain contact form. The server treats them as optional, so this is
+        // backward-compatible with every existing form.
+        orgType: String(data.get('orgType') || '').trim(),
+        userCount: String(data.get('userCount') || '').trim(),
+        source: String(data.get('_source') || '').trim(),
         recaptchaToken: recaptchaToken || ''
       };
     }
@@ -527,7 +533,6 @@
           submitBtn.disabled = true;
           submitBtn.setAttribute('aria-busy', 'true');
         }
-        debugger; 
         fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -934,6 +939,47 @@
   }
 
   /* ------------------------------------------------------------------------
+     7c) APPROACH SUB-NAV — scroll-spy for the sticky section-nav on /approach.
+     Hooks: .al-subnav__link[href="#id"] anchors + the matching section ids.
+     Highlights the link whose section is nearest the viewport centre via
+     IntersectionObserver, mirroring state with .is-active + aria-current.
+     Progressive enhancement: the anchors already navigate with no JS; this only
+     adds the live highlight. No-ops if absent or if IO is unsupported (the first
+     link keeps its initial .is-active state).
+     ------------------------------------------------------------------------ */
+  function initApproachNav() {
+    var links = $$('.al-subnav__link');
+    if (!links.length || !('IntersectionObserver' in window)) { return; }
+
+    var map = {};
+    var sections = [];
+    links.forEach(function (link) {
+      var id = (link.getAttribute('href') || '').replace(/^#/, '');
+      var sec = id && document.getElementById(id);
+      if (sec) { map[id] = link; sections.push(sec); }
+    });
+    if (!sections.length) { return; }
+
+    function setActive(id) {
+      links.forEach(function (link) {
+        var on = link === map[id];
+        link.classList.toggle('is-active', on);
+        if (on) { link.setAttribute('aria-current', 'true'); }
+        else { link.removeAttribute('aria-current'); }
+      });
+    }
+
+    // A band across the viewport middle: the section crossing it wins.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { setActive(entry.target.id); }
+      });
+    }, { root: null, rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+    sections.forEach(function (sec) { io.observe(sec); });
+  }
+
+  /* ------------------------------------------------------------------------
      8) HELP CHAT — floating “Need help?” widget, bottom-right.
      Injected once into <body> on every page (no HTML edits required). Opens a
      small chat-style panel with Contact us CTAs. Escape / outside click close.
@@ -1129,6 +1175,7 @@
       initForms();
       initWorkFilter();
       initServicesNav();
+      initApproachNav();
       initStarFields();
       initHelpChat();
     });

@@ -939,6 +939,17 @@ body.al-scroll-lock { overflow: hidden; }
     radial-gradient(64% 150% at 72% 8%,  var(--al-hero-bloom-teal),   transparent 62%);
 }
 
+/* Same treatment for full-width navy sections when the particle field is off:
+   a static brand-bloom gradient over the navy base (blooms tuned for a wide,
+   tall section rather than the compact CTA band). Sits above the section's own
+   navy background-color, below content — no markup change needed. */
+[data-no-star-field] .al-section--navy {
+  background-image:
+    radial-gradient(40% 82% at 12% 18%, var(--al-hero-bloom-blue),   transparent 62%),
+    radial-gradient(38% 78% at 90% 30%, var(--al-hero-bloom-purple), transparent 60%),
+    radial-gradient(52% 96% at 72% 104%, var(--al-hero-bloom-teal),  transparent 64%);
+}
+
 /* -----------------------------------------------------------------------------
    10. PROVENANCE TAGS
    ----------------------------------------------------------------------------- */
@@ -2680,6 +2691,735 @@ body.al-scroll-lock { overflow: hidden; }
 }
 
 /* -----------------------------------------------------------------------------
+   21. APPROACH PAGE
+   Page-specific components for /approach. Reuses tokens + existing primitives
+   (.al-section*, .al-card*, .al-process*, .al-accordion*, .al-tag*, .al-form*)
+   wherever possible; only genuinely new structures get new classes here:
+     .al-subnav      sticky secondary section-nav (pill look reused from filters)
+     .al-week*       signature Mon–Fri "Week rail" (recurs in 04, 05, 07)
+     .al-ap-card     peer card with a blue top accent rule (02)
+     .al-ap-examine  audit "what we examine" 2-col row grid (03)
+     .al-callout     tinted blue-10 callout panel (03, 05)
+     .al-ap-timeline horizontal-on-desktop entry timeline (04)
+     .al-note        bordered note strip (04)
+     .al-checklist*  tick lists — blue on white, #8FD0FF on navy (05, 06, 09)
+     .al-compare*    Human-dominant / AI-subordinate comparison (07)
+     .al-gates       quality-gate strip with 2px blue top rules (07)
+     .al-field__select  form select primitive (09 audit form)
+   Responsive rules live in §19; reduced-motion rules in §20.
+   ----------------------------------------------------------------------------- */
+
+/* Anchor offset so section jumps clear BOTH sticky bars (navbar + sub-nav). */
+:root { --al-subnav-h: 57px; }
+.al-ap-anchor { scroll-margin-top: calc(var(--al-navbar-h) + var(--al-subnav-h) + 8px); }
+
+/* ---- Sticky sub-nav ---- */
+.al-subnav {
+  position: sticky;
+  top: var(--al-navbar-h);
+  z-index: 90;                 /* below the navbar (z 100), above content */
+  background-color: rgba(255, 255, 255, .92);
+  backdrop-filter: saturate(1.4) blur(8px);
+  -webkit-backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--al-border);
+  box-shadow: 0 8px 22px rgba(3, 45, 96, .06);
+}
+.al-subnav__inner {
+  display: flex;
+  gap: var(--al-space-2);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: var(--al-space-3);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.al-subnav__link {
+  flex: 0 0 auto;
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--al-ink-500);
+  background-color: transparent;
+  border: 1px solid var(--al-border);
+  padding: 8px 14px;
+  border-radius: var(--al-radius-pill);
+  transition: color var(--al-t-fast) var(--al-ease),
+              background-color var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease),
+              transform var(--al-t-fast) var(--al-ease);
+}
+.al-subnav__link:hover {
+  color: var(--al-blue-70);
+  border-color: var(--al-blue-60);
+  background-color: var(--al-blue-10);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(1, 118, 211, .16);
+}
+.al-subnav__link.is-active {
+  color: var(--al-white);
+  border-color: transparent;
+  background-image: linear-gradient(135deg, var(--al-blue-60), var(--al-blue-70));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(1, 118, 211, .42),
+              inset 0 1px 0 rgba(255, 255, 255, .25);
+}
+.al-subnav__link.is-active:hover {
+  color: var(--al-white);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(1, 118, 211, .5),
+              inset 0 1px 0 rgba(255, 255, 255, .25);
+}
+.al-subnav__link:focus-visible {
+  outline: 2px solid var(--al-blue-60);
+  outline-offset: 2px;
+}
+
+/* ---- 02: peer card with a blue top accent rule ---- */
+.al-ap-card { border-top: 3px solid var(--al-blue-60); }
+
+.al-ap-intro { align-items: start; gap: var(--al-space-8); }
+.al-ap-intro h2 { letter-spacing: -0.02em; }
+
+/* ---- Shared: mono sub-heading + block rhythm (03, 05, 07) ---- */
+.al-ap-block { margin-top: var(--al-space-8); }
+.al-ap-subhead {
+  display: block;
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-blue-70);
+  margin-bottom: var(--al-space-5);
+}
+
+/* ---- 03: "What we examine" — 8 rows, 2-col, 2px top rule each ---- */
+.al-ap-examine {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--al-space-5) var(--al-space-7);
+}
+.al-ap-examine__row {
+  border-top: 2px solid var(--al-border);
+  padding-top: var(--al-space-4);
+}
+.al-ap-examine__area {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--al-space-2);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--al-navy-90);
+}
+.al-ap-examine__detail {
+  display: block;
+  margin-top: var(--al-space-2);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--al-ink-500);
+}
+
+/* ---- Callout panel (03 "no obligation", 05 "exposure") ---- */
+.al-callout {
+  background-color: var(--al-blue-10);
+  border: 1px solid #CBE3F7;
+  border-radius: var(--al-radius-panel);
+  padding: var(--al-space-6);
+}
+.al-callout__kicker {
+  display: block;
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-blue-70);
+  margin-bottom: var(--al-space-2);
+}
+.al-callout p { color: var(--al-ink-900); max-width: 78ch; }
+.al-callout .al-checklist { margin: 0; }
+
+/* ---- Signature: the Week rail (Mon–Fri strip) ---- */
+.al-week {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+  overflow: hidden;
+  background-color: var(--al-white);
+}
+.al-week__cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-2);
+  padding: var(--al-space-4);
+  border-left: 1px solid var(--al-border);
+  border-top: 2px solid transparent;   /* reserves the FRI accent's 2px slot */
+}
+.al-week__cell:first-child { border-left: 0; }
+.al-week--compact .al-week__cell { padding: var(--al-space-3) var(--al-space-4); }
+.al-week__day {
+  font-family: var(--al-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--al-ink-500);
+}
+.al-week__note {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--al-ink-900);
+}
+/* FRI "demo" cell: 2px blue top rule + an 8px blue demo dot. */
+.al-week__cell--demo {
+  border-top-color: var(--al-blue-60);
+  background-color: var(--al-blue-10);
+}
+.al-week__cell--demo .al-week__day { color: var(--al-blue-70); }
+.al-week__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--al-radius-pill);
+  background-color: var(--al-blue-60);
+  flex: 0 0 auto;
+}
+
+/* Annotated Week rail wrapper (05) — white card frame. */
+.al-week-card {
+  background-color: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-panel);
+  padding: var(--al-space-5);
+  box-shadow: 0 8px 24px rgba(3, 45, 96, .06);
+}
+.al-week-card .al-week { border: 0; border-radius: 0; }
+.al-week-card .al-week__cell:first-child { border-left: 0; }
+
+/* MON → FRI inline tick (07 last quality gate) — echoes the Week rail. */
+.al-week-tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--al-space-3);
+  padding: 4px 10px;
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-pill);
+  background-color: var(--al-blue-10);
+}
+.al-week-tick__day {
+  font-family: var(--al-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-blue-70);
+}
+.al-week-tick__arrow { color: var(--al-blue-60); font-size: 12px; }
+
+/* ---- 04: entry timeline (horizontal desktop / vertical mobile) ---- */
+.al-ap-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--al-space-5);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--al-space-8);
+}
+.al-ap-tl__node {
+  position: relative;
+  padding-top: var(--al-space-7);   /* room for the marker + connector */
+}
+/* Decorative connector line running through the marker row. */
+.al-ap-tl__node::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--al-border);
+}
+.al-ap-tl__node:first-child::before { left: 11px; }
+.al-ap-tl__node:last-child::before { right: 11px; }
+.al-ap-tl__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--al-radius-pill);
+  background-color: var(--al-blue-60);
+  border: 2px solid var(--al-white);
+  box-shadow: 0 0 0 2px var(--al-blue-60);
+}
+/* Ringed "demo" marker (Day 6 walkthrough). */
+.al-ap-tl__marker--demo {
+  background-color: var(--al-white);
+  border-color: var(--al-blue-60);
+  box-shadow: 0 0 0 2px var(--al-blue-60);
+}
+.al-ap-tl__day {
+  display: block;
+  font-family: var(--al-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--al-blue-70);
+  margin-bottom: var(--al-space-2);
+}
+.al-ap-tl__title {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--al-navy-90);
+  margin-bottom: var(--al-space-2);
+}
+.al-ap-tl__body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--al-ink-500);
+}
+.al-ap-tl__node .al-week { margin-top: var(--al-space-4); }
+
+/* ---- Bordered note strip (04) ---- */
+.al-note {
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+  padding: var(--al-space-5) var(--al-space-6);
+  background-color: var(--al-white);
+}
+.al-note__kicker {
+  display: block;
+  font-family: var(--al-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-blue-70);
+  margin-bottom: var(--al-space-2);
+}
+.al-note p { color: var(--al-ink-900); max-width: 82ch; }
+
+/* ---- Checklists (05, 06, 09) ---- */
+.al-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-3);
+}
+.al-checklist__item {
+  position: relative;
+  padding-left: 34px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--al-ink-900);
+}
+.al-checklist__item::before {         /* tinted disc */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--al-radius-pill);
+  background-color: var(--al-blue-10);
+}
+.al-checklist__item::after {          /* check glyph drawn with borders */
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--al-blue-70);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+/* Divided variant (06 navy exit list). */
+.al-checklist--divided .al-checklist__item {
+  padding-top: var(--al-space-4);
+  padding-bottom: var(--al-space-4);
+  border-top: 1px solid var(--al-border);
+}
+.al-checklist--divided .al-checklist__item::before,
+.al-checklist--divided .al-checklist__item::after {
+  top: calc(var(--al-space-4) + 2px);
+}
+.al-checklist--divided .al-checklist__item::after { top: calc(var(--al-space-4) + 6px); }
+.al-checklist--divided { gap: 0; }
+.al-checklist--divided .al-checklist__item:first-child { border-top: 0; }
+
+/* Navy theming (06): #8FD0FF checks, white text, translucent dividers. */
+.al-section--navy .al-checklist__item { color: rgba(255, 255, 255, .9); }
+.al-section--navy .al-checklist__item::before { background-color: rgba(143, 208, 255, .16); }
+.al-section--navy .al-checklist__item::after { border-color: #8FD0FF; }
+.al-section--navy .al-checklist--divided .al-checklist__item { border-top-color: rgba(255, 255, 255, .14); }
+.al-section--navy .al-checklist--divided .al-checklist__item:first-child { border-top: 0; }
+
+/* ---- 07: Human-dominant / AI-subordinate comparison ---- */
+.al-compare {
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-card);
+  overflow: hidden;
+}
+.al-compare__head,
+.al-compare__row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+.al-compare__col-head {
+  padding: var(--al-space-4) var(--al-space-5);
+  background-color: var(--al-surface);
+}
+.al-compare__col-head--human {
+  border-left: 3px solid var(--al-blue-60);   /* blue accent bar: dominant */
+  background-color: var(--al-blue-10);
+}
+.al-compare__col-head--ai { border-left: 1px solid var(--al-border); }
+.al-compare__role {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--al-space-2);
+  font-family: var(--al-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-ink-500);
+}
+.al-compare__col-head--ai .al-compare__role { color: var(--al-purple-70); }
+.al-compare__col-title {
+  display: block;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--al-navy-90);
+}
+.al-compare__col-head--ai .al-compare__col-title { color: var(--al-ink-500); font-weight: 500; }
+.al-compare__cell {
+  padding: var(--al-space-4) var(--al-space-5);
+  border-top: 1px solid var(--al-border);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.al-compare__cell--human {
+  border-left: 3px solid var(--al-blue-60);
+  color: var(--al-ink-900);
+  font-weight: 500;
+}
+.al-compare__cell--ai {
+  border-left: 1px solid var(--al-border);
+  color: var(--al-ink-500);
+}
+/* Per-cell role label — hidden on desktop (column heads carry the meaning),
+   revealed on mobile when the pair stacks (see §19). */
+.al-compare__cell-role {
+  display: none;
+  font-family: var(--al-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--al-ink-500);
+  margin-right: var(--al-space-2);
+}
+
+/* ---- 07: quality-gate strip, 2px blue top rule each ---- */
+.al-gates {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--al-space-5);
+}
+.al-gate {
+  border-top: 2px solid var(--al-blue-60);
+  padding-top: var(--al-space-4);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--al-ink-900);
+}
+
+/* ---- 09: form select primitive (introduced for the audit form) ---- */
+.al-field__select {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  font-family: var(--al-font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--al-ink-900);
+  background-color: var(--al-white);
+  border: 1px solid var(--al-border);
+  border-radius: var(--al-radius-btn);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  /* caret drawn as an SVG background so it matches the sharp brand look */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235C6470' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease);
+}
+.al-field__select:focus {
+  outline: none;
+  border-color: var(--al-blue-60);
+  box-shadow: 0 0 0 2px var(--al-blue-60);
+}
+.al-field.has-error .al-field__select { border-color: var(--al-error); }
+
+/* ---- Reveal-triggered motion --------------------------------------------------
+   Richer entrances for Approach content. These piggyback on the existing
+   .al-reveal → .is-visible system (js/main.js #4): the element's RESTING state is
+   the final, fully-visible one, and the animation only plays once .is-visible is
+   added — so with JS off everything still renders normally, and the reduced-motion
+   block (§20) neutralises every rule below. Per-item stagger uses a --d custom
+   property so the shorthand can carry the delay without specificity fights. */
+@keyframes al-ap-rise  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes al-ap-pop   { 0% { opacity: 0; transform: scale(.4); } 60% { opacity: 1; transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes al-ap-draw  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes al-ap-check { 0% { opacity: 0; transform: rotate(45deg) scale(.2); } 55% { opacity: 1; } 100% { opacity: 1; transform: rotate(45deg) scale(1); } }
+@keyframes al-ap-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(1, 118, 211, .5); } 50% { box-shadow: 0 0 0 9px rgba(1, 118, 211, 0); } }
+
+/* Hero reassurance points — light check bullets over the dark field. */
+.al-hero--approach .al-hero__points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--al-space-3) var(--al-space-6);
+  margin-top: var(--al-space-2);
+}
+.al-hero--approach .al-hero__points li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--al-hero-ink);
+  font-size: 15px;
+  line-height: 1.4;
+}
+.al-hero--approach .al-hero__points li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 4px;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid var(--al-hero-accent);
+  border-bottom: 2px solid var(--al-hero-accent);
+  transform: rotate(-45deg);
+}
+
+/* Hero: stagger the headline stack in on load. */
+.al-hero--approach .al-hero__content.is-visible > * { animation: al-ap-rise .6s var(--al-ease) var(--d, 0ms) both; }
+.al-hero--approach .al-hero__content > *:nth-child(1) { --d: 40ms; }
+.al-hero--approach .al-hero__content > *:nth-child(2) { --d: 130ms; }
+.al-hero--approach .al-hero__content > *:nth-child(3) { --d: 230ms; }
+.al-hero--approach .al-hero__content > *:nth-child(4) { --d: 330ms; }
+.al-hero--approach .al-hero__content > *:nth-child(5) { --d: 430ms; }
+
+/* 03 — "What we examine" rows rise in sequence. */
+.al-ap-block.is-visible .al-ap-examine__row { animation: al-ap-rise .55s var(--al-ease) var(--d, 0ms) both; }
+.al-ap-examine__row:nth-child(1) { --d: 0ms; }   .al-ap-examine__row:nth-child(2) { --d: 55ms; }
+.al-ap-examine__row:nth-child(3) { --d: 110ms; } .al-ap-examine__row:nth-child(4) { --d: 165ms; }
+.al-ap-examine__row:nth-child(5) { --d: 70ms; }  .al-ap-examine__row:nth-child(6) { --d: 125ms; }
+.al-ap-examine__row:nth-child(7) { --d: 180ms; } .al-ap-examine__row:nth-child(8) { --d: 235ms; }
+
+/* 04 — timeline: nodes rise, connector segments draw, the Day 6 demo marker pulses. */
+.al-ap-timeline.is-visible .al-ap-tl__node { animation: al-ap-rise .55s var(--al-ease) var(--d, 0ms) both; }
+.al-ap-tl__node:nth-child(1) { --d: 0ms; }   .al-ap-tl__node:nth-child(2) { --d: 110ms; }
+.al-ap-tl__node:nth-child(3) { --d: 220ms; } .al-ap-tl__node:nth-child(4) { --d: 330ms; }
+.al-ap-tl__node:nth-child(5) { --d: 440ms; }
+.al-ap-tl__node::before { transform-origin: left center; }
+.al-ap-timeline.is-visible .al-ap-tl__node::before { animation: al-ap-draw .6s var(--al-ease) calc(var(--d, 0ms) + 140ms) both; }
+.al-ap-tl__marker--demo { animation: al-ap-pulse 2.2s var(--al-ease) infinite; }
+
+/* Week-rail dots keep a gentle live pulse (the "Friday demo" beat). */
+.al-week__dot { animation: al-ap-pulse 2.6s var(--al-ease) infinite; }
+
+/* 05 — Week-rail card cells rise across Mon → Fri. */
+.al-week-card.is-visible .al-week__cell { animation: al-ap-rise .5s var(--al-ease) var(--d, 0ms) both; }
+.al-week-card .al-week__cell:nth-child(1) { --d: 0ms; }   .al-week-card .al-week__cell:nth-child(2) { --d: 80ms; }
+.al-week-card .al-week__cell:nth-child(3) { --d: 160ms; } .al-week-card .al-week__cell:nth-child(4) { --d: 240ms; }
+.al-week-card .al-week__cell:nth-child(5) { --d: 320ms; }
+
+/* Checklists (05 how-a-week, 06 exit climax, 09 reassurance): rows rise, then the
+   tinted disc pops and the check glyph draws in — the exit list is the payoff. */
+.al-reveal.is-visible .al-checklist__item { animation: al-ap-rise .5s var(--al-ease) var(--d, 0ms) both; }
+.al-reveal.is-visible .al-checklist__item::before { animation: al-ap-pop .5s var(--al-ease) calc(var(--d, 0ms) + 60ms) both; }
+.al-reveal.is-visible .al-checklist__item::after  { animation: al-ap-check .5s var(--al-ease) calc(var(--d, 0ms) + 140ms) both; }
+.al-checklist__item:nth-child(1) { --d: 0ms; }   .al-checklist__item:nth-child(2) { --d: 90ms; }
+.al-checklist__item:nth-child(3) { --d: 180ms; } .al-checklist__item:nth-child(4) { --d: 270ms; }
+.al-checklist__item:nth-child(5) { --d: 360ms; } .al-checklist__item:nth-child(6) { --d: 450ms; }
+
+/* 07 — human/AI compare rows rise; quality-gate cards rise in sequence. */
+.al-compare.is-visible .al-compare__row { animation: al-ap-rise .5s var(--al-ease) var(--d, 0ms) both; }
+.al-compare__row:nth-of-type(1) { --d: 0ms; }   .al-compare__row:nth-of-type(2) { --d: 70ms; }
+.al-compare__row:nth-of-type(3) { --d: 140ms; } .al-compare__row:nth-of-type(4) { --d: 210ms; }
+.al-compare__row:nth-of-type(5) { --d: 280ms; } .al-compare__row:nth-of-type(6) { --d: 350ms; }
+.al-ap-block.is-visible .al-gate { animation: al-ap-rise .5s var(--al-ease) var(--d, 0ms) both; }
+.al-gate:nth-child(1) { --d: 0ms; }   .al-gate:nth-child(2) { --d: 80ms; }
+.al-gate:nth-child(3) { --d: 160ms; } .al-gate:nth-child(4) { --d: 240ms; }
+.al-gate:nth-child(5) { --d: 320ms; }
+
+/* 08 — FAQ items rise in. */
+.al-accordion.is-visible .al-accordion__item { animation: al-ap-rise .45s var(--al-ease) var(--d, 0ms) both; }
+.al-accordion__item:nth-child(1) { --d: 0ms; }   .al-accordion__item:nth-child(2) { --d: 55ms; }
+.al-accordion__item:nth-child(3) { --d: 110ms; } .al-accordion__item:nth-child(4) { --d: 165ms; }
+.al-accordion__item:nth-child(5) { --d: 220ms; } .al-accordion__item:nth-child(6) { --d: 275ms; }
+.al-accordion__item:nth-child(7) { --d: 330ms; } .al-accordion__item:nth-child(8) { --d: 385ms; }
+
+/* ---- Richer contrast + interaction (Approach) ---------------------------------
+   Adds depth (brand-tinted surfaces, elevation, accent bars, punchier gradients)
+   and interaction (hover lift/glow + a live Week-rail sweep) on top of the base
+   components. Idle animations are killed under reduced-motion in §20. */
+
+/* Punchier hero mesh — more saturated blooms for a higher-contrast banner. */
+.al-hero--approach {
+  --al-hero-bloom-blue:   rgba(1, 118, 211, .55);
+  --al-hero-bloom-purple: rgba(117, 38, 227, .48);
+  --al-hero-bloom-teal:   rgba(3, 180, 167, .30);
+}
+
+/* Surface sections: a clear blue-gray tint (not near-white) + a faint brand bloom,
+   so the light sections read as a distinct mid-tone tier between white and navy. */
+.al-ap-anchor.al-section--surface {
+  background-color: #E7EDF6;
+  background-image:
+    radial-gradient(58% 90% at 100% 0%, rgba(1, 118, 211, .07), transparent 60%),
+    radial-gradient(48% 80% at 0% 100%, rgba(117, 38, 227, .05), transparent 62%);
+}
+
+/* Section sub-heads get a leading accent bar for rhythm + contrast. */
+.al-ap-subhead { position: relative; padding-left: 22px; }
+.al-ap-subhead::before {
+  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 14px; height: 2px;
+  background: linear-gradient(90deg, var(--al-blue-60), var(--al-purple));
+}
+
+/* Cards: resting elevation, lively hover (lift + blue border + deeper shadow). */
+.al-ap-card,
+#approach-audit .al-card,
+#approach-weekly .al-card {
+  box-shadow: 0 2px 10px rgba(3, 45, 96, .04);
+  transition: transform var(--al-t-fast) var(--al-ease),
+              box-shadow var(--al-t-fast) var(--al-ease),
+              border-color var(--al-t-fast) var(--al-ease);
+}
+.al-ap-card:hover,
+#approach-audit .al-card:hover,
+#approach-weekly .al-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--al-blue-60);
+  box-shadow: 0 16px 34px rgba(3, 45, 96, .14);
+}
+/* Peer card (02): the top accent brightens to a blue→purple gradient on hover. */
+.al-ap-card { position: relative; }
+.al-ap-card::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: linear-gradient(90deg, var(--al-blue-60), var(--al-purple));
+  opacity: 0; transition: opacity var(--al-t-fast) var(--al-ease);
+}
+.al-ap-card:hover::after { opacity: 1; }
+
+/* Callout + note: vertical brand accent bar + a touch of gradient. */
+.al-callout {
+  position: relative;
+  overflow: hidden;
+  padding-left: calc(var(--al-space-6) + 6px);
+  background-image: linear-gradient(120deg, var(--al-blue-10), rgba(238, 246, 253, .35));
+}
+.al-callout::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, var(--al-blue-60), var(--al-purple));
+}
+.al-note {
+  position: relative;
+  padding-left: calc(var(--al-space-6) + 6px);
+  transition: box-shadow var(--al-t-fast) var(--al-ease), transform var(--al-t-fast) var(--al-ease);
+}
+.al-note::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background-color: var(--al-blue-60);
+}
+.al-note:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(3, 45, 96, .08); }
+
+/* Week-rail card: stronger elevation, subtle gradient, and a live "week" sweep. */
+.al-week-card {
+  box-shadow: 0 12px 30px rgba(3, 45, 96, .10);
+  background-image: linear-gradient(180deg, #ffffff, #fbfdff);
+}
+.al-week-card .al-week { position: relative; }
+.al-week-card .al-week::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 55%;
+  pointer-events: none; z-index: 2;
+  background: linear-gradient(90deg, transparent 0%, rgba(1, 118, 211, .13) 46%, rgba(117, 38, 227, .10) 54%, transparent 100%);
+  transform: translateX(-120%);
+  animation: al-week-sweep 5s var(--al-ease) infinite;
+}
+@keyframes al-week-sweep { 0% { transform: translateX(-120%); } 100% { transform: translateX(320%); } }
+
+/* Timeline: soft glow on markers, pulsing demo marker keeps its ring, node hover. */
+.al-ap-tl__marker { box-shadow: 0 0 0 2px var(--al-blue-60), 0 0 0 6px rgba(1, 118, 211, .16); }
+.al-ap-tl__marker--demo { animation: al-ap-marker-pulse 2.2s var(--al-ease) infinite; }
+@keyframes al-ap-marker-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--al-blue-60), 0 0 0 0 rgba(1, 118, 211, .45); }
+  50%      { box-shadow: 0 0 0 2px var(--al-blue-60), 0 0 0 10px rgba(1, 118, 211, 0); }
+}
+.al-ap-tl__node { transition: transform var(--al-t-fast) var(--al-ease); }
+.al-ap-tl__node:hover { transform: translateY(-3px); }
+
+/* Compare table: elevation + row hover highlight. */
+.al-compare { box-shadow: 0 8px 24px rgba(3, 45, 96, .06); }
+.al-compare__row { transition: background-color var(--al-t-fast) var(--al-ease); }
+.al-compare__row:hover { background-color: rgba(1, 118, 211, .035); }
+
+/* Quality-gate cards: hover lift. */
+.al-gate { transition: transform var(--al-t-fast) var(--al-ease); }
+.al-gate:hover { transform: translateY(-3px); }
+
+/* 06 exit climax: richer gradient + a soft glow on the checkmarks. */
+#approach-exit {
+  --al-hero-bloom-blue:   rgba(1, 118, 211, .50);
+  --al-hero-bloom-purple: rgba(117, 38, 227, .44);
+  --al-hero-bloom-teal:   rgba(3, 180, 167, .28);
+}
+#approach-exit .al-checklist__item::after { filter: drop-shadow(0 0 4px rgba(143, 208, 255, .55)); }
+
+/* 09 closing form: blue top accent + strong elevation to pull focus to conversion.
+   On the navy section the white card lifts off the dark field. */
+#approach-audit-form .al-card {
+  border-top: 3px solid var(--al-blue-60);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .38);
+}
+
+/* ---- Dark-rhythm sections (04 Start + 09 Closing now navy) ---------------------
+   The page opens dark (hero), breaks the long light stretch at 04, climaxes dark
+   at 06, and closes dark at 09 — with the surface tier tinted in between. These
+   sections get the same brand-bloom gradient as the exit (via the data-no-star
+   -field navy rule) plus light-on-navy overrides for the timeline's own text. */
+#approach-start {
+  --al-hero-bloom-blue:   rgba(1, 118, 211, .42);
+  --al-hero-bloom-purple: rgba(117, 38, 227, .36);
+  --al-hero-bloom-teal:   rgba(3, 180, 167, .22);
+}
+#approach-audit-form {
+  --al-hero-bloom-blue:   rgba(1, 118, 211, .38);
+  --al-hero-bloom-purple: rgba(117, 38, 227, .34);
+  --al-hero-bloom-teal:   rgba(3, 180, 167, .20);
+}
+/* Timeline text over navy (the Week-rail card + note stay white and pop). */
+.al-section--navy .al-ap-tl__title { color: var(--al-white); }
+.al-section--navy .al-ap-tl__body  { color: rgba(255, 255, 255, .72); }
+.al-section--navy .al-ap-tl__day   { color: #8FD0FF; }
+.al-section--navy .al-ap-tl__node::before { background-color: rgba(255, 255, 255, .22); }
+
+/* -----------------------------------------------------------------------------
    19. RESPONSIVE — Webflow breakpoints
    ----------------------------------------------------------------------------- */
 
@@ -2785,6 +3525,20 @@ body.al-scroll-lock { overflow: hidden; }
   .al-footer__brand { grid-column: 1 / -1; max-width: 40ch; }
 
   .al-cta-band { padding: var(--al-space-7); }
+
+  /* ---- Approach page (tablet) ---- */
+  .al-gates { grid-template-columns: repeat(2, 1fr); gap: var(--al-space-5); }
+
+  /* Entry timeline flips to a vertical, left-connector list. */
+  .al-ap-timeline { grid-template-columns: 1fr; gap: 0; }
+  .al-ap-tl__node { padding-top: 0; padding-left: 40px; padding-bottom: var(--al-space-6); }
+  .al-ap-tl__node::before {
+    top: 0; bottom: 0; left: 10px; right: auto;
+    width: 2px; height: auto;
+  }
+  .al-ap-tl__node:first-child::before { top: 11px; }
+  .al-ap-tl__node:last-child::before { bottom: auto; height: 11px; }
+  .al-ap-tl__node:last-child { padding-bottom: 0; }
 }
 
 /* ---- Mobile landscape: <=767px ---- */
@@ -2890,6 +3644,26 @@ body.al-scroll-lock { overflow: hidden; }
     gap: var(--al-space-7);
     padding-block: var(--al-space-8) var(--al-space-7);
   }
+
+  /* ---- Approach page (mobile) ---- */
+  .al-ap-examine { grid-template-columns: 1fr; gap: var(--al-space-4); }
+  .al-gates { grid-template-columns: 1fr; gap: var(--al-space-4); }
+
+  /* Comparison: pairs stack (human still first in the DOM); column heads give
+     way to per-cell role labels so each row stays self-describing. */
+  .al-compare__head { display: none; }
+  .al-compare__row { grid-template-columns: 1fr; }
+  .al-compare__cell { border-left-width: 3px; }
+  .al-compare__cell--ai { border-left-color: var(--al-border); }
+  .al-compare__cell-role { display: inline-block; }
+
+  /* Annotated Week rail scrolls horizontally rather than crushing its notes. */
+  .al-week-card { overflow-x: auto; }
+  .al-week-card .al-week { min-width: 560px; }
+
+  /* Buttons + inputs go full-width to match the site's mobile form pattern. */
+  .al-form .al-btn { width: 100%; }
+  .al-subnav__link { scroll-snap-align: start; }
 }
 
 /* ---- Mobile portrait: <=479px ---- */
@@ -2961,6 +3735,33 @@ body.al-scroll-lock { overflow: hidden; }
      handled in JS — initHeroCanvas() paints one static frame and never starts
      the rAF loop when reduce is set. */
   .al-hero--immersive::before { animation: none; }
+
+  /* Approach reveal-triggered motion: resting state is already the final visible
+     one, so disabling every animation just shows content in place, no stagger. */
+  .al-hero--approach .al-hero__content > *,
+  .al-ap-examine__row,
+  .al-ap-tl__node,
+  .al-ap-tl__node::before,
+  .al-ap-tl__marker--demo,
+  .al-week__dot,
+  .al-week-card .al-week__cell,
+  .al-checklist__item,
+  .al-checklist__item::before,
+  .al-checklist__item::after,
+  .al-compare__row,
+  .al-gate,
+  .al-accordion__item,
+  .al-week-card .al-week::after { animation: none !important; }
+
+  /* Keep the sweep overlay out of the way when frozen. */
+  .al-week-card .al-week::after { display: none; }
+
+  /* Hover lifts are user-initiated, but drop them for consistency with the site. */
+  .al-ap-card:hover,
+  .al-note:hover,
+  .al-gate:hover,
+  .al-ap-tl__node:hover,
+  .al-subnav__link:hover { transform: none; }
 }
 
 /* =============================================================================

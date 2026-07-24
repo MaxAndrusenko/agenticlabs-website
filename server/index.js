@@ -179,6 +179,10 @@ app.post('/api/contact', async function (req, res) {
   const email = String(body.email || '').trim();
   const company = String(body.company || '').trim();
   const details = String(body.details || '').trim();
+  // Optional extras from the Approach audit form; empty on the plain contact form.
+  const orgType = String(body.orgType || '').trim().slice(0, 40);
+  const userCount = String(body.userCount || '').trim().slice(0, 40);
+  const source = String(body.source || '').trim().slice(0, 60);
   const recaptchaToken = String(body.recaptchaToken || '').trim();
   // Honeypot: real users leave this empty; bots often fill it.
   const honeypot = String(body.website || body.companyUrl || '').trim();
@@ -188,7 +192,10 @@ app.post('/api/contact', async function (req, res) {
     return res.status(200).json({ ok: true });
   }
 
-  if (!name || !email || !company || !details) {
+  // The Approach audit form has an OPTIONAL message; the plain contact form
+  // requires project details. Everything else is required on both.
+  const isAudit = source === 'approach-audit';
+  if (!name || !email || !company || (!details && !isAudit)) {
     return res.status(400).json({ error: 'Missing required fields.' });
   }
   if (!isEmail(email)) {
@@ -219,15 +226,21 @@ app.post('/api/contact', async function (req, res) {
     return res.status(502).json({ error: 'reCAPTCHA verification unavailable.' });
   }
 
-  const subject = 'New contact from ' + name + ' — ' + company;
+  // Distinguish audit requests from generic contact messages in the inbox.
+  const subject = isAudit
+    ? 'Free org audit request from ' + name + ' — ' + company
+    : 'New contact from ' + name + ' — ' + company;
 
   const html =
-    '<h2>New contact form submission</h2>' +
+    '<h2>' + (isAudit ? 'Free org audit request' : 'New contact form submission') + '</h2>' +
     '<p><strong>Name:</strong> ' + escapeHtml(name) + '</p>' +
     '<p><strong>Email:</strong> ' + escapeHtml(email) + '</p>' +
     '<p><strong>Company:</strong> ' + escapeHtml(company) + '</p>' +
-    '<p><strong>Project details:</strong></p>' +
-    '<p>' + escapeHtml(details).replace(/\n/g, '<br>') + '</p>';
+    (orgType ? '<p><strong>Salesforce org type:</strong> ' + escapeHtml(orgType) + '</p>' : '') +
+    (userCount ? '<p><strong>Rough user count:</strong> ' + escapeHtml(userCount) + '</p>' : '') +
+    '<p><strong>' + (isAudit ? 'Message' : 'Project details') + ':</strong></p>' +
+    '<p>' + (details ? escapeHtml(details).replace(/\n/g, '<br>') : '<em>(none provided)</em>') + '</p>' +
+    (source ? '<hr><p style="color:#5C6470;font-size:12px">Source: ' + escapeHtml(source) + '</p>' : '');
 
   try {
     const { data, error } = await resend.emails.send({
