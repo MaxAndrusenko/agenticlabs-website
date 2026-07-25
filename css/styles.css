@@ -630,8 +630,16 @@ hr {
 /* Mobile full-screen overlay menu — hidden on desktop */
 .al-mobile-menu {
   display: none;
+  /* Positioned by explicit height, NOT bottom:0 — the navbar's backdrop-filter
+     makes it the containing block for this fixed child, so a `bottom` would
+     resolve to the 68px navbar box and collapse the panel. Height off the
+     viewport keeps it full-screen regardless. */
   position: fixed;
-  inset: 68px 0 0 0;
+  top: var(--al-navbar-h);
+  left: 0;
+  right: 0;
+  height: calc(100vh - var(--al-navbar-h));
+  height: calc(100dvh - var(--al-navbar-h));
   z-index: 99;
   background-color: var(--al-white);
   padding: var(--al-space-6) var(--al-space-5) var(--al-space-8);
@@ -2777,6 +2785,24 @@ body.al-scroll-lock { overflow: hidden; }
   outline: 2px solid var(--al-blue-60);
   outline-offset: 2px;
 }
+/* Edge fades hint that the pill row scrolls horizontally (mobile: items >4 are
+   off-screen). Toggled by initApproachNav based on scroll position. */
+.al-subnav::before,
+.al-subnav::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--al-t-fast) var(--al-ease);
+}
+.al-subnav::before { left: 0;  background: linear-gradient(90deg,  rgba(255, 255, 255, .95), rgba(255, 255, 255, 0)); }
+.al-subnav::after  { right: 0; background: linear-gradient(270deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0)); }
+.al-subnav.is-scroll-left::before  { opacity: 1; }
+.al-subnav.is-scroll-right::after  { opacity: 1; }
 
 /* ---- 02: peer card with a blue top accent rule ---- */
 .al-ap-card { border-top: 3px solid var(--al-blue-60); }
@@ -3560,7 +3586,11 @@ body.al-scroll-lock { overflow: hidden; }
   .al-stat__num { font-size: 32px; }
   .al-card__stat { font-size: 28px; }
 
-  .al-mobile-menu { inset: 68px 0 0 0; }
+  .al-mobile-menu {
+    top: var(--al-navbar-h);
+    height: calc(100vh - var(--al-navbar-h));
+    height: calc(100dvh - var(--al-navbar-h));
+  }
 
   /* Grid stacks to single column */
   .al-grid,
@@ -5930,6 +5960,35 @@ body.al-scroll-lock { overflow: hidden; }
     padding-block: var(--al-space-7);
   }
   .al-sv-hero > .al-container { width: 100%; }
+}
+
+/* On phones the hero also fills the device height, with the credibility stats
+   pinned to the bottom edge so the screen reads as one unit ending on
+   "100% Senior-built". Extra bottom padding clears the floating help button. */
+@media (max-width: 767px) {
+  .al-sv-hero {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - var(--al-navbar-h));
+    min-height: calc(100dvh - var(--al-navbar-h));
+    padding-block: var(--al-space-6) var(--al-space-8);
+  }
+  .al-sv-hero > .al-container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--al-space-6);
+    width: 100%;
+  }
+  /* Compact the credibility stats into a 2×2 grid with tighter top spacing so all
+     four fit on one screen (the global <=479 rule stacks them 1-col, too tall). */
+  .al-sv-hero .al-stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--al-space-4) var(--al-space-5);
+    margin-top: var(--al-space-5);
+    padding-top: var(--al-space-5);
+  }
 }
 
 /* ---- 2. CAPABILITIES — sub-groups + accordion cards ----------------------- */
