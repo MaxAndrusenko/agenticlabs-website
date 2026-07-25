@@ -960,12 +960,42 @@
     });
     if (!sections.length) { return; }
 
+    var track = links[0].parentElement; // .al-subnav__inner (the scroll container)
+    var bar = track.closest ? track.closest('.al-subnav') : track.parentElement;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Edge fades: show a left/right gradient when there's more to scroll to, so
+    // the off-screen items (>4 on mobile) are discoverable.
+    function updateEdges() {
+      if (!bar) { return; }
+      var max = track.scrollWidth - track.clientWidth;
+      bar.classList.toggle('is-scroll-left', track.scrollLeft > 2);
+      bar.classList.toggle('is-scroll-right', track.scrollLeft < max - 2);
+    }
+    track.addEventListener('scroll', updateEdges, { passive: true });
+    window.addEventListener('resize', updateEdges);
+    updateEdges();
+
+    // Keep the active pill in view when it sits past the visible edge — on
+    // narrow screens items >4 scroll off-screen, so highlight alone isn't enough.
+    function revealActive(link) {
+      if (!track || track.scrollWidth <= track.clientWidth) { return; }
+      var cRect = track.getBoundingClientRect();
+      var lRect = link.getBoundingClientRect();
+      var delta = (lRect.left - cRect.left) - (track.clientWidth - lRect.width) / 2;
+      track.scrollBy({ left: delta, behavior: reduce ? 'auto' : 'smooth' });
+    }
+
     function setActive(id) {
       links.forEach(function (link) {
         var on = link === map[id];
         link.classList.toggle('is-active', on);
-        if (on) { link.setAttribute('aria-current', 'true'); }
-        else { link.removeAttribute('aria-current'); }
+        if (on) {
+          link.setAttribute('aria-current', 'true');
+          revealActive(link);
+        } else {
+          link.removeAttribute('aria-current');
+        }
       });
     }
 
