@@ -5582,6 +5582,40 @@ body.al-scroll-lock { overflow: hidden; }
 }
 .al-cs-chip--sm::before { width: 6px; height: 6px; }
 
+/* Salesforce-palette accents for stack / tech chips */
+.al-cs-chip--integration {
+  color: var(--al-teal-70);
+  background: linear-gradient(180deg, #F3FBFA 0%, var(--al-teal-tint) 100%);
+  border-color: rgba(3, 180, 167, .28);
+}
+.al-cs-chip--integration::before { background: var(--al-teal); }
+.al-cs-chip--integration:hover {
+  border-color: rgba(3, 180, 167, .45);
+  background: linear-gradient(180deg, var(--al-white) 0%, #D7F3F0 100%);
+}
+.al-cs-chip--ai {
+  color: var(--al-purple-70);
+  background: linear-gradient(180deg, #F8F3FD 0%, var(--al-purple-tint) 100%);
+  border-color: rgba(117, 38, 227, .26);
+}
+.al-cs-chip--ai::before { background: var(--al-purple); }
+.al-cs-chip--ai:hover {
+  border-color: rgba(117, 38, 227, .42);
+  background: linear-gradient(180deg, var(--al-white) 0%, #E9DBFA 100%);
+}
+
+/* Stack matrix: larger Salesforce-style chips */
+.al-sv-stack-panel .al-cs-chips { gap: var(--al-space-3) var(--al-space-4); }
+.al-sv-stack-panel .al-cs-chip {
+  font-size: 18px;
+  padding: 14px 22px 14px 16px;
+  gap: 12px;
+}
+.al-sv-stack-panel .al-cs-chip::before {
+  width: 8px;
+  height: 8px;
+}
+
 /* ---- SECTION 4: ENGINEERING PRACTICES (white) ----------------------------- */
 .al-sv-practice-grid {
   display: grid;
